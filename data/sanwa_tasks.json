@@ -188,14 +188,15 @@
         "review": {
           "points": 0,
           "score": null,
-          "summary": "李彦希白天的表现很一般，做事情的效率很低，一直在拖拖拉拉。到了下午状态好了一些。",
+          "summary": "李彦希白天的表现很一般，做事情的效率很低，一直在拖拖拉拉。到了下午状态好了一些。晚上做最后一个任务的时候又开始墨迹，完成效果很差，错了很多，讲过很多次的知识点错10题，扣10块钱。",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": -10
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789815867398,
-        "reviewSavedAt": 1789817158102
+        "reviewSavedAt": 1789819740810
       },
       "qiannuo": {
         "fixedClasses": [
