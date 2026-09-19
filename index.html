@@ -4089,7 +4089,7 @@ async function exportTasksText() {
       text += `📝 今日任务：\n`;
       tasks.forEach((t, i) => {
         const dur = t.duration ? `（${Math.round(+t.duration/60*10)/10}小时）` : '';
-        text += `  ⬜ ${i+1}. ${t.name}${dur}\n`;
+        text += `  ${i+1}. ${t.name}${dur}\n`;
       });
     }
     
