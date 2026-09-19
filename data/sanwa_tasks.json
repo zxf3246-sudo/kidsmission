@@ -915,14 +915,14 @@
             "duration": 270
           },
           {
-            "name": "科学",
-            "time": "19:30-21:30",
-            "duration": 120
-          },
-          {
             "name": "Color Moon",
             "time": "15:00-18:00",
             "duration": 180
+          },
+          {
+            "name": "科学",
+            "time": "19:30-21:30",
+            "duration": 120
           }
         ],
         "tasks": [
@@ -969,8 +969,16 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1789833747391onsr",
-            "name": "四五快读第二册1课新字",
+            "id": "t1789833747391dnzj",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391uccj",
+            "name": "1 Mission",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -985,8 +993,8 @@
             "errLinked": false
           },
           {
-            "id": "t1789833747391vl5f",
-            "name": "英语语法练习三页",
+            "id": "t1789833747391onsr",
+            "name": "四五快读第二册1课新字",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -1009,40 +1017,16 @@
             "errLinked": false
           },
           {
-            "id": "t1789833747391dnzj",
-            "name": "Koobits",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391uccj",
-            "name": "1 Mission",
+            "id": "t1789833747391vl5f",
+            "name": "英语语法练习三页",
             "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
           },
           {
-            "id": "t1789833747391j3r4",
-            "name": "错题重做",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": true
-          },
-          {
             "id": "t1789833747391aznz",
             "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391e28d",
-            "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
             "done": false,
@@ -1141,14 +1125,6 @@
           {
             "id": "t1789833747391yvog",
             "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391gr8r",
-            "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
             "done": false,
