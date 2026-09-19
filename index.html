@@ -3616,7 +3616,265 @@ async function exportReview() {
   showImagePreview(out, `三娃复盘_${dateStr}.png`);
 }
 
-// 全屏图片预览（长按可保存到相册）
+// 导出最终任务完成图：深色风格，展示任务完成情况 + 积分存款（和复盘图设计一致）
+async function exportTasksFinal() {
+  try { await autoPullFromCloud(); } catch(e) {}
+  const dateStr = document.getElementById('datePicker').value;
+  const data = state.dates[dateStr];
+  if (!data) return;
+  const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
+
+  const { canvas: tmp, ctx } = newTmpCanvas();
+  const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
+  let y = IMG.PAD;
+  ctx.textBaseline = 'top';
+
+  // 深色背景
+  const bg = ctx.createLinearGradient(0, 0, W, 6000);
+  bg.addColorStop(0, '#1e293b'); bg.addColorStop(1, '#312e81');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, 6000);
+
+  // 标题栏（橙→粉→紫渐变）
+  const hH = 150;
+  const hg = ctx.createLinearGradient(x0, y, x0+CW, y+hH);
+  hg.addColorStop(0, '#f59e0b'); hg.addColorStop(.5, '#ec4899'); hg.addColorStop(1, '#8b5cf6');
+  imgRoundRect(ctx, x0, y, CW, hH, 20); ctx.fillStyle = hg; ctx.fill();
+  setFont(ctx, 30, true); ctx.fillStyle = '#fff';
+  ctx.fillText('✅ 三娃任务完成图', x0+32, y+30);
+  setFont(ctx, 20, false); ctx.fillStyle = 'rgba(255,255,255,.95)';
+  ctx.fillText(`${dateStr}    ${dow}`, x0+32, y+76);
+  setFont(ctx, 14, false); ctx.fillStyle = 'rgba(255,255,255,.8)';
+  ctx.fillText('学习任务 · 完成情况 · 积分存款', x0+32, y+108);
+  y += hH + 20;
+
+  // 孩子卡片
+  CHILDREN.forEach(c => {
+    const cd = data[c.id] || { tasks:[], fixedClasses:[], review:{} };
+    const col = CHILD_COLORS[c.id];
+    const budget = budgetFor(c);
+    const review = cd.review || { points:0, savings:0, score:null, stars:0 };
+    const used = usedTime(c, cd);
+    const classes = cd.fixedClasses || [];
+    const tasks = cd.tasks || [];
+    const classMin = classes.filter(cl=>isAfterSchool(cl,c)).reduce((s,x)=>s+(+x.duration||0),0);
+    const selfStudyMin = used.study - classMin;
+    const totalStudy = classMin + selfStudyMin;
+    const studyPct = budget.study ? Math.min(100, totalStudy / budget.study * 100) : 0;
+    const studyOver = totalStudy > budget.study;
+
+    // 任务完成统计
+    const doneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'done').length;
+    const undoneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'undone').length;
+    const emptyCount = tasks.length - doneCount - undoneCount;
+    const taskDonePct = tasks.length ? Math.round(doneCount / tasks.length * 100) : 0;
+
+    const cumPts = calcCumulativePoints(c.id, dateStr);
+    const cumSav = calcCumulativeSavings(c.id, dateStr);
+    const pts = review.points || 0;
+    const sav = review.savings || 0;
+    const scoreVal = (review.score!==null && !isNaN(review.score)) ? review.score : null;
+    const scoreColor = scoreVal===null ? '#94a3b8'
+      : scoreVal>=90 ? '#10b981' : scoreVal>=75 ? '#6366f1'
+      : scoreVal>=60 ? '#f59e0b' : '#ef4444';
+    const starsVal = (review.stars !== undefined && review.stars !== null) ? review.stars : 0;
+
+    // 测量卡片高度（先设置正文字号以便测量换行）
+    setFont(ctx, 15, false);
+    let cH = 110; // 头部（含星星）
+    cH += 72;     // 评分环 + 进度条
+    cH += 64;     // 任务完成统计三栏
+    cH += 76;     // 四板块积分存款
+    if (classes.length) cH += 40 + classes.length * 44;
+    cH += 40 + Math.max(52, tasks.length * 52);
+    if (cd.taskSavedAt) cH += 30;
+    cH += 28;
+
+    // 卡片底
+    imgRoundRect(ctx, x0, y, CW, cH, 20); ctx.fillStyle = '#fff'; ctx.fill();
+    imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = col.main; ctx.fill();
+    ctx.save(); ctx.globalAlpha = .5;
+    ctx.beginPath(); ctx.arc(x0+CW-20, y+20, 70, 0, Math.PI*2); ctx.fillStyle = col.soft; ctx.fill();
+    ctx.restore();
+
+    let cy = y + 36;
+    // 名字
+    setFont(ctx, 26, true); ctx.fillStyle = col.dark;
+    ctx.fillText(col.emoji + ' ' + c.name, x0+28, cy);
+
+    // 星星（名字右边）
+    setFont(ctx, 26, true);
+    const nameW = ctx.measureText(col.emoji + ' ' + c.name).width;
+    const starR = 10, starGap = 6;
+    const starStartX = x0 + 28 + nameW + 18;
+    const starY = cy + 18;
+    for (let si = 0; si < 5; si++) {
+      const fill = Math.max(0, Math.min(1, starsVal - si));
+      drawStar(ctx, starStartX + si * (starR * 2 + starGap), starY, starR, starR * 0.4, fill);
+    }
+
+    // 评分环（右上）
+    const ringX = x0+CW-66, ringY = cy+6, ringR = 36;
+    ctx.beginPath(); ctx.arc(ringX, ringY, ringR, 0, Math.PI*2);
+    ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 7; ctx.stroke();
+    if (scoreVal !== null) {
+      ctx.beginPath();
+      ctx.arc(ringX, ringY, ringR, -Math.PI/2, -Math.PI/2 + 2*Math.PI*scoreVal/100);
+      ctx.strokeStyle = scoreColor; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.stroke();
+    }
+    setFont(ctx, 19, true); ctx.fillStyle = scoreColor;
+    ctx.textAlign = 'center';
+    ctx.fillText(scoreVal===null ? '未评' : String(scoreVal), ringX, ringY-12);
+    setFont(ctx, 11, false); ctx.fillStyle = '#94a3b8';
+    ctx.fillText('/100', ringX, ringY+10);
+    ctx.textAlign = 'left';
+    cy += 78;
+
+    // 进度条（学习时长）
+    setFont(ctx, 13, false); ctx.fillStyle = '#64748b';
+    const barLabel = `学习预算 ${fmtDur(budget.study)} · 已用 ${fmtDur(totalStudy)}`;
+    ctx.fillText(barLabel, x0+28, cy); cy += 20;
+    const barX = x0+28, barW = CW-56;
+    imgRoundRect(ctx, barX, cy, barW, 9, 4); ctx.fillStyle = '#e2e8f0'; ctx.fill();
+    imgRoundRect(ctx, barX, cy, barW*studyPct/100, 9, 4);
+    ctx.fillStyle = studyOver ? '#ef4444' : col.main; ctx.fill();
+    cy += 22;
+
+    // 任务完成统计三栏
+    const sw = (CW-56-16) / 3;
+    const tstats = [
+      { label:'✅ 已完成', val:String(doneCount), hl:true, col:'#15803d', bg:'#dcfce7' },
+      { label:'❌ 未完成', val:String(undoneCount), hl:false, col:'#b91c1c', bg:'#fee2e2' },
+      { label:'📊 完成率', val:taskDonePct+'%', hl:true, col:taskDonePct>=80?'#15803d':taskDonePct>=60?'#92400e':'#b91c1c', bg:taskDonePct>=80?'#dcfce7':taskDonePct>=60?'#fef3c7':'#fee2e2' },
+    ];
+    tstats.forEach((s, i) => {
+      const sx = x0+28 + i*(sw+8);
+      imgRoundRect(ctx, sx, cy, sw, 60, 10); ctx.fillStyle = s.bg; ctx.fill();
+      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(s.label, sx+sw/2-ctx.measureText(s.label).width/2, cy+8);
+      setFont(ctx, 18, true); ctx.fillStyle = s.col;
+      ctx.fillText(s.val, sx+sw/2-ctx.measureText(s.val).width/2, cy+32);
+    });
+    cy += 72;
+
+    // 四板块同行：今日积分 / 累计积分 / 今日存款 / 累计存款
+    const gap4 = 8;
+    const bw4 = (CW - 56 - gap4 * 3) / 4;
+    const boxes4 = [
+      { label: '今日积分', val: `${pts>=0?'+':''}${pts}`, bg: '#dcfce7', fg: '#15803d' },
+      { label: '累计积分', val: `${cumPts}`,               bg: '#dbeafe', fg: '#1e40af' },
+      { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,  bg: '#fef3c7', fg: '#92400e' },
+      { label: '累计存款', val: `¥${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
+    ];
+    boxes4.forEach((b, i) => {
+      const bx = x0 + 28 + i * (bw4 + gap4);
+      imgRoundRect(ctx, bx, cy, bw4, 64, 10);
+      ctx.fillStyle = b.bg; ctx.fill();
+      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 10);
+      setFont(ctx, 19, true); ctx.fillStyle = b.fg;
+      ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 32);
+    });
+    cy += 76;
+
+    // 课程
+    if (classes.length) {
+      setFont(ctx, 18, true); ctx.fillStyle = col.dark;
+      ctx.fillText('📅 课程安排', x0+28, cy); cy += 32;
+      classes.forEach(cl => {
+        const a = isAfterSchool(cl, c);
+        imgRoundRect(ctx, x0+28, cy, CW-56, 40, 10);
+        ctx.fillStyle = a ? '#fffbeb' : '#f8fafc'; ctx.fill();
+        setFont(ctx, 15, true); ctx.fillStyle = '#334155';
+        ctx.fillText(cl.name, x0+44, cy+10);
+        setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
+        const nw = ctx.measureText(cl.name).width;
+        ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+44+nw+12, cy+11);
+        if (a) {
+          setFont(ctx, 12, true);
+          imgRoundRect(ctx, x0+CW-130, cy+8, 76, 24, 8); ctx.fillStyle = '#f59e0b'; ctx.fill();
+          ctx.fillStyle = '#fff'; ctx.fillText('放学后', x0+CW-130+10, cy+12);
+        }
+        cy += 44;
+      });
+      cy += 4;
+    }
+
+    // 任务列表
+    setFont(ctx, 18, true); ctx.fillStyle = col.dark;
+    ctx.fillText('📝 今日任务完成情况', x0+28, cy); cy += 32;
+    if (!tasks.length) {
+      setFont(ctx, 15, false); ctx.fillStyle = '#94a3b8';
+      ctx.fillText('暂无任务', x0+44, cy); cy += 44;
+    } else {
+      tasks.forEach(t => {
+        const status = t.status || (t.done ? 'done' : 'empty');
+        imgRoundRect(ctx, x0+28, cy, CW-56, 42, 10);
+        ctx.fillStyle = '#f8fafc'; ctx.fill();
+        ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1; ctx.stroke();
+        // 状态框
+        imgRoundRect(ctx, x0+42, cy+8, 26, 26, 6);
+        if (status === 'done') {
+          ctx.fillStyle = '#10b981'; ctx.fill();
+          setFont(ctx, 16, true); ctx.fillStyle = '#fff';
+          ctx.fillText('✓', x0+47, cy+11);
+        } else if (status === 'undone') {
+          ctx.fillStyle = '#ef4444'; ctx.fill();
+          setFont(ctx, 16, true); ctx.fillStyle = '#fff';
+          ctx.fillText('✗', x0+48, cy+11);
+        } else {
+          ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2; ctx.stroke();
+        }
+        // 任务名
+        setFont(ctx, 16, false);
+        let tx = x0+78;
+        if (status === 'done') { ctx.fillStyle = '#94a3b8'; ctx.font = `bold 16px ${IMG.F}`; }
+        else if (status === 'undone') { ctx.fillStyle = '#dc2626'; ctx.font = `bold 16px ${IMG.F}`; }
+        else { ctx.fillStyle = '#334155'; ctx.font = `bold 16px ${IMG.F}`; }
+        ctx.fillText(t.name, tx, cy+11);
+        tx += ctx.measureText(t.name).width + 12;
+        // 时长标签
+        if (t.duration) {
+          setFont(ctx, 13, false);
+          const dt = `${t.duration}分`;
+          const dw = ctx.measureText(dt).width + 14;
+          imgRoundRect(ctx, tx, cy+8, dw, 26, 8); ctx.fillStyle = '#e2e8f0'; ctx.fill();
+          ctx.fillStyle = '#475569'; ctx.fillText(dt, tx+7, cy+12);
+          tx += dw + 6;
+        }
+        // 错题标签
+        if (t.errLinked) {
+          setFont(ctx, 12, true);
+          imgRoundRect(ctx, tx, cy+8, 68, 26, 8); ctx.fillStyle = '#fee2e2'; ctx.fill();
+          ctx.fillStyle = '#b91c1c'; ctx.fillText('📚错题', tx+8, cy+12);
+          tx += 74;
+        }
+        // 休息标签
+        if (t.type === 'rest') {
+          setFont(ctx, 12, true);
+          imgRoundRect(ctx, tx, cy+8, 56, 26, 8); ctx.fillStyle = '#dcfce7'; ctx.fill();
+          ctx.fillStyle = '#15803d'; ctx.fillText('休息', tx+10, cy+12);
+        }
+        cy += 52;
+      });
+    }
+    if (cd.taskSavedAt) {
+      setFont(ctx, 13, false); ctx.fillStyle = '#94a3b8';
+      ctx.fillText(`✓ 最终保存 ${fmtTime(cd.taskSavedAt)}`, x0+CW-230, cy);
+      cy += 30;
+    }
+    y += cH + 16;
+  });
+
+  // 页脚
+  setFont(ctx, 13, false); ctx.fillStyle = 'rgba(255,255,255,.5)';
+  ctx.textAlign = 'center';
+  ctx.fillText('由 三娃每日任务分配 系统导出 · 任务完成图', W/2, y+10);
+  ctx.textAlign = 'left';
+  y += 56;
+
+  const out = cropCanvas(tmp, y);
+  showImagePreview(out, `三娃任务完成_${dateStr}.png`);
+}
 function showImagePreview(canvas, filename) {
   const dataUrl = canvas.toDataURL('image/png');
   // 移除旧的
@@ -4311,6 +4569,7 @@ autoSyncStart();
   </div>
   <div class="footer-row footer-row-export">
     <button class="btn-hero" onclick="exportReview()">📊 导出复盘图</button>
+    <button class="btn-hero" onclick="exportTasksFinal()">✅ 导出完成图</button>
     <button class="btn-hero" onclick="exportTasksText()">📄 导出文字任务</button>
     <button class="btn-hero btn-refresh" onclick="refreshPage()" title="重新加载页面（获取最新版本）">🔄 刷新</button>
   </div>
