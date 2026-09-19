@@ -183,7 +183,7 @@
         "review": {
           "points": 0,
           "score": 85,
-          "summary": "李彦希白天的表现很一般，做事情的效率很低，一直在拖拖拉拉。到了下午状态好了一些，结果晚上做最后一个任务的时候又开始墨迹，完成效果很差，错了很多，讲过很多次的知识点拖拖拉拉，所以我给他扣钱了，每错一题扣了5张宝可梦的卡。而且还挨了揍，后面态度有好转，明天继续专项练习。",
+          "summary": "李彦希白天的表现很一般，做事情的效率很低，一直在拖拖拉拉。到了下午状态好了一些，结果晚上做最后一个任务的时候又开始墨迹，完成效果很差，错了很多，讲过很多次的知识点还是反复错，所以我给他扣钱了，每错一题扣了5张宝可梦的卡。而且还挨了揍，后面态度有好转，明天继续专项练习。",
           "reward": "",
           "other": "",
           "savings": -10,
@@ -192,7 +192,7 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789832560198,
-        "reviewSavedAt": 1789831934147
+        "reviewSavedAt": 1789833783408
       },
       "qiannuo": {
         "fixedClasses": [
@@ -902,6 +902,313 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
+        "taskSavedAt": null,
+        "reviewSavedAt": null
+      }
+    },
+    "2026-09-20": {
+      "yilin": {
+        "fixedClasses": [
+          {
+            "name": "全科补习",
+            "time": "09:00-13:30",
+            "duration": 270
+          },
+          {
+            "name": "科学",
+            "time": "19:30-21:30",
+            "duration": 120
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t17898337473917lik",
+            "name": "学而思作业",
+            "duration": 30,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391t91b",
+            "name": "学校作业",
+            "duration": 30,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391ouyt",
+            "name": "Missy作业",
+            "duration": 30,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391g4d2",
+            "name": "语文5B第三课词汇",
+            "duration": 25,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391a8pr",
+            "name": "科学知识点1",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t17898337473916vo2",
+            "name": "LA作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t17898337473918zf8",
+            "name": "错题重做",
+            "duration": 30,
+            "type": "study",
+            "done": false,
+            "errLinked": true
+          },
+          {
+            "id": "t1789833747391arqz",
+            "name": "自由活动",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391ozu5",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
+        "taskSavedAt": null,
+        "reviewSavedAt": null
+      },
+      "yanxi": {
+        "fixedClasses": [],
+        "tasks": [
+          {
+            "id": "t1789833747391onsr",
+            "name": "四五快读第二册1课新字",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t17898337473914k6k",
+            "name": "WW1单词10个",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391vl5f",
+            "name": "英语语法学习1个",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391n4of",
+            "name": "小龙1篇",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391qq4w",
+            "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391dnzj",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391uccj",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391j3r4",
+            "name": "错题重做",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": true
+          },
+          {
+            "id": "t1789833747391aznz",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391e28d",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
+        "taskSavedAt": null,
+        "reviewSavedAt": null
+      },
+      "qiannuo": {
+        "fixedClasses": [
+          {
+            "name": "豌豆思维",
+            "time": "10:00-10:40",
+            "duration": 40
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1789833747391xkil",
+            "name": "乘法口诀复习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391wf6u",
+            "name": "数学计算2页",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391kb7u",
+            "name": "学而思作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t17898337473913nxw",
+            "name": "练字",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391wyxj",
+            "name": "控笔",
+            "duration": 10,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391oata",
+            "name": "字母拼音",
+            "duration": 10,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391idge",
+            "name": "语法练习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391yvjt",
+            "name": "练习演讲",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391ck0y",
+            "name": "错题重做",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": true
+          },
+          {
+            "id": "t1789833747391yvog",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789833747391gr8r",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
         "taskSavedAt": null,
         "reviewSavedAt": null
       }
