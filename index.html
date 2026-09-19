@@ -3685,12 +3685,12 @@ function acceptRec(idx) {
   closeSmartModal();
 }
 
-// ============ 云端同步（GitHub Gist） ============
+// ============ 云端同步（GitHub 仓库文件） ============
 // 🔴 共享同步配置 - 所有人打开自动连接
-const SHARED_GIST_ID = '2d4287c25c001d0a6c7f030a30b688d5';
 const SHARED_GH_TOKEN = 'ghp_' + 'ORhRXzVqf4qvOmf9AFg1iKzDQHZhrD2f23Bj';
+const SHARED_REPO = 'zxf3246-sudo/kidsmission';
+const SHARED_DATA_FILE = 'data/sanwa_tasks.json';
 const CLOUD_KEY = 'sanwa_cloud_config';
-const GIST_FILENAME = 'sanwa_tasks.json';
 let pullCtx = null;
 let autoSyncEnabled = true;
 let lastRemoteVersion = null;
@@ -3701,11 +3701,12 @@ function loadCloudConfig() {
     const cfg = JSON.parse(localStorage.getItem(CLOUD_KEY)) || {};
     return {
       token: SHARED_GH_TOKEN || cfg.token || '',
-      gistId: SHARED_GIST_ID || cfg.gistId || '',
+      repo: SHARED_REPO || cfg.repo || '',
+      dataFile: SHARED_DATA_FILE || cfg.dataFile || '',
       lastSync: cfg.lastSync || null
     };
   } catch (e) {
-    return { token: SHARED_GH_TOKEN, gistId: SHARED_GIST_ID, lastSync: null };
+    return { token: SHARED_GH_TOKEN, repo: SHARED_REPO, dataFile: SHARED_DATA_FILE, lastSync: null };
   }
 }
 
@@ -3722,7 +3723,7 @@ function updateCloudStatusUI() {
   if (cfg.token) {
     el.classList.add('connected');
     el.classList.remove('disconnected');
-    txt.textContent = cfg.gistId ? '已连接云端' : '已配置Token';
+    txt.textContent = cfg.token ? '已连接云端' : '未连接';
   } else {
     el.classList.add('disconnected');
     el.classList.remove('connected');
@@ -3733,15 +3734,8 @@ function updateCloudStatusUI() {
 function openCloudModal() {
   const cfg = loadCloudConfig();
   document.getElementById('githubToken').value = cfg.token || '';
-  document.getElementById('gistIdInput').value = cfg.gistId || '';
   const idDisplay = document.getElementById('gistIdDisplay');
-  const idShow = document.getElementById('gistIdShow');
-  if (cfg.gistId) {
-    idDisplay.style.display = 'block';
-    idShow.textContent = cfg.gistId;
-  } else {
-    idDisplay.style.display = 'none';
-  }
+  if (idDisplay) idDisplay.style.display = 'none';
   const syncDisplay = document.getElementById('lastSyncDisplay');
   const syncShow = document.getElementById('lastSyncShow');
   if (cfg.lastSync) {
@@ -3759,9 +3753,8 @@ function closeCloudModal() {
 
 function saveCloudConfig() {
   const token = document.getElementById('githubToken').value.trim();
-  const gistId = document.getElementById('gistIdInput').value.trim();
   const prev = loadCloudConfig();
-  const cfg = { token, gistId, lastSync: prev.lastSync || null };
+  const cfg = { token, repo: SHARED_REPO, dataFile: SHARED_DATA_FILE, lastSync: prev.lastSync || null };
   persistCloudConfig(cfg);
   showToast('☁ 云同步配置已保存');
   closeCloudModal();
@@ -3784,83 +3777,96 @@ function hideSyncProgress() {
   if (el) el.style.display = 'none';
 }
 
-// 上传到 GitHub Gist
+// 上传到 GitHub 仓库文件（带自动获取 sha）
 async function uploadToGist() {
   const cfg = loadCloudConfig();
-  if (!cfg.token) {
-    showToast('⚠ 请先配置 GitHub Token');
+  if (!cfg.token || !cfg.repo || !cfg.dataFile) {
+    showToast('⚠ 云端配置不完整');
     openCloudModal();
     return;
   }
   showSyncProgress('正在上传到云端...');
   try {
+    // 先获取文件 sha（如果文件已存在）
+    let sha = null;
+    try {
+      const headResp = await fetch(
+        `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
+        { headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' } }
+      );
+      if (headResp.ok) {
+        const headData = await headResp.json();
+        sha = headData.sha;
+      }
+    } catch (e) {}
+
     const payload = {
-      description: '三娃每日任务数据 · ' + new Date().toLocaleString('zh-CN'),
-      public: false,
-      files: { [GIST_FILENAME]: { content: JSON.stringify(state, null, 2) } }
+      message: 'sync: ' + new Date().toLocaleString('zh-CN'),
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2))))
     };
-    const method = cfg.gistId ? 'PATCH' : 'POST';
-    const url = 'https://api.github.com/gists' + (cfg.gistId ? '/' + cfg.gistId : '');
-    const resp = await fetch(url, {
-      method,
-      headers: {
-        'Authorization': 'token ' + cfg.token,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+    if (sha) payload.sha = sha;
+
+    const resp = await fetch(
+      `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + cfg.token,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }
+    );
     if (!resp.ok) {
       const errText = await resp.text();
       throw new Error('HTTP ' + resp.status + ' ' + errText.slice(0, 120));
-    }
-    const result = await resp.json();
-    if (!cfg.gistId && result.id) {
-      cfg.gistId = result.id;
     }
     cfg.lastSync = new Date().toISOString();
     persistCloudConfig(cfg);
     hideSyncProgress();
-    showToast('✅ 已成功上传到云端（' + (cfg.gistId ? cfg.gistId.slice(0,8) : '') + '…）');
+    showToast('✅ 已成功上传到云端');
   } catch (e) {
     hideSyncProgress();
     showToast('❌ 上传失败：' + e.message);
-    console.error('Gist upload error:', e);
+    console.error('Repo upload error:', e);
   }
 }
 
-// 从 GitHub Gist 拉取（带冲突解决）
+// 从 GitHub 仓库拉取（带冲突解决）
 async function pullFromGist() {
   const cfg = loadCloudConfig();
-  if (!cfg.token) {
-    showToast('⚠ 请先配置 GitHub Token');
+  if (!cfg.token || !cfg.repo || !cfg.dataFile) {
+    showToast('⚠ 云端配置不完整');
     openCloudModal();
-    return;
-  }
-  if (!cfg.gistId) {
-    showToast('⚠ 当前尚未绑定 Gist ID，请先上传一次以创建云端记录');
     return;
   }
   showSyncProgress('正在从云端拉取...');
   try {
-    const resp = await fetch('https://api.github.com/gists/' + cfg.gistId, {
-      headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' }
-    });
+    const resp = await fetch(
+      `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
+      { headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' } }
+    );
     if (!resp.ok) {
+      if (resp.status === 404) {
+        hideSyncProgress();
+        showToast('ℹ 云端尚无数据，首次请先上传');
+        return;
+      }
       const errText = await resp.text();
       throw new Error('HTTP ' + resp.status + ' ' + errText.slice(0, 120));
     }
     const result = await resp.json();
-    const file = result.files && result.files[GIST_FILENAME];
-    if (!file || !file.content) throw new Error('云端文件不存在或为空');
-    const cloudState = JSON.parse(file.content);
+    // GitHub API 返回的 content 是 base64 编码
+    const content = decodeURIComponent(escape(atob(result.content.replace(/\n/g, ''))));
+    const cloudState = JSON.parse(content);
     hideSyncProgress();
     // 数据合并：本地独有日期自动并入；云端独有日期自动拉取；冲突日期弹窗解决
     mergeCloudData(cloudState);
   } catch (e) {
     hideSyncProgress();
     showToast('❌ 拉取失败：' + e.message);
-    console.error('Gist pull error:', e);
+    console.error('Repo pull error:', e);
   }
 }
 
@@ -4022,7 +4028,7 @@ render();
 // ============ 🚀 自动同步启动 ============
 async function autoSyncStart() {
   const cfg = loadCloudConfig();
-  if (!cfg.token || !cfg.gistId) return;
+  if (!cfg.token || !cfg.repo) return;
   
   // 1. 页面打开时自动拉取云端最新
   try {
@@ -4060,25 +4066,26 @@ async function autoSyncStart() {
 
 async function autoPullFromCloud() {
   const cfg = loadCloudConfig();
-  if (!cfg.token || !cfg.gistId) return;
-  
-  const resp = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-    headers: { 'Authorization': 'Bearer ' + cfg.token }
-  });
+  if (!cfg.token || !cfg.repo || !cfg.dataFile) return;
+
+  const resp = await fetch(
+    `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
+    { headers: { 'Authorization': 'Bearer ' + cfg.token } }
+  );
   if (!resp.ok) return;
   const data = await resp.json();
-  const file = data.files[GIST_FILENAME];
-  if (!file) return;
-  
-  // 版本没变就跳过
-  if (lastRemoteVersion === data.history[0].version) return;
-  lastRemoteVersion = data.history[0].version;
-  
-  const cloudState = JSON.parse(file.content);
+  if (!data.content) return;
+
+  // 用文件 SHA 做版本判断
+  if (lastRemoteVersion === data.sha) return;
+  lastRemoteVersion = data.sha;
+
+  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  const cloudState = JSON.parse(content);
   if (!cloudState.dates) return;
-  
+
   const localState = JSON.parse(localStorage.getItem('sanwa_tasks') || '{"dates":{}}');
-  
+
   // 合并策略：云端更新过的日期优先
   const merged = mergeSmart(localState, cloudState);
   if (JSON.stringify(localState) !== JSON.stringify(merged)) {
