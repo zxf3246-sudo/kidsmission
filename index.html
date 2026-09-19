@@ -2340,6 +2340,10 @@ function ensureDateOn(s, dateStr) {
       } else if (!child.fixedClasses) {
         child.fixedClasses = JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || []));
       }
+      // 确保每个课程都有 status 字段
+      (child.fixedClasses || []).forEach(cl => {
+        if (!cl.status) cl.status = cl.done ? 'done' : 'empty';
+      });
       if (!child.review || typeof child.review !== 'object') {
         child.review = { points: 0, savings: 0, score: null, summary: '', reward: '', other: '', stars: 0 };
       } else {
@@ -2399,7 +2403,12 @@ function minutesBetween(start, end) {
   return (eh*60+em) - (sh*60+sm);
 }
 function timeToMinutes(t) { const [h, m] = t.split(':').map(Number); return h*60 + m; }
-function isAfterSchool(cls, child, arrival) {
+function isAfterSchool(cls, child, arrival, dateStr) {
+  // 周末（周六/周日）孩子全天在家，不算"放学后"
+  if (dateStr) {
+    const dow = new Date(dateStr+'T00:00:00').getDay();
+    if (dow === 0 || dow === 6) return false;
+  }
   const start = (cls.time || '').split('-')[0];
   if (!start) return false;
   const arr = arrival || child.arrival;
@@ -3312,7 +3321,7 @@ async function exportTasks() {
       setFont(ctx, 20, true); ctx.fillStyle = col.dark;
       ctx.fillText('📅 课程', x0+32, cy); cy += 34;
       classes.forEach(cl => {
-        const a = isAfterSchool(cl, c);
+        const a = isAfterSchool(cl, c, undefined, dateStr);
         imgRoundRect(ctx, x0+32, cy, CW-64, 40, 8);
         ctx.fillStyle = a ? '#fffbeb' : '#f8fafc'; ctx.fill();
         setFont(ctx, 17, true); ctx.fillStyle = '#334155';
@@ -3442,7 +3451,7 @@ async function exportReview() {
     const budget = budgetFor(c);
     const r = cd.review || { points:0, savings:0, score:null, summary:'', reward:'' };
     const used = usedTime(c, cd);
-    const classMin = (cd.fixedClasses||[]).filter(cl=>isAfterSchool(cl,c)).reduce((s,x)=>s+(+x.duration||0),0);
+    const classMin = (cd.fixedClasses||[]).filter(cl=>isAfterSchool(cl,c,undefined,dateStr)).reduce((s,x)=>s+(+x.duration||0),0);
     const selfStudyMin = used.study - classMin;
     const totalStudy = classMin + selfStudyMin;
     const cumPts = calcCumulativePoints(c.id, dateStr);
@@ -3616,7 +3625,7 @@ async function exportReview() {
   showImagePreview(out, `三娃复盘_${dateStr}.png`);
 }
 
-// 导出最终任务完成图：深色风格，展示任务完成情况 + 积分存款（和复盘图设计一致）
+// 导出最终任务完成图：深色风格，展示课程和任务完成情况（和复盘图设计一致）
 async function exportTasksFinal() {
   try { await autoPullFromCloud(); } catch(e) {}
   const dateStr = document.getElementById('datePicker').value;
@@ -3644,7 +3653,7 @@ async function exportTasksFinal() {
   setFont(ctx, 20, false); ctx.fillStyle = 'rgba(255,255,255,.95)';
   ctx.fillText(`${dateStr}    ${dow}`, x0+32, y+76);
   setFont(ctx, 14, false); ctx.fillStyle = 'rgba(255,255,255,.8)';
-  ctx.fillText('学习任务 · 完成情况 · 积分存款', x0+32, y+108);
+  ctx.fillText('学习任务 · 完成情况', x0+32, y+108);
   y += hH + 20;
 
   // 孩子卡片
@@ -3656,34 +3665,30 @@ async function exportTasksFinal() {
     const used = usedTime(c, cd);
     const classes = cd.fixedClasses || [];
     const tasks = cd.tasks || [];
-    const classMin = classes.filter(cl=>isAfterSchool(cl,c)).reduce((s,x)=>s+(+x.duration||0),0);
-    const selfStudyMin = used.study - classMin;
-    const totalStudy = classMin + selfStudyMin;
+    const totalStudy = used.study;
     const studyPct = budget.study ? Math.min(100, totalStudy / budget.study * 100) : 0;
     const studyOver = totalStudy > budget.study;
+
+    // 课程完成统计
+    const classDoneCount = classes.filter(cl => cl.status === 'done').length;
+    const classPct = classes.length ? Math.round(classDoneCount / classes.length * 100) : 0;
 
     // 任务完成统计
     const doneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'done').length;
     const undoneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'undone').length;
-    const emptyCount = tasks.length - doneCount - undoneCount;
     const taskDonePct = tasks.length ? Math.round(doneCount / tasks.length * 100) : 0;
 
-    const cumPts = calcCumulativePoints(c.id, dateStr);
-    const cumSav = calcCumulativeSavings(c.id, dateStr);
-    const pts = review.points || 0;
-    const sav = review.savings || 0;
     const scoreVal = (review.score!==null && !isNaN(review.score)) ? review.score : null;
     const scoreColor = scoreVal===null ? '#94a3b8'
       : scoreVal>=90 ? '#10b981' : scoreVal>=75 ? '#6366f1'
       : scoreVal>=60 ? '#f59e0b' : '#ef4444';
     const starsVal = (review.stars !== undefined && review.stars !== null) ? review.stars : 0;
 
-    // 测量卡片高度（先设置正文字号以便测量换行）
+    // 测量卡片高度
     setFont(ctx, 15, false);
     let cH = 110; // 头部（含星星）
     cH += 72;     // 评分环 + 进度条
     cH += 64;     // 任务完成统计三栏
-    cH += 76;     // 四板块积分存款
     if (classes.length) cH += 40 + classes.length * 44;
     cH += 40 + Math.max(52, tasks.length * 52);
     if (cd.taskSavedAt) cH += 30;
@@ -3742,9 +3747,9 @@ async function exportTasksFinal() {
     // 任务完成统计三栏
     const sw = (CW-56-16) / 3;
     const tstats = [
-      { label:'✅ 已完成', val:String(doneCount), hl:true, col:'#15803d', bg:'#dcfce7' },
-      { label:'❌ 未完成', val:String(undoneCount), hl:false, col:'#b91c1c', bg:'#fee2e2' },
-      { label:'📊 完成率', val:taskDonePct+'%', hl:true, col:taskDonePct>=80?'#15803d':taskDonePct>=60?'#92400e':'#b91c1c', bg:taskDonePct>=80?'#dcfce7':taskDonePct>=60?'#fef3c7':'#fee2e2' },
+      { label:'✅ 已完成', val:String(doneCount), col:'#15803d', bg:'#dcfce7' },
+      { label:'❌ 未完成', val:String(undoneCount), col:'#b91c1c', bg:'#fee2e2' },
+      { label:'📊 完成率', val:taskDonePct+'%', col:taskDonePct>=80?'#15803d':taskDonePct>=60?'#92400e':'#b91c1c', bg:taskDonePct>=80?'#dcfce7':taskDonePct>=60?'#fef3c7':'#fee2e2' },
     ];
     tstats.forEach((s, i) => {
       const sx = x0+28 + i*(sw+8);
@@ -3756,44 +3761,38 @@ async function exportTasksFinal() {
     });
     cy += 72;
 
-    // 四板块同行：今日积分 / 累计积分 / 今日存款 / 累计存款
-    const gap4 = 8;
-    const bw4 = (CW - 56 - gap4 * 3) / 4;
-    const boxes4 = [
-      { label: '今日积分', val: `${pts>=0?'+':''}${pts}`, bg: '#dcfce7', fg: '#15803d' },
-      { label: '累计积分', val: `${cumPts}`,               bg: '#dbeafe', fg: '#1e40af' },
-      { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,  bg: '#fef3c7', fg: '#92400e' },
-      { label: '累计存款', val: `¥${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
-    ];
-    boxes4.forEach((b, i) => {
-      const bx = x0 + 28 + i * (bw4 + gap4);
-      imgRoundRect(ctx, bx, cy, bw4, 64, 10);
-      ctx.fillStyle = b.bg; ctx.fill();
-      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 10);
-      setFont(ctx, 19, true); ctx.fillStyle = b.fg;
-      ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 32);
-    });
-    cy += 76;
-
-    // 课程
+    // 完成课程
     if (classes.length) {
       setFont(ctx, 18, true); ctx.fillStyle = col.dark;
-      ctx.fillText('📅 课程安排', x0+28, cy); cy += 32;
+      const classTitle = classDoneCount === classes.length
+        ? `🎓 完成课程（${classDoneCount}/${classes.length} ✅）`
+        : `🎓 完成课程（${classDoneCount}/${classes.length}）`;
+      ctx.fillText(classTitle, x0+28, cy); cy += 32;
       classes.forEach(cl => {
-        const a = isAfterSchool(cl, c);
+        const cStatus = cl.status || 'empty';
         imgRoundRect(ctx, x0+28, cy, CW-56, 40, 10);
-        ctx.fillStyle = a ? '#fffbeb' : '#f8fafc'; ctx.fill();
-        setFont(ctx, 15, true); ctx.fillStyle = '#334155';
-        ctx.fillText(cl.name, x0+44, cy+10);
-        setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
-        const nw = ctx.measureText(cl.name).width;
-        ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+44+nw+12, cy+11);
-        if (a) {
-          setFont(ctx, 12, true);
-          imgRoundRect(ctx, x0+CW-130, cy+8, 76, 24, 8); ctx.fillStyle = '#f59e0b'; ctx.fill();
-          ctx.fillStyle = '#fff'; ctx.fillText('放学后', x0+CW-130+10, cy+12);
+        ctx.fillStyle = cStatus==='done' ? '#dcfce7' : cStatus==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
+        // 状态框
+        imgRoundRect(ctx, x0+42, cy+7, 26, 26, 6);
+        if (cStatus === 'done') {
+          ctx.fillStyle = '#10b981'; ctx.fill();
+          setFont(ctx, 15, true); ctx.fillStyle = '#fff';
+          ctx.fillText('✓', x0+47, cy+10);
+        } else if (cStatus === 'undone') {
+          ctx.fillStyle = '#ef4444'; ctx.fill();
+          setFont(ctx, 15, true); ctx.fillStyle = '#fff';
+          ctx.fillText('✗', x0+48, cy+10);
+        } else {
+          ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2; ctx.stroke();
         }
+        setFont(ctx, 15, true);
+        if (cStatus === 'done') ctx.fillStyle = '#15803d';
+        else if (cStatus === 'undone') ctx.fillStyle = '#dc2626';
+        else ctx.fillStyle = '#334155';
+        ctx.fillText(cl.name, x0+78, cy+10);
+        setFont(ctx, 13, false); ctx.fillStyle = '#64748b';
+        const nw = ctx.measureText(cl.name).width;
+        ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+78+nw+10, cy+11);
         cy += 44;
       });
       cy += 4;
@@ -3809,7 +3808,7 @@ async function exportTasksFinal() {
       tasks.forEach(t => {
         const status = t.status || (t.done ? 'done' : 'empty');
         imgRoundRect(ctx, x0+28, cy, CW-56, 42, 10);
-        ctx.fillStyle = '#f8fafc'; ctx.fill();
+        ctx.fillStyle = status==='done' ? '#dcfce7' : status==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
         ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1; ctx.stroke();
         // 状态框
         imgRoundRect(ctx, x0+42, cy+8, 26, 26, 6);
@@ -3825,9 +3824,9 @@ async function exportTasksFinal() {
           ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2; ctx.stroke();
         }
         // 任务名
-        setFont(ctx, 16, false);
         let tx = x0+78;
-        if (status === 'done') { ctx.fillStyle = '#94a3b8'; ctx.font = `bold 16px ${IMG.F}`; }
+        setFont(ctx, 16, false);
+        if (status === 'done') { ctx.fillStyle = '#15803d'; ctx.font = `bold 16px ${IMG.F}`; }
         else if (status === 'undone') { ctx.fillStyle = '#dc2626'; ctx.font = `bold 16px ${IMG.F}`; }
         else { ctx.fillStyle = '#334155'; ctx.font = `bold 16px ${IMG.F}`; }
         ctx.fillText(t.name, tx, cy+11);
