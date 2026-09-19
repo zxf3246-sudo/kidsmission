@@ -2340,6 +2340,13 @@ function ensureDateOn(s, dateStr) {
       } else if (!child.fixedClasses) {
         child.fixedClasses = JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || []));
       }
+      // 按开始时间从早到晚排序固定课程
+      if (child.fixedClasses && child.fixedClasses.length) {
+        child.fixedClasses.sort((a,b) => {
+          const aStart = (a.time||'').split('-')[0]; const bStart = (b.time||'').split('-')[0];
+          return timeToMinutes(aStart) - timeToMinutes(bStart);
+        });
+      }
       if (!child.review || typeof child.review !== 'object') {
         child.review = { points: 0, savings: 0, score: null, summary: '', reward: '', other: '', stars: 0 };
       } else {
@@ -3039,6 +3046,10 @@ function addFixedClass(childId) {
   if (!name) return;
   state.dates[dateStr][childId].fixedClasses.push({
     name, time: timeStr, duration: calcDuration(timeStr)
+  });
+  state.dates[dateStr][childId].fixedClasses.sort((a,b) => {
+    const aStart = (a.time||'').split('-')[0]; const bStart = (b.time||'').split('-')[0];
+    return timeToMinutes(aStart) - timeToMinutes(bStart);
   });
   save(); renderChildren(dateStr);
 }
