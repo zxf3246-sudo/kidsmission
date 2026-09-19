@@ -3538,18 +3538,10 @@ async function exportTasksText() {
       });
     }
     
-    // 复盘
+    // 复盘（文字导出只保留评分和总结，不显示积分/存款）
     const r = cd.review || {};
     if (r.score !== null && r.score !== undefined) {
       text += `⭐ 今日评分：${r.score}/100\n`;
-    }
-    if (r.points !== null && r.points !== undefined) {
-      const cumPts2 = calcCumulativePoints(c.id, dateStr);
-      text += `🎯 当日积分：${r.points>0?'+':''}${r.points}  🏆 累计积分：${cumPts2>0?'+':''}${cumPts2}\n`;
-    }
-    if (r.savings !== null && r.savings !== undefined) {
-      const cumSav2 = calcCumulativeSavings(c.id, dateStr);
-      text += `💸 存款变化：${r.savings>0?'+':''}${r.savings}  🏦 总存款：¥${cumSav2}\n`;
     }
     if (r.summary) text += `📝 总结：${r.summary}\n`;
     if (r.reward) text += `🎁 奖励：${r.reward}\n`;
