@@ -128,8 +128,9 @@
             "name": "英语语法学习1个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789797952268pees",
@@ -195,7 +196,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789815867398,
+        "taskSavedAt": 1789820115876,
         "reviewSavedAt": 1789819740810
       },
       "qiannuo": {
