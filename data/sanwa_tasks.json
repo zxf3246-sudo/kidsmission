@@ -922,14 +922,6 @@
         ],
         "tasks": [
           {
-            "id": "t17898337473917lik",
-            "name": "学而思作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1789833747391t91b",
             "name": "学校作业",
             "duration": 30,
@@ -939,57 +931,17 @@
           },
           {
             "id": "t1789833747391ouyt",
-            "name": "Missy作业",
+            "name": "Missy口语作业看背",
             "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391g4d2",
-            "name": "语文5B第三课词汇",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391a8pr",
-            "name": "科学知识点1",
-            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
           },
           {
             "id": "t17898337473916vo2",
-            "name": "LA作业",
+            "name": "Missy口语作业录视频",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17898337473918zf8",
-            "name": "错题重做",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": true
-          },
-          {
-            "id": "t1789833747391arqz",
-            "name": "自由活动",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391ozu5",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
             "done": false,
             "errLinked": false
           }
@@ -999,11 +951,13 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1789834873072,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -1027,7 +981,7 @@
           },
           {
             "id": "t1789833747391vl5f",
-            "name": "英语语法学习1个",
+            "name": "英语语法练习三页",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -1095,7 +1049,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "08:00",
         "sleep": "21:15",
@@ -1205,7 +1161,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "08:00",
         "sleep": "21:15",
