@@ -1126,7 +1126,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789836392111,
+        "taskSavedAt": 1789837521287,
         "reviewSavedAt": null
       }
     },
@@ -1760,6 +1760,13 @@
       "childId": "yilin",
       "title": "数学 卷1+卷2",
       "date": "2026-10-27",
+      "daysBefore": 14
+    },
+    {
+      "id": "rem_1789836350467_2l0",
+      "childId": "qiannuo",
+      "title": "中文演讲",
+      "date": "2026-09-21",
       "daysBefore": 14
     }
   ]
