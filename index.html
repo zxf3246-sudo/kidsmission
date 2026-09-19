@@ -2035,11 +2035,13 @@ function calcCumulativePoints(childId, dateStr) {
   return total;
 }
 
-// 累计存款：扫描所有历史日期（含今日，按日期升序）累加存款变化
+// 累计存款：初始基础值 + 历史存款变化累加
+const SAVINGS_BASE = { yilin: 1708, yanxi: 151, qiannuo: 90 };
 function calcCumulativeSavings(childId, dateStr) {
-  if (!state.dates) return 0;
+  const base = SAVINGS_BASE[childId] || 0;
+  if (!state.dates) return base;
   const dates = Object.keys(state.dates).filter(d => d <= dateStr).sort();
-  let total = 0;
+  let total = base;
   dates.forEach(d => {
     const cd = state.dates[d] && state.dates[d][childId];
     if (cd && cd.review) total += (+cd.review.savings || 0);
