@@ -176,14 +176,6 @@
             "done": true,
             "errLinked": false,
             "status": "done"
-          },
-          {
-            "id": "t1789797952268lzj3",
-            "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
           }
         ],
         "review": {
@@ -196,7 +188,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789820115876,
+        "taskSavedAt": 1789828687934,
         "reviewSavedAt": 1789828257986
       },
       "qiannuo": {
@@ -224,7 +216,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1789797952268t1qr",
@@ -276,16 +269,18 @@
             "name": "练习演讲",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789797952268ve29",
-            "name": "自由玩耍",
-            "duration": null,
+            "name": "看电视",
+            "duration": 50,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           }
         ],
         "review": {
@@ -297,7 +292,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789814916689,
+        "taskSavedAt": 1789828713738,
         "reviewSavedAt": 1789828454505
       }
     },
