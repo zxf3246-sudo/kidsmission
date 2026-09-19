@@ -3450,12 +3450,10 @@ async function exportReview() {
     ctx.beginPath(); ctx.arc(x0+CW-20, y+20, 70, 0, Math.PI*2); ctx.fillStyle = col.soft; ctx.fill();
     ctx.restore();
 
-    let cy = y + 28;
+    let cy = y + 36;
     // 名字 + 评分环
     setFont(ctx, 26, true); ctx.fillStyle = col.dark;
     ctx.fillText(col.emoji + ' ' + c.name, x0+28, cy);
-    setFont(ctx, 15, false); ctx.fillStyle = '#64748b';
-    ctx.fillText(c.grade, x0+28, cy+38);
 
     // 星星评分（名字右边）— 始终显示5颗，按评分涂金
     const starsVal = (r.stars !== undefined && r.stars !== null) ? r.stars : 0;
