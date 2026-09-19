@@ -1044,7 +1044,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1789835952582,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -1062,14 +1062,6 @@
             "id": "t1789833747391wf6u",
             "name": "数学计算2页",
             "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391kb7u",
-            "name": "学而思作业",
-            "duration": 20,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -1115,14 +1107,6 @@
             "errLinked": false
           },
           {
-            "id": "t1789833747391ck0y",
-            "name": "错题重做",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": true
-          },
-          {
             "id": "t1789833747391yvog",
             "name": "自由玩耍",
             "duration": null,
@@ -1142,7 +1126,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789835211788,
+        "taskSavedAt": 1789835950149,
         "reviewSavedAt": null
       }
     }
