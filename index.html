@@ -2420,8 +2420,8 @@ function renderChildren(dateStr) {
 
     // 复盘区数据
     const review = cd.review || { points:0, savings:0, score:null, summary:'', reward:'', other:'' };
-    // 上课时长 = 放学后固定课程自动累加
-    const classMin = fixed.filter(cl=>isAfterSchool(cl,c)).reduce((s,x)=>s+(+x.duration||0),0);
+    // 上课时长 = 放学后固定课程自动累加（用当天实际到家时间判断）
+    const classMin = fixed.filter(cl=>isAfterSchool(cl,c,arrTime)).reduce((s,x)=>s+(+x.duration||0),0);
     // 自学时长 = 任务学习类手动输入时长合计（与预算条一致）
     const selfStudyMin = used.study - classMin;
     const totalStudyMin = classMin + selfStudyMin;
