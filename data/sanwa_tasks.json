@@ -167,6 +167,15 @@
             "status": "done"
           },
           {
+            "id": "t1789815864843xflk",
+            "name": "学校英语单词背诵",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t1789797952268lzj3",
             "name": "自由玩耍",
             "duration": null,
@@ -184,7 +193,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789815444282,
+        "taskSavedAt": 1789815867398,
         "reviewSavedAt": null
       },
       "qiannuo": {
