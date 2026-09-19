@@ -135,8 +135,9 @@
             "name": "语文学校词复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789797952268ub3b",
@@ -183,7 +184,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789814858050,
+        "taskSavedAt": 1789815444282,
         "reviewSavedAt": null
       },
       "qiannuo": {
