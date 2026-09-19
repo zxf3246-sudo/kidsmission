@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 背景：圆角白色 -->
+  <rect width="200" height="200" rx="40" fill="#ffffff"/>
+  
+  <!-- 身体：椭圆 -->
+  <ellipse cx="100" cy="105" rx="55" ry="65" fill="none" stroke="#1a1a1a" stroke-width="3.5"/>
+  
+  <!-- 眼睛（两个小点） -->
+  <circle cx="82" cy="95" r="3.5" fill="#1a1a1a"/>
+  <circle cx="112" cy="95" r="3.5" fill="#1a1a1a"/>
+  
+  <!-- 嘴（一条小线） -->
+  <line x1="90" y1="115" x2="108" y2="115" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- 左胳膊 -->
+  <path d="M 50 90 Q 30 70 28 55" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- 右胳膊 -->
+  <path d="M 150 90 Q 170 70 172 55" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- 左腿 -->
+  <path d="M 80 168 Q 72 185 68 192" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- 右腿 -->
+  <path d="M 120 168 Q 128 185 132 192" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+</svg>
