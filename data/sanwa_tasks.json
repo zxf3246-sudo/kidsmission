@@ -88,12 +88,13 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": -1
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789815051638,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1789818806989
       },
       "yanxi": {
         "fixedClasses": [
