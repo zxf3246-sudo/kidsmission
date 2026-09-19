@@ -4,12 +4,12 @@
       "yilin": {
         "fixedClasses": [
           {
-            "name": "倪老师语文✅",
+            "name": "倪老师语文",
             "time": "10:00-13:00",
             "duration": 180
           },
           {
-            "name": "线上TAL✅",
+            "name": "线上TAL",
             "time": "15:00-17:00",
             "duration": 120
           },
@@ -92,7 +92,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789814807909,
+        "taskSavedAt": 1789814890371,
         "reviewSavedAt": null
       },
       "yanxi": {
