@@ -3670,16 +3670,12 @@ async function exportTasksFinal() {
     const undoneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'undone').length;
     const taskDonePct = tasks.length ? Math.round(doneCount / tasks.length * 100) : 0;
 
-    const scoreVal = (review.score!==null && !isNaN(review.score)) ? review.score : null;
-    const scoreColor = scoreVal===null ? '#94a3b8'
-      : scoreVal>=90 ? '#10b981' : scoreVal>=75 ? '#6366f1'
-      : scoreVal>=60 ? '#f59e0b' : '#ef4444';
     const starsVal = (review.stars !== undefined && review.stars !== null) ? review.stars : 0;
 
     // 测量卡片高度
     setFont(ctx, 15, false);
-    let cH = 110; // 头部（含星星）
-    cH += 72;     // 评分环 + 进度条
+    let cH = 88;  // 头部（名字+星星）
+    cH += 46;     // 进度条
     cH += 64;     // 任务完成统计三栏
     if (classes.length) cH += 40 + classes.length * 44;
     cH += 40 + Math.max(52, tasks.length * 52);
@@ -3708,23 +3704,7 @@ async function exportTasksFinal() {
       const fill = Math.max(0, Math.min(1, starsVal - si));
       drawStar(ctx, starStartX + si * (starR * 2 + starGap), starY, starR, starR * 0.4, fill);
     }
-
-    // 评分环（右上）
-    const ringX = x0+CW-66, ringY = cy+6, ringR = 36;
-    ctx.beginPath(); ctx.arc(ringX, ringY, ringR, 0, Math.PI*2);
-    ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 7; ctx.stroke();
-    if (scoreVal !== null) {
-      ctx.beginPath();
-      ctx.arc(ringX, ringY, ringR, -Math.PI/2, -Math.PI/2 + 2*Math.PI*scoreVal/100);
-      ctx.strokeStyle = scoreColor; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.stroke();
-    }
-    setFont(ctx, 19, true); ctx.fillStyle = scoreColor;
-    ctx.textAlign = 'center';
-    ctx.fillText(scoreVal===null ? '未评' : String(scoreVal), ringX, ringY-12);
-    setFont(ctx, 11, false); ctx.fillStyle = '#94a3b8';
-    ctx.fillText('/100', ringX, ringY+10);
-    ctx.textAlign = 'left';
-    cy += 78;
+    cy += 56;
 
     // 进度条（学习时长）
     setFont(ctx, 13, false); ctx.fillStyle = '#64748b';
@@ -3739,9 +3719,9 @@ async function exportTasksFinal() {
     // 任务完成统计三栏
     const sw = (CW-56-16) / 3;
     const tstats = [
-      { label:'✅ 已完成', val:String(doneCount), col:'#15803d', bg:'#dcfce7' },
+      { label:'✅ 已完成', val:String(doneCount), col:'#1e40af', bg:'#dbeafe' },
       { label:'❌ 未完成', val:String(undoneCount), col:'#b91c1c', bg:'#fee2e2' },
-      { label:'📊 完成率', val:taskDonePct+'%', col:taskDonePct>=80?'#15803d':taskDonePct>=60?'#92400e':'#b91c1c', bg:taskDonePct>=80?'#dcfce7':taskDonePct>=60?'#fef3c7':'#fee2e2' },
+      { label:'📊 完成率', val:taskDonePct+'%', col:taskDonePct>=80?'#1e40af':taskDonePct>=60?'#92400e':'#b91c1c', bg:taskDonePct>=80?'#dbeafe':taskDonePct>=60?'#fef3c7':'#fee2e2' },
     ];
     tstats.forEach((s, i) => {
       const sx = x0+28 + i*(sw+8);
@@ -3759,10 +3739,10 @@ async function exportTasksFinal() {
       ctx.fillText('🎓 完成课程', x0+28, cy); cy += 32;
       classes.forEach(cl => {
         imgRoundRect(ctx, x0+28, cy, CW-56, 40, 10);
-        ctx.fillStyle = '#dcfce7'; ctx.fill();
-        setFont(ctx, 15, true); ctx.fillStyle = '#15803d';
+        ctx.fillStyle = col.soft; ctx.fill();
+        setFont(ctx, 15, true); ctx.fillStyle = col.dark;
         ctx.fillText(cl.name, x0+44, cy+10);
-        setFont(ctx, 13, false); ctx.fillStyle = '#166534';
+        setFont(ctx, 13, false); ctx.fillStyle = col.main;
         const nw = ctx.measureText(cl.name).width;
         ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+44+nw+10, cy+11);
         cy += 44;
@@ -3780,12 +3760,12 @@ async function exportTasksFinal() {
       tasks.forEach(t => {
         const status = t.status || (t.done ? 'done' : 'empty');
         imgRoundRect(ctx, x0+28, cy, CW-56, 42, 10);
-        ctx.fillStyle = status==='done' ? '#dcfce7' : status==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
+        ctx.fillStyle = status==='done' ? col.soft : status==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
         ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1; ctx.stroke();
         // 状态框
         imgRoundRect(ctx, x0+42, cy+8, 26, 26, 6);
         if (status === 'done') {
-          ctx.fillStyle = '#10b981'; ctx.fill();
+          ctx.fillStyle = col.main; ctx.fill();
           setFont(ctx, 16, true); ctx.fillStyle = '#fff';
           ctx.fillText('✓', x0+47, cy+11);
         } else if (status === 'undone') {
@@ -3798,7 +3778,7 @@ async function exportTasksFinal() {
         // 任务名
         let tx = x0+78;
         setFont(ctx, 16, false);
-        if (status === 'done') { ctx.fillStyle = '#15803d'; ctx.font = `bold 16px ${IMG.F}`; }
+        if (status === 'done') { ctx.fillStyle = col.dark; ctx.font = `bold 16px ${IMG.F}`; }
         else if (status === 'undone') { ctx.fillStyle = '#dc2626'; ctx.font = `bold 16px ${IMG.F}`; }
         else { ctx.fillStyle = '#334155'; ctx.font = `bold 16px ${IMG.F}`; }
         ctx.fillText(t.name, tx, cy+11);
