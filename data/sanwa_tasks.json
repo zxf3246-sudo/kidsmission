@@ -1,0 +1,346 @@
+{
+  "dates": {
+    "2026-09-19": {
+      "yilin": {
+        "fixedClasses": [
+          {
+            "name": "倪老师语文✅",
+            "time": "10:00-13:00",
+            "duration": 180
+          },
+          {
+            "name": "线上TAL✅",
+            "time": "15:00-17:00",
+            "duration": 120
+          },
+          {
+            "name": "英语missy",
+            "time": "19:45-21:45",
+            "duration": 120
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1789797952267yk93",
+            "name": "学校作业",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17897979522672s7j",
+            "name": "Missy作业",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952267v81y",
+            "name": "语文5B第14课词汇",
+            "duration": 25,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952267gq32",
+            "name": "科学知识点1个",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952267jr5i",
+            "name": "LA作业",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952267yqpw",
+            "name": "自由活动",
+            "duration": 60,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:30",
+        "taskSavedAt": 1789814635852,
+        "reviewSavedAt": null
+      },
+      "yanxi": {
+        "fixedClasses": [
+          {
+            "name": "篮球",
+            "time": "13:30-15:30",
+            "duration": 120
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1789797952268eaoz",
+            "name": "四五快读第二册1课新字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17897979522683o07",
+            "name": "WW1单词10个",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952268d5yn",
+            "name": "英语语法学习1个",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268pees",
+            "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268ub3b",
+            "name": "小龙1篇",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268yage",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17897979522686iwf",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952268lzj3",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:30",
+        "taskSavedAt": 1789799801643,
+        "reviewSavedAt": null
+      },
+      "qiannuo": {
+        "fixedClasses": [
+          {
+            "name": "豌豆思维",
+            "time": "10:00-10:40",
+            "duration": 40
+          },
+          {
+            "name": "LA",
+            "time": "11:00-12:00",
+            "duration": 60
+          },
+          {
+            "name": "画画写字",
+            "time": "14:00-17:10",
+            "duration": 190
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t17897979522680d8x",
+            "name": "乘法口诀复习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268t1qr",
+            "name": "数学计算2页",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952268d1gp",
+            "name": "练字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789797952268abc6",
+            "name": "控笔",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17897979522681zep",
+            "name": "字母拼音",
+            "duration": 10,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268x7qb",
+            "name": "语法练习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "status": "empty"
+          },
+          {
+            "id": "t1789797952268bmix",
+            "name": "练习演讲",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789797952268ve29",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": ""
+        },
+        "arrival": "08:00",
+        "sleep": "21:30",
+        "taskSavedAt": 1789799830196,
+        "reviewSavedAt": null
+      }
+    }
+  },
+  "sharedLearning": [
+    "阅读",
+    "一个新成语",
+    "学习一个科学知识",
+    "分析一件新闻事件",
+    "学习一个历史知识"
+  ],
+  "reminders": [
+    {
+      "id": "r921",
+      "childId": "yilin",
+      "title": "英语口语",
+      "date": "2026-09-21",
+      "daysBefore": 14
+    },
+    {
+      "id": "r922",
+      "childId": "yilin",
+      "title": "华文口语",
+      "date": "2026-09-22",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1005",
+      "childId": "yilin",
+      "title": "英语 试卷1 写作",
+      "date": "2026-10-05",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1021",
+      "childId": "yilin",
+      "title": "英语+华文 听力",
+      "date": "2026-10-21",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1022",
+      "childId": "yilin",
+      "title": "英语 试卷2 语言&阅读",
+      "date": "2026-10-22",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1023",
+      "childId": "yilin",
+      "title": "华文 试卷2 语言&阅读",
+      "date": "2026-10-23",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1026",
+      "childId": "yilin",
+      "title": "科学 全套试卷",
+      "date": "2026-10-26",
+      "daysBefore": 14
+    },
+    {
+      "id": "r1027",
+      "childId": "yilin",
+      "title": "数学 卷1+卷2",
+      "date": "2026-10-27",
+      "daysBefore": 14
+    }
+  ]
+}
