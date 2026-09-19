@@ -918,6 +918,11 @@
             "name": "科学",
             "time": "19:30-21:30",
             "duration": 120
+          },
+          {
+            "name": "Color Moon",
+            "time": "15:00-18:00",
+            "duration": 180
           }
         ],
         "tasks": [
@@ -957,7 +962,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789834873072,
+        "taskSavedAt": 1789835179744,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -1059,13 +1064,7 @@
         "reviewSavedAt": null
       },
       "qiannuo": {
-        "fixedClasses": [
-          {
-            "name": "豌豆思维",
-            "time": "10:00-10:40",
-            "duration": 40
-          }
-        ],
+        "fixedClasses": [],
         "tasks": [
           {
             "id": "t1789833747391xkil",
@@ -1167,7 +1166,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1789835211788,
         "reviewSavedAt": null
       }
     }
