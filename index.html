@@ -3445,8 +3445,10 @@ async function exportReview() {
     const studyOver = totalStudy > budget.study;
 
     // 总结/奖励/其他事项高度（需提前测量以确定卡片总高）
+    setFont(ctx, 19, false); // 总结正文字号（与下方渲染一致，确保测量准确）
     const summaryLines = r.summary && r.summary.trim()
       ? imgWrap(ctx, r.summary.trim(), CW-100) : [];
+    setFont(ctx, 15, false);
     const rewardLines = r.reward && r.reward.trim()
       ? imgWrap(ctx, r.reward.trim(), CW-100) : [];
     const otherLines = r.other && r.other.trim()
@@ -3455,7 +3457,7 @@ async function exportReview() {
     let cH = 110; // 头部（含统计行）
     cH += 100; // 统计三栏 + 进度条
     cH += 76; // 积分徽章（四板块）
-    if (summaryLines.length) cH += 32 + summaryLines.length * 24 + 18;
+    if (summaryLines.length) cH += 36 + summaryLines.length * 30 + 18;
     if (rewardLines.length) cH += 32 + rewardLines.length * 24 + 18;
     if (otherLines.length) cH += 32 + otherLines.length * 24 + 18;
     if (cd.reviewSavedAt) cH += 30;
@@ -3551,13 +3553,13 @@ async function exportReview() {
 
     // 总结
     if (summaryLines.length) {
-      setFont(ctx, 16, true); ctx.fillStyle = col.dark;
-      ctx.fillText('📝 今日总结', x0+28, cy); cy += 28;
-      const boxH = summaryLines.length * 24 + 18;
+      setFont(ctx, 20, true); ctx.fillStyle = col.dark;
+      ctx.fillText('📝 今日总结', x0+28, cy); cy += 32;
+      const boxH = summaryLines.length * 30 + 18;
       imgRoundRect(ctx, x0+28, cy, CW-56, boxH, 10); ctx.fillStyle = '#f8fafc'; ctx.fill();
       ctx.fillStyle = col.main; ctx.fillRect(x0+28, cy, 4, boxH);
-      setFont(ctx, 15, false); ctx.fillStyle = '#334155';
-      summaryLines.forEach((ln, i) => ctx.fillText(ln, x0+42, cy+9+i*24));
+      setFont(ctx, 19, false); ctx.fillStyle = '#334155';
+      summaryLines.forEach((ln, i) => ctx.fillText(ln, x0+42, cy+9+i*30));
       cy += boxH + 14;
     }
     // 奖励
