@@ -2805,7 +2805,7 @@ function renderChildren(dateStr) {
           </div>
           <div class="stat-cell sav-cum">
             <div class="stat-label">累计存款</div>
-            <div class="stat-value ${cumulativeSavings<0?'warn':(cumulativeSavings===0?'empty':'')}">¥${cumulativeSavings}</div>
+            <div class="stat-value ${cumulativeSavings<0?'warn':(cumulativeSavings===0?'empty':'')}">S$${cumulativeSavings}</div>
             <div class="stat-sub">含今日</div>
           </div>
         </div>
@@ -3472,7 +3472,7 @@ async function exportTasks() {
     // 积分换钱：10 积分 = 1 元（可根据实际调整）
     const totalMoney = Math.round(totalPoints / 10 * 100) / 100;
     setFont(ctx, 17, true); ctx.fillStyle = col.main;
-    ctx.fillText(`⭐ ${dayScore}   🎯 ${dayPoints}   🏆 总积分 ${totalPoints>0?'+':''}${totalPoints}   💰 总 ¥${totalMoney}`, x0+32, cy+74);
+    ctx.fillText(`⭐ ${dayScore}   🎯 ${dayPoints}   🏆 总积分 ${totalPoints>0?'+':''}${totalPoints}   💰 总 S$${totalMoney}`, x0+32, cy+74);
     cy += 104;
 
     // 预算条
@@ -3729,7 +3729,7 @@ async function exportReview() {
       { label: '今日积分', val: `${pts>=0?'+':''}${pts}`, bg: '#dcfce7', fg: '#15803d' },
       { label: '累计积分', val: `${cumPts}`,               bg: '#dbeafe', fg: '#1e40af' },
       { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,  bg: '#fef3c7', fg: '#92400e' },
-      { label: '累计存款', val: `¥${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
+      { label: '累计存款', val: `S$${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
     ];
     boxes4.forEach((b, i) => {
       const bx = x0 + 28 + i * (bw4 + gap4);
