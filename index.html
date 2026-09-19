@@ -652,13 +652,30 @@
     overflow: hidden;
   }
   .review-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px;
+  }
+  .review-points {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px;
   }
   .stat-cell {
     background: #fff; padding: 5px 7px; border-radius: 8px;
-    border: 1px solid #d1fae5; text-align: center;
+    border: 1px solid #e2e8f0; text-align: center;
     display: flex; flex-direction: column; align-items: center; gap: 1px;
   }
+  .review-stats .stat-cell:nth-child(1) { background: #ede9fe; border-color: #c4b5fd; }
+  .review-stats .stat-cell:nth-child(1) .stat-value { color: #6d28d9; }
+  .review-stats .stat-cell:nth-child(2) { background: #ffedd5; border-color: #fdba74; }
+  .review-stats .stat-cell:nth-child(2) .stat-value { color: #c2410c; }
+  .review-stats .stat-cell:nth-child(3) { background: #ccfbf1; border-color: #5eead4; }
+  .review-stats .stat-cell:nth-child(3) .stat-value { color: #0f766e; }
+  .stat-cell.pt-today  { background: #dcfce7; border-color: #86efac; }
+  .stat-cell.pt-cum    { background: #dbeafe; border-color: #93c5fd; }
+  .stat-cell.sav-today { background: #fef3c7; border-color: #fcd34d; }
+  .stat-cell.sav-cum   { background: #fce7f3; border-color: #f9a8d4; }
+  .stat-cell.pt-today  .stat-value, .stat-cell.pt-today  .stat-input { color: #15803d; }
+  .stat-cell.pt-cum    .stat-value { color: #1e40af; }
+  .stat-cell.sav-today .stat-value, .stat-cell.sav-today .stat-input { color: #92400e; }
+  .stat-cell.sav-cum   .stat-value { color: #9d174d; }
   .stat-label { font-size: 9px; color: #64748b; font-weight: 600; }
   .stat-value { font-size: 13px; font-weight: 700; color: #166534; line-height: 1.25; }
   .stat-value.warn { color: #dc2626; }
@@ -2576,30 +2593,32 @@ function renderChildren(dateStr) {
             <div class="stat-value ${totalStudyMin>budget.study?'warn':''}" style="${totalStudyMin>budget.study?'color:#dc2626':''}">${fmtDur(totalStudyMin)}</div>
             <div class="stat-sub">预算 ${fmtDur(budget.study)}${totalStudyMin>budget.study?' · 超时':''}</div>
           </div>
-          <div class="stat-cell">
-            <div class="stat-label">当日积分</div>
+        </div>
+        <div class="review-points">
+          <div class="stat-cell pt-today">
+            <div class="stat-label">今日积分</div>
             <input type="number" class="stat-input" id="rv-points-${c.id}"
               value="${pointsVal}" placeholder="0"
               oninput="updateReview('${c.id}','points',this.value,false)"
               onblur="updateReview('${c.id}','points',this.value,true)">
             <div class="stat-sub">正负均可</div>
           </div>
-          <div class="stat-cell">
+          <div class="stat-cell pt-cum">
             <div class="stat-label">累计积分</div>
-            <div class="stat-value ${cumulativePoints<0?'warn':(cumulativePoints===0?'empty':'')}" style="${cumulativePoints>0?'color:#16a34a':''}">${cumulativePoints>0?'+':''}${cumulativePoints}</div>
+            <div class="stat-value ${cumulativePoints<0?'warn':(cumulativePoints===0?'empty':'')}">${cumulativePoints>0?'+':''}${cumulativePoints}</div>
             <div class="stat-sub">含今日</div>
           </div>
-          <div class="stat-cell">
-            <div class="stat-label">存款变化</div>
+          <div class="stat-cell sav-today">
+            <div class="stat-label">今日存款</div>
             <input type="number" class="stat-input" id="rv-savings-${c.id}"
               value="${savingsVal}" placeholder="0"
               oninput="updateReview('${c.id}','savings',this.value,false)"
               onblur="updateReview('${c.id}','savings',this.value,true)">
             <div class="stat-sub">正负均可</div>
           </div>
-          <div class="stat-cell">
-            <div class="stat-label">总存款</div>
-            <div class="stat-value ${cumulativeSavings<0?'warn':(cumulativeSavings===0?'empty':'')}" style="${cumulativeSavings>0?'color:#16a34a':''}">¥${cumulativeSavings}</div>
+          <div class="stat-cell sav-cum">
+            <div class="stat-label">累计存款</div>
+            <div class="stat-value ${cumulativeSavings<0?'warn':(cumulativeSavings===0?'empty':'')}">¥${cumulativeSavings}</div>
             <div class="stat-sub">含今日</div>
           </div>
         </div>
