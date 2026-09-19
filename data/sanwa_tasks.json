@@ -23,7 +23,7 @@
           {
             "id": "t1789797952267yk93",
             "name": "学校作业",
-            "duration": 30,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -32,7 +32,7 @@
           {
             "id": "t17897979522672s7j",
             "name": "Missy作业",
-            "duration": 30,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -50,7 +50,7 @@
           {
             "id": "t1789797952267gq32",
             "name": "科学知识点1个",
-            "duration": 15,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -68,7 +68,7 @@
           {
             "id": "t1789814772797lign",
             "name": "语文作文",
-            "duration": 50,
+            "duration": 0,
             "type": "study",
             "done": false,
             "errLinked": false,
@@ -95,7 +95,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789830708455,
+        "taskSavedAt": 1789832529379,
         "reviewSavedAt": 1789831935548
       },
       "yanxi": {
@@ -128,7 +128,7 @@
           {
             "id": "t1789797952268d5yn",
             "name": "英语语法学习1个",
-            "duration": 15,
+            "duration": 45,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -146,7 +146,7 @@
           {
             "id": "t1789797952268ub3b",
             "name": "小龙1篇",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -155,7 +155,7 @@
           {
             "id": "t1789797952268yage",
             "name": "Koobits",
-            "duration": 20,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -173,7 +173,7 @@
           {
             "id": "t1789815864843xflk",
             "name": "学校英语单词背诵",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -191,7 +191,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789828687934,
+        "taskSavedAt": 1789832560198,
         "reviewSavedAt": 1789831934147
       },
       "qiannuo": {
