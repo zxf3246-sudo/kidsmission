@@ -2340,10 +2340,6 @@ function ensureDateOn(s, dateStr) {
       } else if (!child.fixedClasses) {
         child.fixedClasses = JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || []));
       }
-      // 确保每个课程都有 status 字段
-      (child.fixedClasses || []).forEach(cl => {
-        if (!cl.status) cl.status = cl.done ? 'done' : 'empty';
-      });
       if (!child.review || typeof child.review !== 'object') {
         child.review = { points: 0, savings: 0, score: null, summary: '', reward: '', other: '', stars: 0 };
       } else {
@@ -3669,10 +3665,6 @@ async function exportTasksFinal() {
     const studyPct = budget.study ? Math.min(100, totalStudy / budget.study * 100) : 0;
     const studyOver = totalStudy > budget.study;
 
-    // 课程完成统计
-    const classDoneCount = classes.filter(cl => cl.status === 'done').length;
-    const classPct = classes.length ? Math.round(classDoneCount / classes.length * 100) : 0;
-
     // 任务完成统计
     const doneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'done').length;
     const undoneCount = tasks.filter(t => (t.status || (t.done ? 'done' : '')) === 'undone').length;
@@ -3764,35 +3756,15 @@ async function exportTasksFinal() {
     // 完成课程
     if (classes.length) {
       setFont(ctx, 18, true); ctx.fillStyle = col.dark;
-      const classTitle = classDoneCount === classes.length
-        ? `🎓 完成课程（${classDoneCount}/${classes.length} ✅）`
-        : `🎓 完成课程（${classDoneCount}/${classes.length}）`;
-      ctx.fillText(classTitle, x0+28, cy); cy += 32;
+      ctx.fillText('🎓 完成课程', x0+28, cy); cy += 32;
       classes.forEach(cl => {
-        const cStatus = cl.status || 'empty';
         imgRoundRect(ctx, x0+28, cy, CW-56, 40, 10);
-        ctx.fillStyle = cStatus==='done' ? '#dcfce7' : cStatus==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
-        // 状态框
-        imgRoundRect(ctx, x0+42, cy+7, 26, 26, 6);
-        if (cStatus === 'done') {
-          ctx.fillStyle = '#10b981'; ctx.fill();
-          setFont(ctx, 15, true); ctx.fillStyle = '#fff';
-          ctx.fillText('✓', x0+47, cy+10);
-        } else if (cStatus === 'undone') {
-          ctx.fillStyle = '#ef4444'; ctx.fill();
-          setFont(ctx, 15, true); ctx.fillStyle = '#fff';
-          ctx.fillText('✗', x0+48, cy+10);
-        } else {
-          ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2; ctx.stroke();
-        }
-        setFont(ctx, 15, true);
-        if (cStatus === 'done') ctx.fillStyle = '#15803d';
-        else if (cStatus === 'undone') ctx.fillStyle = '#dc2626';
-        else ctx.fillStyle = '#334155';
-        ctx.fillText(cl.name, x0+78, cy+10);
-        setFont(ctx, 13, false); ctx.fillStyle = '#64748b';
+        ctx.fillStyle = '#dcfce7'; ctx.fill();
+        setFont(ctx, 15, true); ctx.fillStyle = '#15803d';
+        ctx.fillText(cl.name, x0+44, cy+10);
+        setFont(ctx, 13, false); ctx.fillStyle = '#166534';
         const nw = ctx.measureText(cl.name).width;
-        ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+78+nw+10, cy+11);
+        ctx.fillText(`${cl.time}  ${cl.duration}分`, x0+44+nw+10, cy+11);
         cy += 44;
       });
       cy += 4;
