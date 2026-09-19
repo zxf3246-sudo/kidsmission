@@ -4078,8 +4078,8 @@ async function exportTasksText() {
     const classes = (cd.fixedClasses||[]).filter(cl=>isAfterSchool(cl,c,cd.arrival||c.arrival));
     if (classes.length) {
       text += `📖 固定课程：\n`;
-      classes.forEach(cl => {
-        text += `  🕐 ${cl.time||''} ${cl.name}\n`;
+      classes.forEach((cl, i) => {
+        text += `  ${i+1}. ${cl.time||''} ${cl.name}\n`;
       });
     }
     
