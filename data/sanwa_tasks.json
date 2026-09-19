@@ -242,20 +242,21 @@
           },
           {
             "id": "t17897979522681zep",
-            "name": "字母拼音",
+            "name": "字母练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789797952268x7qb",
             "name": "语法练习",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "t1789797952268bmix",
@@ -283,7 +284,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789799830196,
+        "taskSavedAt": 1789814916689,
         "reviewSavedAt": null
       }
     },
