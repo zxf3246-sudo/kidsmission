@@ -3771,12 +3771,12 @@ async function exportTasksFinal() {
       tasks.forEach(t => {
         const status = t.status || (t.done ? 'done' : 'empty');
         imgRoundRect(ctx, x0+28, cy, CW-56, 42, 10);
-        ctx.fillStyle = status==='done' ? col.soft : status==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
+        ctx.fillStyle = status==='done' ? '#dcfce7' : status==='undone' ? '#fee2e2' : '#f8fafc'; ctx.fill();
         ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1; ctx.stroke();
         // 状态框
         imgRoundRect(ctx, x0+42, cy+8, 26, 26, 6);
         if (status === 'done') {
-          ctx.fillStyle = col.main; ctx.fill();
+          ctx.fillStyle = '#10b981'; ctx.fill();
           setFont(ctx, 16, true); ctx.fillStyle = '#fff';
           ctx.fillText('✓', x0+47, cy+11);
         } else if (status === 'undone') {
@@ -3789,7 +3789,7 @@ async function exportTasksFinal() {
         // 任务名
         let tx = x0+78;
         setFont(ctx, 16, false);
-        if (status === 'done') { ctx.fillStyle = col.dark; ctx.font = `bold 16px ${IMG.F}`; }
+        if (status === 'done') { ctx.fillStyle = '#15803d'; ctx.font = `bold 16px ${IMG.F}`; }
         else if (status === 'undone') { ctx.fillStyle = '#dc2626'; ctx.font = `bold 16px ${IMG.F}`; }
         else { ctx.fillStyle = '#334155'; ctx.font = `bold 16px ${IMG.F}`; }
         ctx.fillText(t.name, tx, cy+11);
