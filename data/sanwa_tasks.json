@@ -43,8 +43,9 @@
             "name": "语文5B第13课词汇",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789797952267gq32",
@@ -93,7 +94,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789815051638,
+        "taskSavedAt": 1789830708455,
         "reviewSavedAt": 1789829060608
       },
       "yanxi": {
