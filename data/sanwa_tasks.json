@@ -167,7 +167,7 @@
           {
             "id": "t1789833747391xkil",
             "name": "乘法口诀复习",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -176,7 +176,7 @@
           {
             "id": "t1789833747391wf6u",
             "name": "数学计算2页",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -185,7 +185,7 @@
           {
             "id": "t17898337473913nxw",
             "name": "练字",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -244,7 +244,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789873481030,
+        "taskSavedAt": 1789873500972,
         "reviewSavedAt": null
       }
     },
