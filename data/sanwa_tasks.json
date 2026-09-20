@@ -130,17 +130,18 @@
             "name": "英语语法练习三页",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "t178986782481306r9",
             "name": "学而思作业",
             "duration": null,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391aznz",
@@ -163,7 +164,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789890485498,
+        "taskSavedAt": 1789895128552,
         "reviewSavedAt": null
       },
       "qiannuo": {
