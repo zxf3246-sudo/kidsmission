@@ -83,7 +83,7 @@
           {
             "id": "t17898337473914k6k",
             "name": "WW1单词10个",
-            "duration": 15,
+            "duration": 60,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -92,7 +92,7 @@
           {
             "id": "t1789833747391onsr",
             "name": "四五快读第二册1课新字",
-            "duration": 25,
+            "duration": null,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -115,17 +115,17 @@
             "errLinked": false
           },
           {
-            "id": "t178986782481306r9",
-            "name": "学而思作业",
-            "duration": null,
+            "id": "t1789833747391vl5f",
+            "name": "英语语法练习三页",
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
           },
           {
-            "id": "t1789833747391vl5f",
-            "name": "英语语法练习三页",
-            "duration": 15,
+            "id": "t178986782481306r9",
+            "name": "学而思作业",
+            "duration": null,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -150,7 +150,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789872035842,
+        "taskSavedAt": 1789872056162,
         "reviewSavedAt": null
       },
       "qiannuo": {
