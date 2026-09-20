@@ -121,9 +121,9 @@
             "name": "语文学校词复习",
             "duration": 15,
             "type": "study",
-            "done": true,
+            "done": false,
             "errLinked": false,
-            "status": "done"
+            "status": "empty"
           },
           {
             "id": "t1789833747391vl5f",
@@ -162,7 +162,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789889625373,
+        "taskSavedAt": 1789888400247,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -216,18 +216,20 @@
           {
             "id": "t1789833747391idge",
             "name": "语法练习",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391yvjt",
             "name": "练习演讲",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391yvog",
@@ -249,7 +251,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789875670480,
+        "taskSavedAt": 1789889638959,
         "reviewSavedAt": null
       }
     },
