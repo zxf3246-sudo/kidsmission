@@ -207,8 +207,9 @@
             "name": "控笔",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391idge",
@@ -246,7 +247,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789873500972,
+        "taskSavedAt": 1789875664697,
         "reviewSavedAt": null
       }
     },
