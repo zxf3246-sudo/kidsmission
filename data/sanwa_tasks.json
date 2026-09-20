@@ -131,7 +131,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "empty"
           },
           {
             "id": "t178986782481306r9",
@@ -216,7 +217,7 @@
           {
             "id": "t1789833747391idge",
             "name": "语法练习",
-            "duration": 30,
+            "duration": 50,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -251,7 +252,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789889638959,
+        "taskSavedAt": 1789890465068,
         "reviewSavedAt": null
       }
     },
@@ -1742,56 +1743,64 @@
       "childId": "yilin",
       "title": "英语口语",
       "date": "2026-09-21",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r922",
       "childId": "yilin",
       "title": "华文口语",
       "date": "2026-09-22",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1005",
       "childId": "yilin",
       "title": "英语 试卷1 写作",
       "date": "2026-10-05",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1021",
       "childId": "yilin",
       "title": "英语+华文 听力",
       "date": "2026-10-21",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1022",
       "childId": "yilin",
       "title": "英语 试卷2 语言&阅读",
       "date": "2026-10-22",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1023",
       "childId": "yilin",
       "title": "华文 试卷2 语言&阅读",
       "date": "2026-10-23",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1026",
       "childId": "yilin",
       "title": "科学 全套试卷",
       "date": "2026-10-26",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "r1027",
       "childId": "yilin",
       "title": "数学 卷1+卷2",
       "date": "2026-10-27",
-      "daysBefore": 14
+      "daysBefore": 14,
+      "category": "other"
     }
   ]
 }
