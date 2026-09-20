@@ -1744,7 +1744,7 @@
       "title": "英语口语",
       "date": "2026-09-21",
       "daysBefore": 14,
-      "category": "other"
+      "category": "exam"
     },
     {
       "id": "r922",
@@ -1752,7 +1752,7 @@
       "title": "华文口语",
       "date": "2026-09-22",
       "daysBefore": 14,
-      "category": "other"
+      "category": "exam"
     },
     {
       "id": "r1005",
