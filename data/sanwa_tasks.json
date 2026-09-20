@@ -187,20 +187,22 @@
             "name": "练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391wyxj",
-            "name": "控笔",
-            "duration": 10,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391oata",
             "name": "字母拼音",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789833747391wyxj",
+            "name": "控笔",
             "duration": 10,
             "type": "study",
             "done": false,
@@ -242,7 +244,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789869387266,
+        "taskSavedAt": 1789873481030,
         "reviewSavedAt": null
       }
     },
