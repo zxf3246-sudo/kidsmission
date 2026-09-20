@@ -734,8 +734,23 @@
   .stat-input::placeholder { color: #cbd5e1; font-weight: 500; }
   .review-field { margin-bottom: 8px; }
   .review-field label {
-    display: block; font-size: 11px; color: #64748b;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: #64748b;
     margin-bottom: 4px; font-weight: 600;
+  }
+  .voice-btn {
+    font-size: 14px; padding: 2px 8px; border-radius: 10px;
+    border: 1px solid #e2e8f0; background: #fff; cursor: pointer;
+    transition: all .15s; line-height: 1;
+  }
+  .voice-btn:hover { background: #fef3c7; border-color: #fbbf24; }
+  .voice-btn.recording {
+    background: #ef4444; border-color: #ef4444; color: #fff;
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
   }
   .review-input {
     width: 100%; padding: 7px 10px; border: 1.5px solid color-mix(in srgb, var(--theme) 22%, #fff);
@@ -1210,7 +1225,7 @@
           <input type="number" class="review-input" id="rv-score-yilin" value="" min="0" max="100" placeholder="未评" oninput="updateReview('yilin','score',this.value,false)" onblur="updateReview('yilin','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘</label>
+          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-yilin" title="语音输入">🎤</button></label>
           <textarea class="review-textarea lg" id="rv-summary-yilin" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yilin','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -1443,7 +1458,7 @@
           <input type="number" class="review-input" id="rv-score-yanxi" value="" min="0" max="100" placeholder="未评" oninput="updateReview('yanxi','score',this.value,false)" onblur="updateReview('yanxi','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘</label>
+          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-yanxi" title="语音输入">🎤</button></label>
           <textarea class="review-textarea lg" id="rv-summary-yanxi" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yanxi','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -1697,7 +1712,7 @@
           <input type="number" class="review-input" id="rv-score-qiannuo" value="" min="0" max="100" placeholder="未评" oninput="updateReview('qiannuo','score',this.value,false)" onblur="updateReview('qiannuo','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘</label>
+          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-qiannuo" title="语音输入">🎤</button></label>
           <textarea class="review-textarea lg" id="rv-summary-qiannuo" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('qiannuo','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -2393,6 +2408,162 @@ async function saveReview(childId) {
   }
 }
 
+// ====== 语音输入（Web Speech API + 中文纠错） ======
+let _recognition = null;
+let _voiceBuffer = '';
+let _voiceChildId = null;
+let _voiceIsListening = false;
+
+// 常用中文语音识别纠错词典
+const VOICE_CORRECTIONS = [
+  // 数字/时间
+  [/二/g, '2'], [/三/g, '3'], [/四/g, '4'], [/五/g, '5'],
+  [/六/g, '6'], [/七/g, '7'], [/八/g, '8'], [/九/g, '9'],
+  [/十/g, '10'], [/二十/g, '20'], [/三十/g, '30'],
+  [/半小时/g, '30分钟'], [/一小时/g, '1小时'],
+  [/两点/g, '2点'], [/三点/g, '3点'], [/四点/g, '4点'],
+  [/五点/g, '5点'], [/六点/g, '6点'], [/七点/g, '7点'],
+  [/八点/g, '8点'], [/九点/g, '9点'], [/十点/g, '10点'],
+  // 标点
+  [/(。|，|！|？|；|：)/g, '$1 '],
+  [/ +/g, ' '], [/^ /, ''], [/ $/, ''],
+  // 孩子名字
+  [/怡林|依林|宜霖|怡霖/g, '李怡霖'],
+  [/妍希|研希|彦希|燕西/g, '李彦希'],
+  [/芊诺|千诺|千洛/g, '李芊诺'],
+  // 常用词
+  [/作业/g, '作业'], [/课程/g, '课程'], [/表现/g, '表现'],
+  [/完成/g, '完成'], [/没完成/g, '没完成'], [/做得好/g, '做得好'],
+  [/不好/g, '不好'], [/问题/g, '问题'], [/改进/g, '改进'],
+  [/不错/g, '不错'], [/认真/g, '认真'], [/粗心/g, '粗心'],
+  [/坚持/g, '坚持'], [/努力/g, '努力'], [/态度/g, '态度'],
+  [/英语/g, '英语'], [/语文/g, '语文'], [/数学/g, '数学'],
+  [/科学/g, '科学'], [/阅读/g, '阅读'], [/跑步/g, '跑步'],
+  [/运动/g, '运动'], [/休息/g, '休息'], [/奖励/g, '奖励'],
+  [/积分/g, '积分'], [/存款/g, '存款'], [/考试/g, '考试'],
+  [/活动/g, '活动'], [/今天/g, '今天'], [/明天/g, '明天'],
+  [/昨天/g, '昨天'], [/早上/g, '早上'], [/晚上/g, '晚上'],
+  [/放学/g, '放学'], [/睡觉/g, '睡觉'], [/在家/g, '在家'],
+  // 清理重复标点
+  [/([。，！？；])\1+/g, '$1'],
+];
+
+function applyVoiceCorrection(text) {
+  VOICE_CORRECTIONS.forEach(([re, rep]) => { text = text.replace(re, rep); });
+  // 中文后无空格，英文/数字和中文之间加空格
+  text = text.replace(/([\u4e00-\u9fa5])([A-Za-z0-9])/g, '$1 $2');
+  text = text.replace(/([A-Za-z0-9])([\u4e00-\u9fa5])/g, '$1 $2');
+  return text.trim();
+}
+
+function initVoice() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    // 不支持，隐藏按钮
+    document.querySelectorAll('.voice-btn').forEach(b => { b.style.display = 'none'; });
+    return;
+  }
+  if (!_recognition) {
+    _recognition = new SR();
+    _recognition.lang = 'zh-CN';
+    _recognition.continuous = true;
+    _recognition.interimResults = true;
+
+    _recognition.onresult = (e) => {
+      let interim = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const r = e.results[i];
+        if (r.isFinal) {
+          _voiceBuffer += applyVoiceCorrection(r[0].transcript);
+        } else {
+          interim += r[0].transcript;
+        }
+      }
+      // 实时预览到 textarea
+      const ta = document.getElementById('rv-summary-' + _voiceChildId);
+      if (ta) {
+        const base = _voiceBuffer;
+        const preview = base + (interim ? ' ' + interim : '');
+        ta.value = preview;
+      }
+    };
+
+    _recognition.onerror = (e) => {
+      console.warn('Voice error:', e.error);
+      stopVoice();
+    };
+
+    _recognition.onend = () => {
+      if (_voiceIsListening) {
+        // 自动重连（用户没主动停）
+        try { _recognition.start(); } catch(e) { stopVoice(); }
+      } else {
+        finalizeVoice();
+      }
+    };
+  }
+  bindVoiceButtons();
+}
+
+function bindVoiceButtons() {
+  document.querySelectorAll('.voice-btn').forEach(btn => {
+    if (btn._voiceBound) return;
+    btn._voiceBound = true;
+    btn.addEventListener('click', () => {
+      const childId = btn.id.replace('voice-', '');
+      if (_voiceIsListening) {
+        stopVoice();
+      } else {
+        startVoice(childId);
+      }
+    });
+  });
+}
+
+function startVoice(childId) {
+  if (_voiceIsListening) return;
+  _voiceChildId = childId;
+  _voiceBuffer = '';
+  _voiceIsListening = true;
+  try {
+    _recognition.start();
+    const btn = document.getElementById('voice-' + childId);
+    if (btn) { btn.classList.add('recording'); btn.textContent = '⏹'; }
+    const ta = document.getElementById('rv-summary-' + childId);
+    if (ta) { ta.dataset.voiceOrig = ta.value; ta.value = ''; }
+    showToast('🎙 正在听... 再次点按钮停止');
+  } catch (e) {
+    console.error(e);
+    showToast('⚠ 语音识别启动失败，请用 Chrome 或微信打开');
+    _voiceIsListening = false;
+  }
+}
+
+function stopVoice() {
+  _voiceIsListening = false;
+  try { _recognition.stop(); } catch(e) {}
+}
+
+function finalizeVoice() {
+  const btn = document.getElementById('voice-' + _voiceChildId);
+  if (btn) { btn.classList.remove('recording'); btn.textContent = '🎤'; }
+  const ta = document.getElementById('rv-summary-' + _voiceChildId);
+  if (ta) {
+    let finalText = _voiceBuffer || (ta.value || '').trim();
+    if (finalText.startsWith('。') || finalText.startsWith('，')) {
+      finalText = finalText.slice(1).trim();
+    }
+    // 如果有原文本，追加而非覆盖
+    const orig = ta.dataset.voiceOrig || '';
+    ta.value = orig ? (orig.replace(/\s+$/, '') + '。' + finalText) : finalText;
+    delete ta.dataset.voiceOrig;
+    // 自动保存
+    updateReview(_voiceChildId, 'summary', ta.value);
+  }
+  _voiceChildId = null;
+  showToast('✅ 语音转文字完成');
+}
+
 // 待补充类别（用于卡片徽标）
 function overdueCategories(childId, dateStr) {
   const load = getRecentLoadInState(state, childId, dateStr);
@@ -2892,7 +3063,7 @@ function renderChildren(dateStr) {
             onblur="updateReview('${c.id}','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘</label>
+          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-${c.id}" title="语音输入">🎤</button></label>
           <textarea class="review-textarea lg" id="rv-summary-${c.id}" rows="6"
             placeholder="记录今天的表现亮点、问题、改进点……"
             onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
@@ -2921,6 +3092,7 @@ function renderChildren(dateStr) {
     renderTasks(c.id, tasks);
     renderReminders(c.id);
   });
+  bindVoiceButtons();
 }
 
 function renderFixedClasses(child, fixed, dateStr) {
@@ -4705,6 +4877,7 @@ document.getElementById('datePicker').value = getLocalDateStr();
 document.getElementById('datePicker').addEventListener('change', render);
 updateCloudStatusUI();
 render();
+initVoice();
 
 // ============ 🚀 自动同步启动 ============
 async function autoSyncStart() {
