@@ -163,6 +163,25 @@
   .children-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
   }
+  body.focused-single .children-grid {
+    grid-template-columns: 1fr;
+  }
+  .focus-back-bar {
+    grid-column: 1 / -1;
+    display: flex; justify-content: flex-start;
+    margin-bottom: 4px;
+  }
+  .btn-back-all {
+    padding: 9px 18px; border-radius: 10px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+    font-size: 14px; font-weight: 600; box-shadow: 0 4px 10px rgba(99,102,241,.3);
+    transition: transform .15s;
+  }
+  .btn-back-all:hover { transform: translateY(-1px); }
+  .child-head-clickable {
+    cursor: pointer; transition: opacity .15s;
+  }
+  .child-head-clickable:hover { opacity: .85; }
   @media (max-width: 960px) {
     .children-grid { grid-template-columns: 1fr; }
     body { padding: 12px; }
@@ -2394,6 +2413,7 @@ function autoEnrichNewDate(s, dateStr, childId) {
 // ============ 状态 ============
 let state = loadState();
 let currentView = 'all'; // 'all' | 'task' | 'review'
+let focusedChild = null; // null = 显示全部孩子；否则只显示该孩子
 let dirtyState = {}; // { childId: { task: bool, review: bool } }
 
 function markDirty(childId, part) {
@@ -2415,6 +2435,19 @@ function setView(v) {
   document.querySelectorAll('.view-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.view === v);
   });
+  renderChildren(document.getElementById('datePicker').value);
+}
+// 进入某个孩子的单人页面
+function focusChild(childId) {
+  focusedChild = childId;
+  document.body.classList.add('focused-single');
+  renderChildren(document.getElementById('datePicker').value);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// 返回全部孩子视图
+function unfocusChild() {
+  focusedChild = null;
+  document.body.classList.remove('focused-single');
   renderChildren(document.getElementById('datePicker').value);
 }
 function uid() { return 't' + Date.now() + Math.random().toString(36).slice(2,6); }
@@ -2654,7 +2687,17 @@ function renderSharedLearning() {
 function renderChildren(dateStr) {
   const grid = document.getElementById('childrenGrid');
   grid.innerHTML = '';
-  CHILDREN.forEach(c => {
+  // 单人视图：在顶部加返回按钮
+  if (focusedChild) {
+    const backBtn = document.createElement('div');
+    backBtn.className = 'focus-back-bar';
+    backBtn.innerHTML = `<button class="btn-back-all" onclick="unfocusChild()">← 返回全部</button>`;
+    grid.appendChild(backBtn);
+  }
+  const childrenToShow = focusedChild
+    ? CHILDREN.filter(c => c.id === focusedChild)
+    : CHILDREN;
+  childrenToShow.forEach(c => {
     const cd = state.dates[dateStr][c.id];
     const tasks = cd.tasks || [];
     const fixed = cd.fixedClasses || [];
@@ -2716,13 +2759,14 @@ function renderChildren(dateStr) {
     const card = document.createElement('div');
     card.className = 'child-card';
     card.setAttribute('data-child', c.id);
+    const headClickAttr = focusedChild ? '' : `onclick="focusChild('${c.id}')"`;
     card.innerHTML = `
       <div class="task-section">
       <div class="child-head">
         <div class="left">
-          <div class="avatar" style="${c.avatarImg ? "background:none;background-image:none;box-shadow:none;" : ""}">${c.avatarImg ? '<img src="'+c.avatarImg+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">' : c.emoji}</div>
+          <div class="avatar child-head-clickable" style="${c.avatarImg ? "background:none;background-image:none;box-shadow:none;" : ""}" ${headClickAttr} title="点击进入 ${c.name} 专属页面">${c.avatarImg ? '<img src="'+c.avatarImg+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">' : c.emoji}</div>
           <div>
-            <div class="child-name">${c.name} <span class="child-animal">${c.animal||''}</span> <span class="grade-badge">${c.grade}</span></div>
+            <div class="child-name child-head-clickable" ${headClickAttr} title="点击进入 ${c.name} 专属页面">${c.name} <span class="child-animal">${c.animal||''}</span> <span class="grade-badge">${c.grade}</span></div>
             <div class="time-info">⏰ 在家
               <input type="time" class="time-input" value="${arrTime}"
                 onchange="editChildTime('${c.id}','arrival',this.value)">
