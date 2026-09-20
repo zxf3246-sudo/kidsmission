@@ -257,7 +257,7 @@
 
   /* ====== 重要提示（倒计时列表） ====== */
   .reminder-bar {
-    display: flex; flex-direction: column; gap: 6px;
+    display: flex; flex-direction: column; gap: 8px;
     padding: 10px 12px; margin-bottom: 10px;
     background: linear-gradient(135deg, #fff7ed, #fef3c7);
     border: 1px solid #fed7aa; border-radius: 10px;
@@ -268,42 +268,36 @@
     display: inline-flex; align-items: center; gap: 4px;
     font-size: 13px;
   }
-  .reminder-group {
-    display: flex; flex-direction: column; gap: 4px;
-  }
-  .reminder-group-header {
-    font-size: 11px; font-weight: 700; color: #fff;
-    padding: 2px 8px; border-radius: 5px; display: inline-block;
-    align-self: flex-start;
-  }
-  .reminder-group.cat-exam .reminder-group-header    { background: #dc2626; }
-  .reminder-group.cat-activity .reminder-group-header { background: #0284c7; }
-  .reminder-group.cat-other .reminder-group-header   { background: #7c3aed; }
   .reminder-list {
-    display: flex; flex-direction: column; gap: 4px;
+    display: flex; flex-direction: column; gap: 6px;
   }
   .reminder-item {
     display: flex; align-items: center; gap: 8px;
     padding: 8px 12px; border-radius: 10px;
     background: #fff; border: 1px solid #fed7aa;
-    color: #9a3412; font-size: 13px;
+    color: #9a3412; font-size: 13px; width: 100%;
   }
   .reminder-item.cat-exam    { border-color: #fca5a5; }
   .reminder-item.cat-activity { border-color: #7dd3fc; }
   .reminder-item.cat-other   { border-color: #c4b5fd; }
-  .reminder-item .rb-cat-badge {
-    font-size: 10px; font-weight: 700; color: #fff;
-    padding: 2px 6px; border-radius: 4px; flex-shrink: 0; min-width: 28px; text-align: center;
+  .reminder-item .rb-cat-input {
+    font-size: 11px; font-weight: 700; color: #fff;
+    padding: 3px 8px; border-radius: 5px; border: none;
+    cursor: pointer; flex-shrink: 0; font-family: inherit;
+    appearance: none; -webkit-appearance: none;
+    padding-right: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath d='M0 0l4 6 4-6z' fill='%23fff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center;
+    background-size: 6px;
   }
-  .reminder-item.cat-exam .rb-cat-badge    { background: #dc2626; }
-  .reminder-item.cat-activity .rb-cat-badge { background: #0284c7; }
-  .reminder-item.cat-other .rb-cat-badge   { background: #7c3aed; }
+  .reminder-item.cat-exam .rb-cat-input     { background-color: #dc2626; }
+  .reminder-item.cat-activity .rb-cat-input { background-color: #0284c7; }
+  .reminder-item.cat-other .rb-cat-input    { background-color: #7c3aed; }
   .reminder-item .rb-name-input {
     flex: 1; min-width: 0; font-weight: 600; font-size: 13px;
     border: none; outline: none; background: transparent;
     color: inherit; padding: 0; margin: 0;
   }
-  .reminder-item .rb-cat-input { display: none; }
   .reminder-item .rb-date-input,
   .reminder-item .rb-window-input { display: none; }
   .reminder-item .rb-count {
@@ -3220,30 +3214,24 @@ function renderReminders(childId) {
     if (myList.length === 0) {
       html += `<span class="reminder-empty">暂无到期提醒 · 点 ＋ 添加</span>`;
     } else {
-      // 按分类分组
-      ['exam', 'activity', 'other'].forEach(cat => {
-        const catList = myList.filter(r => (r.category || 'other') === cat);
-        if (catList.length === 0) return;
-        const catInfo = REMINDER_CATEGORIES[cat];
-        html += `<span class="reminder-group cat-${cat}">`;
-        html += `<span class="reminder-group-label">${catInfo.label}</span>`;
-        catList.forEach(r => {
-          const info = reminderInfo(r);
-          const cls = info.cls === 'soon' ? ' soon' : info.cls === 'done' ? ' done' : '';
-          html += `<span class="reminder-item cat-${cat}${cls}" data-id="${r.id}">`
-            + `<input class="rb-name-input" value="${escapeHtml(r.title)}" title="点我修改标题">`
-            + `<input class="rb-date-input" type="date" value="${r.date}" title="改日期" style="display:none">`
-            + `<select class="rb-cat-input" title="分类">`
-            + Object.entries(REMINDER_CATEGORIES).map(([k,v]) =>
-                `<option value="${k}" ${k===cat?'selected':''}>${v.label}</option>`).join('')
-            + `</select>`
-            + `<input class="rb-window-input" type="number" min="1" max="60" value="${r.daysBefore}" title="提前几天显示" style="display:none">`
-            + `<span class="rb-count">${info.label}</span>`
-            + `<button class="rb-del" title="删除">×</button>`
-            + `</span>`;
-        });
-        html += `</span>`;
+      html += `<div class="reminder-list">`;
+      myList.forEach(r => {
+        const cat = r.category || 'other';
+        const info = reminderInfo(r);
+        const cls = info.cls === 'soon' ? ' soon' : info.cls === 'done' ? ' done' : '';
+        html += `<span class="reminder-item cat-${cat}${cls}" data-id="${r.id}">`
+          + `<select class="rb-cat-input" title="分类">`
+          + Object.entries(REMINDER_CATEGORIES).map(([k,v]) =>
+              `<option value="${k}" ${k===cat?'selected':''}>${v.label}</option>`).join('')
+          + `</select>`
+          + `<input class="rb-name-input" value="${escapeHtml(r.title)}" title="点我修改标题">`
+          + `<input class="rb-date-input" type="date" value="${r.date}" title="改日期" style="display:none">`
+          + `<input class="rb-window-input" type="number" min="1" max="60" value="${r.daysBefore}" title="提前几天显示" style="display:none">`
+          + `<span class="rb-count">${info.label}</span>`
+          + `<button class="rb-del" title="删除">×</button>`
+          + `</span>`;
       });
+      html += `</div>`;
     }
     html += `<button class="rb-add" title="添加重要提醒">＋</button>`;
     el.innerHTML = html;
