@@ -159,16 +159,18 @@
             "name": "乘法口诀复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391wf6u",
             "name": "数学计算2页",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17898337473913nxw",
@@ -230,7 +232,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789837521287,
+        "taskSavedAt": 1789869387266,
         "reviewSavedAt": null
       }
     },
