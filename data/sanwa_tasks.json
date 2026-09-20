@@ -155,17 +155,17 @@
         ],
         "review": {
           "points": 6,
-          "score": null,
+          "score": 88,
           "summary": "李彦希今天表现都还可以，然后昨天很困难的语法问题，今天大部分也解决了。中间给了他们很多的休息时间，所以状态调整的还挺不错的，任务一项一项按顺序完成。",
-          "reward": "-15块自己换了肯德基宝可梦包包",
+          "reward": "-28块自己换了肯德基宝可梦礼物",
           "other": "",
-          "savings": 0,
+          "savings": -28,
           "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1789895128552,
-        "reviewSavedAt": 1789897833831
+        "reviewSavedAt": 1789901318710
       },
       "qiannuo": {
         "fixedClasses": [],
