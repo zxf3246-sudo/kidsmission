@@ -734,26 +734,8 @@
   .stat-input::placeholder { color: #cbd5e1; font-weight: 500; }
   .review-field { margin-bottom: 8px; }
   .review-field label {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 11px; color: #64748b;
+    display: block; font-size: 11px; color: #64748b;
     margin-bottom: 4px; font-weight: 600;
-  }
-  .voice-btn {
-    font-size: 14px; padding: 4px 10px; border-radius: 12px;
-    border: 1px solid #e2e8f0; background: #fff; cursor: pointer;
-    transition: background .15s, border-color .15s, color .15s;
-    line-height: 1; position: relative; z-index: 10;
-    min-width: 28px; min-height: 22px;
-  }
-  .voice-btn:hover { background: #fef3c7; border-color: #fbbf24; }
-  .voice-btn.recording {
-    background: #ef4444; border-color: #ef4444; color: #fff;
-    animation: pulse 1.2s ease-in-out infinite;
-    pointer-events: auto;
-  }
-  @keyframes pulse {
-    0%,100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.08); opacity: .9; }
   }
   .review-input {
     width: 100%; padding: 7px 10px; border: 1.5px solid color-mix(in srgb, var(--theme) 22%, #fff);
@@ -1228,7 +1210,7 @@
           <input type="number" class="review-input" id="rv-score-yilin" value="" min="0" max="100" placeholder="未评" oninput="updateReview('yilin','score',this.value,false)" onblur="updateReview('yilin','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-yilin" title="语音输入">🎤</button></label>
+          <label>总结 / 复盘</label>
           <textarea class="review-textarea lg" id="rv-summary-yilin" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yilin','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -1461,7 +1443,7 @@
           <input type="number" class="review-input" id="rv-score-yanxi" value="" min="0" max="100" placeholder="未评" oninput="updateReview('yanxi','score',this.value,false)" onblur="updateReview('yanxi','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-yanxi" title="语音输入">🎤</button></label>
+          <label>总结 / 复盘</label>
           <textarea class="review-textarea lg" id="rv-summary-yanxi" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yanxi','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -1715,7 +1697,7 @@
           <input type="number" class="review-input" id="rv-score-qiannuo" value="" min="0" max="100" placeholder="未评" oninput="updateReview('qiannuo','score',this.value,false)" onblur="updateReview('qiannuo','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-qiannuo" title="语音输入">🎤</button></label>
+          <label>总结 / 复盘</label>
           <textarea class="review-textarea lg" id="rv-summary-qiannuo" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('qiannuo','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
@@ -3095,7 +3077,7 @@ function renderChildren(dateStr) {
             onblur="updateReview('${c.id}','score',this.value,true)">
         </div>
         <div class="review-field">
-          <label>总结 / 复盘 <button type="button" class="voice-btn" id="voice-${c.id}" title="语音输入">🎤</button></label>
+          <label>总结 / 复盘</label>
           <textarea class="review-textarea lg" id="rv-summary-${c.id}" rows="6"
             placeholder="记录今天的表现亮点、问题、改进点……"
             onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
@@ -3124,7 +3106,6 @@ function renderChildren(dateStr) {
     renderTasks(c.id, tasks);
     renderReminders(c.id);
   });
-  bindVoiceButtons();
 }
 
 function renderFixedClasses(child, fixed, dateStr) {
@@ -4909,7 +4890,6 @@ document.getElementById('datePicker').value = getLocalDateStr();
 document.getElementById('datePicker').addEventListener('change', render);
 updateCloudStatusUI();
 render();
-initVoice();
 
 // ============ 🚀 自动同步启动 ============
 async function autoSyncStart() {
