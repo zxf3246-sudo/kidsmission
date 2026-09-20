@@ -85,16 +85,18 @@
             "name": "WW1单词10个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391onsr",
             "name": "四五快读第二册1课新字",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391n4of",
@@ -148,7 +150,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789869368568,
+        "taskSavedAt": 1789871948330,
         "reviewSavedAt": null
       },
       "qiannuo": {
