@@ -255,82 +255,75 @@
     color: var(--theme); border: 1px solid color-mix(in srgb, var(--theme) 22%, transparent);
   }
 
-  /* ====== 重要提示（倒计时小条） ====== */
+  /* ====== 重要提示（倒计时列表） ====== */
   .reminder-bar {
-    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-    padding: 6px 10px; margin-bottom: 10px;
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 10px 12px; margin-bottom: 10px;
     background: linear-gradient(135deg, #fff7ed, #fef3c7);
     border: 1px solid #fed7aa; border-radius: 10px;
-    font-size: 12px; line-height: 1.6;
+    font-size: 13px; line-height: 1.6;
   }
   .reminder-bar .rb-title {
     font-weight: 700; color: #c2410c; white-space: nowrap;
     display: inline-flex; align-items: center; gap: 4px;
+    font-size: 13px;
   }
   .reminder-group {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 1px 6px; border-radius: 8px; margin-right: 2px;
+    display: flex; flex-direction: column; gap: 4px;
   }
-  .reminder-group-label {
-    font-size: 10px; font-weight: 700; padding: 1px 5px;
-    border-radius: 5px; color: #fff;
+  .reminder-group-header {
+    font-size: 11px; font-weight: 700; color: #fff;
+    padding: 2px 8px; border-radius: 5px; display: inline-block;
+    align-self: flex-start;
   }
-  .reminder-group.cat-exam    { background: #fef2f2; }
-  .reminder-group.cat-exam .reminder-group-label { background: #dc2626; }
-  .reminder-group.cat-activity { background: #f0f9ff; }
-  .reminder-group.cat-activity .reminder-group-label { background: #0284c7; }
-  .reminder-group.cat-other   { background: #f5f3ff; }
-  .reminder-group.cat-other .reminder-group-label { background: #7c3aed; }
+  .reminder-group.cat-exam .reminder-group-header    { background: #dc2626; }
+  .reminder-group.cat-activity .reminder-group-header { background: #0284c7; }
+  .reminder-group.cat-other .reminder-group-header   { background: #7c3aed; }
+  .reminder-list {
+    display: flex; flex-direction: column; gap: 4px;
+  }
   .reminder-item {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 1px 8px; border-radius: 10px;
-    background: #fff; border: 1px solid #fdba74;
-    color: #9a3412; font-size: 12px; cursor: pointer;
-    max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 10px;
+    background: #fff; border: 1px solid #fed7aa;
+    color: #9a3412; font-size: 13px;
   }
-  .reminder-item:hover { background: #fffbeb; }
-  .reminder-item.cat-exam    { border-color: #fca5a5; color: #991b1b; }
-  .reminder-item.cat-activity { border-color: #7dd3fc; color: #075985; }
-  .reminder-item.cat-other   { border-color: #c4b5fd; color: #5b21b6; }
-  .reminder-item .rb-name-input,
-  .reminder-item .rb-date-input,
-  .reminder-item .rb-window-input,
-  .reminder-item .rb-cat-input {
+  .reminder-item.cat-exam    { border-color: #fca5a5; }
+  .reminder-item.cat-activity { border-color: #7dd3fc; }
+  .reminder-item.cat-other   { border-color: #c4b5fd; }
+  .reminder-item .rb-cat-badge {
+    font-size: 10px; font-weight: 700; color: #fff;
+    padding: 2px 6px; border-radius: 4px; flex-shrink: 0; min-width: 28px; text-align: center;
+  }
+  .reminder-item.cat-exam .rb-cat-badge    { background: #dc2626; }
+  .reminder-item.cat-activity .rb-cat-badge { background: #0284c7; }
+  .reminder-item.cat-other .rb-cat-badge   { background: #7c3aed; }
+  .reminder-item .rb-name-input {
+    flex: 1; min-width: 0; font-weight: 600; font-size: 13px;
     border: none; outline: none; background: transparent;
-    font: inherit; color: inherit; padding: 0; margin: 0;
-    height: auto; min-width: 0;
+    color: inherit; padding: 0; margin: 0;
   }
-  .reminder-item .rb-name-input { font-weight: 600; width: 6em; }
-  .reminder-item .rb-date-input { width: 7.2em; font-size: 11px; color: #9a3412; }
+  .reminder-item .rb-cat-input { display: none; }
+  .reminder-item .rb-date-input,
   .reminder-item .rb-window-input { display: none; }
-  .reminder-item .rb-cat-input {
-    font-size: 10px; padding: 1px 3px; border-radius: 4px;
-    background: #fef3c7; cursor: pointer; width: 4.5em;
-  }
-  .reminder-item .rb-name-input:focus,
-  .reminder-item .rb-date-input:focus,
-  .reminder-item .rb-window-input:focus,
-  .reminder-item .rb-cat-input:focus {
-    background: #fff; border-radius: 4px; padding: 0 3px; box-shadow: 0 0 0 1px #fdba74;
-  }
-  .reminder-item .rb-del {
-    border: none; background: transparent; cursor: pointer;
-    color: #c2410c; font-weight: 700; font-size: 12px;
-    padding: 0 2px; line-height: 1; border-radius: 50%;
-  }
-  .reminder-item .rb-del:hover { background: #fed7aa; }
-  .reminder-item .rb-name { font-weight: 600; }
   .reminder-item .rb-count {
-    font-size: 11px; font-weight: 700; margin-left: 2px;
-    padding: 0 5px; border-radius: 6px;
-    background: #ea580c; color: #fff;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    padding: 3px 10px; border-radius: 6px;
+    background: #ea580c; color: #fff; min-width: 40px; text-align: center;
   }
   .reminder-item.done .rb-count { background: #10b981; }
   .reminder-item.soon .rb-count { background: #dc2626; }
-  .reminder-empty { color: #9a3412; opacity: .7; }
+  .reminder-item .rb-del {
+    border: none; background: transparent; cursor: pointer;
+    color: #94a3b8; font-weight: 700; font-size: 16px;
+    padding: 2px 6px; line-height: 1; border-radius: 50%;
+  }
+  .reminder-item .rb-del:hover { background: #fee2e2; color: #ef4444; }
+  .reminder-empty { color: #9a3412; opacity: .7; font-size: 12px; }
+  .rb-add-row { display: flex; justify-content: flex-end; }
   .rb-add {
-    font-size: 13px; font-weight: 700; width: 18px; height: 18px; line-height: 16px;
-    text-align: center; border-radius: 9px; cursor: pointer;
+    font-size: 13px; font-weight: 700;
+    padding: 4px 12px; border-radius: 8px; cursor: pointer;
     background: #fdba74; color: #9a3412; border: none; font-family: inherit;
   }
   .rb-add:hover { background: #fb923c; color: #fff; }
@@ -1236,7 +1229,7 @@
         </div>
         
         <div class="review-save-row">
-          <button class="btn-save-review" onclick="saveReview('yilin')">💾 保存复盘</button>
+          <button class="btn-save-review" onclick="saveReview('yilin')">☁ 上传到云端</button>
           <span class="save-status unsaved">⚠ 复盘尚未保存最终版本</span>
         </div>
       </div>
@@ -1469,7 +1462,7 @@
         </div>
         
         <div class="review-save-row">
-          <button class="btn-save-review" onclick="saveReview('yanxi')">💾 保存复盘</button>
+          <button class="btn-save-review" onclick="saveReview('yanxi')">☁ 上传到云端</button>
           <span class="save-status unsaved">⚠ 复盘尚未保存最终版本</span>
         </div>
       </div>
@@ -1723,7 +1716,7 @@
         </div>
         
         <div class="review-save-row">
-          <button class="btn-save-review" onclick="saveReview('qiannuo')">💾 保存复盘</button>
+          <button class="btn-save-review" onclick="saveReview('qiannuo')">☁ 上传到云端</button>
           <span class="save-status unsaved">⚠ 复盘尚未保存最终版本</span>
         </div>
       </div>
@@ -2388,8 +2381,8 @@ async function saveTasks(childId) {
     console.error('Auto upload after saveTasks failed:', e);
   }
 }
-// 保存复盘（标记最终版本）
-function saveReview(childId) {
+// 保存复盘（标记最终版本，并自动上传云端）
+async function saveReview(childId) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
@@ -2397,7 +2390,13 @@ function saveReview(childId) {
   clearDirty(childId, 'review');
   save();
   renderChildren(dateStr);
-  showToast('✅ 复盘已保存为最终版本（' + fmtTime(cd.reviewSavedAt) + '）');
+  showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在上传到云端...');
+  // 自动上传到云端
+  try {
+    await uploadToGist();
+  } catch (e) {
+    console.error('Auto upload after saveReview failed:', e);
+  }
 }
 
 // 待补充类别（用于卡片徽标）
@@ -2918,7 +2917,7 @@ function renderChildren(dateStr) {
         </div>
         ${trend}
         <div class="review-save-row">
-          <button class="btn-save-review" onclick="saveReview('${c.id}')">💾 保存复盘</button>
+          <button class="btn-save-review" onclick="saveReview('${c.id}')">☁ 上传到云端</button>
           ${reviewSaveStatusHtml}
         </div>
       </div>
