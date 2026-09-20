@@ -2934,10 +2934,10 @@ function renderChildren(dateStr) {
 
     // 复盘区数据
     const review = cd.review || { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
-    // 上课时长 = 放学后固定课程自动累加（用当天实际到家时间判断）
-    const classMin = fixed.filter(cl=>isAfterSchool(cl,c,arrTime)).reduce((s,x)=>s+(+x.duration||0),0);
-    // 自学时长 = 任务学习类手动输入时长合计（与预算条一致）
-    const selfStudyMin = used.study - classMin;
+    // 上课时长 = 所有固定课程总时长
+    const classMin = fixed.reduce((s,x)=>s+(+x.duration||0),0);
+    // 自学时长 = 任务学习类（排除休息）
+    const selfStudyMin = (cd.tasks || []).filter(t => t.type !== 'rest').reduce((s,t)=>s+(+t.duration||0),0);
     const totalStudyMin = classMin + selfStudyMin;
     const studyPct = budget.study ? Math.round(totalStudyMin/budget.study*100) : 0;
     const studyClass = totalStudyMin > budget.study ? 'warn' : (totalStudyMin === 0 ? 'empty' : '');
@@ -3896,8 +3896,8 @@ async function exportReview() {
     const budget = budgetFor(c);
     const r = cd.review || { points:0, savings:0, score:null, summary:'', reward:'' };
     const used = usedTime(c, cd);
-    const classMin = (cd.fixedClasses||[]).filter(cl=>isAfterSchool(cl,c,undefined,dateStr)).reduce((s,x)=>s+(+x.duration||0),0);
-    const selfStudyMin = used.study - classMin;
+    const classMin = (cd.fixedClasses||[]).reduce((s,x)=>s+(+x.duration||0),0);
+    const selfStudyMin = (cd.tasks||[]).filter(t => t.type !== 'rest').reduce((s,t)=>s+(+t.duration||0),0);
     const totalStudy = classMin + selfStudyMin;
     const cumPts = calcCumulativePoints(c.id, dateStr);
     const cumSav = calcCumulativeSavings(c.id, dateStr);
