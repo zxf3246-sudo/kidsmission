@@ -101,10 +101,11 @@
           {
             "id": "t1789833747391n4of",
             "name": "小龙1篇",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789833747391qq4w",
@@ -144,7 +145,8 @@
             "duration": null,
             "type": "rest",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "empty"
           }
         ],
         "review": {
@@ -158,7 +160,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789872215700,
+        "taskSavedAt": 1789875654896,
         "reviewSavedAt": null
       },
       "qiannuo": {
