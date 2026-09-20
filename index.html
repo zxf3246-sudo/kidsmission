@@ -1112,7 +1112,7 @@
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('yilin')">＋ 添加任务</button>
         <button class="btn-pattern-task" onclick="autoArrangeByPattern('yilin')">🧠 按习惯布置</button>
-        <button class="btn-save-task" onclick="saveTasks('yilin')">💾 保存任务</button>
+        <button class="btn-save-task" onclick="saveTasks('yilin')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
       </div>
@@ -1345,7 +1345,7 @@
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('yanxi')">＋ 添加任务</button>
         <button class="btn-pattern-task" onclick="autoArrangeByPattern('yanxi')">🧠 按习惯布置</button>
-        <button class="btn-save-task" onclick="saveTasks('yanxi')">💾 保存任务</button>
+        <button class="btn-save-task" onclick="saveTasks('yanxi')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
       </div>
@@ -1599,7 +1599,7 @@
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('qiannuo')">＋ 添加任务</button>
         <button class="btn-pattern-task" onclick="autoArrangeByPattern('qiannuo')">🧠 按习惯布置</button>
-        <button class="btn-save-task" onclick="saveTasks('qiannuo')">💾 保存任务</button>
+        <button class="btn-save-task" onclick="saveTasks('qiannuo')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
       </div>
@@ -2321,7 +2321,7 @@ function fmtTime(ts) {
   return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
 }
 // 保存任务（标记最终版本）
-function saveTasks(childId) {
+async function saveTasks(childId) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
@@ -2329,7 +2329,13 @@ function saveTasks(childId) {
   clearDirty(childId, 'task');
   save();
   renderChildren(dateStr);
-  showToast('✅ 任务已保存为最终版本（' + fmtTime(cd.taskSavedAt) + '）');
+  showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在上传到云端...');
+  // 自动上传到云端
+  try {
+    await uploadToGist();
+  } catch (e) {
+    console.error('Auto upload after saveTasks failed:', e);
+  }
 }
 // 保存复盘（标记最终版本）
 function saveReview(childId) {
@@ -2736,7 +2742,7 @@ function renderChildren(dateStr) {
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('${c.id}')">＋ 添加任务</button>
         <button class="btn-pattern-task" onclick="autoArrangeByPattern('${c.id}')">🧠 按习惯布置</button>
-        <button class="btn-save-task" onclick="saveTasks('${c.id}')">💾 保存任务</button>
+        <button class="btn-save-task" onclick="saveTasks('${c.id}')">☁ 上传到云端</button>
       </div>
       ${taskSaveStatusHtml}
       </div>
