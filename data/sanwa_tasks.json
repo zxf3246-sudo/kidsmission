@@ -37,6 +37,15 @@
             "done": true,
             "errLinked": false,
             "status": "done"
+          },
+          {
+            "id": "t1789903098865ckg7",
+            "name": "休息",
+            "duration": 30,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           }
         ],
         "review": {
@@ -50,7 +59,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789902205400,
+        "taskSavedAt": 1789903104105,
         "reviewSavedAt": 1789903009916
       },
       "yanxi": {
