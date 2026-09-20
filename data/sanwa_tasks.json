@@ -23,23 +23,16 @@
           {
             "id": "t1789833747391ouyt",
             "name": "Missy口语作业看背",
-            "duration": 30,
+            "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789833747391t91b",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17898337473916vo2",
             "name": "Missy口语作业录视频",
-            "duration": 20,
+            "duration": 10,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -56,7 +49,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789837610317,
+        "taskSavedAt": 1789901416567,
         "reviewSavedAt": null
       },
       "yanxi": {
