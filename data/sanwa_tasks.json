@@ -205,7 +205,7 @@
           {
             "id": "t1789833747391wyxj",
             "name": "控笔",
-            "duration": 10,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -247,7 +247,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789875664697,
+        "taskSavedAt": 1789875670480,
         "reviewSavedAt": null
       }
     },
