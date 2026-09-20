@@ -112,8 +112,9 @@
             "name": "语文学校词复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17898721698416kea",
