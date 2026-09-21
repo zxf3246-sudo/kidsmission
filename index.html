@@ -5139,7 +5139,6 @@ async function exportTasksText() {
     const budget = budgetFor(c);
     
     text += `${c.emoji} ${c.name}（${c.grade}）\n`;
-    text += `🕐 在家 ${cd.arrival||c.arrival} → 睡觉 ${cd.sleep||c.sleep}\n`;
     
     // 重要事项提醒（导出只显示倒计时 1 天的，今天到期的不显示）
     const myRems = (state.reminders||[])
