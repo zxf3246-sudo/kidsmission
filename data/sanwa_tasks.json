@@ -118,8 +118,9 @@
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17898368240124w1h",
@@ -193,7 +194,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789988629996,
+        "taskSavedAt": 1789989540355,
         "reviewSavedAt": null
       },
       "qiannuo": {
