@@ -5171,12 +5171,8 @@ async function exportTasksText() {
       });
     }
     
-    // 复盘（文字导出只保留评分和总结，不显示积分/存款）
+    // 复盘（文字导出不显示评分和总结，仅保留奖励）
     const r = cd.review || {};
-    if (r.score !== null && r.score !== undefined) {
-      text += `⭐ 今日评分：${r.score}/100\n`;
-    }
-    if (r.summary) text += `📝 总结：${r.summary}\n`;
     if (r.reward) text += `🎁 奖励：${r.reward}\n`;
     
     text += '\n';
