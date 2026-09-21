@@ -1940,8 +1940,7 @@ const DEFAULT_SHARED_LEARNING = ['阅读','一个新成语','学习一个科学�
 const WEEKLY_CLASSES = {
   yilin: {
     1: [{name:'英语missy',     time:'19:00-21:00', duration:120}],
-    2: [{name:'Missy英语',     time:'10:00-14:30', duration:270},
-        {name:'科学',          time:'20:40-22:40', duration:120}],
+    2: [{name:'科学',          time:'20:40-22:40', duration:120}],
     3: [{name:'补语文',        time:'15:00-18:00', duration:180}],
     4: [{name:'语文LA',        time:'15:00-16:00', duration:60},
         {name:'科学',          time:'19:30-21:30', duration:120}],
@@ -2940,6 +2939,25 @@ function mergeDefaultReminders(obj) {
   }
 }
 
+// 永久移除李怡霖周二 10:00-14:30 Missy 英语固定课程（清理历史数据中的残留）
+function removeMissyTueClass(obj) {
+  if (!obj || !obj.dates) return;
+  let removed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (cd && Array.isArray(cd.fixedClasses)) {
+      const before = cd.fixedClasses.length;
+      cd.fixedClasses = cd.fixedClasses.filter(c =>
+        !(c.name && /missy/i.test(c.name) && c.time === '10:00-14:30'));
+      removed += before - cd.fixedClasses.length;
+    }
+  });
+  if (removed > 0) {
+    console.log('[removeMissyTueClass] 🗑 已移除李怡霖周二 Missy 英语固定课程：', removed, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 确保复盘快捷关键词存在：
 // - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
 // - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
@@ -2992,6 +3010,7 @@ function loadState() {
         console.log('[loadState] 🔁 周末时间迁移 v2：更新了', migrated, '个值');
         try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
       }
+      removeMissyTueClass(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -5246,6 +5265,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   // 云端可能是旧数据，补充新增的默认提醒（按 id 去重）和复盘关键词
   mergeDefaultReminders(state);
   ensureSummaryKeywords(state);
+  removeMissyTueClass(state);
   save();
   render();
   // 记录同步时间
