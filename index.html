@@ -502,6 +502,7 @@
     box-shadow: 0 0 0 2px rgba(99,102,241,.15);
   }
   .task-item .duration-input::placeholder { color: #cbd5e1; }
+  .task-item .duration-input.time { width: 104px; }
   .task-item .duration-unit { font-size: 11px; color: var(--c-muted); font-weight: 500; }
   .task-item .err-flag { font-size: 13px; cursor: help; }
   .task-item .type-rest-tag {
@@ -2282,7 +2283,7 @@ function autoArrangeByPattern(childId) {
   });
 
   restTasks.forEach(rt => {
-    newTasks.push({ id: uid(), name: rt.name, duration: rt.duration, type: 'rest', status: '', errLinked: false });
+    newTasks.push({ id: uid(), name: rt.name, duration: rt.duration, time: rt.time || null, type: 'rest', status: '', errLinked: false });
   });
 
   const msg = `🔍 学到了 ${pattern.totalSamples} 天「${pattern.weekdayLabel}」的规律：\n\n`
@@ -2978,6 +2979,7 @@ function usedTime(child, childData) {
   let study = 0, rest = 0;
   const arr = childData.arrival || child.arrival;
   (childData.tasks || []).forEach(t => {
+    if (isBedtimeTask(t)) return; // 洗漱睡觉按时间点安排，不计入时长
     const dur = +t.duration || 0;
     if (t.type === 'rest') rest += dur; else study += dur;
   });
@@ -3278,11 +3280,15 @@ function renderTasks(childId, tasks) {
     const status = t.status || (t.done ? 'done' : 'empty');
     row.className = 'task-item' + (status==='done'?' done':'') + (status==='undone'?' undone':'');
     row.dataset.idx = i;
-    // 时长输入框：所有任务都可手动输入分钟数
+    // 时长/时间点输入框：洗漱睡觉类任务输入时间点（如 20:30），其余任务输入分钟数
     const durVal = (t.duration !== null && t.duration !== undefined) ? t.duration : '';
-    const durHtml = `<input type="number" class="duration-input" value="${durVal}" min="0" placeholder="—"
-      oninput="editTaskDuration('${childId}',${i},this.value,false)"
-      onblur="editTaskDuration('${childId}',${i},this.value,true)"><span class="duration-unit">分</span>`;
+    const durHtml = isBedtimeTask(t)
+      ? `<input type="time" class="duration-input time" value="${t.time || ''}" title="洗漱睡觉时间点"
+          oninput="editTaskTime('${childId}',${i},this.value,false)"
+          onblur="editTaskTime('${childId}',${i},this.value,true)">`
+      : `<input type="number" class="duration-input" value="${durVal}" min="0" placeholder="—"
+          oninput="editTaskDuration('${childId}',${i},this.value,false)"
+          onblur="editTaskDuration('${childId}',${i},this.value,true)"><span class="duration-unit">分</span>`;
     const typeTag = t.type === 'rest' ? `<span class="type-rest-tag">休息</span>` : '';
     const errHtml = t.errLinked ? `<span class="err-flag" title="错题重点">📚</span>` : '';
     const enrichTag = (t.autoEnriched && t.enrichCategory && ACTIVITY_LIBRARY[t.enrichCategory])
@@ -3462,6 +3468,22 @@ function editTaskName(childId, idx, val) {
   save();
 }
 // 任务时长手动编辑（oninput只保存，onblur重渲染统计区/预算条）
+// 洗漱睡觉类任务：时间输入为时间点（如 20:30）而非分钟数
+function isBedtimeTask(t) {
+  const n = (t.name || '').trim();
+  return n.includes('洗漱') || n.includes('睡');
+}
+function editTaskTime(childId, idx, value, rerender) {
+  const dateStr = document.getElementById('datePicker').value;
+  const v = value ? value : null; // "HH:MM" 或空
+  const task = state.dates[dateStr][childId].tasks[idx];
+  if (task) {
+    task.time = v;
+    markDirty(childId, 'task');
+    save();
+    if (rerender) renderChildren(dateStr);
+  }
+}
 function editTaskDuration(childId, idx, value, rerender) {
   const dateStr = document.getElementById('datePicker').value;
   let v;
@@ -3945,10 +3967,11 @@ async function exportTasks() {
         setFont(ctx, 18, status==='done'); ctx.fillStyle = status==='done' ? '#94a3b8' : status==='undone' ? '#dc2626' : '#334155';
         ctx.fillText(t.name, x0+86, cy+12);
         let tx = x0+86 + ctx.measureText(t.name).width + 14;
-        // 时长标签
-        if (t.duration) {
+        // 时长/时间点标签
+        const tLabel = isBedtimeTask(t) ? (t.time || '') : (t.duration ? `${t.duration}分` : '');
+        if (tLabel) {
           setFont(ctx, 14, false);
-          const dt = `${t.duration}分`;
+          const dt = tLabel;
           const dw = ctx.measureText(dt).width + 18;
           imgRoundRect(ctx, tx, cy+10, dw, 26, 8); ctx.fillStyle = '#f1f5f9'; ctx.fill();
           ctx.fillStyle = '#475569'; ctx.fillText(dt, tx+9, cy+15);
@@ -4394,10 +4417,11 @@ async function exportTasksFinal() {
         else { ctx.fillStyle = '#334155'; ctx.font = `bold 16px ${IMG.F}`; }
         ctx.fillText(t.name, tx, cy+11);
         tx += ctx.measureText(t.name).width + 12;
-        // 时长标签
-        if (t.duration) {
+        // 时长/时间点标签
+        const tLabel2 = isBedtimeTask(t) ? (t.time || '') : (t.duration ? `${t.duration}分` : '');
+        if (tLabel2) {
           setFont(ctx, 13, false);
-          const dt = `${t.duration}分`;
+          const dt = tLabel2;
           const dw = ctx.measureText(dt).width + 14;
           imgRoundRect(ctx, tx, cy+8, dw, 26, 8); ctx.fillStyle = '#e2e8f0'; ctx.fill();
           ctx.fillStyle = '#475569'; ctx.fillText(dt, tx+7, cy+12);
@@ -4525,7 +4549,9 @@ async function exportTasksText() {
     if (tasks.length) {
       text += `📝 今日任务：\n`;
       tasks.forEach((t, i) => {
-        const dur = t.duration ? `（${Math.round(+t.duration/60*10)/10}小时）` : '';
+        const dur = isBedtimeTask(t)
+          ? (t.time ? `（${t.time}）` : '')
+          : (t.duration ? `（${Math.round(+t.duration/60*10)/10}小时）` : '');
         text += `  ${i+1}. ${t.name}${dur}\n`;
       });
     }
