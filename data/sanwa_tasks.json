@@ -1873,18 +1873,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 4,
+          "score": 88,
+          "summary": "测试工具兔兔记录图图图图图图图图图记录图图图图……",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 4
+          "stars": 4,
+          "keywords": [
+            "不在状态",
+            "找事儿",
+            "挨揍"
+          ]
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790007320834,
-        "reviewSavedAt": 1789996700475
+        "reviewSavedAt": 1790029265812
       }
     },
     "2026-09-23": {
