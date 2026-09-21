@@ -1542,14 +1542,17 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 5,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 0,
-          "keywords": []
+          "stars": 4,
+          "keywords": [
+            "听话",
+            "高效率"
+          ]
         },
         "arrival": "16:30",
         "sleep": "21:00",
