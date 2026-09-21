@@ -3651,6 +3651,22 @@
       "date": "2026-09-24",
       "daysBefore": 7,
       "category": "activity"
+    },
+    {
+      "id": "rem_1789977953430_rxw",
+      "childId": "qiannuo",
+      "title": "睡衣告别会",
+      "date": "2026-10-01",
+      "daysBefore": 3,
+      "category": "activity"
+    },
+    {
+      "id": "rem_1789977976815_6c6",
+      "childId": "yilin",
+      "title": "睡衣告别会（223）",
+      "date": "2026-10-01",
+      "daysBefore": 3,
+      "category": "activity"
     }
   ],
   "summaryKeywords": [
