@@ -257,19 +257,21 @@
           },
           {
             "id": "t1789836824012puf9",
-            "name": "思维联系",
+            "name": "思维练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789836824012vx92",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 35,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789836824012d3yx",
@@ -292,7 +294,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789989526957,
+        "taskSavedAt": 1789992245530,
         "reviewSavedAt": 1789958973122
       }
     },
