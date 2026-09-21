@@ -207,16 +207,8 @@
           },
           {
             "id": "t1789836824012a49t",
-            "name": "书法练字",
+            "name": "书法汉字练习",
             "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836824012vf94",
-            "name": "控笔练习",
-            "duration": 10,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -224,6 +216,14 @@
           {
             "id": "t1789836824012l8wz",
             "name": "字母拼音练习",
+            "duration": 10,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1789836824012vf94",
+            "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false,
