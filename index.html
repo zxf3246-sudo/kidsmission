@@ -5508,6 +5508,14 @@ async function autoSyncStart() {
   console.log('[自动同步] ✅ 已启动');
 }
 
+// 是否正在编辑某个输入框（用于避免自动同步打断手打内容）
+function anyInputFocused() {
+  const el = document.activeElement;
+  if (!el || !el.tagName) return false;
+  const tag = el.tagName;
+  return tag === 'INPUT' || tag === 'TEXTAREA' || (tag === 'DIV' && el.isContentEditable);
+}
+
 async function autoPullFromCloud() {
   const cfg = loadCloudConfig();
   if (!cfg.token || !cfg.repo || !cfg.dataFile) return;
@@ -5535,6 +5543,12 @@ async function autoPullFromCloud() {
   if (JSON.stringify(localState) !== JSON.stringify(merged)) {
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
+    if (anyInputFocused()) {
+      // 正在输入（如手打评语），只合并数据不刷新页面，避免打断打字；
+      // 数据已保存，输入框失焦或下次刷新时自然显示
+      showToast('☁ 云端数据已合并（输入中暂不刷新）');
+      return;
+    }
     render();
     showToast('☁ 已同步云端最新数据');
   }
