@@ -148,6 +148,14 @@
             "courseTask": "la"
           },
           {
+            "id": "t1789976616564wu83",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t17898368240127jp8",
             "name": "自由活动",
             "duration": null,
@@ -175,7 +183,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789967678134,
+        "taskSavedAt": 1789976621687,
         "reviewSavedAt": null
       },
       "qiannuo": {
