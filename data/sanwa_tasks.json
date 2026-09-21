@@ -134,7 +134,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1789977462736qwfs",
@@ -189,7 +190,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789986314160,
+        "taskSavedAt": 1789986334918,
         "reviewSavedAt": null
       },
       "qiannuo": {
