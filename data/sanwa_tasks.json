@@ -133,7 +133,7 @@
           {
             "id": "t1789977462736qwfs",
             "name": "学而思Lesson 1作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -183,7 +183,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789977479946,
+        "taskSavedAt": 1789982021099,
         "reviewSavedAt": null
       },
       "qiannuo": {
