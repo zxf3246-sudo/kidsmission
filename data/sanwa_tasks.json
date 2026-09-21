@@ -195,13 +195,17 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 0
+          "stars": 4,
+          "keywords": [
+            "拖拖拉拉",
+            "听话"
+          ]
         },
         "arrival": "14:00",
         "sleep": "21:00",
