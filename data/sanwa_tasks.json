@@ -1800,13 +1800,6 @@
             "done": false
           },
           {
-            "id": "fix-20260922-qiannuo-2",
-            "name": "数学计算练习",
-            "duration": 20,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "fix-20260922-qiannuo-3",
             "name": "书法汉字练习",
             "duration": 15,
@@ -1824,13 +1817,6 @@
             "id": "fix-20260922-qiannuo-5",
             "name": "控笔练习",
             "duration": 10,
-            "type": "study",
-            "done": false
-          },
-          {
-            "id": "fix-20260922-qiannuo-6",
-            "name": "语文练习",
-            "duration": 15,
             "type": "study",
             "done": false
           },
@@ -1871,7 +1857,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790006796083,
+        "taskSavedAt": 1790006825427,
         "reviewSavedAt": 1789996700475
       }
     },
