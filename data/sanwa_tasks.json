@@ -29,15 +29,6 @@
             "status": "done"
           },
           {
-            "id": "t1789836824012h5d5",
-            "name": "自由活动",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "status": "undone"
-          },
-          {
             "id": "t1789836824012p9mp",
             "name": "科学知识点",
             "duration": 15,
@@ -63,6 +54,15 @@
             "done": true,
             "errLinked": false,
             "status": "done"
+          },
+          {
+            "id": "t1789836824012h5d5",
+            "name": "自由活动",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t17898368240128psv",
@@ -137,9 +137,9 @@
             "name": "语文阅读理解",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "t1789977462736qwfs",
@@ -195,7 +195,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789989540355,
+        "taskSavedAt": 1789992221734,
         "reviewSavedAt": null
       },
       "qiannuo": {
