@@ -4688,7 +4688,7 @@ async function exportTasksText() {
   const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
   
   let text = `📚 三娃每日任务 · ${dateStr} ${dow}\n`;
-  text += `${'='.repeat(30)}\n\n`;
+  text += `${'='.repeat(28)}\n\n`;
   
   CHILDREN.forEach(c => {
     const cd = data[c.id] || { tasks:[], fixedClasses:[], review:{} };
@@ -4742,7 +4742,7 @@ async function exportTasksText() {
     text += '\n';
   });
   
-  text += `${'='.repeat(30)}\n`;
+  text += `${'='.repeat(28)}\n`;
   text += `祝三娃学习顺利！💪`;
 
   _lastTextExport = { text, filename: `三娃任务_${dateStr}.txt` };
