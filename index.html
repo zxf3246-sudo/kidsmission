@@ -3813,7 +3813,9 @@ function resetChild(childId) {
 
 // ============ 重要提醒（倒计时小条，按孩子归属） ============
 function reminderInfo(r) {
-  const today = getLocalDateStr();
+  // 以"当前查看的日期"为基准计算倒计时：切到哪天，提示就按那天的视角显示
+  const picker = document.getElementById('datePicker');
+  const today = (picker && picker.value) || getLocalDateStr();
   const todayT = new Date(today + 'T00:00:00').getTime();
   const targetT = new Date(r.date + 'T00:00:00').getTime();
   const days = Math.round((targetT - todayT) / 86400000);
