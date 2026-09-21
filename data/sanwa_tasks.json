@@ -560,6 +560,25 @@
         ],
         "tasks": [
           {
+            "id": "t17899625670701ts3",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "done",
+            "done": true,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t1789797952267jr5i",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "courseTask": "la"
+          },
+          {
             "id": "t1789797952267yk93",
             "name": "学校作业",
             "duration": 10,
@@ -596,15 +615,6 @@
             "status": "done"
           },
           {
-            "id": "t1789797952267jr5i",
-            "name": "LA作业",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
             "id": "t1789814772797lign",
             "name": "语文作文",
             "duration": 0,
@@ -634,7 +644,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1789832529379,
+        "taskSavedAt": 1789962571558,
         "reviewSavedAt": 1789831935548
       },
       "yanxi": {
@@ -646,6 +656,24 @@
           }
         ],
         "tasks": [
+          {
+            "id": "t1789962567070zmim",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t178996256707013rw",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
           {
             "id": "t1789797952268eaoz",
             "name": "四五快读第二册1课新字",
@@ -752,6 +780,24 @@
           }
         ],
         "tasks": [
+          {
+            "id": "t1789962567070j6u6",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t1789962567070wrb8",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
           {
             "id": "t17897979522680d8x",
             "name": "乘法口诀复习",
@@ -1466,7 +1512,8 @@
             "duration": 30,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "courseTask": "xes"
           },
           {
             "id": "t17898368433135dzt",
@@ -1501,14 +1548,6 @@
             "errLinked": false
           },
           {
-            "id": "t1789836843313dna1",
-            "name": "LA作业",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17898368433139727",
             "name": "自由活动",
             "duration": null,
@@ -1530,7 +1569,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
@@ -1546,6 +1587,15 @@
           }
         ],
         "tasks": [
+          {
+            "id": "t1789962559452vwim",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
           {
             "id": "t1789836843313l32i",
             "name": "四五快读第二册1课新字",
@@ -1624,7 +1674,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:00",
         "sleep": "21:00",
@@ -1641,6 +1693,15 @@
         ],
         "tasks": [
           {
+            "id": "t1789962559453i981",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789836843313bjxs",
             "name": "乘法口诀复习",
             "duration": 15,
@@ -1652,14 +1713,6 @@
             "id": "t17898368433139vml",
             "name": "数学计算2页",
             "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836843313rg5g",
-            "name": "学而思作业",
-            "duration": 20,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -1726,7 +1779,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "16:30",
         "sleep": "21:00",
