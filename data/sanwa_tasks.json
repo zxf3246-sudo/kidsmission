@@ -91,8 +91,24 @@
         ],
         "tasks": [
           {
+            "id": "t1789836824012trlt",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t178983682401294wz",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1789836824012rti8",
-            "name": "四五快读第二册1课新字",
+            "name": "四五快读新字",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -108,7 +124,7 @@
           },
           {
             "id": "t17898368240124pee",
-            "name": "英语语法学习1个",
+            "name": "英语语法学习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -125,22 +141,6 @@
           {
             "id": "t1789836824012k4nn",
             "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836824012trlt",
-            "name": "Koobits",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t178983682401294wz",
-            "name": "1 Mission",
             "duration": 15,
             "type": "study",
             "done": false,
