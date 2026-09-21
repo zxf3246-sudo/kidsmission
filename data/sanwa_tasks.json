@@ -1759,22 +1759,18 @@
         ],
         "review": {
           "points": 0,
-          "score": 88,
-          "summary": "放学刚回来状态一般，有点墨迹。正式开始认真做是从下午5点以后，后续就正常了。",
+          "score": null,
+          "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "拖拖拉拉",
-            "听话",
-            "准确率高"
-          ]
+          "stars": 0.5,
+          "keywords": []
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790006772989,
-        "reviewSavedAt": 1789996840169
+        "reviewSavedAt": 1790007154208
       },
       "qiannuo": {
         "fixedClasses": [
