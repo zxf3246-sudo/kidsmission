@@ -2004,7 +2004,7 @@ const ACTIVITY_LIBRARY = {
 };
 
 // 默认任务模板 —— 按用户截图，纯文本列表，时长可选
-function defaultTasksFor(childId) {
+function defaultTasksFor(childId, dateStr) {
   const t = (name, duration, type, err) =>
     ({ id: uid(), name, duration: duration||null, type: type||'study', done: false, errLinked: !!err });
   if (childId === 'yilin') return [
@@ -2016,17 +2016,22 @@ function defaultTasksFor(childId) {
     t('自由活动', null, 'rest'),
     t('洗漱睡觉', null, 'rest'),
   ];
-  if (childId === 'yanxi') return [
-    t('四五快读第二册1课新字', 15),
-    t('WW1单词10个', 15),
-    t('英语语法学习1个', 15),
-    t('小龙1篇', 15),
-    t('语文学校词复习', 15),
-    t('Koobits', 20),
-    t('1 Mission', 15),
-    t('自由玩耍', null, 'rest'),
-    t('洗漱睡觉', null, 'rest'),
-  ];
+  if (childId === 'yanxi') {
+    // 第五项按星期交替：1/3/5/7（周一、三、五、日）语文阅读理解；2/4/6（周二、四、六）英语语法
+    // getDay(): 周日=0（用户口径"7"），周一=1...周六=6 → 周日或奇数天=阅读理解，偶数天=英语语法
+    const dow = dateStr ? new Date(dateStr + 'T00:00:00').getDay() : 1;
+    const isReadComprehension = (dow === 0 || dow % 2 === 1);
+    return [
+      t('Koobits', 20),
+      t('1 Mission', 15),
+      t('四五快读新字', 15),
+      t('WW1单词10个', 15),
+      isReadComprehension ? t('语文阅读理解', 15) : t('英语语法', 15),
+      t('语文学校词复习', 15),
+      t('自由玩耍', null, 'rest'),
+      t('洗漱睡觉', null, 'rest'),
+    ];
+  }
   if (childId === 'qiannuo') return [
     t('乘法口诀复习', 15),
     t('数学计算2页', 15),
@@ -2985,7 +2990,7 @@ function ensureDateOn(s, dateStr) {
       const override = (WEEKLY_ARRIVAL_SLEEP[c.id] && WEEKLY_ARRIVAL_SLEEP[c.id][dow]) || {};
       s.dates[dateStr][c.id] = {
         fixedClasses: JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || [])),
-        tasks: defaultTasksFor(c.id),
+        tasks: defaultTasksFor(c.id, dateStr),
         review: { points: 0, score: null, summary: '', reward: '', other: '', keywords: [] },
         arrival: override.arrival || c.arrival,
         sleep: override.sleep || c.sleep,
@@ -3007,7 +3012,7 @@ function ensureDateOn(s, dateStr) {
       } else if (!child) {
         child = s.dates[dateStr][c.id] = {
           fixedClasses: JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || [])),
-          tasks: defaultTasksFor(c.id)
+          tasks: defaultTasksFor(c.id, dateStr)
         };
       } else if (!child.fixedClasses) {
         child.fixedClasses = JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || []));
@@ -3645,7 +3650,7 @@ function delTask(childId, idx) {
 function resetChild(childId) {
   if (!confirm('确认重置该孩子的任务为默认？')) return;
   const dateStr = document.getElementById('datePicker').value;
-  state.dates[dateStr][childId].tasks = defaultTasksFor(childId);
+  state.dates[dateStr][childId].tasks = defaultTasksFor(childId, dateStr);
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
