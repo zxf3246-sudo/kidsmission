@@ -1702,7 +1702,7 @@
         "review": {
           "points": 0,
           "score": 88,
-          "summary": "放",
+          "summary": "放学刚回来状态一般，有点墨迹。正式开始认真做是从下午5点以后，后续就正常了。",
           "reward": "",
           "other": "",
           "savings": 0,
@@ -1716,7 +1716,7 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1789996840169
       },
       "qiannuo": {
         "fixedClasses": [
