@@ -131,6 +131,14 @@
             "errLinked": false
           },
           {
+            "id": "t1789977462736qwfs",
+            "name": "学而思Lesson 1作业",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1789836824012k4nn",
             "name": "语文学校词复习",
             "duration": 15,
@@ -146,14 +154,6 @@
             "status": "",
             "done": false,
             "courseTask": "la"
-          },
-          {
-            "id": "t1789976616564wu83",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
           },
           {
             "id": "t17898368240127jp8",
@@ -3575,7 +3575,7 @@
     {
       "id": "ryx_es2",
       "childId": "yanxi",
-      "title": "Spelling 18",
+      "title": "英语小测 Spelling 18",
       "date": "2026-09-24",
       "daysBefore": 7,
       "category": "exam"
@@ -3583,7 +3583,7 @@
     {
       "id": "ryx_es4",
       "childId": "yanxi",
-      "title": "Spelling 19",
+      "title": "英语小测 Spelling 19",
       "date": "2026-10-08",
       "daysBefore": 7,
       "category": "exam"
@@ -3591,7 +3591,7 @@
     {
       "id": "ryx_es6",
       "childId": "yanxi",
-      "title": "Spelling 20",
+      "title": "英语小测 Spelling 20",
       "date": "2026-10-22",
       "daysBefore": 7,
       "category": "exam"
@@ -3599,7 +3599,7 @@
     {
       "id": "ryx_es7",
       "childId": "yanxi",
-      "title": "Spelling 21",
+      "title": "英语小测 Spelling 21",
       "date": "2026-10-29",
       "daysBefore": 7,
       "category": "exam"
@@ -3627,6 +3627,14 @@
       "date": "2026-09-25",
       "daysBefore": 7,
       "category": "activity"
+    },
+    {
+      "id": "rem_1789976913650_vhw",
+      "childId": "yanxi",
+      "title": "约定和同学Dojo island",
+      "date": "2026-09-21",
+      "daysBefore": 7,
+      "category": "other"
     }
   ],
   "summaryKeywords": [
