@@ -198,6 +198,14 @@
             "errLinked": false
           },
           {
+            "id": "t178996818288722fd",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1789836824012a49t",
             "name": "练字",
             "duration": 15,
@@ -266,7 +274,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789968133076,
+        "taskSavedAt": 1789968198961,
         "reviewSavedAt": 1789958973122
       }
     },
