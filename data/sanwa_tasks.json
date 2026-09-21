@@ -1632,7 +1632,7 @@
           },
           {
             "id": "t1789836843313b4jz",
-            "name": "语文5B14课词汇",
+            "name": "语文5B15课词汇",
             "duration": 25,
             "type": "study",
             "done": false,
@@ -1684,7 +1684,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790003018280,
+        "taskSavedAt": 1790006849053,
         "reviewSavedAt": 1789996946185
       },
       "yanxi": {
@@ -1725,6 +1725,13 @@
             "done": false
           },
           {
+            "id": "fix-20260922-yanxi-5",
+            "name": "学校英语小测复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789962559452vwim",
             "name": "语文LA作业",
             "duration": null,
@@ -1732,13 +1739,6 @@
             "status": "",
             "done": false,
             "courseTask": "la"
-          },
-          {
-            "id": "fix-20260922-yanxi-5",
-            "name": "学校英语小测复习",
-            "duration": 15,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789836843313bwoc",
