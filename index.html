@@ -2042,6 +2042,8 @@ const COURSE_HOMEWORK = [
   { key: 'xes', taskName: '学而思作业', isClass: n => n.includes('学而思') || n.includes('TAL'), matchTask: n => n.includes('学而思作业') },
   { key: 'la',  taskName: '语文LA作业', isClass: n => n.includes('LA'), matchTask: n => n.includes('LA作业') },
 ];
+// 动态作业插入锚点：李怡霖紧跟"科学知识点"；其他孩子未配置时插在第一个休息任务之前
+const COURSE_HOMEWORK_ANCHOR = { yilin: '科学知识点' };
 
 // 本地日期字符串（YYYY-MM-DD），避免 toISOString 的 UTC 偏移一天问题
 function localDateStr(d) {
@@ -2062,6 +2064,17 @@ function hasCourseThatDay(childId, dateStr, isClass) {
   const classes = (dayData && dayData.fixedClasses)
     || WEEKLY_CLASSES[childId][new Date(dateStr + 'T00:00:00').getDay()] || [];
   return classes.some(cl => isClass(cl.name));
+}
+
+// 动态作业插入位置：有锚点任务（如李怡霖"科学知识点"）则紧跟其后，否则插在第一个休息任务之前
+function courseHomeworkInsertPos(tasks, childId) {
+  const anchor = COURSE_HOMEWORK_ANCHOR[childId];
+  if (anchor) {
+    const ai = tasks.findIndex(t => !t.courseTask && t.name === anchor);
+    if (ai !== -1) return ai + 1;
+  }
+  const ri = tasks.findIndex(t => t.type === 'rest');
+  return ri === -1 ? tasks.length : ri;
 }
 
 // 同步当日的课程作业任务；有变化返回 true（由调用方决定是否保存）
@@ -2093,9 +2106,14 @@ function syncCourseHomework(childId, dateStr) {
     const legacyIdx = tasks.findIndex(t => !t.courseTask && ch.matchTask(t.name || ''));
     if (shouldShow) {
       if (idx === -1) {
-        // 插入位置：学而思作业最前，语文LA作业紧随其后
-        const xesIdx = tasks.findIndex(t => t.courseTask === 'xes');
-        const insertPos = (ch.key === 'la' && xesIdx !== -1) ? xesIdx + 1 : 0;
+        // 插入位置：李怡霖紧跟"科学知识点"；否则插在第一个休息任务前；语文LA作业紧随学而思作业
+        let insertPos;
+        if (ch.key === 'la') {
+          const xesIdx = tasks.findIndex(t => t.courseTask === 'xes');
+          insertPos = xesIdx !== -1 ? xesIdx + 1 : courseHomeworkInsertPos(tasks, childId);
+        } else {
+          insertPos = courseHomeworkInsertPos(tasks, childId);
+        }
         if (legacyIdx !== -1) {
           // 旧版同名任务（默认模板遗留）：转为动态任务并保留时长
           const old = tasks[legacyIdx];
