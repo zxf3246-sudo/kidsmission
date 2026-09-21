@@ -3755,17 +3755,32 @@ function renderReminders(childId) {
 function addReminder(childId) {
   const title = prompt('提醒事项（如：英语期中考试）：', '');
   if (!title) return;
-  const date = prompt('日期 YYYY-MM-DD：', getLocalDateStr());
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { showToast('日期格式错误'); return; }
+  const date = normalizeDateInput(prompt('日期 YYYY-MM-DD：', getLocalDateStr()));
+  if (!date) { showToast('日期格式错误'); return; }
   const catInput = prompt('分类（exam=考试 / activity=活动 / other=其他，默认 exam）：', 'exam');
   const category = ['exam','activity','other'].includes(catInput) ? catInput : 'exam';
-  const daysBefore = prompt('提前几天开始显示？（默认 14）', '14');
-  const db = Math.max(1, Math.min(60, parseInt(daysBefore) || 14));
+  const daysBefore = prompt('提前几天开始显示？（默认 7）', '7');
+  const db = Math.max(1, Math.min(60, parseInt(daysBefore) || 7));
   state.reminders = state.reminders || [];
   state.reminders.push({ id: 'rem_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5),
     childId, title: title.trim(), date, daysBefore: db, category });
   save();
   render(); // 整体重绘，确保新提醒条 DOM 出现
+}
+
+// 规范化用户输入的日期：支持 2026-9-22 / 2026/9/22 / 2026.9.22，自动补零并校验真实日期
+function normalizeDateInput(s) {
+  if (!s) return null;
+  s = String(s).trim();
+  const m = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+  if (!m) return null;
+  const y = +m[1], mo = +m[2], d = +m[3];
+  const ds = y + '-' + String(mo).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+  const t = new Date(ds + 'T00:00:00');
+  if (isNaN(t.getTime())) return null;
+  // 校验回读一致，拒绝 2月30日 这类无效日期
+  const back = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+  return back === ds ? ds : null;
 }
 
 
