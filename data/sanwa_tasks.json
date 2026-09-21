@@ -1794,7 +1794,7 @@
           },
           {
             "id": "fix-20260922-qiannuo-1",
-            "name": "600字1课生字",
+            "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": false
@@ -1871,7 +1871,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790006796083,
         "reviewSavedAt": 1789996700475
       }
     },
