@@ -4233,7 +4233,7 @@ async function exportTasks() {
     setFont(ctx, 32, true); ctx.fillStyle = col.dark;
     ctx.fillText(col.emoji + ' ' + c.name, x0+32, cy);
     setFont(ctx, 18, false); ctx.fillStyle = '#64748b';
-    ctx.fillText(`${c.grade} · ${c.arrival} 在家 → ${c.sleep} 睡觉`, x0+32, cy+48);
+    ctx.fillText(`${c.grade}`, x0+32, cy+48);
     // 评分/积分行
     const review = cd.review || {};
     const dayScore = review.score !== null && review.score !== undefined ? `评分 ${review.score}` : '未评分';
