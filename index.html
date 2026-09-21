@@ -2126,6 +2126,22 @@ function syncCourseHomework(childId, dateStr) {
             { id: uid(), name: ch.taskName, duration: null, type: 'study', status: '', done: false, courseTask: ch.key });
         }
         changed = true;
+      } else {
+        // 已存在：确保位置正确（旧版可能把动态作业存到了错误位置，每次渲染时归位）
+        const task = tasks[idx];
+        let pos;
+        if (ch.key === 'la') {
+          const xesIdx = tasks.findIndex(t => t.courseTask === 'xes');
+          pos = xesIdx !== -1 ? xesIdx + 1 : courseHomeworkInsertPos(tasks, childId);
+        } else {
+          pos = courseHomeworkInsertPos(tasks, childId);
+        }
+        if (idx !== pos) {
+          tasks.splice(idx, 1);
+          const p2 = pos > idx ? pos - 1 : pos;
+          tasks.splice(Math.max(0, Math.min(p2, tasks.length)), 0, task);
+          changed = true;
+        }
       }
     } else {
       // 不应出现：移除动态任务；旧版同名任务（默认模板遗留）一并移除，保证无课日不出现
