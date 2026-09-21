@@ -125,7 +125,7 @@
           {
             "id": "t1789962776938ved5",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "status": "",
             "done": false,
@@ -175,7 +175,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789966834350,
+        "taskSavedAt": 1789966921319,
         "reviewSavedAt": null
       },
       "qiannuo": {
