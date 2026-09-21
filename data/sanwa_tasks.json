@@ -1273,8 +1273,9 @@
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789836824012pxxv",
@@ -1312,7 +1313,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789984574395,
+        "taskSavedAt": 1789985666748,
         "reviewSavedAt": null
       },
       "yanxi": {
