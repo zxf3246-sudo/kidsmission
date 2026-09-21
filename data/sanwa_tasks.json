@@ -111,15 +111,6 @@
             "status": "done"
           },
           {
-            "id": "t1789962776938ved5",
-            "name": "语文LA作业",
-            "duration": 20,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1789999983570htfk",
             "name": "dojo island",
             "duration": 50,
@@ -183,6 +174,15 @@
             "status": "done"
           },
           {
+            "id": "t1789962776938ved5",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "status": "undone",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t17898368240127jp8",
             "name": "自由活动",
             "duration": 20,
@@ -219,7 +219,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790000011674,
+        "taskSavedAt": 1790001707242,
         "reviewSavedAt": 1790000445113
       },
       "qiannuo": {
