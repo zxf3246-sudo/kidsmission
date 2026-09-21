@@ -4719,15 +4719,12 @@ async function exportTasksText() {
       });
     }
     
-    // 任务列表（休息类任务不导出）
+    // 任务列表（休息类任务不导出，任务后不带预估时长）
     const tasks = (cd.tasks || []).filter(t => t.type !== 'rest');
     if (tasks.length) {
       text += `📝 今日任务：\n`;
       tasks.forEach((t, i) => {
-        const dur = isBedtimeTask(t)
-          ? (t.time ? `（${t.time}）` : '')
-          : (t.duration ? `（${Math.round(+t.duration/60*10)/10}小时）` : '');
-        text += `  ${i+1}. ${t.name}${dur}\n`;
+        text += `  ${i+1}. ${t.name}\n`;
       });
     }
     
