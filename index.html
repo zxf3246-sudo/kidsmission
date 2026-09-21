@@ -3407,7 +3407,7 @@ function renderFixedClasses(child, fixed, dateStr) {
     row.className = 'class-item' + (after?' after-school':'');
     row.innerHTML = `
       <span class="class-time">${escapeHtml(cl.time||'')}</span>
-      <span class="class-name" contenteditable="true" onblur="editFixedClass('${child.id}',${i},this.textContent)">${escapeHtml(cl.name)}</span>
+      <span class="class-name">${escapeHtml(cl.name)}</span>
       <span class="class-tag ${after?'after':'day'}">${after?'放学后':'白天'}</span>
       <span class="class-duration">${cl.duration}分</span>
       <button class="btn-del" onclick="delFixedClass('${child.id}',${i})">×</button>`;
