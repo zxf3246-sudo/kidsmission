@@ -4886,6 +4886,35 @@ function downloadText(text, filename) {
 
 // 导出文字版任务（适合发微信群）
 let _lastTextExport = { text: '', filename: '' };
+// 📖 每日成语库（适合小学生背诵理解，含意思与例句）
+const DAILY_IDIOMS = [
+  { c:'专心致志', p:'zhuān xīn zhì zhì', m:'集中精神，一心一意地做一件事。', e:'小明专心致志地写作业，不一会儿就写完了。' },
+  { c:'持之以恒', p:'chí zhī yǐ héng', m:'长久地坚持下去，不半途而废。', e:'学习要持之以恒，不能三天打鱼两天晒网。' },
+  { c:'聚精会神', p:'jù jīng huì shén', m:'集中全部精神，注意力很集中。', e:'上课时我们要聚精会神地听老师讲课。' },
+  { c:'温故知新', p:'wēn gù zhī xīn', m:'复习学过的知识，能从中得到新的理解和收获。', e:'老师常提醒我们温故知新，所以我每天都复习功课。' },
+  { c:'勤能补拙', p:'qín néng bǔ zhuō', m:'勤奋努力可以弥补天资上的不足。', e:'虽然我学得比别人慢，但勤能补拙，多练就会了。' },
+  { c:'一丝不苟', p:'yī sī bù gǒu', m:'做事认真仔细，一点也不马虎。', e:'她写作业一丝不苟，每个字都写得工工整整。' },
+  { c:'井井有条', p:'jǐng jǐng yǒu tiáo', m:'形容做事有条理，安排得整整齐齐。', e:'小军的书桌整理得井井有条，找东西特别快。' },
+  { c:'全力以赴', p:'quán lì yǐ fù', m:'把全部力量都用上去做一件事。', e:'运动会马上开始了，我们要全力以赴争取好成绩。' },
+  { c:'一日千里', p:'yī rì qiān lǐ', m:'形容进步或发展得非常快。', e:'自从每天坚持读英语，他的口语进步一日千里。' },
+  { c:'水滴石穿', p:'shuǐ dī shí chuān', m:'比喻做事只要有恒心，不断努力就能成功。', e:'每天练十分钟字，水滴石穿，我的字进步很大。' },
+  { c:'胸有成竹', p:'xiōng yǒu chéng zhú', m:'做事之前已经有了充分的把握。', e:'他复习得很充分，走进考场时胸有成竹。' },
+  { c:'彬彬有礼', p:'bīn bīn yǒu lǐ', m:'形容文雅又有礼貌的样子。', e:'小明见到老师总是彬彬有礼地问好。' },
+  { c:'乐于助人', p:'lè yú zhù rén', m:'很愿意帮助别人。', e:'小红乐于助人，同学遇到困难她都会帮忙。' },
+  { c:'闻鸡起舞', p:'wén jī qǐ wǔ', m:'比喻有志气的人奋发努力，勤学苦练。', e:'他每天早起读书，像闻鸡起舞一样勤奋。' },
+  { c:'画蛇添足', p:'huà shé tiān zú', m:'比喻做了多余的事，反而把事情弄糟。', e:'文章已经写完了，他又加了几句，真是画蛇添足。' },
+  { c:'亡羊补牢', p:'wáng yáng bǔ láo', m:'出了问题及时补救，还不算晚。', e:'这次没考好没关系，亡羊补牢，下次努力就好。' },
+  { c:'守株待兔', p:'shǒu zhū dài tù', m:'比喻不努力，只想侥幸得到收获。', e:'我们不能守株待兔，好成绩要靠自己努力得来。' },
+  { c:'井底之蛙', p:'jǐng dǐ zhī wā', m:'比喻眼界狭小、见识短浅的人。', e:'多看书多旅行，才能不做井底之蛙。' }
+];
+
+// 按日期取一个固定的每日成语（同一天无论导多少次都一样）
+function idiomForDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  return DAILY_IDIOMS[seed % DAILY_IDIOMS.length];
+}
+
 async function exportTasksText() {
   try { await autoPullFromCloud(); } catch(e) {}
   const dateStr = document.getElementById('datePicker').value;
@@ -4945,7 +4974,13 @@ async function exportTasksText() {
     text += '\n';
   });
   
-  text += `${'='.repeat(28)}\n`;
+  // 每日成语（适合小学生背诵理解）
+  const idiom = idiomForDate(dateStr);
+  text += `\n📖 每日成语：${idiom.c}（${idiom.p}）\n`;
+  text += `    意思：${idiom.m}\n`;
+  text += `    例句：${idiom.e}\n`;
+  
+  text += `\n${'='.repeat(28)}\n`;
   text += `祝三娃学习顺利！💪`;
 
   _lastTextExport = { text, filename: `三娃任务_${dateStr}.txt` };
