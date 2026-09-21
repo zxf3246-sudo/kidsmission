@@ -2032,17 +2032,23 @@ function defaultTasksFor(childId, dateStr) {
       t('洗漱睡觉', null, 'rest'),
     ];
   }
-  if (childId === 'qiannuo') return [
-    t('乘法口诀复习', 15),
-    t('数学计算2页', 15),
-    t('练字', 15),
-    t('控笔', 10),
-    t('字母拼音', 10),
-    t('语法练习', 15),
-    t('练习演讲', 15),
-    t('自由玩耍', null, 'rest'),
-    t('洗漱睡觉', null, 'rest'),
-  ];
+  if (childId === 'qiannuo') {
+    // 第七项按星期交替：1/3/5/7（周一、三、五、日）英语阅读练习；2/4/6（周二、四、六）语文练习
+    // getDay(): 周日=0（用户口径"7"），周一=1...周六=6 → 周日或奇数天=英语阅读练习，偶数天=语文练习
+    const dow = dateStr ? new Date(dateStr + 'T00:00:00').getDay() : 1;
+    const isEngReading = (dow === 0 || dow % 2 === 1);
+    return [
+      t('WWK3个新单词', 15),
+      t('600字1课生字', 15),
+      t('数学计算练习', 20),
+      t('书法汉字练习', 15),
+      t('字母拼音练习', 10),
+      t('控笔练习', 10),
+      isEngReading ? t('英语阅读练习', 15) : t('语文练习', 15),
+      t('自由玩耍', null, 'rest'),
+      t('洗漱睡觉', null, 'rest'),
+    ];
+  }
   return [];
 }
 
