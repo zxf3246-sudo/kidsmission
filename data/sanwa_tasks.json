@@ -1596,12 +1596,15 @@
         ],
         "review": {
           "points": 0,
-          "score": null,
+          "score": 87,
           "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 0
+          "stars": 0,
+          "keywords": [
+            "听话"
+          ]
         },
         "arrival": "14:30",
         "sleep": "21:00",
