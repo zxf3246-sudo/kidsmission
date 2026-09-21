@@ -4664,6 +4664,18 @@ async function exportTasksText() {
     text += `${c.emoji} ${c.name}（${c.grade}）\n`;
     text += `🕐 在家 ${cd.arrival||c.arrival} → 睡觉 ${cd.sleep||c.sleep}\n`;
     
+    // 重要事项提醒（与页面重要提示一致的窗口内项目）
+    const myRems = (state.reminders||[])
+      .filter(r => r.childId === c.id && reminderInfo(r).inWindow)
+      .sort((a,b) => (a.date > b.date ? 1 : -1));
+    if (myRems.length) {
+      text += `🔔 重要事项：\n`;
+      myRems.forEach((r, i) => {
+        const cat = REMINDER_CATEGORIES[(r.category||'other')].label;
+        text += `  ${i+1}. [${cat}] ${r.title}（${reminderInfo(r).label}）\n`;
+      });
+    }
+    
     // 固定课程
     const classes = (cd.fixedClasses||[]).filter(cl=>isAfterSchool(cl,c,cd.arrival||c.arrival));
     if (classes.length) {
