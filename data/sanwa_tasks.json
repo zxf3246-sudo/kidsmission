@@ -1647,6 +1647,14 @@
             "errLinked": false
           },
           {
+            "id": "t17900072179264bg9",
+            "name": "数学问题讨论",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "fixy-20260922-pod",
             "name": "听播客",
             "duration": 30,
@@ -1682,7 +1690,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790006849053,
+        "taskSavedAt": 1790007228116,
         "reviewSavedAt": 1790007171303
       },
       "yanxi": {
