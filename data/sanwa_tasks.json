@@ -3643,6 +3643,14 @@
       "date": "2026-10-05",
       "daysBefore": 7,
       "category": "other"
+    },
+    {
+      "id": "rem_1789977714182_ps9",
+      "childId": "qiannuo",
+      "title": "中秋节活动（穿旗袍）",
+      "date": "2026-09-24",
+      "daysBefore": 7,
+      "category": "activity"
     }
   ],
   "summaryKeywords": [
