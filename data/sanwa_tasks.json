@@ -135,7 +135,7 @@
           {
             "id": "t17898368240123hpn",
             "name": "语文阅读理解",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -144,7 +144,7 @@
           {
             "id": "t1789977462736qwfs",
             "name": "学而思Lesson 1作业",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -153,10 +153,11 @@
           {
             "id": "t1789836824012k4nn",
             "name": "语文学校词复习",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962776938ved5",
@@ -195,7 +196,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789992221734,
+        "taskSavedAt": 1789994203873,
         "reviewSavedAt": null
       },
       "qiannuo": {
