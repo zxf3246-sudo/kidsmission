@@ -1508,17 +1508,18 @@
             "name": "学而思作业",
             "duration": 20,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "courseTask": "xes"
+            "courseTask": "xes",
+            "status": "done"
           },
           {
             "id": "t17899654204646r86",
             "name": "语文LA作业",
             "duration": null,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "la"
           },
           {
@@ -1541,7 +1542,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1789965446213,
         "reviewSavedAt": null
       }
     },
