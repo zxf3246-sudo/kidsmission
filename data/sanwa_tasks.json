@@ -3386,14 +3386,6 @@
   ],
   "reminders": [
     {
-      "id": "r921",
-      "childId": "yilin",
-      "title": "英语口语",
-      "date": "2026-09-21",
-      "daysBefore": 14,
-      "category": "exam"
-    },
-    {
       "id": "r922",
       "childId": "yilin",
       "title": "华文口语",
@@ -3632,22 +3624,6 @@
       "date": "2026-09-25",
       "daysBefore": 7,
       "category": "activity"
-    },
-    {
-      "id": "rem_1789976913650_vhw",
-      "childId": "yanxi",
-      "title": "约定和同学Dojo island",
-      "date": "2026-09-21",
-      "daysBefore": 7,
-      "category": "other"
-    },
-    {
-      "id": "rem_1789977603221_6nr",
-      "childId": "qiannuo",
-      "title": "班级大使8:30前到学校",
-      "date": "2026-10-05",
-      "daysBefore": 7,
-      "category": "other"
     },
     {
       "id": "rem_1789977714182_ps9",
