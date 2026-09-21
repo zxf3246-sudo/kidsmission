@@ -2958,6 +2958,70 @@ function removeMissyTueClass(obj) {
   }
 }
 
+// 把 9/22-24 李彦希、李芊诺的旧模板任务统一升级为新模板（白天改过的固定任务形式）
+// 仅当该日任务未被用户手动改过（学习任务名与旧模板完全一致）时执行；
+// 保留完成状态、休息任务、动态作业（学而思作业/语文LA作业）及固定课程
+function upgradeLegacyTasks(obj, dateStr, childId) {
+  if (!obj || !obj.dates) return false;
+  const cd = obj.dates[dateStr] && obj.dates[dateStr][childId];
+  if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return false;
+
+  const OLD = {
+    yanxi: ['四五快读第二册1课新字','WW1单词10个','英语语法学习1个','小龙1篇','语文学校词复习','Koobits','1 Mission'],
+    qiannuo: ['乘法口诀复习','数学计算2页','练字','控笔','字母拼音','语法练习','练习演讲']
+  };
+  const oldStudy = OLD[childId];
+  if (!oldStudy) return false;
+
+  // 当前学习任务名
+  const studyNames = cd.tasks.filter(t => t.type !== 'rest').map(t => t.name);
+  // 允许的动态作业名（按课程自动插入）
+  const dynamicOk = ['学而思作业','语文LA作业'];
+  // 只要存在旧模板之外的学习任务（非动态作业）或缺少旧模板任务 → 视为用户手动改过，跳过
+  if (studyNames.some(n => !oldStudy.includes(n) && !dynamicOk.includes(n))) return false;
+  if (!oldStudy.every(n => studyNames.includes(n))) return false;
+
+  // 记录完成状态（按旧任务名）
+  const doneMap = {};
+  cd.tasks.forEach(t => { doneMap[t.name] = !!t.done; });
+
+  const dow = new Date(dateStr + 'T00:00:00').getDay();
+  const yanxiAlt = (dow === 0 || dow % 2 === 1) ? '语文阅读理解' : '英语语法';
+  const qiannuoAlt = (dow === 0 || dow % 2 === 1) ? '英语阅读练习' : '语文练习';
+  const NEW = {
+    yanxi: ['Koobits','1 Mission','四五快读新字','WW1单词10个',yanxiAlt,'语文学校词复习'],
+    qiannuo: ['WWK3个新单词','600字1课生字','数学计算练习','书法汉字练习','字母拼音练习','控笔练习',qiannuoAlt]
+  };
+  const DUR = {
+    'Koobits':20,'1 Mission':15,'四五快读新字':15,'WW1单词10个':15,'语文阅读理解':15,'英语语法':15,'语文学校词复习':15,
+    'WWK3个新单词':15,'600字1课生字':15,'数学计算练习':20,'书法汉字练习':15,'字母拼音练习':10,'控笔练习':10,'英语阅读练习':15,'语文练习':15
+  };
+
+  const newTasks = NEW[childId].map(n => ({
+    id: uid(), name: n, duration: DUR[n], type: 'study', done: !!doneMap[n]
+  }));
+  // 保留原有休息任务与动态作业（保持原相对顺序）
+  const keep = cd.tasks.filter(t => t.type === 'rest' || t.name === '学而思作业' || t.name === '语文LA作业');
+  cd.tasks = newTasks.concat(keep);
+  return true;
+}
+
+// 对指定日期范围执行李彦希/李芊诺任务格式升级（当前仅 9/22-24）
+function migrateTaskFormat(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = false;
+  const dates = ['2026-09-22','2026-09-23','2026-09-24'];
+  dates.forEach(ds => {
+    ['yanxi','qiannuo'].forEach(cid => {
+      if (upgradeLegacyTasks(obj, ds, cid)) changed = true;
+    });
+  });
+  if (changed) {
+    console.log('[migrateTaskFormat] 🔁 已将 9/22-24 李彦希/李芊诺任务升级为新模板');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 确保复盘快捷关键词存在：
 // - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
 // - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
@@ -3011,6 +3075,7 @@ function loadState() {
         try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
       }
       removeMissyTueClass(obj);
+      migrateTaskFormat(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -5266,6 +5331,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   mergeDefaultReminders(state);
   ensureSummaryKeywords(state);
   removeMissyTueClass(state);
+  migrateTaskFormat(state);
   save();
   render();
   // 记录同步时间
