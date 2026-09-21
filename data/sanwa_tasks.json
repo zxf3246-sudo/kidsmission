@@ -1296,13 +1296,6 @@
             "done": true
           },
           {
-            "id": "fixy-20260921-m2",
-            "name": "Missy口语练习1个",
-            "duration": 20,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t1789836824012p9mp",
             "name": "科学知识点",
             "duration": 15,
@@ -1328,13 +1321,6 @@
             "done": true,
             "errLinked": false,
             "status": "done"
-          },
-          {
-            "id": "fixy-20260921-pod",
-            "name": "听播客",
-            "duration": 30,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789836824012h5d5",
@@ -1372,7 +1358,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789999289020,
+        "taskSavedAt": 1790000891748,
         "reviewSavedAt": 1790000391646
       },
       "yanxi": {
@@ -1594,7 +1580,7 @@
         "review": {
           "points": 5,
           "score": 88,
-          "summary": "依旧表现得非常稳定，在学习方面yi'zhi'bao",
+          "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
