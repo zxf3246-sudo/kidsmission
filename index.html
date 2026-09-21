@@ -3697,6 +3697,7 @@ function reminderInfo(r) {
   let label, cls;
   if (days < 0)              { label = `已过 ${-days}天`; cls = 'done'; }
   else if (days === 0)       { label = '今天'; cls = 'soon'; }
+  else if (days === 1)       { label = '明天'; cls = 'soon'; }
   else if (days <= 3)        { label = `${days}天`; cls = 'soon'; }
   else                       { label = `${days}天`; cls = 'active'; }
   return { days, label, cls, inWindow };
