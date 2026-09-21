@@ -1701,12 +1701,17 @@
         ],
         "review": {
           "points": 0,
-          "score": null,
-          "summary": "",
+          "score": 88,
+          "summary": "放",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 4
+          "stars": 4,
+          "keywords": [
+            "拖拖拉拉",
+            "听话",
+            "准确率高"
+          ]
         },
         "arrival": "14:00",
         "sleep": "21:00",
