@@ -601,23 +601,6 @@
   }
   .btn-smart:hover { background: linear-gradient(135deg, #fde68a, #fbbf24); transform: translateY(-1px); }
 
-  /* ====== 智能推荐徽标/提示 ====== */
-  .overdue-hint {
-    font-size: 11px; margin-top: 8px; padding: 6px 10px;
-    background: linear-gradient(135deg, #fef3c7, #ffedd5);
-    border-radius: 8px; color: #92400e;
-    display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
-    border: 1px solid #fcd34d;
-  }
-  .od-tag {
-    background: #fff; padding: 2px 8px; border-radius: 8px;
-    font-weight: 600; border: 1px solid #fcd34d; font-size: 10px;
-  }
-  .od-tag.crit {
-    background: #fee2e2; color: #991b1b; border-color: #fca5a5;
-    animation: pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
   .enrich-tag {
     font-size: 10px; padding: 2px 6px; border-radius: 6px;
     background: linear-gradient(135deg, #fef3c7, #fde68a);
@@ -1851,7 +1834,27 @@ const DEFAULT_REMINDERS = [
   { id: 'r1022', childId: 'yilin', title: '英语 试卷2 语言&阅读', date: '2026-10-22', daysBefore: 14, category: 'exam' },
   { id: 'r1023', childId: 'yilin', title: '华文 试卷2 语言&阅读', date: '2026-10-23', daysBefore: 14, category: 'exam' },
   { id: 'r1026', childId: 'yilin', title: '科学 全套试卷',       date: '2026-10-26', daysBefore: 14, category: 'exam' },
-  { id: 'r1027', childId: 'yilin', title: '数学 卷1+卷2',       date: '2026-10-27', daysBefore: 14, category: 'exam' }
+  { id: 'r1027', childId: 'yilin', title: '数学 卷1+卷2',       date: '2026-10-27', daysBefore: 14, category: 'exam' },
+
+  // 李芊诺 K2 第四学期 语文听写（每周三）
+  { id: 'rqn_cw2', childId: 'qiannuo', title: '第二周语文学校听写', date: '2026-09-23', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw3', childId: 'qiannuo', title: '第三周语文学校听写', date: '2026-09-30', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw4', childId: 'qiannuo', title: '第四周语文学校听写', date: '2026-10-07', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw5', childId: 'qiannuo', title: '第五周语文学校听写', date: '2026-10-14', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw6', childId: 'qiannuo', title: '第六周语文学校听写', date: '2026-10-21', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw7', childId: 'qiannuo', title: '第七周语文学校听写', date: '2026-10-28', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw8', childId: 'qiannuo', title: '第八周语文学校听写', date: '2026-11-04', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_cw9', childId: 'qiannuo', title: '第九周语文学校听写', date: '2026-11-11', daysBefore: 7, category: 'exam' },
+
+  // 李芊诺 K2 第四学期 英语听写（每周三）
+  { id: 'rqn_ew2', childId: 'qiannuo', title: '第二周英语学校听写', date: '2026-09-23', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew3', childId: 'qiannuo', title: '第三周英语学校听写', date: '2026-09-30', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew4', childId: 'qiannuo', title: '第四周英语学校听写', date: '2026-10-07', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew5', childId: 'qiannuo', title: '第五周英语学校听写', date: '2026-10-14', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew6', childId: 'qiannuo', title: '第六周英语学校听写', date: '2026-10-21', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew7', childId: 'qiannuo', title: '第七周英语学校听写', date: '2026-10-28', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew8', childId: 'qiannuo', title: '第八周英语学校听写', date: '2026-11-04', daysBefore: 7, category: 'exam' },
+  { id: 'rqn_ew9', childId: 'qiannuo', title: '第九周英语学校听写', date: '2026-11-11', daysBefore: 7, category: 'exam' }
 ];
 const REMINDER_CATEGORIES = {
   exam:     { label: '考试', short: '考' },
@@ -2578,24 +2581,6 @@ function finalizeVoice() {
   showToast('✅ 语音转文字完成');
 }
 
-// 待补充类别（用于卡片徽标）
-function overdueCategories(childId, dateStr) {
-  const load = getRecentLoadInState(state, childId, dateStr);
-  if (load.days < 3) return [];
-  const analysis = analyzeEnrichment(childId, dateStr);
-  const cd = state.dates[dateStr] && state.dates[dateStr][childId];
-  const todayCats = new Set();
-  if (cd && cd.tasks) cd.tasks.forEach(t => { const m = matchActivity(t.name); if (m) todayCats.add(m.category); });
-  const list = [];
-  Object.entries(analysis).forEach(([catKey, a]) => {
-    if (todayCats.has(catKey)) return;
-    const cat = ACTIVITY_LIBRARY[catKey];
-    if (a.daysSince >= cat.cooldownDays) {
-      list.push({ label: cat.label, critical: a.daysSince === Infinity || a.daysSince >= cat.criticalDays });
-    }
-  });
-  return list;
-}
 // 新日期自动补充：仅当历史≥7天且存在高优先级（从未安排/临界超期）推荐时注入，最多2项
 function autoEnrichNewDate(s, dateStr, childId) {
   const load = getRecentLoadInState(s, childId, dateStr);
@@ -2662,12 +2647,27 @@ function unfocusChild() {
 }
 function uid() { return 't' + Date.now() + Math.random().toString(36).slice(2,6); }
 
+// 补充新增的默认提醒（按 id 去重，避免覆盖用户已编辑/已存在的提醒）
+function mergeDefaultReminders(obj) {
+  if (!obj) return;
+  if (!Array.isArray(obj.reminders)) obj.reminders = [];
+  const existingIds = new Set(obj.reminders.map(r => r && r.id));
+  const added = DEFAULT_REMINDERS.filter(r => !existingIds.has(r.id));
+  if (added.length) {
+    obj.reminders.push(...added.map(r => ({ ...r })));
+    console.log('[mergeDefaultReminders] 🔁 补充默认提醒：', added.length, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem('sanwa_tasks');
     if (raw) {
       const obj = JSON.parse(raw);
       if (!obj.reminders) obj.reminders = [...DEFAULT_REMINDERS];
+      // 迁移：补充新增的默认提醒（按 id 去重，避免覆盖用户已编辑/已存在的提醒）
+      mergeDefaultReminders(obj);
       if (obj.dates) {
         Object.keys(obj.dates).forEach(k => { if (!k || !/^\d{4}-\d{2}-\d{2}$/.test(k)) delete obj.dates[k]; });
       }
@@ -2927,10 +2927,6 @@ function renderChildren(dateStr) {
     const studySharePct = totalUsed > 0 ? Math.round(used.study / totalUsed * 100) : 0;
     const restSharePct = totalUsed > 0 ? 100 - studySharePct : 0;
     const taskDonePct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
-    const overdue = overdueCategories(c.id, dateStr);
-    const overdueHtml = overdue.length
-      ? `<div class="overdue-hint">📚 待补充: ${overdue.map(o=>`<span class="od-tag ${o.critical?'crit':''}">${o.label}</span>`).join('')}</div>`
-      : '';
 
     // 复盘区数据
     const review = cd.review || { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
@@ -2991,7 +2987,6 @@ function renderChildren(dateStr) {
 
       <div class="reminder-bar" id="reminder-${c.id}"></div>
       <div class="fixed-classes" id="fixed-${c.id}"></div>
-      ${overdueHtml}
       <div class="task-list" id="tasks-${c.id}"></div>
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('${c.id}')">＋ 添加任务</button>
@@ -4832,6 +4827,8 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   const finalState = { ...cloudState, dates: mergedDates };
   // 保留本地 CHILDREN 配置无关字段；这里直接替换 state
   state = finalState;
+  // 云端可能是旧数据，补充新增的默认提醒（按 id 去重）
+  mergeDefaultReminders(state);
   save();
   render();
   // 记录同步时间
