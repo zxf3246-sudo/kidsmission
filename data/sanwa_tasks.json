@@ -280,8 +280,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "time": "21:00",
+            "status": "done"
           }
         ],
         "review": {
@@ -296,7 +298,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789992245530,
+        "taskSavedAt": 1789995927642,
         "reviewSavedAt": 1789958973122
       }
     },
