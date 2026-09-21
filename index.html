@@ -322,6 +322,29 @@
   }
   .rb-add:hover { background: #fb923c; color: #fff; }
 
+  /* 添加提醒的分类选择弹层 */
+  .cat-modal {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.45); z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cat-modal-box {
+    background: #fff; border-radius: 14px; padding: 18px 16px;
+    width: 76%; max-width: 300px; text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  }
+  .cat-modal-title { font-size: 15px; font-weight: 700; color: #333; margin-bottom: 14px; }
+  .cat-opt {
+    display: block; width: 100%; padding: 11px 0; margin-bottom: 9px;
+    border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
+    background: #f3f4f6; color: #333; font-family: inherit;
+  }
+  .cat-opt:active { opacity: .75; }
+  .cat-cancel {
+    display: block; width: 100%; padding: 8px 0; margin-top: 2px;
+    border: none; background: none; color: #9ca3af; font-size: 13px; font-family: inherit;
+  }
+
   /* ====== 固定课程 ====== */
   .fixed-classes {
     margin-bottom: 12px; padding: 10px 12px;
@@ -3763,20 +3786,40 @@ function renderReminders(childId) {
   });
 }
 
+// 可视化选择提醒分类（中文点选，避免手输英文 key 出错）
+function chooseCategoryModal(cb) {
+  const ov = document.createElement('div');
+  ov.className = 'cat-modal';
+  const box = document.createElement('div');
+  box.className = 'cat-modal-box';
+  box.innerHTML = '<div class="cat-modal-title">选择分类</div>'
+    + Object.entries(REMINDER_CATEGORIES).map(([k, v]) =>
+        `<button type="button" class="cat-opt" data-k="${k}">${v.label}</button>`).join('')
+    + '<button type="button" class="cat-cancel">取消</button>';
+  ov.appendChild(box);
+  document.body.appendChild(ov);
+  const close = () => ov.remove();
+  ov.querySelectorAll('.cat-opt').forEach(b => {
+    b.onclick = () => { const k = b.dataset.k; close(); cb(k); };
+  });
+  ov.querySelector('.cat-cancel').onclick = close;
+  ov.onclick = e => { if (e.target === ov) close(); };
+}
+
 function addReminder(childId) {
   const title = prompt('提醒事项（如：英语期中考试）：', '');
   if (!title) return;
   const date = normalizeDateInput(prompt('日期 YYYY-MM-DD：', getLocalDateStr()));
   if (!date) { showToast('日期格式错误'); return; }
-  const catInput = prompt('分类（exam=考试 / activity=活动 / other=其他，默认 exam）：', 'exam');
-  const category = ['exam','activity','other'].includes(catInput) ? catInput : 'exam';
-  const daysBefore = prompt('提前几天开始显示？（默认 7）', '7');
-  const db = Math.max(1, Math.min(60, parseInt(daysBefore) || 7));
-  state.reminders = state.reminders || [];
-  state.reminders.push({ id: 'rem_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5),
-    childId, title: title.trim(), date, daysBefore: db, category });
-  save();
-  render(); // 整体重绘，确保新提醒条 DOM 出现
+  chooseCategoryModal(catKey => {
+    const daysBefore = prompt('提前几天开始显示？（默认 7）', '7');
+    const db = Math.max(1, Math.min(60, parseInt(daysBefore) || 7));
+    state.reminders = state.reminders || [];
+    state.reminders.push({ id: 'rem_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5),
+      childId, title: title.trim(), date, daysBefore: db, category: catKey });
+    save();
+    render(); // 整体重绘，确保新提醒条 DOM 出现
+  });
 }
 
 // 规范化用户输入的日期：支持 2026-9-22 / 2026/9/22 / 2026.9.22，自动补零并校验真实日期
