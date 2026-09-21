@@ -201,16 +201,17 @@
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 4,
+          "stars": 0,
           "keywords": [
             "拖拖拉拉",
-            "听话"
+            "听话",
+            "准确率高"
           ]
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1789995941491,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1789999585431
       },
       "qiannuo": {
         "fixedClasses": [],
