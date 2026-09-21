@@ -228,8 +228,9 @@
             "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789836824012l8wz",
@@ -286,7 +287,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789986171968,
+        "taskSavedAt": 1789987296774,
         "reviewSavedAt": 1789958973122
       }
     },
