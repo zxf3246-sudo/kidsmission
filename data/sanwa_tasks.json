@@ -1897,7 +1897,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
@@ -1913,15 +1915,6 @@
           }
         ],
         "tasks": [
-          {
-            "id": "t17899626198254vrw",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
           {
             "id": "t1789962619825xa35",
             "name": "四五快读第二册1课新字",
@@ -1979,6 +1972,15 @@
             "errLinked": false
           },
           {
+            "id": "t17899626198254vrw",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t178996261982578u2",
             "name": "自由玩耍",
             "duration": null,
@@ -2001,7 +2003,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:00",
         "sleep": "21:00",
@@ -2017,24 +2021,6 @@
           }
         ],
         "tasks": [
-          {
-            "id": "t17899626198264765",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t1789962619826o8gd",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
           {
             "id": "t1789962619825ais5",
             "name": "乘法口诀复习",
@@ -2092,6 +2078,24 @@
             "errLinked": false
           },
           {
+            "id": "t17899626198264765",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t1789962619826o8gd",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789962619825jmos",
             "name": "自由玩耍",
             "duration": null,
@@ -2114,7 +2118,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "16:30",
         "sleep": "21:00",
