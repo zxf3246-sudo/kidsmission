@@ -123,15 +123,6 @@
             "errLinked": false
           },
           {
-            "id": "t1789962776938ved5",
-            "name": "语文LA作业",
-            "duration": 20,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t17898368240123hpn",
             "name": "语文阅读理解",
             "duration": 15,
@@ -146,6 +137,15 @@
             "type": "study",
             "done": false,
             "errLinked": false
+          },
+          {
+            "id": "t1789962776938ved5",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
           },
           {
             "id": "t17898368240127jp8",
@@ -175,7 +175,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789966921319,
+        "taskSavedAt": 1789967678134,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -3015,7 +3015,7 @@
     {
       "id": "ryx_es2",
       "childId": "yanxi",
-      "title": "第二周英语学校听写",
+      "title": "Spelling 18",
       "date": "2026-09-24",
       "daysBefore": 7,
       "category": "exam"
@@ -3023,7 +3023,7 @@
     {
       "id": "ryx_es4",
       "childId": "yanxi",
-      "title": "第四周英语学校听写",
+      "title": "Spelling 19",
       "date": "2026-10-08",
       "daysBefore": 7,
       "category": "exam"
@@ -3031,7 +3031,7 @@
     {
       "id": "ryx_es6",
       "childId": "yanxi",
-      "title": "第六周英语学校听写",
+      "title": "Spelling 20",
       "date": "2026-10-22",
       "daysBefore": 7,
       "category": "exam"
@@ -3039,8 +3039,16 @@
     {
       "id": "ryx_es7",
       "childId": "yanxi",
-      "title": "第七周英语学校听写",
+      "title": "Spelling 21",
       "date": "2026-10-29",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "rem_1789967673039_9gn",
+      "childId": "yanxi",
+      "title": "语文第十六课小测",
+      "date": "2026-09-22",
       "daysBefore": 7,
       "category": "exam"
     }
