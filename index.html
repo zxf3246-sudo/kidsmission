@@ -755,9 +755,14 @@
     cursor: pointer; user-select: none;
   }
   .kw-chip:active { transform: scale(.95); }
+  .kw-chip.sel {
+    background: var(--theme); color: #fff;
+    border-color: var(--theme); box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
   .kw-del {
     font-style: normal; font-size: 12px; color: #cbd5e1; padding: 0 2px;
   }
+  .kw-chip.sel .kw-del { color: rgba(255,255,255,.85); }
   .kw-del:active { color: #dc2626; }
   .kw-add {
     border: none; background: none; color: color-mix(in srgb, var(--theme) 75%, #888);
@@ -2364,18 +2369,19 @@ function updateReview(childId, field, value, rerender) {
   if (rerender) renderChildren(dateStr);
 }
 
-// 点击快捷关键词 → 追加到当日总结（与手写文字拼接）
-function addSummaryKeyword(childId, kw) {
+// 点选/取消当天表现关键词（独立存储于 review.keywords，不写入总结文本）
+function toggleReviewKeyword(childId, kw) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
-  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
-  const cur = cd.review.summary || '';
-  cd.review.summary = cur ? cur + ' ' + kw : kw;
-  const ta = document.getElementById('rv-summary-' + childId);
-  if (ta) ta.value = cd.review.summary;
+  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, keywords: [] };
+  if (!Array.isArray(cd.review.keywords)) cd.review.keywords = [];
+  const i = cd.review.keywords.indexOf(kw);
+  if (i >= 0) cd.review.keywords.splice(i, 1);
+  else cd.review.keywords.push(kw);
   markDirty(childId, 'review');
   save();
+  renderChildren(dateStr); // 重渲染以更新高亮选中态
 }
 
 // 添加新的快捷关键词
@@ -2402,6 +2408,14 @@ function delSummaryKeyword(kw) {
   if (!Array.isArray(state.summaryKeywords)) return;
   if (!confirm('删除关键词「' + kw + '」？')) return;
   state.summaryKeywords = state.summaryKeywords.filter(x => x !== kw);
+  // 同时清理所有日期中已选中的该关键词
+  Object.values(state.dates || {}).forEach(kids => {
+    Object.values(kids || {}).forEach(cd => {
+      if (cd && cd.review && Array.isArray(cd.review.keywords)) {
+        cd.review.keywords = cd.review.keywords.filter(x => x !== kw);
+      }
+    });
+  });
   if (state.summaryKeywords.length === 0) kwDelMode = false;
   save();
   renderChildren(document.getElementById('datePicker').value);
@@ -2820,7 +2834,7 @@ function ensureDateOn(s, dateStr) {
       s.dates[dateStr][c.id] = {
         fixedClasses: JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || [])),
         tasks: defaultTasksFor(c.id),
-        review: { points: 0, score: null, summary: '', reward: '', other: '' },
+        review: { points: 0, score: null, summary: '', reward: '', other: '', keywords: [] },
         arrival: override.arrival || c.arrival,
         sleep: override.sleep || c.sleep,
         taskSavedAt: null,
@@ -3024,7 +3038,7 @@ function renderChildren(dateStr) {
     const taskDonePct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
 
     // 复盘区数据
-    const review = cd.review || { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
+    const review = cd.review || { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, keywords: [] };
     // 上课时长 = 所有固定课程总时长
     const classMin = fixed.reduce((s,x)=>s+(+x.duration||0),0);
     // 自学时长 = 任务学习类（排除休息）
@@ -3166,21 +3180,21 @@ function renderChildren(dateStr) {
             oninput="updateReview('${c.id}','score',this.value,false)"
             onblur="updateReview('${c.id}','score',this.value,true)">
         </div>
-        <div class="review-field">
-          <label>总结 / 复盘</label>
-          <textarea class="review-textarea lg" id="rv-summary-${c.id}" rows="6"
-            placeholder="记录今天的表现亮点、问题、改进点……"
-            onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
-        </div>
         <div class="review-field kw-field">
-          <label>✨ 快捷关键词 · 点击添加到总结</label>
+          <label>✨ 表现关键词 · 点选当天表现</label>
           <div class="kw-bar">
             ${(state.summaryKeywords||[]).map(kw =>
-              `<span class="kw-chip" onclick="addSummaryKeyword('${c.id}','${escapeAttr(kw)}')">${escapeHtml(kw)}${kwDelMode ? `<i class="kw-del" onclick="event.stopPropagation();delSummaryKeyword('${escapeAttr(kw)}')">×</i>` : ''}</span>`
+              `<span class="kw-chip${(review.keywords||[]).includes(kw)?' sel':''}" onclick="toggleReviewKeyword('${c.id}','${escapeAttr(kw)}')">${escapeHtml(kw)}${kwDelMode ? `<i class="kw-del" onclick="event.stopPropagation();delSummaryKeyword('${escapeAttr(kw)}')">×</i>` : ''}</span>`
             ).join('')}
             <button class="kw-add" onclick="addSummaryKeywordItem()">＋ 添加关键词</button>
             <button class="kw-del-mode${kwDelMode?' active':''}" onclick="toggleKwDelMode()">${kwDelMode?'✔ 完成删除':'✏ 删除关键词'}</button>
           </div>
+        </div>
+        <div class="review-field">
+          <label>总结 / 复盘（手动记录）</label>
+          <textarea class="review-textarea lg" id="rv-summary-${c.id}" rows="6"
+            placeholder="记录今天的表现亮点、问题、改进点……"
+            onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
         </div>
         <div class="review-field">
           <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
