@@ -1643,60 +1643,46 @@
         ],
         "tasks": [
           {
-            "id": "t1789836843313l32i",
-            "name": "四五快读第二册1课新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836843313f23q",
-            "name": "WW1单词10个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17898368433134yz0",
-            "name": "英语语法学习1个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836843313pt41",
-            "name": "小龙1篇",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17898368433130we5",
-            "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836843313tzvj",
+            "id": "fix-20260922-yanxi-0",
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789836843313nzik",
+            "id": "fix-20260922-yanxi-1",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
+          },
+          {
+            "id": "fix-20260922-yanxi-2",
+            "name": "四五快读新字",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260922-yanxi-3",
+            "name": "WW1单词10个",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260922-yanxi-4",
+            "name": "英语语法",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260922-yanxi-5",
+            "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1789962559452vwim",
@@ -1753,60 +1739,53 @@
         ],
         "tasks": [
           {
-            "id": "t1789836843313bjxs",
-            "name": "乘法口诀复习",
+            "id": "fix-20260922-qiannuo-0",
+            "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17898368433139vml",
-            "name": "数学计算2页",
+            "id": "fix-20260922-qiannuo-1",
+            "name": "600字1课生字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789836843313s374",
-            "name": "练字",
+            "id": "fix-20260922-qiannuo-2",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260922-qiannuo-3",
+            "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789836843313ur2q",
-            "name": "控笔",
+            "id": "fix-20260922-qiannuo-4",
+            "name": "字母拼音练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789836843313pk7q",
-            "name": "字母拼音",
+            "id": "fix-20260922-qiannuo-5",
+            "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17898368433133vx4",
-            "name": "语法练习",
+            "id": "fix-20260922-qiannuo-6",
+            "name": "语文练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789836843313ly79",
-            "name": "练习演讲",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
             "id": "t17899667681027xmh",
@@ -1941,60 +1920,46 @@
         ],
         "tasks": [
           {
-            "id": "t1789962619825xa35",
-            "name": "四五快读第二册1课新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962619825tipl",
-            "name": "WW1单词10个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962619825v14t",
-            "name": "英语语法学习1个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962619825vlfn",
-            "name": "小龙1篇",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t178996261982542hk",
-            "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17899626198259la5",
+            "id": "fix-20260923-yanxi-0",
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962619825l31n",
+            "id": "fix-20260923-yanxi-1",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
+          },
+          {
+            "id": "fix-20260923-yanxi-2",
+            "name": "四五快读新字",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260923-yanxi-3",
+            "name": "WW1单词10个",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260923-yanxi-4",
+            "name": "语文阅读理解",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260923-yanxi-5",
+            "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t17899626198254vrw",
@@ -2047,60 +2012,53 @@
         ],
         "tasks": [
           {
-            "id": "t1789962619825ais5",
-            "name": "乘法口诀复习",
+            "id": "fix-20260923-qiannuo-0",
+            "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962619825wjvy",
-            "name": "数学计算2页",
+            "id": "fix-20260923-qiannuo-1",
+            "name": "600字1课生字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962619825y3rv",
-            "name": "练字",
+            "id": "fix-20260923-qiannuo-2",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260923-qiannuo-3",
+            "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962619825yw3g",
-            "name": "控笔",
+            "id": "fix-20260923-qiannuo-4",
+            "name": "字母拼音练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17899626198254akz",
-            "name": "字母拼音",
+            "id": "fix-20260923-qiannuo-5",
+            "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17899626198259vvt",
-            "name": "语法练习",
+            "id": "fix-20260923-qiannuo-6",
+            "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962619825lou2",
-            "name": "练习演讲",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
             "id": "t17899626198264765",
@@ -2259,60 +2217,46 @@
         ],
         "tasks": [
           {
-            "id": "t17899626216249kfx",
-            "name": "四五快读第二册1课新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t178996262162422zj",
-            "name": "WW1单词10个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962621624wq7i",
-            "name": "英语语法学习1个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962621624e50s",
-            "name": "小龙1篇",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962621624ypuq",
-            "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962621624w31t",
+            "id": "fix-20260924-yanxi-0",
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17899626216244iec",
+            "id": "fix-20260924-yanxi-1",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
+          },
+          {
+            "id": "fix-20260924-yanxi-2",
+            "name": "四五快读新字",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260924-yanxi-3",
+            "name": "WW1单词10个",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260924-yanxi-4",
+            "name": "英语语法",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260924-yanxi-5",
+            "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1789962621625qjhi",
@@ -2359,60 +2303,53 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17899626216249aio",
-            "name": "乘法口诀复习",
+            "id": "fix-20260924-qiannuo-0",
+            "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962621624ay07",
-            "name": "数学计算2页",
+            "id": "fix-20260924-qiannuo-1",
+            "name": "600字1课生字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t17899626216248qeb",
-            "name": "练字",
+            "id": "fix-20260924-qiannuo-2",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "fix-20260924-qiannuo-3",
+            "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962621624qliz",
-            "name": "控笔",
+            "id": "fix-20260924-qiannuo-4",
+            "name": "字母拼音练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t178996262162478dl",
-            "name": "字母拼音",
+            "id": "fix-20260924-qiannuo-5",
+            "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
-            "id": "t1789962621624u3nb",
-            "name": "语法练习",
+            "id": "fix-20260924-qiannuo-6",
+            "name": "语文练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962621624v1h9",
-            "name": "练习演讲",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": false
           },
           {
             "id": "t1789962621625nyo9",
