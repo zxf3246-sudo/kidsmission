@@ -4719,8 +4719,8 @@ async function exportTasksText() {
       });
     }
     
-    // 任务列表
-    const tasks = cd.tasks || [];
+    // 任务列表（休息类任务不导出）
+    const tasks = (cd.tasks || []).filter(t => t.type !== 'rest');
     if (tasks.length) {
       text += `📝 今日任务：\n`;
       tasks.forEach((t, i) => {
