@@ -2959,8 +2959,8 @@ function removeMissyTueClass(obj) {
 }
 
 // 把 9/22-24 李彦希、李芊诺的旧模板任务统一升级为新模板（白天改过的固定任务形式）
-// 仅当该日任务未被用户手动改过（学习任务名与旧模板完全一致）时执行；
-// 保留完成状态、休息任务、动态作业（学而思作业/语文LA作业）及固定课程
+// 只要该日仍是旧模板任务（存在旧模板任务名）就执行升级；
+// 保留完成状态、休息任务、动态作业（学而思作业/语文LA作业）及固定课程，用户自定义任务追加保留
 function upgradeLegacyTasks(obj, dateStr, childId) {
   if (!obj || !obj.dates) return false;
   const cd = obj.dates[dateStr] && obj.dates[dateStr][childId];
@@ -2973,13 +2973,14 @@ function upgradeLegacyTasks(obj, dateStr, childId) {
   const oldStudy = OLD[childId];
   if (!oldStudy) return false;
 
-  // 当前学习任务名
-  const studyNames = cd.tasks.filter(t => t.type !== 'rest').map(t => t.name);
-  // 允许的动态作业名（按课程自动插入）
-  const dynamicOk = ['学而思作业','语文LA作业'];
-  // 只要存在旧模板之外的学习任务（非动态作业）或缺少旧模板任务 → 视为用户手动改过，跳过
-  if (studyNames.some(n => !oldStudy.includes(n) && !dynamicOk.includes(n))) return false;
-  if (!oldStudy.every(n => studyNames.includes(n))) return false;
+  // 旧模板独有的任务名（新模板不会出现）→ 用于判定该日仍是旧模板
+  const OLD_ONLY = {
+    yanxi: ['四五快读第二册1课新字','英语语法学习1个','小龙1篇'],
+    qiannuo: ['乘法口诀复习','数学计算2页','练字','控笔','字母拼音','语法练习','练习演讲']
+  };
+  const studyTasks = cd.tasks.filter(t => t.type !== 'rest');
+  // 只要存在旧模板独有任务名 → 视为旧模板日期，执行升级（幂等：升级后不再命中）
+  if (!studyTasks.some(t => OLD_ONLY[childId].includes(t.name))) return false;
 
   // 记录完成状态（按旧任务名）
   const doneMap = {};
@@ -3000,9 +3001,13 @@ function upgradeLegacyTasks(obj, dateStr, childId) {
   const newTasks = NEW[childId].map(n => ({
     id: uid(), name: n, duration: DUR[n], type: 'study', done: !!doneMap[n]
   }));
+  // 用户自定义的学习任务（不在旧模板、不在新模板、非动态作业）追加保留，避免丢数据
+  const custom = studyTasks
+    .filter(t => !oldStudy.includes(t.name) && !NEW[childId].includes(t.name) && !['学而思作业','语文LA作业'].includes(t.name))
+    .map(t => ({ id: uid(), name: t.name, duration: t.duration, type: 'study', done: !!t.done }));
   // 保留原有休息任务与动态作业（保持原相对顺序）
   const keep = cd.tasks.filter(t => t.type === 'rest' || t.name === '学而思作业' || t.name === '语文LA作业');
-  cd.tasks = newTasks.concat(keep);
+  cd.tasks = newTasks.concat(custom, keep);
   return true;
 }
 
