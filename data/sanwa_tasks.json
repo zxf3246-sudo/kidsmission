@@ -1227,14 +1227,6 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17898122854996o44",
-            "name": "学而思作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1789812285499jbc6",
             "name": "学校作业",
             "duration": 30,
@@ -1267,14 +1259,6 @@
             "errLinked": false
           },
           {
-            "id": "t1789812285500ojkx",
-            "name": "LA作业",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17898122855007vo1",
             "name": "错题重做",
             "duration": 30,
@@ -1291,6 +1275,15 @@
             "errLinked": false
           },
           {
+            "id": "t1789812285500ojkx",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789812285500jteq",
             "name": "洗漱睡觉",
             "duration": null,
@@ -1305,7 +1298,8 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "savings": -5
+          "savings": -5,
+          "stars": 0
         },
         "arrival": "14:30",
         "sleep": "22:00",
@@ -1386,6 +1380,24 @@
             "errLinked": true
           },
           {
+            "id": "t178996542046460db",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "done",
+            "done": true,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t17899654204642c0d",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "done",
+            "done": true,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789812285500v57e",
             "name": "自由玩耍",
             "duration": null,
@@ -1407,11 +1419,13 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1789965437430,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -1429,14 +1443,6 @@
             "id": "t1789812285500dapq",
             "name": "数学计算2页",
             "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789812285500z8j5",
-            "name": "学而思作业",
-            "duration": 20,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -1498,6 +1504,24 @@
             "errLinked": false
           },
           {
+            "id": "t1789812285500z8j5",
+            "name": "学而思作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t17899654204646r86",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789812285500iqnl",
             "name": "洗漱睡觉",
             "duration": null,
@@ -1511,7 +1535,9 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": ""
+          "other": "",
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "16:30",
         "sleep": "22:00",
