@@ -4413,7 +4413,7 @@ async function exportReview() {
     const studyOver = totalStudy > budget.study;
 
     // 总结/奖励/其他事项高度（需提前测量以确定卡片总高）
-    setFont(ctx, 19, false); // 总结正文字号（与下方渲染一致，确保测量准确）
+    setFont(ctx, 22, false); // 总结正文字号（与下方渲染一致，确保测量准确）
     const summaryLines = r.summary && r.summary.trim()
       ? imgWrap(ctx, r.summary.trim(), CW-100) : [];
     setFont(ctx, 15, false);
@@ -4425,22 +4425,22 @@ async function exportReview() {
     const kw = (r.keywords || []).filter(Boolean);
     let kwRows = 0;
     if (kw.length) {
-      setFont(ctx, 14, false);
+      setFont(ctx, 16, false);
       let cur = 0;
       kw.forEach(k => {
-        const w = ctx.measureText(k).width + 24;
+        const w = ctx.measureText(k).width + 26;
         if (cur + w > CW - 56) { kwRows++; cur = w; }
-        else cur += w + 8;
+        else cur += w + 10;
       });
       if (cur > 0) kwRows++;
     }
 
     let cH = 110; // 头部（含统计行）
-    cH += 100; // 统计三栏 + 进度条
-    cH += 76; // 积分徽章（四板块）
-    cH += 76; // 本周积分 / 本周平均评分
-    if (kwRows) cH += kwRows * 38 + 36; // 今日表现关键词（标题 30 + chips + 间距）
-    if (summaryLines.length) cH += 36 + summaryLines.length * 30 + 18;
+    cH += 80; // 统计三栏 + 进度条（紧凑）
+    cH += 52; // 积分徽章（四板块，紧凑）
+    cH += 52; // 本周积分 / 本周平均评分（紧凑）
+    if (kwRows) cH += kwRows * 46 + 52; // 今日表现关键词（版面扩大：标题34 + chips行 + 间距）
+    if (summaryLines.length) cH += summaryLines.length * 38 + 74; // 今日总结（版面扩大）
     if (rewardLines.length) cH += 32 + rewardLines.length * 24 + 18;
     if (otherLines.length) cH += 32 + otherLines.length * 24 + 18;
     if (cd.reviewSavedAt) cH += 30;
@@ -4489,7 +4489,7 @@ async function exportReview() {
     ctx.textAlign = 'left';
     cy += 78;
 
-    // 三栏统计
+    // 三栏统计（紧凑）
     const sw = (CW-56-16) / 3;
     const stats = [
       { label:'上课时长', val:fmtDur(classMin), hl:false, over:false },
@@ -4498,23 +4498,23 @@ async function exportReview() {
     ];
     stats.forEach((s, i) => {
       const sx = x0+28 + i*(sw+8);
-      imgRoundRect(ctx, sx, cy, sw, 64, 10);
+      imgRoundRect(ctx, sx, cy, sw, 46, 9);
       ctx.fillStyle = s.hl ? col.soft : '#f8fafc'; ctx.fill();
-      setFont(ctx, 13, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(s.label, sx+sw/2-ctx.measureText(s.label).width/2, cy+10);
-      setFont(ctx, 16, true); ctx.fillStyle = s.over ? '#ef4444' : col.dark;
+      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(s.label, sx+sw/2-ctx.measureText(s.label).width/2, cy+6);
+      setFont(ctx, 15, true); ctx.fillStyle = s.over ? '#ef4444' : col.dark;
       const valStr = s.val;
-      ctx.fillText(valStr, sx+sw/2-ctx.measureText(valStr).width/2, cy+36);
+      ctx.fillText(valStr, sx+sw/2-ctx.measureText(valStr).width/2, cy+25);
     });
-    cy += 76;
+    cy += 58;
     // 进度条
     const barX = x0+28, barW = CW-56;
     imgRoundRect(ctx, barX, cy, barW, 9, 4); ctx.fillStyle = '#e2e8f0'; ctx.fill();
     imgRoundRect(ctx, barX, cy, barW*studyPct/100, 9, 4);
     ctx.fillStyle = studyOver ? '#ef4444' : col.main; ctx.fill();
-    cy += 24;
+    cy += 22;
 
-    // 四板块同行：今日积分 / 累计积分 / 今日存款 / 累计存款
+    // 四板块同行：今日积分 / 累计积分 / 今日存款 / 累计存款（紧凑）
     const gap4 = 8;
     const bw4 = (CW - 56 - gap4 * 3) / 4;
     const boxes4 = [
@@ -4525,16 +4525,16 @@ async function exportReview() {
     ];
     boxes4.forEach((b, i) => {
       const bx = x0 + 28 + i * (bw4 + gap4);
-      imgRoundRect(ctx, bx, cy, bw4, 64, 10);
+      imgRoundRect(ctx, bx, cy, bw4, 40, 9);
       ctx.fillStyle = b.bg; ctx.fill();
-      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 10);
-      setFont(ctx, 19, true); ctx.fillStyle = b.fg;
-      ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 32);
+      setFont(ctx, 11, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 5);
+      setFont(ctx, 15, true); ctx.fillStyle = b.fg;
+      ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 20);
     });
-    cy += 76;
+    cy += 52;
 
-    // 本周板块：本周积分 / 本周平均评分
+    // 本周板块：本周积分 / 本周平均评分（紧凑）
     const gap2 = 12;
     const bw2 = (CW - 56 - gap2) / 2;
     const boxes2 = [
@@ -4543,44 +4543,44 @@ async function exportReview() {
     ];
     boxes2.forEach((b, i) => {
       const bx = x0 + 28 + i * (bw2 + gap2);
-      imgRoundRect(ctx, bx, cy, bw2, 64, 10);
+      imgRoundRect(ctx, bx, cy, bw2, 40, 9);
       ctx.fillStyle = b.bg; ctx.fill();
-      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(b.label, bx + bw2/2 - ctx.measureText(b.label).width/2, cy + 10);
-      setFont(ctx, 19, true); ctx.fillStyle = b.fg;
-      ctx.fillText(b.val, bx + bw2/2 - ctx.measureText(b.val).width/2, cy + 32);
+      setFont(ctx, 11, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(b.label, bx + bw2/2 - ctx.measureText(b.label).width/2, cy + 5);
+      setFont(ctx, 15, true); ctx.fillStyle = b.fg;
+      ctx.fillText(b.val, bx + bw2/2 - ctx.measureText(b.val).width/2, cy + 20);
     });
-    cy += 76;
+    cy += 52;
 
-    // 今日表现关键词（选中即展示，标签样式）
+    // 今日表现关键词（选中即展示，标签样式，版面扩大）
     if (kw.length) {
-      setFont(ctx, 18, true); ctx.fillStyle = col.dark;
-      ctx.fillText('✨ 今日表现关键词', x0+28, cy); cy += 30;
-      const chipH = 30, gapX = 8, gapY = 8;
+      setFont(ctx, 20, true); ctx.fillStyle = col.dark;
+      ctx.fillText('✨ 今日表现关键词', x0+28, cy); cy += 34;
+      const chipH = 36, gapX = 10, gapY = 10;
       let cx = x0+28, cyy = cy;
-      setFont(ctx, 14, false);
+      setFont(ctx, 16, false);
       kw.forEach(k => {
         const tw = ctx.measureText(k).width;
-        const cw = tw + 22;
+        const cw = tw + 26;
         if (cx + cw > x0 + CW - 28) { cx = x0+28; cyy += chipH + gapY; }
-        imgRoundRect(ctx, cx, cyy, cw, chipH, 15); ctx.fillStyle = col.soft; ctx.fill();
+        imgRoundRect(ctx, cx, cyy, cw, chipH, 18); ctx.fillStyle = col.soft; ctx.fill();
         ctx.fillStyle = col.dark;
-        ctx.fillText(k, cx + 11, cyy + 7);
+        ctx.fillText(k, cx + 13, cyy + 9);
         cx += cw + gapX;
       });
-      cy = cyy + chipH + 14;
+      cy = cyy + chipH + 18;
     }
 
-    // 总结
+    // 总结（版面扩大）
     if (summaryLines.length) {
-      setFont(ctx, 20, true); ctx.fillStyle = col.dark;
-      ctx.fillText('📝 今日总结', x0+28, cy); cy += 32;
-      const boxH = summaryLines.length * 30 + 18;
+      setFont(ctx, 22, true); ctx.fillStyle = col.dark;
+      ctx.fillText('📝 今日总结', x0+28, cy); cy += 36;
+      const boxH = summaryLines.length * 38 + 22;
       imgRoundRect(ctx, x0+28, cy, CW-56, boxH, 10); ctx.fillStyle = '#f8fafc'; ctx.fill();
       ctx.fillStyle = col.main; ctx.fillRect(x0+28, cy, 4, boxH);
-      setFont(ctx, 19, false); ctx.fillStyle = '#334155';
-      summaryLines.forEach((ln, i) => ctx.fillText(ln, x0+42, cy+9+i*30));
-      cy += boxH + 14;
+      setFont(ctx, 22, false); ctx.fillStyle = '#334155';
+      summaryLines.forEach((ln, i) => ctx.fillText(ln, x0+42, cy+10+i*38));
+      cy += boxH + 16;
     }
     // 奖励
     if (rewardLines.length) {
