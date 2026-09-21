@@ -344,25 +344,6 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t178986782481306r9",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "courseTask": "xes"
-          },
-          {
-            "id": "t1789962585244bkgv",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1789833747391dnzj",
             "name": "Koobits",
             "duration": 20,
@@ -461,24 +442,6 @@
       "qiannuo": {
         "fixedClasses": [],
         "tasks": [
-          {
-            "id": "t17899625852444xlg",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t17899625852445j16",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
           {
             "id": "t1789833747391xkil",
             "name": "乘法口诀复习",
