@@ -2063,6 +2063,22 @@ function getPastDatesInState(s, childId, dateStr, days) {
   }
   return result;
 }
+// 本周（周一开始，至所选日含所选日）该孩子有记录的日期
+function getWeekDatesInState(s, childId, dateStr) {
+  if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return [];
+  const target = new Date(dateStr + 'T00:00:00');
+  const dow = target.getDay(); // 0=周日
+  const diffToMonday = dow === 0 ? 6 : dow - 1;
+  const monday = new Date(target); monday.setDate(target.getDate() - diffToMonday);
+  const result = [];
+  for (let d = new Date(monday); d.getTime() <= target.getTime(); d.setDate(d.getDate() + 1)) {
+    const ds = d.toISOString().slice(0,10);
+    if (s.dates[ds] && s.dates[ds][childId]) {
+      result.push({ date: ds, childData: s.dates[ds][childId] });
+    }
+  }
+  return result;
+}
 // 分析该孩子各类活动的历史使用情况
 function analyzeEnrichmentInState(s, childId, dateStr) {
   const history = getPastDatesInState(s, childId, dateStr, 45);
@@ -2296,9 +2312,9 @@ function previewWeekdayPattern(childId) {
   showToast(`🧠 ${pattern.weekdayLabel}布置规律：\n${list}`);
 }
 
-// 复盘趋势：近 7 天累计积分、平均评分、评分天数
+// 复盘趋势：本周累计积分、本周平均评分、评分天数
 function reviewTrend(childId, dateStr) {
-  const history = getPastDatesInState(state, childId, dateStr, 7);
+  const history = getWeekDatesInState(state, childId, dateStr);
   if (!history.length) return '';
   let totalPoints = 0, scoreSum = 0, scoreCount = 0;
   history.forEach(h => {
@@ -2309,8 +2325,8 @@ function reviewTrend(childId, dateStr) {
     }
   });
   const avgScore = scoreCount ? Math.round(scoreSum/scoreCount) : null;
-  const parts = [`近7天积分 <span class="trend-pill ${totalPoints<0?'neg':''}">${totalPoints>0?'+':''}${totalPoints}</span>`];
-  if (scoreCount) parts.push(`平均评分 <span class="trend-pill ${avgScore<60?'neg':''}">${avgScore}</span>`);
+  const parts = [`本周积分 <span class="trend-pill ${totalPoints<0?'neg':''}">${totalPoints>0?'+':''}${totalPoints}</span>`];
+  if (scoreCount) parts.push(`本周平均评分 <span class="trend-pill ${avgScore<60?'neg':''}">${avgScore}</span>`);
   parts.push(`已评 ${scoreCount}/${history.length} 天`);
   return `<div class="review-trend">${parts.join('')}</div>`;
 }
@@ -4019,6 +4035,17 @@ async function exportReview() {
     const cumSav = calcCumulativeSavings(c.id, dateStr);
     const pts = r.points || 0;
     const sav = r.savings || 0;
+    // 本周积分 / 本周平均评分（周一起至所选日）
+    const weekHistory = getWeekDatesInState(state, c.id, dateStr);
+    let weekPts = 0, weekScoreSum = 0, weekScoreCount = 0;
+    weekHistory.forEach(h => {
+      const hr = h.childData.review;
+      if (hr) {
+        weekPts += (+hr.points || 0);
+        if (hr.score !== null && !isNaN(hr.score)) { weekScoreSum += +hr.score; weekScoreCount++; }
+      }
+    });
+    const weekAvg = weekScoreCount ? Math.round(weekScoreSum/weekScoreCount) : null;
     const scoreVal = (r.score!==null && !isNaN(r.score)) ? r.score : null;
     const scoreColor = scoreVal===null ? '#94a3b8'
       : scoreVal>=90 ? '#10b981' : scoreVal>=75 ? '#6366f1'
@@ -4039,6 +4066,7 @@ async function exportReview() {
     let cH = 110; // 头部（含统计行）
     cH += 100; // 统计三栏 + 进度条
     cH += 76; // 积分徽章（四板块）
+    cH += 76; // 本周积分 / 本周平均评分
     if (summaryLines.length) cH += 36 + summaryLines.length * 30 + 18;
     if (rewardLines.length) cH += 32 + rewardLines.length * 24 + 18;
     if (otherLines.length) cH += 32 + otherLines.length * 24 + 18;
@@ -4130,6 +4158,24 @@ async function exportReview() {
       ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 10);
       setFont(ctx, 19, true); ctx.fillStyle = b.fg;
       ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 32);
+    });
+    cy += 76;
+
+    // 本周板块：本周积分 / 本周平均评分
+    const gap2 = 12;
+    const bw2 = (CW - 56 - gap2) / 2;
+    const boxes2 = [
+      { label: '本周积分', val: `${weekPts>=0?'+':''}${weekPts}`, bg: '#dcfce7', fg: '#15803d' },
+      { label: '本周平均评分', val: weekAvg===null ? '—' : String(weekAvg), bg: '#e0e7ff', fg: '#3730a3' },
+    ];
+    boxes2.forEach((b, i) => {
+      const bx = x0 + 28 + i * (bw2 + gap2);
+      imgRoundRect(ctx, bx, cy, bw2, 64, 10);
+      ctx.fillStyle = b.bg; ctx.fill();
+      setFont(ctx, 12, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(b.label, bx + bw2/2 - ctx.measureText(b.label).width/2, cy + 10);
+      setFont(ctx, 19, true); ctx.fillStyle = b.fg;
+      ctx.fillText(b.val, bx + bw2/2 - ctx.measureText(b.val).width/2, cy + 32);
     });
     cy += 76;
 
