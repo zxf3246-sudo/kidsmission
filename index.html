@@ -2002,12 +2002,11 @@ function defaultTasksFor(childId) {
   const t = (name, duration, type, err) =>
     ({ id: uid(), name, duration: duration||null, type: type||'study', done: false, errLinked: !!err });
   if (childId === 'yilin') return [
-    t('学而思作业', 30),
     t('学校作业', 30),
     t('Missy作业', 30),
-    t('语文5B第三课词汇', 25),
-    t('科学知识点1', 15),
-    t('LA作业', 20),
+    t('语文词语', 25),
+    t('科学知识点', 15),
+    t('数学练习', 15),
     t('自由活动', null, 'rest'),
     t('洗漱睡觉', null, 'rest'),
   ];
@@ -2025,7 +2024,6 @@ function defaultTasksFor(childId) {
   if (childId === 'qiannuo') return [
     t('乘法口诀复习', 15),
     t('数学计算2页', 15),
-    t('学而思作业', 20),
     t('练字', 15),
     t('控笔', 10),
     t('字母拼音', 10),
@@ -2035,6 +2033,84 @@ function defaultTasksFor(childId) {
     t('洗漱睡觉', null, 'rest'),
   ];
   return [];
+}
+
+// ============ 按课程动态作业（语文LA作业 / 学而思作业） ============
+// 规则：只在当天有对应课程的周内出现（本周内首次有课的当天起）；
+// 未完成则顺延到后续每天，直到完成；本周一旦完成，本周内不再出现。
+const COURSE_HOMEWORK = [
+  { key: 'xes', taskName: '学而思作业', isClass: n => n.includes('学而思') || n.includes('TAL'), matchTask: n => n.includes('学而思作业') },
+  { key: 'la',  taskName: '语文LA作业', isClass: n => n.includes('LA'), matchTask: n => n.includes('LA作业') },
+];
+
+// 该日期所在周的周一（自然周，周一起始）
+function mondayOf(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  const diff = d.getDay() === 0 ? 6 : d.getDay() - 1;
+  d.setDate(d.getDate() - diff);
+  return d.toISOString().slice(0, 10);
+}
+
+// 该孩子指定日期是否有某类课程（优先当日实际固定课程，回退周课表）
+function hasCourseThatDay(childId, dateStr, isClass) {
+  const dayData = state.dates[dateStr] && state.dates[dateStr][childId];
+  const classes = (dayData && dayData.fixedClasses)
+    || WEEKLY_CLASSES[childId][new Date(dateStr + 'T00:00:00').getDay()] || [];
+  return classes.some(cl => isClass(cl.name));
+}
+
+// 同步当日的课程作业任务；有变化返回 true（由调用方决定是否保存）
+function syncCourseHomework(childId, dateStr) {
+  const cd = state.dates && state.dates[dateStr] && state.dates[dateStr][childId];
+  if (!cd) return false;
+  const tasks = cd.tasks || [];
+  const monday = mondayOf(dateStr);
+  const today = new Date(dateStr + 'T00:00:00');
+  const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+  let changed = false;
+  COURSE_HOMEWORK.forEach(ch => {
+    // 本周（周一~所选日）内是否有该课程
+    let weekHasCourse = false;
+    for (let d = new Date(monday + 'T00:00:00'); d.getTime() <= today.getTime(); d.setDate(d.getDate() + 1)) {
+      if (hasCourseThatDay(childId, d.toISOString().slice(0, 10), ch.isClass)) { weekHasCourse = true; break; }
+    }
+    // 本周内（周一~昨天）该作业是否已完成 → 完成则本周不再出现
+    let doneBefore = false;
+    for (let d = new Date(monday + 'T00:00:00'); d.getTime() <= yesterday.getTime(); d.setDate(d.getDate() + 1)) {
+      const ds = d.toISOString().slice(0, 10);
+      const dayData = state.dates[ds] && state.dates[ds][childId];
+      if (!dayData) continue;
+      const t = (dayData.tasks || []).find(x => x.courseTask === ch.key || ch.matchTask(x.name || ''));
+      if (t && (t.status === 'done' || t.done)) { doneBefore = true; break; }
+    }
+    const shouldShow = weekHasCourse && !doneBefore;
+    const idx = tasks.findIndex(t => t.courseTask === ch.key);
+    const legacyIdx = tasks.findIndex(t => !t.courseTask && ch.matchTask(t.name || ''));
+    if (shouldShow) {
+      if (idx === -1) {
+        // 插入位置：学而思作业最前，语文LA作业紧随其后
+        const xesIdx = tasks.findIndex(t => t.courseTask === 'xes');
+        const insertPos = (ch.key === 'la' && xesIdx !== -1) ? xesIdx + 1 : 0;
+        if (legacyIdx !== -1) {
+          // 旧版同名任务（默认模板遗留）：转为动态任务并保留时长
+          const old = tasks[legacyIdx];
+          old.courseTask = ch.key;
+          if (old.name !== ch.taskName) old.name = ch.taskName;
+          tasks.splice(legacyIdx, 1);
+          tasks.splice(insertPos, 0, old);
+        } else {
+          tasks.splice(insertPos, 0,
+            { id: uid(), name: ch.taskName, duration: null, type: 'study', status: '', done: false, courseTask: ch.key });
+        }
+        changed = true;
+      }
+    } else {
+      // 不应出现：移除动态任务；旧版同名任务（默认模板遗留）一并移除，保证无课日不出现
+      if (idx !== -1) { tasks.splice(idx, 1); changed = true; }
+      else if (legacyIdx !== -1) { tasks.splice(legacyIdx, 1); changed = true; }
+    }
+  });
+  return changed;
 }
 
 // ============ 智能推荐引擎 ============
@@ -2993,6 +3069,10 @@ function usedTime(child, childData) {
 function render() {
   const dateStr = document.getElementById('datePicker').value;
   ensureDate(dateStr);
+  // 同步课程作业：按课程动态出现/顺延/本周完成后隐藏
+  let synced = false;
+  CHILDREN.forEach(c => { if (syncCourseHomework(c.id, dateStr)) synced = true; });
+  if (synced) save();
   // 切换日期时重置脏标记（按孩子保存时间判断是否有未保存更改由后续编辑触发）
   dirtyState = {};
   const dow = new Date(dateStr+'T00:00:00').getDay();
@@ -3643,6 +3723,7 @@ function addFixedClass(childId) {
     const aStart = (a.time||'').split('-')[0]; const bStart = (b.time||'').split('-')[0];
     return timeToMinutes(aStart) - timeToMinutes(bStart);
   });
+  syncCourseHomework(childId, dateStr);
   save(); renderChildren(dateStr);
 }
 function editFixedClass(childId, idx, val) {
@@ -3650,11 +3731,14 @@ function editFixedClass(childId, idx, val) {
   const n = val.trim();
   if (!n) { renderChildren(dateStr); return; }
   state.dates[dateStr][childId].fixedClasses[idx].name = n;
+  const changed = syncCourseHomework(childId, dateStr);
   save();
+  if (changed) renderChildren(dateStr);
 }
 function delFixedClass(childId, idx) {
   const dateStr = document.getElementById('datePicker').value;
   state.dates[dateStr][childId].fixedClasses.splice(idx,1);
+  syncCourseHomework(childId, dateStr);
   save(); renderChildren(dateStr);
 }
 
