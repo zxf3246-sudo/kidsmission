@@ -77,17 +77,21 @@
         ],
         "review": {
           "points": 0,
-          "score": null,
+          "score": 87,
           "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 0
+          "stars": 4,
+          "keywords": [
+            "听话",
+            "考试成绩差"
+          ]
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1789999289020,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1789999318485
       },
       "yanxi": {
         "fixedClasses": [
