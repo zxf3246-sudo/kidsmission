@@ -283,7 +283,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789986151031,
+        "taskSavedAt": 1789986171968,
         "reviewSavedAt": 1789958973122
       }
     },
@@ -3652,14 +3652,6 @@
       "date": "2026-10-01",
       "daysBefore": 3,
       "category": "activity"
-    },
-    {
-      "id": "r921",
-      "childId": "yilin",
-      "title": "英语口语",
-      "date": "2026-09-21",
-      "daysBefore": 14,
-      "category": "exam"
     }
   ],
   "summaryKeywords": [
