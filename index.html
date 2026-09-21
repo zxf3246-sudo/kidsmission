@@ -3564,7 +3564,6 @@ function renderFixedClasses(child, fixed, dateStr) {
     row.innerHTML = `
       <span class="class-time">${escapeHtml(cl.time||'')}</span>
       <span class="class-name">${escapeHtml(cl.name)}</span>
-      <span class="class-tag ${after?'after':'day'}">${after?'放学后':'白天'}</span>
       <span class="class-duration">${cl.duration}分钟</span>
       <button class="btn-del" onclick="delFixedClass('${child.id}',${i})">×</button>`;
     el.appendChild(row);
@@ -4270,11 +4269,6 @@ async function exportTasks() {
         setFont(ctx, 15, false); ctx.fillStyle = '#64748b';
         const nw = ctx.measureText(cl.name).width;
         ctx.fillText(`${cl.time}  ${cl.duration}分钟`, x0+48+nw+16, cy+11);
-        if (a) {
-          setFont(ctx, 13, true);
-          imgRoundRect(ctx, x0+CW-128, cy+8, 80, 26, 8); ctx.fillStyle = '#f59e0b'; ctx.fill();
-          ctx.fillStyle = '#fff'; ctx.fillText('放学后', x0+CW-128+14, cy+13);
-        }
         cy += 48;
       });
       cy += 4;
