@@ -107,8 +107,9 @@
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789836824012rti8",
@@ -187,7 +188,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789984241117,
+        "taskSavedAt": 1789985340592,
         "reviewSavedAt": null
       },
       "qiannuo": {
