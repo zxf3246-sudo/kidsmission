@@ -299,24 +299,6 @@
         ],
         "tasks": [
           {
-            "id": "t1789962582236ys9m",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t1789962582236jeos",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1789833747391ouyt",
             "name": "Missy口语作业看背",
             "duration": 15,
@@ -355,7 +337,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1789903104105,
+        "taskSavedAt": 1789962604848,
         "reviewSavedAt": 1789906368308
       },
       "yanxi": {
@@ -372,7 +354,7 @@
             "courseTask": "xes"
           },
           {
-            "id": "t1789962582236csz9",
+            "id": "t1789962585244bkgv",
             "name": "语文LA作业",
             "duration": null,
             "type": "study",
@@ -480,7 +462,7 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17899625822361hba",
+            "id": "t17899625852444xlg",
             "name": "学而思作业",
             "duration": null,
             "type": "study",
@@ -489,7 +471,7 @@
             "courseTask": "xes"
           },
           {
-            "id": "t1789962582236l3k2",
+            "id": "t17899625852445j16",
             "name": "语文LA作业",
             "duration": null,
             "type": "study",
