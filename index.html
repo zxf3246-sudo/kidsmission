@@ -4748,9 +4748,9 @@ async function exportTasksText() {
     text += `${c.emoji} ${c.name}（${c.grade}）\n`;
     text += `🕐 在家 ${cd.arrival||c.arrival} → 睡觉 ${cd.sleep||c.sleep}\n`;
     
-    // 重要事项提醒（与页面重要提示一致的窗口内项目）
+    // 重要事项提醒（导出只显示倒计时 1 天的，今天到期的不显示）
     const myRems = (state.reminders||[])
-      .filter(r => r.childId === c.id && reminderInfo(r).inWindow)
+      .filter(r => r.childId === c.id && reminderInfo(r).days === 1)
       .sort((a,b) => (a.date > b.date ? 1 : -1));
     if (myRems.length) {
       text += `🔔 重要事项：\n`;
