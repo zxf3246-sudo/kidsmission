@@ -122,7 +122,7 @@
           },
           {
             "id": "t17898368240124w1h",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -189,7 +189,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789984241117,
+        "taskSavedAt": 1789986314160,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -3653,6 +3653,14 @@
       "date": "2026-10-01",
       "daysBefore": 3,
       "category": "activity"
+    },
+    {
+      "id": "r921",
+      "childId": "yilin",
+      "title": "英语口语",
+      "date": "2026-09-21",
+      "daysBefore": 14,
+      "category": "exam"
     }
   ],
   "summaryKeywords": [
