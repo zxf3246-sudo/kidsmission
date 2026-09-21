@@ -763,6 +763,14 @@
     border: none; background: none; color: color-mix(in srgb, var(--theme) 75%, #888);
     font-size: 12px; font-weight: 600; padding: 4px 6px; cursor: pointer;
   }
+  .kw-del-mode {
+    border: 1px solid #fecaca; background: #fff; color: #dc2626;
+    font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 14px;
+    cursor: pointer; user-select: none;
+  }
+  .kw-del-mode.active {
+    background: #dc2626; color: #fff; border-color: #dc2626;
+  }
   .review-trend {
     margin-top: 8px; font-size: 11px; color: var(--theme);
     display: flex; gap: 10px; flex-wrap: wrap;
@@ -2382,11 +2390,19 @@ function addSummaryKeywordItem() {
   renderChildren(document.getElementById('datePicker').value);
 }
 
+// 删除模式开关：平时关键词不带 ×，点「✏ 删除关键词」进入删除模式才显示 ×
+let kwDelMode = false;
+function toggleKwDelMode() {
+  kwDelMode = !kwDelMode;
+  renderChildren(document.getElementById('datePicker').value);
+}
+
 // 删除快捷关键词
 function delSummaryKeyword(kw) {
   if (!Array.isArray(state.summaryKeywords)) return;
   if (!confirm('删除关键词「' + kw + '」？')) return;
   state.summaryKeywords = state.summaryKeywords.filter(x => x !== kw);
+  if (state.summaryKeywords.length === 0) kwDelMode = false;
   save();
   renderChildren(document.getElementById('datePicker').value);
 }
@@ -3160,9 +3176,10 @@ function renderChildren(dateStr) {
           <label>✨ 快捷关键词 · 点击添加到总结</label>
           <div class="kw-bar">
             ${(state.summaryKeywords||[]).map(kw =>
-              `<span class="kw-chip" onclick="addSummaryKeyword('${c.id}','${escapeAttr(kw)}')">${escapeHtml(kw)}<i class="kw-del" onclick="event.stopPropagation();delSummaryKeyword('${escapeAttr(kw)}')">×</i></span>`
+              `<span class="kw-chip" onclick="addSummaryKeyword('${c.id}','${escapeAttr(kw)}')">${escapeHtml(kw)}${kwDelMode ? `<i class="kw-del" onclick="event.stopPropagation();delSummaryKeyword('${escapeAttr(kw)}')">×</i>` : ''}</span>`
             ).join('')}
             <button class="kw-add" onclick="addSummaryKeywordItem()">＋ 添加关键词</button>
+            <button class="kw-del-mode${kwDelMode?' active':''}" onclick="toggleKwDelMode()">${kwDelMode?'✔ 完成删除':'✏ 删除关键词'}</button>
           </div>
         </div>
         <div class="review-field">
