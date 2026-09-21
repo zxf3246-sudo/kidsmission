@@ -123,12 +123,13 @@
             "errLinked": false
           },
           {
-            "id": "t17898368240124pee",
-            "name": "英语语法学习",
-            "duration": 15,
+            "id": "t1789962776938ved5",
+            "name": "语文LA作业",
+            "duration": null,
             "type": "study",
+            "status": "",
             "done": false,
-            "errLinked": false
+            "courseTask": "la"
           },
           {
             "id": "t17898368240123hpn",
@@ -145,15 +146,6 @@
             "type": "study",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t1789962776938ved5",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t17898368240127jp8",
@@ -183,7 +175,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1789962314404,
+        "taskSavedAt": 1789966834350,
         "reviewSavedAt": null
       },
       "qiannuo": {
