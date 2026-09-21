@@ -2924,7 +2924,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
@@ -3020,7 +3022,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:00",
         "sleep": "21:00",
@@ -3124,7 +3128,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "16:30",
         "sleep": "21:00",
