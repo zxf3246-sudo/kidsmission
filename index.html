@@ -2031,10 +2031,12 @@ function defaultTasksFor(childId, dateStr) {
     ({ id: uid(), name, duration: duration||null, type: type||'study', done: false, errLinked: !!err });
   if (childId === 'yilin') return [
     t('学校作业', 30),
-    t('Missy作业', 30),
+    t('Missy作文阅读', 30),
+    t('Missy口语练习1个', 20),
     t('语文词语', 25),
     t('科学知识点', 15),
     t('数学练习', 15),
+    t('听播客', 30),
     t('自由活动', null, 'rest'),
     t('洗漱睡觉', null, 'rest'),
   ];
@@ -3027,6 +3029,40 @@ function migrateTaskFormat(obj) {
   }
 }
 
+// 李怡霖固定任务升级：'Missy作业'（30分）→ 'Missy作文阅读'（30分）+ 'Missy口语练习1个'（20分），
+// 并在第一个休息任务前插入 '听播客'（30分）。幂等：已含新任务名则跳过。
+function migrateYilinMissyTasks(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    const missy = cd.tasks.find(t => t.name === 'Missy作业');
+    const hasNew = cd.tasks.some(t => t.name === 'Missy作文阅读' || t.name === 'Missy口语练习1个' || t.name === '听播客');
+    if (!missy || hasNew) return; // 无旧任务或已升级
+    const missyDone = !!missy.done;
+    const newArr = [];
+    cd.tasks.forEach(t => {
+      if (t.name === 'Missy作业') {
+        newArr.push({ id: uid(), name: 'Missy作文阅读', duration: 30, type: 'study', done: missyDone });
+        newArr.push({ id: uid(), name: 'Missy口语练习1个', duration: 20, type: 'study', done: false });
+      } else {
+        newArr.push(t);
+      }
+    });
+    // 在第一个休息任务前插入 听播客（30分钟）
+    const restIdx = newArr.findIndex(t => t.type === 'rest');
+    if (restIdx >= 0) newArr.splice(restIdx, 0, { id: uid(), name: '听播客', duration: 30, type: 'study', done: false });
+    else newArr.push({ id: uid(), name: '听播客', duration: 30, type: 'study', done: false });
+    cd.tasks = newArr;
+    changed++;
+  });
+  if (changed > 0) {
+    console.log('[migrateYilinMissyTasks] 🗂 已更新李怡霖 Missy 任务：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 确保复盘快捷关键词存在：
 // - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
 // - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
@@ -3081,6 +3117,7 @@ function loadState() {
       }
       removeMissyTueClass(obj);
       migrateTaskFormat(obj);
+      migrateYilinMissyTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -5337,6 +5374,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   ensureSummaryKeywords(state);
   removeMissyTueClass(state);
   migrateTaskFormat(state);
+  migrateYilinMissyTasks(state);
   save();
   render();
   // 记录同步时间
