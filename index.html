@@ -740,6 +740,29 @@
     outline: none; border-color: var(--theme);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme) 15%, transparent);
   }
+  .kw-field { margin-top: 10px; }
+  .kw-bar {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    padding: 8px; background: color-mix(in srgb, var(--theme) 6%, #fff);
+    border: 1px dashed color-mix(in srgb, var(--theme) 30%, #fff);
+    border-radius: 8px;
+  }
+  .kw-chip {
+    display: inline-flex; align-items: center; gap: 2px;
+    background: #fff; color: var(--theme);
+    border: 1px solid color-mix(in srgb, var(--theme) 35%, #fff);
+    padding: 4px 8px; border-radius: 14px; font-size: 12px; font-weight: 600;
+    cursor: pointer; user-select: none;
+  }
+  .kw-chip:active { transform: scale(.95); }
+  .kw-del {
+    font-style: normal; font-size: 12px; color: #cbd5e1; padding: 0 2px;
+  }
+  .kw-del:active { color: #dc2626; }
+  .kw-add {
+    border: none; background: none; color: color-mix(in srgb, var(--theme) 75%, #888);
+    font-size: 12px; font-weight: 600; padding: 4px 6px; cursor: pointer;
+  }
   .review-trend {
     margin-top: 8px; font-size: 11px; color: var(--theme);
     display: flex; gap: 10px; flex-wrap: wrap;
@@ -1862,6 +1885,9 @@ const REMINDER_CATEGORIES = {
   other:    { label: '其他', short: '他' }
 };
 
+// 复盘"每日总结"快捷关键词（点击即可追加到总结文本，可在页面上增删）
+const DEFAULT_SUMMARY_KEYWORDS = ['表现很好','专注力不错','作业完成','阅读完成','需要改进','很开心'];
+
 // 共同学习（每天固定）
 const DEFAULT_SHARED_LEARNING = ['阅读','一个新成语','学习一个科学知识','分析一件新闻事件','学习一个历史知识'];
 
@@ -2328,6 +2354,41 @@ function updateReview(childId, field, value, rerender) {
   if (rerender) renderChildren(dateStr);
 }
 
+// 点击快捷关键词 → 追加到当日总结（与手写文字拼接）
+function addSummaryKeyword(childId, kw) {
+  const dateStr = document.getElementById('datePicker').value;
+  const cd = state.dates[dateStr] && state.dates[dateStr][childId];
+  if (!cd) return;
+  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
+  const cur = cd.review.summary || '';
+  cd.review.summary = cur ? cur + ' ' + kw : kw;
+  const ta = document.getElementById('rv-summary-' + childId);
+  if (ta) ta.value = cd.review.summary;
+  markDirty(childId, 'review');
+  save();
+}
+
+// 添加新的快捷关键词
+function addSummaryKeywordItem() {
+  const input = prompt('输入一个快捷关键词（如：上课主动举手）：', '');
+  if (!input) return;
+  const kw = input.trim();
+  if (!Array.isArray(state.summaryKeywords)) state.summaryKeywords = [...DEFAULT_SUMMARY_KEYWORDS];
+  if (state.summaryKeywords.includes(kw)) { showToast('该关键词已存在'); return; }
+  state.summaryKeywords.push(kw);
+  save();
+  renderChildren(document.getElementById('datePicker').value);
+}
+
+// 删除快捷关键词
+function delSummaryKeyword(kw) {
+  if (!Array.isArray(state.summaryKeywords)) return;
+  if (!confirm('删除关键词「' + kw + '」？')) return;
+  state.summaryKeywords = state.summaryKeywords.filter(x => x !== kw);
+  save();
+  renderChildren(document.getElementById('datePicker').value);
+}
+
 // 星星评分 HTML 生成（5颗星，半星最小单位）
 function starRatingHtml(childId, rating) {
   rating = rating || 0;
@@ -2660,6 +2721,15 @@ function mergeDefaultReminders(obj) {
   }
 }
 
+// 确保复盘快捷关键词存在（旧数据没有时补默认）
+function ensureSummaryKeywords(obj) {
+  if (!obj) return;
+  if (!Array.isArray(obj.summaryKeywords) || obj.summaryKeywords.length === 0) {
+    obj.summaryKeywords = [...DEFAULT_SUMMARY_KEYWORDS];
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem('sanwa_tasks');
@@ -2668,6 +2738,7 @@ function loadState() {
       if (!obj.reminders) obj.reminders = [...DEFAULT_REMINDERS];
       // 迁移：补充新增的默认提醒（按 id 去重，避免覆盖用户已编辑/已存在的提醒）
       mergeDefaultReminders(obj);
+      ensureSummaryKeywords(obj);
       if (obj.dates) {
         Object.keys(obj.dates).forEach(k => { if (!k || !/^\d{4}-\d{2}-\d{2}$/.test(k)) delete obj.dates[k]; });
       }
@@ -2712,7 +2783,8 @@ function loadState() {
 }
 function initState() {
   const today = new Date().toISOString().slice(0,10);
-  return ensureDateOn({ dates: {}, sharedLearning: [...DEFAULT_SHARED_LEARNING], reminders: [...DEFAULT_REMINDERS] }, today);
+  return ensureDateOn({ dates: {}, sharedLearning: [...DEFAULT_SHARED_LEARNING], reminders: [...DEFAULT_REMINDERS],
+    summaryKeywords: [...DEFAULT_SUMMARY_KEYWORDS] }, today);
 }
 function ensureDateOn(s, dateStr) {
   if (!s.dates) s.dates = {};
@@ -3077,6 +3149,15 @@ function renderChildren(dateStr) {
             placeholder="记录今天的表现亮点、问题、改进点……"
             onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
         </div>
+        <div class="review-field kw-field">
+          <label>✨ 快捷关键词 · 点击添加到总结</label>
+          <div class="kw-bar">
+            ${(state.summaryKeywords||[]).map(kw =>
+              `<span class="kw-chip" onclick="addSummaryKeyword('${c.id}','${escapeAttr(kw)}')">${escapeHtml(kw)}<i class="kw-del" onclick="event.stopPropagation();delSummaryKeyword('${escapeAttr(kw)}')">×</i></span>`
+            ).join('')}
+            <button class="kw-add" onclick="addSummaryKeywordItem()">＋ 添加关键词</button>
+          </div>
+        </div>
         <div class="review-field">
           <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
           <input type="text" class="review-input" id="rv-reward-${c.id}"
@@ -3228,6 +3309,8 @@ function quickAddTask(childId, inputEl) {
 function escapeHtml(s) {
   return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
+// 用于 HTML 属性内的关键词转义（escapeHtml 已覆盖引号，这里做别名保持语义清晰）
+function escapeAttr(s) { return escapeHtml(s); }
 
 // ============ 任务操作 ============
 let modalCtx = null;
@@ -4827,8 +4910,9 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   const finalState = { ...cloudState, dates: mergedDates };
   // 保留本地 CHILDREN 配置无关字段；这里直接替换 state
   state = finalState;
-  // 云端可能是旧数据，补充新增的默认提醒（按 id 去重）
+  // 云端可能是旧数据，补充新增的默认提醒（按 id 去重）和复盘关键词
   mergeDefaultReminders(state);
+  ensureSummaryKeywords(state);
   save();
   render();
   // 记录同步时间
