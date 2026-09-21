@@ -5716,11 +5716,11 @@ async function autoSyncStart() {
     await autoPullFromCloud();
   } catch(e) {}
   
-  // 2. 定时检查云端更新（每 30 秒）
+  // 2. 定时检查云端更新（每 60 秒一次；频率已调低以省流量/电量，保存即上传、切回页面即同步不受影响）
   syncTimer = setInterval(async () => {
     if (!autoSyncEnabled) return;
     try { await autoPullFromCloud(); } catch(e) {}
-  }, 30000);
+  }, 60000);
   
   // 3. 页面隐藏/切回来时检查更新
   document.addEventListener('visibilitychange', async () => {
