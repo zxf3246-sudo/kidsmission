@@ -5109,14 +5109,18 @@ const IDIOM_BATCHES = [
 ];
 
 // 按日期取一个固定的每日成语（同一天无论导多少次都一样）
-// 从 2026-09-22 起按天轮换：第一批 110 个用完后，自动切换到第二批 100 个（不重复），再往后循环
+// 从 2026-09-22 起按天轮换：第一批 110 个用完后，自动切换到第二批 100 个（不重复），
+// 全部用尽后（210 天）自动循环回第一批，全程自动无需手动更新
 function idiomForDate(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
-  const dayIndex = Math.floor((d.getTime() - IDIOM_START_MS) / 86400000);
-  const perBatch = IDIOM_BATCHES[0].length;
-  const batchIdx = Math.floor(dayIndex / perBatch) % IDIOM_BATCHES.length;
-  const batch = IDIOM_BATCHES[batchIdx];
-  return batch[((dayIndex % perBatch) + batch.length) % batch.length];
+  let dayIndex = Math.floor((d.getTime() - IDIOM_START_MS) / 86400000);
+  const cycleLen = IDIOM_BATCHES.reduce((s, b) => s + b.length, 0);
+  dayIndex = ((dayIndex % cycleLen) + cycleLen) % cycleLen;
+  for (const batch of IDIOM_BATCHES) {
+    if (dayIndex < batch.length) return batch[dayIndex];
+    dayIndex -= batch.length;
+  }
+  return IDIOM_BATCHES[0][0];
 }
 
 async function exportTasksText() {
