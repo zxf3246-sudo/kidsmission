@@ -1343,6 +1343,15 @@
             "status": "done"
           },
           {
+            "id": "t1789962776938ved5",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "status": "undone",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789999983570htfk",
             "name": "dojo island",
             "duration": 50,
@@ -1404,15 +1413,6 @@
             "done": true,
             "errLinked": false,
             "status": "done"
-          },
-          {
-            "id": "t1789962776938ved5",
-            "name": "语文LA作业",
-            "duration": 20,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t17898368240127jp8",
