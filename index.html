@@ -2043,12 +2043,17 @@ const COURSE_HOMEWORK = [
   { key: 'la',  taskName: '语文LA作业', isClass: n => n.includes('LA'), matchTask: n => n.includes('LA作业') },
 ];
 
+// 本地日期字符串（YYYY-MM-DD），避免 toISOString 的 UTC 偏移一天问题
+function localDateStr(d) {
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+}
+
 // 该日期所在周的周一（自然周，周一起始）
 function mondayOf(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   const diff = d.getDay() === 0 ? 6 : d.getDay() - 1;
   d.setDate(d.getDate() - diff);
-  return d.toISOString().slice(0, 10);
+  return localDateStr(d);
 }
 
 // 该孩子指定日期是否有某类课程（优先当日实际固定课程，回退周课表）
@@ -2072,12 +2077,12 @@ function syncCourseHomework(childId, dateStr) {
     // 本周（周一~所选日）内是否有该课程
     let weekHasCourse = false;
     for (let d = new Date(monday + 'T00:00:00'); d.getTime() <= today.getTime(); d.setDate(d.getDate() + 1)) {
-      if (hasCourseThatDay(childId, d.toISOString().slice(0, 10), ch.isClass)) { weekHasCourse = true; break; }
+      if (hasCourseThatDay(childId, localDateStr(d), ch.isClass)) { weekHasCourse = true; break; }
     }
     // 本周内（周一~昨天）该作业是否已完成 → 完成则本周不再出现
     let doneBefore = false;
     for (let d = new Date(monday + 'T00:00:00'); d.getTime() <= yesterday.getTime(); d.setDate(d.getDate() + 1)) {
-      const ds = d.toISOString().slice(0, 10);
+      const ds = localDateStr(d);
       const dayData = state.dates[ds] && state.dates[ds][childId];
       if (!dayData) continue;
       const t = (dayData.tasks || []).find(x => x.courseTask === ch.key || ch.matchTask(x.name || ''));
