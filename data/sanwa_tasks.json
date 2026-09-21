@@ -272,11 +272,12 @@
         "review": {
           "points": 0,
           "score": null,
-          "summary": "表现很好 粗心 完美",
+          "summary": "",
           "reward": "",
           "other": "",
           "savings": 0,
-          "stars": 0
+          "stars": 0,
+          "keywords": []
         },
         "arrival": "16:30",
         "sleep": "21:00",
