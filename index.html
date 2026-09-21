@@ -1886,7 +1886,9 @@ const REMINDER_CATEGORIES = {
 };
 
 // 复盘"每日总结"快捷关键词（点击即可追加到总结文本，可在页面上增删）
-const DEFAULT_SUMMARY_KEYWORDS = ['表现很好','专注力不错','作业完成','阅读完成','需要改进','很开心'];
+const DEFAULT_SUMMARY_KEYWORDS = ['高效率','拖拖拉拉','听话','发脾气','积极','消极','不在状态','准确率高','反复出错','粗心','完美','真棒','批评','找事儿','吵架','挨揍','哭哭啼啼','考试成绩好','考试成绩差','老师表扬','老师批评'];
+// 旧版默认关键词（用于迁移判断：若本地仍是旧默认列表，说明用户未自定义，替换为新列表）
+const LEGACY_SUMMARY_KEYWORDS = ['表现很好','专注力不错','作业完成','阅读完成','需要改进','很开心'];
 
 // 共同学习（每天固定）
 const DEFAULT_SHARED_LEARNING = ['阅读','一个新成语','学习一个科学知识','分析一件新闻事件','学习一个历史知识'];
@@ -2721,10 +2723,15 @@ function mergeDefaultReminders(obj) {
   }
 }
 
-// 确保复盘快捷关键词存在（旧数据没有时补默认）
+// 确保复盘快捷关键词存在：
+// - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
+// - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
 function ensureSummaryKeywords(obj) {
   if (!obj) return;
-  if (!Array.isArray(obj.summaryKeywords) || obj.summaryKeywords.length === 0) {
+  const kw = obj.summaryKeywords;
+  const isLegacy = Array.isArray(kw) && kw.length === LEGACY_SUMMARY_KEYWORDS.length
+    && LEGACY_SUMMARY_KEYWORDS.every(w => kw.includes(w)) && kw.every(w => LEGACY_SUMMARY_KEYWORDS.includes(w));
+  if (!Array.isArray(kw) || kw.length === 0 || isLegacy) {
     obj.summaryKeywords = [...DEFAULT_SUMMARY_KEYWORDS];
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
