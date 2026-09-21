@@ -1894,10 +1894,10 @@ const DEFAULT_REMINDERS = [
   { id: 'rqn_ew9', childId: 'qiannuo', title: '第九周英语学校听写', date: '2026-11-11', daysBefore: 7, category: 'exam' },
 
   // 李彦希 P2F 第四学期 英语拼写/听写（每周四，Spelling 18/19/20/21）
-  { id: 'ryx_es2', childId: 'yanxi', title: '第二周英语学校听写', date: '2026-09-24', daysBefore: 7, category: 'exam' },
-  { id: 'ryx_es4', childId: 'yanxi', title: '第四周英语学校听写', date: '2026-10-08', daysBefore: 7, category: 'exam' },
-  { id: 'ryx_es6', childId: 'yanxi', title: '第六周英语学校听写', date: '2026-10-22', daysBefore: 7, category: 'exam' },
-  { id: 'ryx_es7', childId: 'yanxi', title: '第七周英语学校听写', date: '2026-10-29', daysBefore: 7, category: 'exam' }
+  { id: 'ryx_es2', childId: 'yanxi', title: 'Spelling 18', date: '2026-09-24', daysBefore: 7, category: 'exam' },
+  { id: 'ryx_es4', childId: 'yanxi', title: 'Spelling 19', date: '2026-10-08', daysBefore: 7, category: 'exam' },
+  { id: 'ryx_es6', childId: 'yanxi', title: 'Spelling 20', date: '2026-10-22', daysBefore: 7, category: 'exam' },
+  { id: 'ryx_es7', childId: 'yanxi', title: 'Spelling 21', date: '2026-10-29', daysBefore: 7, category: 'exam' }
 ];
 const REMINDER_CATEGORIES = {
   exam:     { label: '考试', short: '考' },
@@ -2887,6 +2887,20 @@ function mergeDefaultReminders(obj) {
   if (added.length) {
     obj.reminders.push(...added.map(r => ({ ...r })));
     console.log('[mergeDefaultReminders] 🔁 补充默认提醒：', added.length, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+  // 标题规范化：默认提醒标题更新后，同步用户已有的旧格式标题（如"第二周英语学校听写"→"Spelling 18"）
+  // 仅当已有标题仍是旧的听写格式时才更新，避免覆盖用户自定义标题
+  let updated = false;
+  DEFAULT_REMINDERS.forEach(r => {
+    const found = obj.reminders.find(x => x && x.id === r.id);
+    if (found && found.title !== r.title && /^(第.+周)?(语文|英语)学校听写$/.test(found.title || '')) {
+      found.title = r.title;
+      updated = true;
+    }
+  });
+  if (updated) {
+    console.log('[mergeDefaultReminders] 🔁 更新提醒标题');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
