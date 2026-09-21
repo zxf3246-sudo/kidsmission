@@ -1597,15 +1597,6 @@
         ],
         "tasks": [
           {
-            "id": "t1789962559452vwim",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1789836843313l32i",
             "name": "四五快读第二册1课新字",
             "duration": 15,
@@ -1662,6 +1653,15 @@
             "errLinked": false
           },
           {
+            "id": "t1789962559452vwim",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
             "id": "t1789836843313bwoc",
             "name": "自由玩耍",
             "duration": null,
@@ -1701,15 +1701,6 @@
           }
         ],
         "tasks": [
-          {
-            "id": "t1789962559453i981",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
           {
             "id": "t1789836843313bjxs",
             "name": "乘法口诀复习",
@@ -1765,6 +1756,15 @@
             "type": "study",
             "done": false,
             "errLinked": false
+          },
+          {
+            "id": "t17899667681027xmh",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
           },
           {
             "id": "t1789836843313o9a1",
@@ -3017,6 +3017,38 @@
       "childId": "qiannuo",
       "title": "第九周英语学校听写",
       "date": "2026-11-11",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "ryx_es2",
+      "childId": "yanxi",
+      "title": "第二周英语学校听写",
+      "date": "2026-09-24",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "ryx_es4",
+      "childId": "yanxi",
+      "title": "第四周英语学校听写",
+      "date": "2026-10-08",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "ryx_es6",
+      "childId": "yanxi",
+      "title": "第六周英语学校听写",
+      "date": "2026-10-22",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "ryx_es7",
+      "childId": "yanxi",
+      "title": "第七周英语学校听写",
+      "date": "2026-10-29",
       "daysBefore": 7,
       "category": "exam"
     }
