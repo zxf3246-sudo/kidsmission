@@ -274,7 +274,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1789976027962,
+        "taskSavedAt": 1789977617885,
         "reviewSavedAt": 1789958973122
       }
     },
@@ -3633,6 +3633,14 @@
       "childId": "yanxi",
       "title": "约定和同学Dojo island",
       "date": "2026-09-21",
+      "daysBefore": 7,
+      "category": "other"
+    },
+    {
+      "id": "rem_1789977603221_6nr",
+      "childId": "qiannuo",
+      "title": "班级大使8:30前到学校",
+      "date": "2026-10-05",
       "daysBefore": 7,
       "category": "other"
     }
