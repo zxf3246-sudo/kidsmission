@@ -2052,6 +2052,7 @@ function defaultTasksFor(childId, dateStr) {
       t('WW1单词10个', 15),
       isReadComprehension ? t('语文阅读理解', 15) : t('英语语法', 15),
       t('语文学校词复习', 15),
+      t('一页计算题', 15),
       t('自由玩耍', null, 'rest'),
       t('洗漱睡觉', null, 'rest'),
     ];
@@ -3063,6 +3064,29 @@ function migrateYilinMissyTasks(obj) {
   }
 }
 
+// 从今天起（含今天）给李彦希固定任务增加"一页计算题"（15分钟）
+// 幂等：任务已含"一页计算题"则跳过；插入位置与默认模板一致（第一个休息任务前）
+function addYanxiCalcTask(obj) {
+  if (!obj || !obj.dates) return;
+  const start = '2026-09-20'; // 用户要求从今天开始
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (ds < start) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    if (cd.tasks.some(t => t.name === '一页计算题')) return; // 已存在
+    const calc = { id: uid(), name: '一页计算题', duration: 15, type: 'study', done: false };
+    const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
+    if (restIdx >= 0) cd.tasks.splice(restIdx, 0, calc);
+    else cd.tasks.push(calc);
+    changed++;
+  });
+  if (changed > 0) {
+    console.log('[addYanxiCalcTask] ➕ 已为李彦希从今天起添加"一页计算题"：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 确保复盘快捷关键词存在：
 // - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
 // - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
@@ -3118,6 +3142,7 @@ function loadState() {
       removeMissyTueClass(obj);
       migrateTaskFormat(obj);
       migrateYilinMissyTasks(obj);
+      addYanxiCalcTask(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -5668,6 +5693,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   removeMissyTueClass(state);
   migrateTaskFormat(state);
   migrateYilinMissyTasks(state);
+  addYanxiCalcTask(state);
   save();
   render();
   // 记录同步时间
