@@ -4518,12 +4518,12 @@ async function exportReview() {
     const gap6 = 6;
     const bw6 = (CW - 56 - gap6 * 5) / 6;
     const boxes6 = [
+      { label: '本周均分', val: weekAvg===null ? '—' : String(weekAvg), bg: '#e0e7ff', fg: '#3730a3' },
       { label: '今日积分', val: `${pts>=0?'+':''}${pts}`,   bg: '#dcfce7', fg: '#15803d' },
+      { label: '本周积分', val: `${weekPts>=0?'+':''}${weekPts}`, bg: '#e0f2fe', fg: '#075985' },
       { label: '累计积分', val: `${cumPts}`,                 bg: '#dbeafe', fg: '#1e40af' },
       { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,    bg: '#fef3c7', fg: '#92400e' },
       { label: '累计存款', val: `S$${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
-      { label: '本周积分', val: `${weekPts>=0?'+':''}${weekPts}`, bg: '#e0f2fe', fg: '#075985' },
-      { label: '本周均分', val: weekAvg===null ? '—' : String(weekAvg), bg: '#e0e7ff', fg: '#3730a3' },
     ];
     boxes6.forEach((b, i) => {
       const bx = x0 + 28 + i * (bw6 + gap6);
