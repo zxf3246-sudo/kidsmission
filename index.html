@@ -4514,41 +4514,25 @@ async function exportReview() {
     ctx.fillStyle = studyOver ? '#ef4444' : col.main; ctx.fill();
     cy += 22;
 
-    // 四板块同行：今日积分 / 累计积分 / 今日存款 / 累计存款（紧凑）
-    const gap4 = 8;
-    const bw4 = (CW - 56 - gap4 * 3) / 4;
-    const boxes4 = [
-      { label: '今日积分', val: `${pts>=0?'+':''}${pts}`, bg: '#dcfce7', fg: '#15803d' },
-      { label: '累计积分', val: `${cumPts}`,               bg: '#dbeafe', fg: '#1e40af' },
-      { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,  bg: '#fef3c7', fg: '#92400e' },
+    // 六项指标一行展示：今日积分 / 累计积分 / 今日存款 / 累计存款 / 本周积分 / 本周平均评分（紧凑）
+    const gap6 = 6;
+    const bw6 = (CW - 56 - gap6 * 5) / 6;
+    const boxes6 = [
+      { label: '今日积分', val: `${pts>=0?'+':''}${pts}`,   bg: '#dcfce7', fg: '#15803d' },
+      { label: '累计积分', val: `${cumPts}`,                 bg: '#dbeafe', fg: '#1e40af' },
+      { label: '今日存款', val: `${sav>=0?'+':''}${sav}`,    bg: '#fef3c7', fg: '#92400e' },
       { label: '累计存款', val: `S$${cumSav}`,               bg: '#fce7f3', fg: '#9d174d' },
+      { label: '本周积分', val: `${weekPts>=0?'+':''}${weekPts}`, bg: '#e0f2fe', fg: '#075985' },
+      { label: '本周均分', val: weekAvg===null ? '—' : String(weekAvg), bg: '#e0e7ff', fg: '#3730a3' },
     ];
-    boxes4.forEach((b, i) => {
-      const bx = x0 + 28 + i * (bw4 + gap4);
-      imgRoundRect(ctx, bx, cy, bw4, 40, 9);
+    boxes6.forEach((b, i) => {
+      const bx = x0 + 28 + i * (bw6 + gap6);
+      imgRoundRect(ctx, bx, cy, bw6, 40, 7);
       ctx.fillStyle = b.bg; ctx.fill();
-      setFont(ctx, 11, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(b.label, bx + bw4/2 - ctx.measureText(b.label).width/2, cy + 5);
-      setFont(ctx, 15, true); ctx.fillStyle = b.fg;
-      ctx.fillText(b.val, bx + bw4/2 - ctx.measureText(b.val).width/2, cy + 20);
-    });
-    cy += 52;
-
-    // 本周板块：本周积分 / 本周平均评分（紧凑）
-    const gap2 = 12;
-    const bw2 = (CW - 56 - gap2) / 2;
-    const boxes2 = [
-      { label: '本周积分', val: `${weekPts>=0?'+':''}${weekPts}`, bg: '#dcfce7', fg: '#15803d' },
-      { label: '本周平均评分', val: weekAvg===null ? '—' : String(weekAvg), bg: '#e0e7ff', fg: '#3730a3' },
-    ];
-    boxes2.forEach((b, i) => {
-      const bx = x0 + 28 + i * (bw2 + gap2);
-      imgRoundRect(ctx, bx, cy, bw2, 40, 9);
-      ctx.fillStyle = b.bg; ctx.fill();
-      setFont(ctx, 11, false); ctx.fillStyle = '#64748b';
-      ctx.fillText(b.label, bx + bw2/2 - ctx.measureText(b.label).width/2, cy + 5);
-      setFont(ctx, 15, true); ctx.fillStyle = b.fg;
-      ctx.fillText(b.val, bx + bw2/2 - ctx.measureText(b.val).width/2, cy + 20);
+      setFont(ctx, 10, false); ctx.fillStyle = '#64748b';
+      ctx.fillText(b.label, bx + bw6/2 - ctx.measureText(b.label).width/2, cy + 4);
+      setFont(ctx, 14, true); ctx.fillStyle = b.fg;
+      ctx.fillText(b.val, bx + bw6/2 - ctx.measureText(b.val).width/2, cy + 20);
     });
     cy += 52;
 
