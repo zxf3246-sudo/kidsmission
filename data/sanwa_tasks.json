@@ -1969,14 +1969,17 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 5,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "积极"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "21:00",
