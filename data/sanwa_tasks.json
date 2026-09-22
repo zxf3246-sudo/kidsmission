@@ -1644,29 +1644,6 @@
             "status": "done"
           },
           {
-            "id": "t1789836843313b4jz",
-            "name": "语文5B15课词汇",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17900072179264bg9",
-            "name": "数学问题讨论",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "fixy-20260922-pod",
-            "name": "听播客",
-            "duration": 30,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t17898368433139727",
             "name": "自由活动",
             "duration": null,
@@ -1695,7 +1672,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790078036688,
+        "taskSavedAt": 1790080275037,
         "reviewSavedAt": 1790007171303
       },
       "yanxi": {
