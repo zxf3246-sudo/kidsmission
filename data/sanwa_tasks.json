@@ -1728,7 +1728,7 @@
           {
             "id": "t1790080574312init",
             "name": "学而思计算",
-            "duration": null,
+            "duration": 27,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -1773,7 +1773,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790081008135,
+        "taskSavedAt": 1790081020915,
         "reviewSavedAt": 1790007154208
       },
       "qiannuo": {
