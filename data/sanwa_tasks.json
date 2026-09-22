@@ -2175,19 +2175,21 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 5,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790089217338
       }
     },
     "2026-09-24": {
