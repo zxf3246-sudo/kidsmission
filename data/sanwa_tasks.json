@@ -1618,19 +1618,20 @@
             "status": "done"
           },
           {
+            "id": "fixy-20260922-m1",
+            "name": "Missy作文阅读",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
             "id": "t17900077425061ut9",
             "name": "Missy9.21课堂作业（背+抄）",
             "duration": 40,
             "type": "study",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "fixy-20260922-m1",
-            "name": "Missy作文阅读",
-            "duration": 30,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789836843313b4jz",
