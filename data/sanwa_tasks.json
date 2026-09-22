@@ -124,10 +124,10 @@
           {
             "id": "fix-20260922-yanxi-5",
             "name": "学校英语小测复习",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
-            "done": false,
-            "status": "empty"
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1790080574312init",
@@ -179,7 +179,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790088787958,
+        "taskSavedAt": 1790088798895,
         "reviewSavedAt": 1790007154208
       },
       "qiannuo": {
