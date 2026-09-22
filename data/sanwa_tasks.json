@@ -1646,10 +1646,11 @@
           {
             "id": "t17898368433139727",
             "name": "自由活动",
-            "duration": null,
+            "duration": 30,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17898368433136o50",
@@ -1672,7 +1673,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790080279943,
+        "taskSavedAt": 1790080996219,
         "reviewSavedAt": 1790007171303
       },
       "yanxi": {
@@ -1725,15 +1726,6 @@
             "status": "empty"
           },
           {
-            "id": "t1789962559452vwim",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1790080574312init",
             "name": "学而思计算",
             "duration": null,
@@ -1741,6 +1733,15 @@
             "done": true,
             "errLinked": false,
             "status": "done"
+          },
+          {
+            "id": "t1789962559452vwim",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "la"
           },
           {
             "id": "t1789836843313bwoc",
@@ -1771,7 +1772,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790080939842,
+        "taskSavedAt": 1790080588995,
         "reviewSavedAt": 1790007154208
       },
       "qiannuo": {
@@ -1812,7 +1813,8 @@
             "name": "字母拼音练习",
             "duration": 10,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1790007276897y0f6",
@@ -1845,7 +1847,8 @@
             "duration": null,
             "type": "rest",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1789836843313yiu3",
