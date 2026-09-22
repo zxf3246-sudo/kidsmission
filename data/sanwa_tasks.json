@@ -1820,18 +1820,20 @@
           {
             "id": "t1790007276897y0f6",
             "name": "学校英语小测复习",
-            "duration": null,
+            "duration": 5,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790007311067v353",
             "name": "学校语文小测复习",
-            "duration": null,
+            "duration": 5,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899667681027xmh",
@@ -1876,7 +1878,7 @@
         },
         "arrival": "19:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790079192520,
+        "taskSavedAt": 1790081849068,
         "reviewSavedAt": 1790029265812
       }
     },
