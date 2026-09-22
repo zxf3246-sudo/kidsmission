@@ -3064,6 +3064,39 @@ function migrateYilinMissyTasks(obj) {
   }
 }
 
+// 一次性迁移：对调 9/22 与 9/23 两天的复盘数据（所有孩子）
+// 用户误将 9/22 的复盘登记到 9/23 上，因此交换两天的 review 对象
+// 用 localStorage 标记保证只执行一次，避免刷新后反复对调
+function swapReviewDates(obj) {
+  const MAP_KEY = 'sanwa_swap_review_0922_0923_done';
+  try {
+    if (localStorage.getItem(MAP_KEY) === '1') return; // 已对调过
+  } catch(_) {}
+  if (!obj || !obj.dates) return;
+  const dA = obj.dates['2026-09-22'];
+  const dB = obj.dates['2026-09-23'];
+  if (!dA || !dB) return; // 必须有这两天数据才处理
+  let touched = 0;
+  CHILDREN.forEach(c => {
+    const ca = dA[c.id];
+    const cb = dB[c.id];
+    if (!ca && !cb) return;
+    if (!ca) dA[c.id] = ca = { tasks: [], fixedClasses: [], review: {} };
+    if (!cb) dB[c.id] = cb = { tasks: [], fixedClasses: [], review: {} };
+    const t = ca.review;
+    ca.review = cb.review;
+    cb.review = t;
+    touched++;
+  });
+  if (touched > 0) {
+    console.log('[swapReviewDates] 🔁 已对调 9/22 与 9/23 复盘，涉及孩子数:', touched);
+    try {
+      localStorage.setItem('sanwa_tasks', JSON.stringify(obj));
+      localStorage.setItem(MAP_KEY, '1');
+    } catch(_) {}
+  }
+}
+
 // 从今天起（含今天）给李彦希固定任务增加"一页计算题"（15分钟）
 // 幂等：任务已含"一页计算题"则跳过；插入位置与默认模板一致（第一个休息任务前）
 // 起始日期用动态"今天"（getLocalDateStr），避免硬编码日期漂移；
@@ -3151,6 +3184,7 @@ function loadState() {
       migrateTaskFormat(obj);
       migrateYilinMissyTasks(obj);
       addYanxiCalcTask(obj);
+      swapReviewDates(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -5702,6 +5736,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   migrateTaskFormat(state);
   migrateYilinMissyTasks(state);
   addYanxiCalcTask(state);
+  swapReviewDates(state);
   save();
   render();
   // 记录同步时间
