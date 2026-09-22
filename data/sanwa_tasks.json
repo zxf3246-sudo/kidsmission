@@ -1721,8 +1721,8 @@
             "name": "学校英语小测复习",
             "duration": 15,
             "type": "study",
-            "done": true,
-            "status": "done"
+            "done": false,
+            "status": "empty"
           },
           {
             "id": "t1789962559452vwim",
