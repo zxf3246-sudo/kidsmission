@@ -1801,21 +1801,24 @@
             "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260922-qiannuo-1",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260922-qiannuo-3",
             "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260922-qiannuo-4",
@@ -1882,7 +1885,7 @@
         },
         "arrival": "19:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790007320834,
+        "taskSavedAt": 1790079121736,
         "reviewSavedAt": 1790029265812
       }
     },
