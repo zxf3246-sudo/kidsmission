@@ -4349,6 +4349,16 @@ async function exportTasks() {
   downloadCanvas(out, `三娃任务_${dateStr}.png`);
 }
 
+// 加载头像图片（SVG data URL）为可绘制 Image，供复盘图头部使用
+function loadAvatarImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
 // 导出复盘（家长用）：彩色 PNG 长图，含评分环 / 时长统计 / 积分徽章
 async function exportReview() {
   // 先拉云端最新
@@ -4357,6 +4367,11 @@ async function exportReview() {
   const data = state.dates[dateStr];
   if (!data) return;
   const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
+  // 预加载各孩子头像（SVG data URL），供头部可爱风格绘制
+  const avatars = {};
+  await Promise.all(CHILDREN.map(async c => {
+    avatars[c.id] = c.avatarImg ? await loadAvatarImage(c.avatarImg) : null;
+  }));
   const { canvas: tmp, ctx } = newTmpCanvas();
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
   let y = IMG.PAD;
@@ -4455,25 +4470,52 @@ async function exportReview() {
     ctx.restore();
 
     let cy = y + 36;
-    // 名字 + 评分环
-    setFont(ctx, 26, true); ctx.fillStyle = col.dark;
-    ctx.fillText(col.emoji + ' ' + c.name, x0+28, cy);
+    // 头像（圆形，带白描边）+ 中文名 + 英文名（与任务模块一致，可爱风格）
+    const avSize = 52; // 头像直径
+    const avR = avSize / 2;
+    const avCX = x0 + 28 + avR;
+    const avCY = cy + 34;
+    const avImg = avatars[c.id];
+    if (avImg) {
+      ctx.save();
+      ctx.beginPath(); ctx.arc(avCX, avCY, avR, 0, Math.PI*2);
+      ctx.closePath(); ctx.clip();
+      ctx.drawImage(avImg, avCX - avR, avCY - avR, avSize, avSize);
+      ctx.restore();
+      // 白描边
+      ctx.beginPath(); ctx.arc(avCX, avCY, avR, 0, Math.PI*2);
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.stroke();
+    } else {
+      // 无头像时用纯色圆 + emoji
+      ctx.beginPath(); ctx.arc(avCX, avCY, avR, 0, Math.PI*2);
+      ctx.fillStyle = col.soft; ctx.fill();
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      setFont(ctx, 30, false); ctx.fillStyle = col.dark;
+      ctx.fillText(col.emoji, avCX, avCY);
+      ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    }
+    // 名字区起点
+    const nameX = avCX + avR + 12;
+    setFont(ctx, 28, true); ctx.fillStyle = col.dark;
+    ctx.fillText(c.name, nameX, cy + 12);
+    setFont(ctx, 15, false); ctx.fillStyle = '#64748b';
+    ctx.fillText(c.enName || '', nameX, cy + 44);
 
     // 星星评分（名字右边）— 始终显示5颗，按评分涂金
     const starsVal = (r.stars !== undefined && r.stars !== null) ? r.stars : 0;
-    setFont(ctx, 26, true); // 与名字同字体测量宽度
-    const nameW = ctx.measureText(col.emoji + ' ' + c.name).width;
+    setFont(ctx, 28, true);
+    const nameW = ctx.measureText(c.name).width;
     const starR = 10;       // 外半径
     const starGap = 6;
-    const starStartX = x0 + 28 + nameW + 18;
-    const starY = cy + 18;
+    const starStartX = nameX + nameW + 16;
+    const starY = cy + 28;
     for (let si = 0; si < 5; si++) {
       const fill = Math.max(0, Math.min(1, starsVal - si));
       drawStar(ctx, starStartX + si * (starR * 2 + starGap), starY, starR, starR * 0.4, fill);
     }
 
     // 评分环（右上）
-    const ringX = x0+CW-66, ringY = cy+6, ringR = 36;
+    const ringX = x0+CW-66, ringY = cy+30, ringR = 36;
     ctx.beginPath(); ctx.arc(ringX, ringY, ringR, 0, Math.PI*2);
     ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 7; ctx.stroke();
     if (scoreVal !== null) {
