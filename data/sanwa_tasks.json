@@ -1728,14 +1728,16 @@
             "name": "四五快读新字6个",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260922-yanxi-3",
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260922-yanxi-5",
@@ -1782,7 +1784,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790078467744,
+        "taskSavedAt": 1790078472136,
         "reviewSavedAt": 1790007154208
       },
       "qiannuo": {
