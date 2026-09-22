@@ -2064,19 +2064,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 5,
+          "score": 87,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "低效率",
+            "准确率低"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790088851889,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790089187430
       },
       "qiannuo": {
         "fixedClasses": [
