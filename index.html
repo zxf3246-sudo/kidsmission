@@ -4425,10 +4425,10 @@ async function exportReview() {
     const kw = (r.keywords || []).filter(Boolean);
     let kwRows = 0;
     if (kw.length) {
-      setFont(ctx, 16, false);
+      setFont(ctx, 20, true); // 与关键词实际渲染一致（加大加粗）
       let cur = 0;
       kw.forEach(k => {
-        const w = ctx.measureText(k).width + 26;
+        const w = ctx.measureText(k).width + 30;
         if (cur + w > CW - 56) { kwRows++; cur = w; }
         else cur += w + 10;
       });
@@ -4439,7 +4439,7 @@ async function exportReview() {
     cH += 80; // 统计三栏 + 进度条（紧凑）
     cH += 52; // 积分徽章（四板块，紧凑）
     cH += 52; // 本周积分 / 本周平均评分（紧凑）
-    if (kwRows) cH += kwRows * 46 + 52; // 今日表现关键词（版面扩大：标题34 + chips行 + 间距）
+    if (kwRows) cH += kwRows * 54 + 52; // 今日表现关键词（版面扩大：标题34 + chips行 + 间距）
     if (summaryLines.length) cH += summaryLines.length * 38 + 74; // 今日总结（版面扩大）
     if (rewardLines.length) cH += 32 + rewardLines.length * 24 + 18;
     if (otherLines.length) cH += 32 + otherLines.length * 24 + 18;
@@ -4540,16 +4540,16 @@ async function exportReview() {
     if (kw.length) {
       setFont(ctx, 20, true); ctx.fillStyle = col.dark;
       ctx.fillText('✨ 今日表现关键词', x0+28, cy); cy += 34;
-      const chipH = 36, gapX = 10, gapY = 10;
+      const chipH = 42, gapX = 10, gapY = 12;
       let cx = x0+28, cyy = cy;
-      setFont(ctx, 16, false);
+      setFont(ctx, 20, true); // 关键词加大加粗
       kw.forEach(k => {
         const tw = ctx.measureText(k).width;
-        const cw = tw + 26;
+        const cw = tw + 30;
         if (cx + cw > x0 + CW - 28) { cx = x0+28; cyy += chipH + gapY; }
-        imgRoundRect(ctx, cx, cyy, cw, chipH, 18); ctx.fillStyle = col.soft; ctx.fill();
+        imgRoundRect(ctx, cx, cyy, cw, chipH, 21); ctx.fillStyle = col.soft; ctx.fill();
         ctx.fillStyle = col.dark;
-        ctx.fillText(k, cx + 13, cyy + 9);
+        ctx.fillText(k, cx + 15, cyy + 8);
         cx += cw + gapX;
       });
       cy = cyy + chipH + 18;
