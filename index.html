@@ -3066,14 +3066,22 @@ function migrateYilinMissyTasks(obj) {
 
 // 从今天起（含今天）给李彦希固定任务增加"一页计算题"（15分钟）
 // 幂等：任务已含"一页计算题"则跳过；插入位置与默认模板一致（第一个休息任务前）
+// 起始日期用动态"今天"（getLocalDateStr），避免硬编码日期漂移；
+// 并清理落在"今天"之前被误加的这一项
 function addYanxiCalcTask(obj) {
   if (!obj || !obj.dates) return;
-  const start = '2026-09-20'; // 用户要求从今天开始
+  const start = getLocalDateStr(); // 用户要求从今天开始（取真实当天）
   let changed = 0;
   Object.keys(obj.dates).forEach(ds => {
-    if (ds < start) return;
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    if (ds < start) {
+      // 今天之前的日期：移除可能被误加的"一页计算题"
+      const before = cd.tasks.length;
+      cd.tasks = cd.tasks.filter(t => t.name !== '一页计算题');
+      if (cd.tasks.length !== before) changed++;
+      return;
+    }
     if (cd.tasks.some(t => t.name === '一页计算题')) return; // 已存在
     const calc = { id: uid(), name: '一页计算题', duration: 15, type: 'study', done: false };
     const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
@@ -3082,7 +3090,7 @@ function addYanxiCalcTask(obj) {
     changed++;
   });
   if (changed > 0) {
-    console.log('[addYanxiCalcTask] ➕ 已为李彦希从今天起添加"一页计算题"：', changed, '天');
+    console.log('[addYanxiCalcTask] ➕ 已为李彦希从今天起调整"一页计算题"：', changed, '天');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
