@@ -1734,6 +1734,15 @@
             "courseTask": "la"
           },
           {
+            "id": "t1790080574312init",
+            "name": "学而思计算",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t1789836843313bwoc",
             "name": "自由玩耍",
             "duration": null,
