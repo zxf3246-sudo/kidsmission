@@ -1972,9 +1972,10 @@
           {
             "id": "fixy-20260923-pod",
             "name": "听播客",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1789962619824aotx",
@@ -1990,8 +1991,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:00"
           }
         ],
         "review": {
@@ -2010,7 +2013,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790170050194,
+        "taskSavedAt": 1790170573858,
         "reviewSavedAt": 1790170523741
       },
       "yanxi": {
