@@ -2723,6 +2723,13 @@
             "errLinked": false
           },
           {
+            "id": "t1790154702338nirp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789962795667l80y",
             "name": "学而思作业",
             "duration": null,
@@ -2730,22 +2737,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789962795667rpp8",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1790154702338nirp",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789962795664umm7",
@@ -2882,15 +2873,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789962795667exm9",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t1789962795666v4ez",
@@ -3714,6 +3696,13 @@
             "errLinked": false
           },
           {
+            "id": "t1790154702338stfp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789996257101b99z",
             "name": "学而思作业",
             "duration": null,
@@ -3721,22 +3710,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789996257101vvb1",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1790154702338stfp",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789996257099806p",
@@ -3857,15 +3830,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789996257101rxzk",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t1789996257099gr4e",
