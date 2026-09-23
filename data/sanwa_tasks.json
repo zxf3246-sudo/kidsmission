@@ -2016,29 +2016,8 @@
             "done": false
           },
           {
-            "id": "fix-20260923-yanxi-2",
-            "name": "四五快读新字",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "fix-20260923-yanxi-3",
-            "name": "WW1单词10个",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
-            "id": "fix-20260923-yanxi-4",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
-            "id": "fix-20260923-yanxi-5",
-            "name": "英语小测复习",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2051,6 +2030,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "fix-20260923-yanxi-5",
+            "name": "英语小测复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t178996261982578u2",
@@ -2085,7 +2071,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790088851889,
+        "taskSavedAt": 1790144665072,
         "reviewSavedAt": 1790089375064
       },
       "qiannuo": {
