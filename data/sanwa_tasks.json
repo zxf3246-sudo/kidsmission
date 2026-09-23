@@ -2086,7 +2086,8 @@
             "type": "rest",
             "done": true,
             "errLinked": false,
-            "status": "done"
+            "status": "done",
+            "time": "21:30"
           }
         ],
         "review": {
