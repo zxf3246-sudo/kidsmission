@@ -2177,11 +2177,12 @@
           },
           {
             "id": "t1789962619825jmos",
-            "name": "自由玩耍",
-            "duration": null,
+            "name": "下楼玩",
+            "duration": 40,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962619825w9lk",
@@ -2207,7 +2208,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790165860508,
+        "taskSavedAt": 1790166736065,
         "reviewSavedAt": 1790089445992
       }
     },
