@@ -2126,13 +2126,6 @@
             "done": false
           },
           {
-            "id": "fix-20260923-qiannuo-6",
-            "name": "英语阅读练习",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t17899626198264765",
             "name": "学而思作业",
             "duration": null,
@@ -2182,7 +2175,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790144710052,
+        "taskSavedAt": 1790144729201,
         "reviewSavedAt": 1790089445992
       }
     },
