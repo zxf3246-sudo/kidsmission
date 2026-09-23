@@ -2116,14 +2116,16 @@
             "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-qiannuo-1",
             "name": "600字1课生字",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-qiannuo-2",
@@ -2203,7 +2205,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790144729201,
+        "taskSavedAt": 1790155393702,
         "reviewSavedAt": 1790089445992
       }
     },
