@@ -1664,19 +1664,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 5,
+          "score": 87,
+          "summary": "按照任务积极完成，就是不知道真正吸收进去多少，反正还是那句话，是不是做样子只有她自己知道。到了目前这个阶段，老师和家长的帮助都是辅助，她自己不学的话也是一点用都没有。",
           "reward": "",
           "other": "",
           "savings": 0,
           "stars": 4,
-          "keywords": []
+          "keywords": [
+            "高效率",
+            "积极"
+          ]
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790088773932,
-        "reviewSavedAt": 1790007171303
+        "reviewSavedAt": 1790144464683
       },
       "yanxi": {
         "fixedClasses": [
