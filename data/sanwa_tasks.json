@@ -2166,8 +2166,8 @@
             "name": "语文LA作业",
             "duration": null,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "la"
           },
           {
@@ -2202,7 +2202,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790164954470,
+        "taskSavedAt": 1790164964788,
         "reviewSavedAt": 1790089445992
       }
     },
