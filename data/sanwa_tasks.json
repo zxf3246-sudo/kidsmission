@@ -2163,7 +2163,7 @@
             "name": "学而思作业",
             "duration": null,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
             "courseTask": "xes"
           },
@@ -2209,7 +2209,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790166736065,
+        "taskSavedAt": 1790167785595,
         "reviewSavedAt": 1790089445992
       }
     },
