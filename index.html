@@ -2070,6 +2070,7 @@ function defaultTasksFor(childId, dateStr) {
       t('字母拼音练习', 10),
       t('控笔练习', 10),
       isEngReading ? t('英语阅读练习', 15) : t('语文练习', 15),
+      ...(dow === 4 ? [t('学校双语作业', 15)] : []),   // 每周四固定：学校双语作业
       t('自由玩耍', null, 'rest'),
       t('洗漱睡觉', null, 'rest'),
     ];
@@ -2984,6 +2985,30 @@ function renameYanxiWW1(obj) {
   }
 }
 
+// 给李芊诺所有"周四"的日期补上固定任务"学校双语作业"（15分钟）。
+// 幂等：当天已在"控笔练习"之后、休息任务之前插入；已含则跳过。
+// 只处理周四（getDay()===4），且跳过用户已手动调整过的（任务里已含该名）。
+function addQiannuoThursBilingual(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    if (dow !== 4) return; // 仅周四
+    const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
+    if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    if (cd.tasks.some(t => t.name === '学校双语作业')) return; // 已存在
+    const task = { id: uid(), name: '学校双语作业', duration: 15, type: 'study', done: false };
+    const wingIdx = cd.tasks.findIndex(t => t.type === 'rest');
+    if (wingIdx >= 0) cd.tasks.splice(wingIdx, 0, task);
+    else cd.tasks.push(task);
+    changed++;
+  });
+  if (changed > 0) {
+    console.log('[addQiannuoThursBilingual] ➕ 已为李芊诺周四补"学校双语作业"：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 把 9/22-24 李彦希、李芊诺的旧模板任务统一升级为新模板（白天改过的固定任务形式）
 // 只要该日仍是旧模板任务（存在旧模板任务名）就执行升级；
 // 保留完成状态、休息任务、动态作业（学而思作业/语文LA作业）及固定课程，用户自定义任务追加保留
@@ -3208,6 +3233,7 @@ function loadState() {
       migrateYilinMissyTasks(obj);
       addYanxiCalcTask(obj);
       renameYanxiWW1(obj);
+      addQiannuoThursBilingual(obj);
       swapReviewDates(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
@@ -5761,6 +5787,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   migrateYilinMissyTasks(state);
   addYanxiCalcTask(state);
   renameYanxiWW1(state);
+  addQiannuoThursBilingual(state);
   swapReviewDates(state);
   save();
   render();
