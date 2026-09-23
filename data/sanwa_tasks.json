@@ -2058,8 +2058,8 @@
             "name": "语文LA作业",
             "duration": null,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "la"
           },
           {
@@ -2095,7 +2095,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790144665072,
+        "taskSavedAt": 1790165875110,
         "reviewSavedAt": 1790089375064
       },
       "qiannuo": {
