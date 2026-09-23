@@ -2851,6 +2851,8 @@ function finalizeVoice() {
 
 // 新日期自动补充：仅当历史≥7天且存在高优先级（从未安排/临界超期）推荐时注入，最多2项
 function autoEnrichNewDate(s, dateStr, childId) {
+  // 已按用户要求永久关闭：不再往任务里自动注入智能推荐活动
+  return;
   const load = getRecentLoadInState(s, childId, dateStr);
   if (load.days < 7) return; // 至少一周历史才自动注入
   const recs = recommendForInState(s, childId, dateStr);
@@ -3007,6 +3009,26 @@ function addQiannuoThursBilingual(obj) {
     console.log('[addQiannuoThursBilingual] ➕ 已为李芊诺周四补"学校双语作业"：', changed, '天');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
+}
+
+// 清除"智能推荐引擎"此前自动注入的任务（如亲子瑜伽、冥想等），避免残留
+// 幂等：仅移除带 autoEnriched 标记的任务，不影响用户手动添加的内容
+function removeAutoEnrichedTasks(obj) {
+  if (!obj || !obj.dates) return 0;
+  let changed = 0;
+  Object.values(obj.dates).forEach(kids => {
+    Object.values(kids || {}).forEach(cd => {
+      if (!cd || !Array.isArray(cd.tasks)) return;
+      const before = cd.tasks.length;
+      cd.tasks = cd.tasks.filter(t => !t.autoEnriched);
+      if (cd.tasks.length !== before) changed++;
+    });
+  });
+  if (changed > 0) {
+    console.log('[removeAutoEnrichedTasks] 🧹 已清除智能推荐自动注入任务：', changed, '处');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+  return changed;
 }
 
 // 把 9/22-24 李彦希、李芊诺的旧模板任务统一升级为新模板（白天改过的固定任务形式）
@@ -3235,6 +3257,7 @@ function loadState() {
       renameYanxiWW1(obj);
       addQiannuoThursBilingual(obj);
       swapReviewDates(obj);
+      removeAutoEnrichedTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
       return obj;
     } else {
@@ -3270,7 +3293,7 @@ function ensureDateOn(s, dateStr) {
         taskSavedAt: null,
         reviewSavedAt: null
       };
-      autoEnrichNewDate(s, dateStr, c.id);
+      // 已按用户要求关闭智能推荐自动填充（不再往任务里注入亲子瑜伽等活动）
     });
   } else {
     const dow = new Date(dateStr+'T00:00:00').getDay();
@@ -5934,6 +5957,7 @@ async function autoPullFromCloud() {
     renameYanxiWW1(merged);
     addQiannuoThursBilingual(merged);
     swapReviewDates(merged);
+    removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
     if (anyInputFocused()) {
