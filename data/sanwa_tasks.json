@@ -2151,7 +2151,8 @@
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false
+            "done": false,
+            "status": "undone"
           },
           {
             "id": "t17899626198264765",
@@ -2203,7 +2204,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790165855891,
+        "taskSavedAt": 1790165860508,
         "reviewSavedAt": 1790089445992
       }
     },
