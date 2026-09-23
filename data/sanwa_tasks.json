@@ -2038,7 +2038,8 @@
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-yanxi-5",
@@ -2096,7 +2097,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790165875110,
+        "taskSavedAt": 1790166622537,
         "reviewSavedAt": 1790089375064
       },
       "qiannuo": {
