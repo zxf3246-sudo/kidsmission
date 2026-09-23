@@ -2022,7 +2022,8 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-yanxi-1",
@@ -2134,7 +2135,8 @@
             "name": "书法汉字练习",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-qiannuo-4",
@@ -2200,7 +2202,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790155402002,
+        "taskSavedAt": 1790164954470,
         "reviewSavedAt": 1790089445992
       }
     },
