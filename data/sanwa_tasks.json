@@ -2419,16 +2419,16 @@
             "name": "WWK3个新单词",
             "duration": 15,
             "type": "study",
-            "done": true,
-            "status": "done"
+            "done": false,
+            "status": "empty"
           },
           {
             "id": "fix-20260924-qiannuo-1",
             "name": "600字1课生字",
             "duration": 15,
             "type": "study",
-            "done": true,
-            "status": "done"
+            "done": false,
+            "status": "empty"
           },
           {
             "id": "fix-20260924-qiannuo-2",
@@ -2510,7 +2510,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790155364248,
+        "taskSavedAt": 1790177309256,
         "reviewSavedAt": null
       }
     },
