@@ -1,630 +1,5 @@
 {
   "dates": {
-    "2026-09-22": {
-      "yilin": {
-        "fixedClasses": [
-          {
-            "name": "科学",
-            "time": "20:40-22:40",
-            "duration": 120
-          }
-        ],
-        "tasks": [
-          {
-            "id": "t17898368433135dzt",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "fixy-20260922-m1",
-            "name": "Missy作文阅读",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "t17900077425061ut9",
-            "name": "Missy9.21课堂作业（背+抄）",
-            "duration": 40,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836843313li2r",
-            "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368433139727",
-            "name": "自由活动",
-            "duration": 30,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368433136o50",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "time": "22:55"
-          }
-        ],
-        "review": {
-          "points": 5,
-          "score": 87,
-          "summary": "按照任务积极完成，就是不知道真正吸收进去多少，反正还是那句话，是不是做样子只有她自己知道。到了目前这个阶段，老师和家长的帮助都是辅助，她自己不学的话也是一点用都没有。",
-          "reward": "",
-          "other": "",
-          "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "高效率",
-            "积极"
-          ]
-        },
-        "arrival": "14:30",
-        "sleep": "21:00",
-        "taskSavedAt": 1790088773932,
-        "reviewSavedAt": 1790144464683
-      },
-      "yanxi": {
-        "fixedClasses": [
-          {
-            "name": "TTA AI",
-            "time": "15:30-17:00",
-            "duration": 90
-          }
-        ],
-        "tasks": [
-          {
-            "id": "fix-20260922-yanxi-0",
-            "name": "Koobits",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-yanxi-1",
-            "name": "1 Mission",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-yanxi-2",
-            "name": "四五快读新字6个",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-yanxi-3",
-            "name": "WW1单词5个",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-yanxi-5",
-            "name": "学校英语小测复习",
-            "duration": 25,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "t1790080574312init",
-            "name": "学而思计算",
-            "duration": 27,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789962559452vwim",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1789836843313bwoc",
-            "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "status": "undone"
-          },
-          {
-            "id": "t1789836843313gv2j",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "time": "21:32"
-          }
-        ],
-        "review": {
-          "points": 0,
-          "score": 88,
-          "summary": "今天李彦希的效率有点低下，应该说最近的效率都不太高，好像只要没有什么奖励的话他学习都提不起积极性。但是喜欢主动跟我分享学校学到的，或者见到的一些新的事物，这点挺好的。他想靠成绩去得到新的宝可梦卡，不知道这个奖励又能坚持多久。",
-          "reward": "",
-          "other": "",
-          "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "低效率",
-            "准确率低",
-            "心不在焉"
-          ]
-        },
-        "arrival": "14:00",
-        "sleep": "21:00",
-        "taskSavedAt": 1790088798895,
-        "reviewSavedAt": 1790144527133
-      },
-      "qiannuo": {
-        "fixedClasses": [
-          {
-            "name": "学而思",
-            "time": "17:00-18:30",
-            "duration": 90
-          }
-        ],
-        "tasks": [
-          {
-            "id": "fix-20260922-qiannuo-0",
-            "name": "WWK3个新单词",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-qiannuo-1",
-            "name": "600字5个生字",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-qiannuo-3",
-            "name": "书法汉字练习",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "fix-20260922-qiannuo-4",
-            "name": "字母拼音练习",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
-            "id": "t1790007276897y0f6",
-            "name": "学校英语小测复习",
-            "duration": 5,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1790007311067v353",
-            "name": "学校语文小测复习",
-            "duration": 5,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17899667681027xmh",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t1789836843313o9a1",
-            "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "status": "undone"
-          },
-          {
-            "id": "t1789836843313yiu3",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "time": "21:00"
-          }
-        ],
-        "review": {
-          "points": 5,
-          "score": 88,
-          "summary": "依旧稳定发挥，没什么特别的，由于回家比较晚，学而思的作业没时间做，明天做的时候看看她吸收的怎么样。",
-          "reward": "",
-          "other": "",
-          "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "注意力集中",
-            "听话"
-          ]
-        },
-        "arrival": "19:00",
-        "sleep": "21:00",
-        "taskSavedAt": 1790088810476,
-        "reviewSavedAt": 1790144571053
-      }
-    },
-    "2026-09-21": {
-      "yilin": {
-        "fixedClasses": [
-          {
-            "name": "英语missy",
-            "time": "19:00-21:00",
-            "duration": 120
-          }
-        ],
-        "tasks": [
-          {
-            "id": "t1789836824012li9x",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1790001502515g03j",
-            "name": "Missy作业",
-            "duration": 15,
-            "type": "study",
-            "done": true
-          },
-          {
-            "id": "t1789836824012p9mp",
-            "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012pxxv",
-            "name": "语文词语",
-            "duration": 25,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368240120tev",
-            "name": "数学练习",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012h5d5",
-            "name": "自由活动",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "status": "undone"
-          },
-          {
-            "id": "t17898368240128psv",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "time": "21:45",
-            "status": "done"
-          }
-        ],
-        "review": {
-          "points": 3,
-          "score": 87,
-          "summary": "忘带钱包，李彦希下去送的钱给校车司机，回来的也比较晚，但是回来一直按指挥完成任务。自己也透露了今天英语口语考试很差，Missy老师也说能看出她没有认真练习,估计这次口语成绩会很差。说到底还是态度问题，这么看下去EOY成绩会很不理想。",
-          "reward": "",
-          "other": "",
-          "savings": 0,
-          "stars": 3.5,
-          "keywords": [
-            "听话",
-            "考试成绩差",
-            "老师批评"
-          ]
-        },
-        "arrival": "14:30",
-        "sleep": "21:00",
-        "taskSavedAt": 1790001678537,
-        "reviewSavedAt": 1790000391646
-      },
-      "yanxi": {
-        "fixedClasses": [
-          {
-            "name": "语文LA",
-            "time": "14:30-15:30",
-            "duration": 60
-          }
-        ],
-        "tasks": [
-          {
-            "id": "t1789836824012trlt",
-            "name": "Koobits",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789962776938ved5",
-            "name": "语文LA作业",
-            "duration": 20,
-            "type": "study",
-            "status": "undone",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1789999983570htfk",
-            "name": "dojo island",
-            "duration": 50,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t178983682401294wz",
-            "name": "1 Mission",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012rti8",
-            "name": "四五快读新字",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368240124w1h",
-            "name": "WW1单词5个",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368240123hpn",
-            "name": "语文阅读理解",
-            "duration": 25,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789977462736qwfs",
-            "name": "学而思Lesson 1作业",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012k4nn",
-            "name": "语文学校词复习",
-            "duration": 25,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t17898368240127jp8",
-            "name": "自由活动",
-            "duration": 20,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012duab",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "time": "21:05",
-            "status": "done"
-          }
-        ],
-        "review": {
-          "points": 6,
-          "score": 88,
-          "summary": "一开始回来的时候效率很低，跟同学约定了4点一起玩Dojo 小游戏, 因为之前报备过，所以限时50分钟。5点多以后才正式进入学习状态，态度和效率都提高了，最后终于复活了10张之前没收的宝可梦卡。",
-          "reward": "",
-          "other": "Dojo island 50分钟",
-          "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "拖拖拉拉",
-            "准确率高",
-            "听话",
-            "知错就改"
-          ]
-        },
-        "arrival": "14:00",
-        "sleep": "21:00",
-        "taskSavedAt": 1790000011674,
-        "reviewSavedAt": 1790000445113
-      },
-      "qiannuo": {
-        "fixedClasses": [],
-        "tasks": [
-          {
-            "id": "t1789836824012ir8w",
-            "name": "WWK3个新单词",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012sy3s",
-            "name": "600字1课生字",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t178996818288722fd",
-            "name": "数学计算练习",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012a49t",
-            "name": "书法汉字练习",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012l8wz",
-            "name": "字母拼音练习",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012vf94",
-            "name": "控笔练习",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012puf9",
-            "name": "思维练习",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012vx92",
-            "name": "自由玩耍",
-            "duration": 35,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1789836824012d3yx",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "time": "21:00",
-            "status": "done"
-          }
-        ],
-        "review": {
-          "points": 5,
-          "score": 88,
-          "summary": "李芊诺表现的一直是比较平稳的，每天的评价也都差不多。任务完成的效率比较高，目前各种字体都是在慢慢进步的过程中，只是偶尔在做事情的时候会分心，弄下这个弄下那个。",
-          "reward": "",
-          "other": "",
-          "savings": 0,
-          "stars": 4,
-          "keywords": [
-            "听话",
-            "高效率",
-            "积极",
-            "做事分心"
-          ]
-        },
-        "arrival": "16:30",
-        "sleep": "21:00",
-        "taskSavedAt": 1789995927642,
-        "reviewSavedAt": 1790001108930
-      }
-    },
     "2026-09-19": {
       "yilin": {
         "fixedClasses": [
@@ -783,7 +158,7 @@
           },
           {
             "id": "t17897979522683o07",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": true,
@@ -1117,7 +492,7 @@
           },
           {
             "id": "t1789812266896w5ks",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -1276,6 +651,13 @@
             "errLinked": true
           },
           {
+            "id": "t1790154702339qqo2",
+            "name": "学校双语作业",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789812266896f04d",
             "name": "自由玩耍",
             "duration": null,
@@ -1421,7 +803,7 @@
           },
           {
             "id": "t17898122855008768",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -1727,7 +1109,7 @@
           },
           {
             "id": "t17898337473914k6k",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 60,
             "type": "study",
             "done": true,
@@ -1894,6 +1276,645 @@
         "reviewSavedAt": 1789903136239
       }
     },
+    "2026-09-21": {
+      "yilin": {
+        "fixedClasses": [
+          {
+            "name": "英语missy",
+            "time": "19:00-21:00",
+            "duration": 120
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1789836824012li9x",
+            "name": "学校作业",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1790154702337nkce",
+            "name": "Missy作文阅读",
+            "duration": 30,
+            "type": "study",
+            "done": true
+          },
+          {
+            "id": "t1790154702337k81b",
+            "name": "Missy口语练习1个",
+            "duration": 20,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "t1789836824012p9mp",
+            "name": "科学知识点",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012pxxv",
+            "name": "语文词语",
+            "duration": 25,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368240120tev",
+            "name": "数学练习",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1790154702337poae",
+            "name": "听播客",
+            "duration": 30,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "t1789836824012h5d5",
+            "name": "自由活动",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false,
+            "status": "undone"
+          },
+          {
+            "id": "t17898368240128psv",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "time": "21:45",
+            "status": "done"
+          }
+        ],
+        "review": {
+          "points": 3,
+          "score": 87,
+          "summary": "忘带钱包，李彦希下去送的钱给校车司机，回来的也比较晚，但是回来一直按指挥完成任务。自己也透露了今天英语口语考试很差，Missy老师也说能看出她没有认真练习,估计这次口语成绩会很差。说到底还是态度问题，这么看下去EOY成绩会很不理想。",
+          "reward": "",
+          "other": "",
+          "savings": 0,
+          "stars": 3.5,
+          "keywords": [
+            "听话",
+            "考试成绩差",
+            "老师批评"
+          ]
+        },
+        "arrival": "14:30",
+        "sleep": "21:00",
+        "taskSavedAt": 1790001678537,
+        "reviewSavedAt": 1790000391646
+      },
+      "yanxi": {
+        "fixedClasses": [
+          {
+            "name": "语文LA",
+            "time": "14:30-15:30",
+            "duration": 60
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1789836824012trlt",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789962776938ved5",
+            "name": "语文LA作业",
+            "duration": 20,
+            "type": "study",
+            "status": "undone",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
+            "id": "t1789999983570htfk",
+            "name": "dojo island",
+            "duration": 50,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t178983682401294wz",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012rti8",
+            "name": "四五快读新字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368240124w1h",
+            "name": "WW1单词5个",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368240123hpn",
+            "name": "语文阅读理解",
+            "duration": 25,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789977462736qwfs",
+            "name": "学而思Lesson 1作业",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012k4nn",
+            "name": "语文学校词复习",
+            "duration": 25,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368240127jp8",
+            "name": "自由活动",
+            "duration": 20,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012duab",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "time": "21:05",
+            "status": "done"
+          }
+        ],
+        "review": {
+          "points": 6,
+          "score": 88,
+          "summary": "一开始回来的时候效率很低，跟同学约定了4点一起玩Dojo 小游戏, 因为之前报备过，所以限时50分钟。5点多以后才正式进入学习状态，态度和效率都提高了，最后终于复活了10张之前没收的宝可梦卡。",
+          "reward": "",
+          "other": "Dojo island 50分钟",
+          "savings": 0,
+          "stars": 4,
+          "keywords": [
+            "拖拖拉拉",
+            "准确率高",
+            "听话",
+            "知错就改"
+          ]
+        },
+        "arrival": "14:00",
+        "sleep": "21:00",
+        "taskSavedAt": 1790000011674,
+        "reviewSavedAt": 1790000445113
+      },
+      "qiannuo": {
+        "fixedClasses": [],
+        "tasks": [
+          {
+            "id": "t1789836824012ir8w",
+            "name": "WWK3个新单词",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012sy3s",
+            "name": "600字1课生字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t178996818288722fd",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012a49t",
+            "name": "书法汉字练习",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012l8wz",
+            "name": "字母拼音练习",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012vf94",
+            "name": "控笔练习",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012puf9",
+            "name": "思维练习",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012vx92",
+            "name": "自由玩耍",
+            "duration": 35,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836824012d3yx",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "time": "21:00",
+            "status": "done"
+          }
+        ],
+        "review": {
+          "points": 5,
+          "score": 88,
+          "summary": "李芊诺表现的一直是比较平稳的，每天的评价也都差不多。任务完成的效率比较高，目前各种字体都是在慢慢进步的过程中，只是偶尔在做事情的时候会分心，弄下这个弄下那个。",
+          "reward": "",
+          "other": "",
+          "savings": 0,
+          "stars": 4,
+          "keywords": [
+            "听话",
+            "高效率",
+            "积极",
+            "做事分心"
+          ]
+        },
+        "arrival": "16:30",
+        "sleep": "21:00",
+        "taskSavedAt": 1789995927642,
+        "reviewSavedAt": 1790001108930
+      }
+    },
+    "2026-09-22": {
+      "yilin": {
+        "fixedClasses": [
+          {
+            "name": "科学",
+            "time": "20:40-22:40",
+            "duration": 120
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t17898368433135dzt",
+            "name": "学校作业",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "fixy-20260922-m1",
+            "name": "Missy作文阅读",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "t17900077425061ut9",
+            "name": "Missy9.21课堂作业（背+抄）",
+            "duration": 40,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789836843313li2r",
+            "name": "科学知识点",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368433139727",
+            "name": "自由活动",
+            "duration": 30,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17898368433136o50",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:55"
+          }
+        ],
+        "review": {
+          "points": 5,
+          "score": 87,
+          "summary": "按照任务积极完成，就是不知道真正吸收进去多少，反正还是那句话，是不是做样子只有她自己知道。到了目前这个阶段，老师和家长的帮助都是辅助，她自己不学的话也是一点用都没有。",
+          "reward": "",
+          "other": "",
+          "savings": 0,
+          "stars": 4,
+          "keywords": [
+            "高效率",
+            "积极"
+          ]
+        },
+        "arrival": "14:30",
+        "sleep": "21:00",
+        "taskSavedAt": 1790088773932,
+        "reviewSavedAt": 1790144464683
+      },
+      "yanxi": {
+        "fixedClasses": [
+          {
+            "name": "TTA AI",
+            "time": "15:30-17:00",
+            "duration": 90
+          }
+        ],
+        "tasks": [
+          {
+            "id": "fix-20260922-yanxi-0",
+            "name": "Koobits",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-yanxi-1",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-yanxi-2",
+            "name": "四五快读新字6个",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-yanxi-3",
+            "name": "WW1单词5个",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-yanxi-5",
+            "name": "学校英语小测复习",
+            "duration": 25,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "t1790080574312init",
+            "name": "学而思计算",
+            "duration": 27,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1789962559452vwim",
+            "name": "语文LA作业",
+            "duration": null,
+            "type": "study",
+            "status": "undone",
+            "done": false,
+            "courseTask": "la"
+          },
+          {
+            "id": "t1789836843313bwoc",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false,
+            "status": "undone"
+          },
+          {
+            "id": "t1789836843313gv2j",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:32"
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": 88,
+          "summary": "今天李彦希的效率有点低下，应该说最近的效率都不太高，好像只要没有什么奖励的话他学习都提不起积极性。但是喜欢主动跟我分享学校学到的，或者见到的一些新的事物，这点挺好的。他想靠成绩去得到新的宝可梦卡，不知道这个奖励又能坚持多久。",
+          "reward": "",
+          "other": "",
+          "savings": 0,
+          "stars": 4,
+          "keywords": [
+            "低效率",
+            "准确率低",
+            "心不在焉"
+          ]
+        },
+        "arrival": "14:00",
+        "sleep": "21:00",
+        "taskSavedAt": 1790088798895,
+        "reviewSavedAt": 1790144527133
+      },
+      "qiannuo": {
+        "fixedClasses": [
+          {
+            "name": "学而思",
+            "time": "17:00-18:30",
+            "duration": 90
+          }
+        ],
+        "tasks": [
+          {
+            "id": "fix-20260922-qiannuo-0",
+            "name": "WWK3个新单词",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-qiannuo-1",
+            "name": "600字5个生字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-qiannuo-3",
+            "name": "书法汉字练习",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "fix-20260922-qiannuo-4",
+            "name": "字母拼音练习",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "t1790007276897y0f6",
+            "name": "学校英语小测复习",
+            "duration": 5,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1790007311067v353",
+            "name": "学校语文小测复习",
+            "duration": 5,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t17899667681027xmh",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "undone",
+            "done": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t1789836843313o9a1",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false,
+            "status": "undone"
+          },
+          {
+            "id": "t1789836843313yiu3",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:00"
+          }
+        ],
+        "review": {
+          "points": 5,
+          "score": 88,
+          "summary": "依旧稳定发挥，没什么特别的，由于回家比较晚，学而思的作业没时间做，明天做的时候看看她吸收的怎么样。",
+          "reward": "",
+          "other": "",
+          "savings": 0,
+          "stars": 4,
+          "keywords": [
+            "注意力集中",
+            "听话"
+          ]
+        },
+        "arrival": "19:00",
+        "sleep": "21:00",
+        "taskSavedAt": 1790088810476,
+        "reviewSavedAt": 1790144571053
+      }
+    },
     "2026-09-23": {
       "yilin": {
         "fixedClasses": [
@@ -2025,6 +2046,13 @@
           {
             "id": "fix-20260923-yanxi-5",
             "name": "英语小测复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "t1790154702338c5so",
+            "name": "一页计算题",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2320,7 +2348,7 @@
           },
           {
             "id": "fix-20260924-yanxi-3",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2335,6 +2363,13 @@
           {
             "id": "fix-20260924-yanxi-5",
             "name": "语文学校词复习",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "t17901547023381frj",
+            "name": "一页计算题",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2428,6 +2463,13 @@
           {
             "id": "fix-20260924-qiannuo-6",
             "name": "语文练习",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
+            "id": "t17901547023396qn2",
+            "name": "学校双语作业",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2645,7 +2687,7 @@
           },
           {
             "id": "t17899627956645zuh",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -2708,6 +2750,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "t1790154702338nirp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1789962795664umm7",
@@ -3037,7 +3086,7 @@
           },
           {
             "id": "t1789975939304pmrd",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -3067,6 +3116,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "t1790154702338pxiy",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t17899759393041g32",
@@ -3335,7 +3391,7 @@
           },
           {
             "id": "t1789975948766tlds",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -3365,6 +3421,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "t1790154702338dfee",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1789975948766q8n4",
@@ -3639,7 +3702,7 @@
           },
           {
             "id": "t1789996257099yaur",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -3678,6 +3741,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "t1790154702338stfp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1789996257099806p",
@@ -3992,7 +4062,7 @@
           },
           {
             "id": "t17900033900916jup",
-            "name": "WW1单词10个",
+            "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -4022,6 +4092,13 @@
             "status": "",
             "done": false,
             "courseTask": "la"
+          },
+          {
+            "id": "t179015470233848b9",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
           },
           {
             "id": "t1790003390091145o",
@@ -4459,6 +4536,13 @@
             "courseTask": "la"
           },
           {
+            "id": "t1790154702339dnyf",
+            "name": "学校双语作业",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1790146994243vo3o",
             "name": "自由玩耍",
             "duration": null,
@@ -4520,7 +4604,7 @@
       "title": "英语 试卷1 写作",
       "date": "2026-10-05",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
     },
     {
       "id": "r1021",
@@ -4528,7 +4612,7 @@
       "title": "英语+华文 听力",
       "date": "2026-10-21",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
     },
     {
       "id": "r1022",
@@ -4536,7 +4620,7 @@
       "title": "英语 试卷2 语言&阅读",
       "date": "2026-10-22",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
     },
     {
       "id": "r1023",
@@ -4544,7 +4628,7 @@
       "title": "华文 试卷2 语言&阅读",
       "date": "2026-10-23",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
     },
     {
       "id": "r1026",
@@ -4552,7 +4636,7 @@
       "title": "科学 全套试卷",
       "date": "2026-10-26",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
     },
     {
       "id": "r1027",
@@ -4560,7 +4644,15 @@
       "title": "数学 卷1+卷2",
       "date": "2026-10-27",
       "daysBefore": 14,
-      "category": "exam"
+      "category": "other"
+    },
+    {
+      "id": "rem_1789836350467_2l0",
+      "childId": "qiannuo",
+      "title": "中文演讲",
+      "date": "2026-09-21",
+      "daysBefore": 14,
+      "category": "other"
     },
     {
       "id": "rqn_cw3",
@@ -4705,9 +4797,26 @@
       "date": "2026-10-29",
       "daysBefore": 7,
       "category": "exam"
+    },
+    {
+      "id": "rqn_cw2",
+      "childId": "qiannuo",
+      "title": "第二周语文学校听写",
+      "date": "2026-09-23",
+      "daysBefore": 7,
+      "category": "exam"
+    },
+    {
+      "id": "rqn_ew2",
+      "childId": "qiannuo",
+      "title": "第二周英语学校听写",
+      "date": "2026-09-23",
+      "daysBefore": 7,
+      "category": "exam"
     }
   ],
   "summaryKeywords": [
+    "高效率",
     "拖拖拉拉",
     "听话",
     "发脾气",
@@ -4728,11 +4837,10 @@
     "考试成绩差",
     "老师表扬",
     "老师批评",
-    "自制力强",
-    "自制力差",
-    "准确率低",
+    "知错就改",
+    "做事分心",
     "低效率",
-    "高效率",
+    "准确率低",
     "心不在焉",
     "注意力集中"
   ]
