@@ -4256,14 +4256,6 @@
       "category": "other"
     },
     {
-      "id": "rqn_cw2",
-      "childId": "qiannuo",
-      "title": "第二周语文学校听写",
-      "date": "2026-09-23",
-      "daysBefore": 7,
-      "category": "exam"
-    },
-    {
       "id": "rqn_cw3",
       "childId": "qiannuo",
       "title": "第三周语文学校听写",
@@ -4316,14 +4308,6 @@
       "childId": "qiannuo",
       "title": "第九周语文学校听写",
       "date": "2026-11-11",
-      "daysBefore": 7,
-      "category": "exam"
-    },
-    {
-      "id": "rqn_ew2",
-      "childId": "qiannuo",
-      "title": "第二周英语学校听写",
-      "date": "2026-09-23",
       "daysBefore": 7,
       "category": "exam"
     },
