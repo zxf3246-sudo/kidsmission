@@ -3406,6 +3406,10 @@ function usedTime(child, childData) {
 function render() {
   const dateStr = document.getElementById('datePicker').value;
   ensureDate(dateStr);
+  // 补插保险：切到任意日期时，若为周四，确保李芊诺该天含固定任务"学校双语作业"
+  if (new Date(dateStr+'T00:00:00').getDay() === 4) {
+    addQiannuoThursBilingual(state);
+  }
   // 同步课程作业：按课程动态出现/顺延/本周完成后隐藏
   let synced = false;
   CHILDREN.forEach(c => { if (syncCourseHomework(c.id, dateStr)) synced = true; });
