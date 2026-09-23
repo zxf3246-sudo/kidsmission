@@ -3940,8 +3940,8 @@ function reminderInfo(r) {
   const targetT = new Date(r.date + 'T00:00:00').getTime();
   const days = Math.round((targetT - todayT) / 86400000);
   const w = r.daysBefore || 14;
-  // 仅在 0 <= days <= w 窗口内显示（今天 ～ 提前 w 天）
-  const inWindow = (days >= 0 && days <= w);
+  // 仅在 1 <= days <= w 窗口内显示（明天 ～ 提前 w 天）；今天到期的不显示
+  const inWindow = (days >= 1 && days <= w);
   let label, cls;
   if (days < 0)              { label = `已过 ${-days}天`; cls = 'done'; }
   else if (days === 0)       { label = '今天'; cls = 'soon'; }
