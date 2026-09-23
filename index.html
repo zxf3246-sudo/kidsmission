@@ -5924,6 +5924,16 @@ async function autoPullFromCloud() {
   // 合并策略：云端更新过的日期优先
   const merged = mergeSmart(localState, cloudState);
   if (JSON.stringify(localState) !== JSON.stringify(merged)) {
+    // 云端可能是旧数据，合并后补齐固定任务/迁移（与 finalizeMerge 一致）
+    mergeDefaultReminders(merged);
+    ensureSummaryKeywords(merged);
+    removeMissyTueClass(merged);
+    migrateTaskFormat(merged);
+    migrateYilinMissyTasks(merged);
+    addYanxiCalcTask(merged);
+    renameYanxiWW1(merged);
+    addQiannuoThursBilingual(merged);
+    swapReviewDates(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
     if (anyInputFocused()) {
