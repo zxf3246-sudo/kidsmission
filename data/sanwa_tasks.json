@@ -1939,7 +1939,8 @@
             "name": "Missy口语练习1个",
             "duration": 20,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1789962619824uugz",
@@ -2004,7 +2005,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790164916014,
         "reviewSavedAt": 1790088991734
       },
       "yanxi": {
