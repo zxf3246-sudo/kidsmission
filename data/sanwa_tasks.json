@@ -2030,7 +2030,7 @@
           {
             "id": "fix-20260923-yanxi-1",
             "name": "1 Mission",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "status": "done"
@@ -2062,7 +2062,7 @@
           {
             "id": "t17899626198254vrw",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 80,
             "type": "study",
             "status": "done",
             "done": true,
@@ -2195,8 +2195,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "time": "21:15",
+            "status": "done"
           }
         ],
         "review": {
@@ -2214,7 +2216,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790168316536,
+        "taskSavedAt": 1790169599982,
         "reviewSavedAt": 1790168556936
       }
     },
