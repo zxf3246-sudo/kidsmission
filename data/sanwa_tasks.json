@@ -2620,26 +2620,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t17899627956643g9r",
-            "name": "拉伸放松",
-            "duration": 10,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t178996279566460s7",
-            "name": "七巧板",
-            "duration": 15,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
@@ -2753,26 +2733,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t17899627956663xya",
-            "name": "跳绳练习",
-            "duration": 15,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t1789962795666k0ns",
-            "name": "夹豆子游戏",
-            "duration": 10,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
@@ -2889,26 +2849,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t1789962795667fmuj",
-            "name": "投接球游戏",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t1789962795667660w",
-            "name": "拼图",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
@@ -3601,26 +3541,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t1789996257099n4mr",
-            "name": "亲子瑜伽",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t17899962570993z0u",
-            "name": "七巧板",
-            "duration": 15,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
@@ -3726,26 +3646,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t17899962570994sgs",
-            "name": "投接球游戏",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t1789996257099kdvz",
-            "name": "拼图",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
@@ -3846,26 +3746,6 @@
             "type": "rest",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t17899962571005vk7",
-            "name": "亲子瑜伽",
-            "duration": 20,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "sports"
-          },
-          {
-            "id": "t1789996257100s8t7",
-            "name": "七巧板",
-            "duration": 15,
-            "type": "rest",
-            "done": false,
-            "errLinked": false,
-            "autoEnriched": true,
-            "enrichCategory": "handeye"
           }
         ],
         "review": {
