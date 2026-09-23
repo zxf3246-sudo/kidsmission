@@ -2128,7 +2128,8 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "fix-20260923-qiannuo-3",
@@ -2150,8 +2151,7 @@
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "status": "undone"
+            "done": false
           },
           {
             "id": "t17899626198264765",
@@ -2203,7 +2203,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790164964788,
+        "taskSavedAt": 1790165851543,
         "reviewSavedAt": 1790089445992
       }
     },
@@ -4723,14 +4723,6 @@
           {
             "id": "t1790164903095hjfo",
             "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790164903095uucl",
-            "name": "一页计算题",
             "duration": 15,
             "type": "study",
             "done": false,
