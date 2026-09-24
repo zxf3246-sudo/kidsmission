@@ -2409,14 +2409,18 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 4,
+          "score": 87,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "keywords": [
+            "听话",
+            "批评",
+            "自制力差"
+          ],
+          "savings": -6,
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
