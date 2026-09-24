@@ -2258,16 +2258,18 @@
             "name": "语文词语",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962621624xui4",
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962778973y62g",
@@ -2322,7 +2324,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790240528022,
         "reviewSavedAt": null
       },
       "yanxi": {
