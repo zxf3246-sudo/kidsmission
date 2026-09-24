@@ -2526,17 +2526,23 @@
         "review": {
           "points": 11,
           "score": 91,
-          "summary": "",
+          "summary": "李芊诺今天表现的很不错，学校的听写都是对的，回来积极完成作业和认同的任务，自己造成的",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "准确率高",
+            "真棒",
+            "高效率",
+            "注意力集中"
+          ],
           "savings": 0,
           "stars": 4.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790257860039,
-        "reviewSavedAt": 1790258384832
+        "reviewSavedAt": 1790258443621
       }
     },
     "2026-09-26": {
