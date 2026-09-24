@@ -2373,7 +2373,8 @@
             "name": "英语语法",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": false,
+            "status": "undone"
           },
           {
             "id": "t17901547023381frj",
@@ -2397,8 +2398,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:30"
           }
         ],
         "review": {
@@ -2413,7 +2416,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790241676281,
+        "taskSavedAt": 1790257820821,
         "reviewSavedAt": null
       },
       "qiannuo": {
