@@ -2524,19 +2524,19 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 91,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
           "savings": 0,
-          "stars": 0
+          "stars": 4.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790257860039,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790258384832
       }
     },
     "2026-09-26": {
