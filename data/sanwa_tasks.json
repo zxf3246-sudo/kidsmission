@@ -2358,13 +2358,6 @@
             "done": false
           },
           {
-            "id": "fix-20260924-yanxi-5",
-            "name": "语文学校词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t17901547023381frj",
             "name": "一页计算题",
             "duration": 15,
@@ -2400,7 +2393,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790227969614,
         "reviewSavedAt": null
       },
       "qiannuo": {
