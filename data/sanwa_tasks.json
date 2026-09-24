@@ -2393,11 +2393,12 @@
           },
           {
             "id": "t1789962621624sr3p",
-            "name": "自由玩耍",
-            "duration": null,
+            "name": "偷玩Dojo",
+            "duration": 35,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962621624s0g5",
@@ -2420,7 +2421,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790240486739,
+        "taskSavedAt": 1790241332199,
         "reviewSavedAt": null
       },
       "qiannuo": {
