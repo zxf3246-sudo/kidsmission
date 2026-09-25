@@ -640,15 +640,6 @@
             "status": "done"
           },
           {
-            "id": "t17899962571017kuw",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "done",
-            "done": true,
-            "courseTask": "xes"
-          },
-          {
             "id": "t17903501049374ui3",
             "name": "小测复习",
             "duration": 15,
@@ -656,6 +647,15 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t17899962571017kuw",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "done",
+            "done": true,
+            "courseTask": "xes"
           },
           {
             "id": "t1789996257099gr4e",
@@ -898,14 +898,14 @@
         "tasks": [
           {
             "id": "t1790350199775tpxv",
-            "name": "WWK3个新单词",
+            "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775a0g1",
-            "name": "600字1课生字",
+            "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
@@ -919,14 +919,14 @@
           },
           {
             "id": "t179035019977556tk",
-            "name": "书法汉字练习",
+            "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775eq7r",
-            "name": "字母拼音练习",
+            "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
@@ -2434,14 +2434,14 @@
         "tasks": [
           {
             "id": "t1790350199775e65c",
-            "name": "WWK3个新单词",
+            "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775t7b6",
-            "name": "600字1课生字",
+            "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2455,14 +2455,14 @@
           },
           {
             "id": "t1790350199775mpo5",
-            "name": "书法汉字练习",
+            "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775xxa2",
-            "name": "字母拼音练习",
+            "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
@@ -2767,14 +2767,14 @@
         "tasks": [
           {
             "id": "t17903501997758vuq",
-            "name": "WWK3个新单词",
+            "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775xdhd",
-            "name": "600字1课生字",
+            "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
@@ -2788,14 +2788,14 @@
           },
           {
             "id": "t1790350199775mqqr",
-            "name": "书法汉字练习",
+            "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790350199775h22k",
-            "name": "字母拼音练习",
+            "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
