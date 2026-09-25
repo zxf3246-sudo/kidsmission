@@ -3115,27 +3115,34 @@ function renameYanxiWeeklyTasks(obj) {
 function renameQiannuoFixedTasks(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
+  const NAME_MAP = {
+    'WWK3个新单词': 'WWK单词3个',
+    '600字1课生字': '600字新字5个',
+    '书法汉字练习': '华文练字',
+    '字母拼音练习': '字母拼音'
+  };
   Object.keys(obj.dates).forEach(ds => {
     const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
     if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
     const dow = new Date(ds + 'T00:00:00').getDay();
-    const NAME_MAP = {
-      'WWK3个新单词': 'WWK单词3个',
-      '600字1课生字': '600字新字5个',
-      '书法汉字练习': '华文练字',
-      '字母拼音练习': '字母拼音'
-    };
     let hit = false;
+    // 改名
     cd.tasks.forEach(t => { if (t && t.name && NAME_MAP[t.name]) { t.name = NAME_MAP[t.name]; hit = true; } });
-    if (dow === 1 && !cd.tasks.some(t => t.name === '乘法口诀复习') && cd.tasks.some(t => t.name === '字母拼音')) {
-      const idx = cd.tasks.findIndex(t => t.name === '字母拼音');
-      cd.tasks.splice(idx + 1, 0, { id: uid(), name: '乘法口诀复习', duration: 10, type: 'study', done: false });
-      hit = true;
+    // "乘法口诀复习"仅周一(dow=1)保留：周一确保存在，非周一一律移除
+    const mIdx = cd.tasks.findIndex(t => t.name === '乘法口诀复习');
+    if (dow === 1) {
+      if (mIdx === -1 && cd.tasks.some(t => t.name === '字母拼音')) {
+        const i = cd.tasks.findIndex(t => t.name === '字母拼音');
+        cd.tasks.splice(i + 1, 0, { id: uid(), name: '乘法口诀复习', duration: 10, type: 'study', done: false });
+        hit = true;
+      }
+    } else {
+      if (mIdx !== -1) { cd.tasks.splice(mIdx, 1); hit = true; }
     }
     if (hit) changed++;
   });
   if (changed > 0) {
-    console.log('[renameQiannuoFixedTasks] 🔄 李芊诺固定任务改名/周一乘法口诀复习：', changed, '天');
+    console.log('[renameQiannuoFixedTasks] 🔄 李芊诺固定任务改名/乘法口诀复习：', changed, '天');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
