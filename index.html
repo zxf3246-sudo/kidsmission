@@ -2028,17 +2028,28 @@ const ACTIVITY_LIBRARY = {
 function defaultTasksFor(childId, dateStr) {
   const t = (name, duration, type, err) =>
     ({ id: uid(), name, duration: duration||null, type: type||'study', done: false, errLinked: !!err });
-  if (childId === 'yilin') return [
+  if (childId === 'yilin') {
+    // 第4/5项（语文词语、科学知识点）按星期换名字：
+    // 周六(dow=6) 后缀"复习"；周日(dow=0) 后缀"错题巩固"；其余天沿用原名
+    const dow = dateStr ? new Date(dateStr + 'T00:00:00').getDay() : 1;
+    const langName = dow === 6 ? '语文词语复习'
+                   : dow === 0 ? '语文错题巩固'
+                   : '语文词语';
+    const sciName = dow === 6 ? '科学知识点复习'
+                  : dow === 0 ? '科学错题巩固'
+                  : '科学知识点';
+    return [
     t('学校作业', 30),
     t('Missy作文阅读', 30),
     t('Missy口语练习1个', 20),
-    t('语文词语', 25),
-    t('科学知识点', 15),
+    t(langName, 25),
+    t(sciName, 15),
     t('数学练习', 15),
     t('听播客', 30),
     t('自由活动', null, 'rest'),
     t('洗漱睡觉', null, 'rest'),
   ];
+  }
   if (childId === 'yanxi') {
     // 第五项按星期交替：1/3/5/7（周一、三、五、日）语文阅读理解；2/4/6（周二、四、六）英语语法
     // getDay(): 周日=0（用户口径"7"），周一=1...周六=6 → 周日或奇数天=阅读理解，偶数天=英语语法
@@ -2981,8 +2992,30 @@ function removeMissyNilaoshi(obj) {
   }
 }
 
-// 将已保存数据中李彦希任务的"WW1单词10个"重命名为"WW1单词5个"
-// 幂等：无旧名称则不动（自动跳过已改/未命中日期）
+// 李怡霖固定任务按星期重命名（历史数据迁移）：
+// 周六(dow=6)：语文词语→语文词语复习，科学知识点→科学知识点复习
+// 周日(dow=0)：语文词语→语文错题巩固，科学知识点→科学错题巩固
+// 幂等：无旧名则不动
+function renameYilinWeeklyTasks(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    const map = {};
+    if (dow === 6) { map['语文词语'] = '语文词语复习'; map['科学知识点'] = '科学知识点复习'; }
+    else if (dow === 0) { map['语文词语'] = '语文错题巩固'; map['科学知识点'] = '科学错题巩固'; }
+    else return;
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    cd.tasks.forEach(task => {
+      if (task && task.name && map[task.name]) { task.name = map[task.name]; changed++; }
+    });
+  });
+  if (changed > 0) {
+    console.log('[renameYilinWeeklyTasks] 🔄 李怡霖每周固定任务改名：', changed, '项');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
 function renameYanxiWW1(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3292,6 +3325,7 @@ function loadState() {
       addQiannuoThursBilingual(obj);
       removeYanxiSchoolWords(obj);
       removeMissyNilaoshi(obj);
+      renameYilinWeeklyTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
@@ -5857,6 +5891,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   addQiannuoThursBilingual(state);
   removeYanxiSchoolWords(state);
   removeMissyNilaoshi(state);
+  renameYilinWeeklyTasks(state);
   swapReviewDates(state);
   save();
   render();
@@ -6000,6 +6035,7 @@ async function autoPullFromCloud() {
     addQiannuoThursBilingual(merged);
     removeYanxiSchoolWords(merged);
     removeMissyNilaoshi(merged);
+    renameYilinWeeklyTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
