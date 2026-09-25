@@ -3436,7 +3436,13 @@
     },
     "2026-09-25": {
       "yilin": {
-        "fixedClasses": [],
+        "fixedClasses": [
+          {
+            "name": "2026PSLE真题解析",
+            "time": "19:00-20:30",
+            "duration": 90
+          }
+        ],
         "tasks": [
           {
             "id": "t1789996257095fwyx",
@@ -3526,7 +3532,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1790329963410,
+        "taskSavedAt": 1790329997352,
         "reviewSavedAt": null
       },
       "yanxi": {
