@@ -2381,14 +2381,6 @@
             "status": "undone"
           },
           {
-            "id": "t17901547023381frj",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "status": "done"
-          },
-          {
             "id": "t1789962621624sr3p",
             "name": "偷玩Dojo",
             "duration": 35,
@@ -3552,15 +3544,6 @@
             "errLinked": false
           },
           {
-            "id": "t17899962571019d6g",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t17899962570955duu",
             "name": "数学练习",
             "duration": 15,
@@ -3665,6 +3648,13 @@
             "errLinked": false
           },
           {
+            "id": "t1790154702338stfp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789996257101b99z",
             "name": "学而思作业",
             "duration": null,
@@ -3672,22 +3662,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789996257101vvb1",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1790154702338stfp",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789996257099806p",
@@ -3788,15 +3762,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789996257101rxzk",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t1789996257099gr4e",
