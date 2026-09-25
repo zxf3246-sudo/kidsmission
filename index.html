@@ -2236,7 +2236,9 @@ function syncQuizReviewDynamic(dateStr) {
     });
     const idx = cd.tasks.findIndex(t => t.courseTask === 'quizReview');
     if (hit) {
-      if (idx === -1) {
+      // 若当天已存在含"小测"字样的任务（如用户手动加的"英语小测复习"），视为已覆盖，不重复插入
+      const hasExisting = cd.tasks.some(t => t.courseTask === 'quizReview' || (t && (t.name || '').includes('小测') && t.name !== '小测复习'));
+      if (idx === -1 && !hasExisting) {
         const insertPos = courseHomeworkInsertPos(cd.tasks, childId);
         cd.tasks.splice(insertPos, 0, { id: uid(), name: '小测复习', duration: 15, type: 'study', status: '', done: false, courseTask: 'quizReview' });
         changed = true;
