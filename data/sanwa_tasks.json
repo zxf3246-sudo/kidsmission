@@ -3718,14 +3718,19 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 91,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "积极",
+            "听话",
+            "注意力集中",
+            "高效率"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4.5
         },
         "arrival": "16:30",
         "sleep": "22:00",
