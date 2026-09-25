@@ -3452,24 +3452,24 @@
             "name": "Missy作文阅读",
             "duration": 30,
             "type": "study",
-            "done": true,
-            "status": "done"
+            "done": false
           },
           {
             "id": "t1790320937959le2h",
             "name": "Missy作业背2句",
             "duration": null,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "fixy-20260925-m2",
             "name": "Missy口语练习1个",
             "duration": 20,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t17899962570958z08",
@@ -3532,7 +3532,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1790320996985,
+        "taskSavedAt": 1790328614841,
         "reviewSavedAt": null
       },
       "yanxi": {
