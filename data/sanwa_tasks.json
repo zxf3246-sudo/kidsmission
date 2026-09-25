@@ -2562,15 +2562,6 @@
             "courseTask": "xes"
           },
           {
-            "id": "t1789962795667v9uq",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t178996279565989rg",
             "name": "数学练习",
             "duration": 15,
@@ -2675,6 +2666,13 @@
             "errLinked": false
           },
           {
+            "id": "t1790154702338nirp",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": false
+          },
+          {
             "id": "t1789962795667l80y",
             "name": "学而思作业",
             "duration": null,
@@ -2682,22 +2680,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1789962795667rpp8",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
-            "id": "t1790154702338nirp",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
           },
           {
             "id": "t1789962795664umm7",
@@ -2800,29 +2782,11 @@
           },
           {
             "id": "t1789962795666epkl",
-            "name": "练习演讲",
+            "name": "学校小测复习",
             "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t17899627956674hq5",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t1789962795667exm9",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t1789962795666v4ez",
@@ -2853,7 +2817,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790330286473,
         "reviewSavedAt": null
       }
     },
