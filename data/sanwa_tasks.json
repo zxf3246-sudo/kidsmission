@@ -3447,7 +3447,7 @@
           {
             "id": "t1789996257095fwyx",
             "name": "学校作业",
-            "duration": 30,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -3464,7 +3464,7 @@
           {
             "id": "t1790320937959le2h",
             "name": "Missy作业背2句",
-            "duration": null,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -3532,7 +3532,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1790329997352,
+        "taskSavedAt": 1790330254340,
         "reviewSavedAt": null
       },
       "yanxi": {
