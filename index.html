@@ -2051,7 +2051,6 @@ function defaultTasksFor(childId, dateStr) {
       t('四五快读新字', 15),
       t('WW1单词5个', 15),
       isReadComprehension ? t('语文阅读理解', 15) : t('英语语法', 15),
-      t('语文学校词复习', 15),
       t('一页计算题', 15),
       t('自由玩耍', null, 'rest'),
       t('洗漱睡觉', null, 'rest'),
@@ -3198,6 +3197,23 @@ function addYanxiCalcTask(obj) {
   }
 }
 
+// 从李彦希所有日期的任务列表里剔除"语文学校词复习"（用户要求不再安排该任务）
+function removeYanxiSchoolWords(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    const before = cd.tasks.length;
+    cd.tasks = cd.tasks.filter(t => t.name !== '语文学校词复习');
+    if (cd.tasks.length !== before) changed++;
+  });
+  if (changed > 0) {
+    console.log('[removeYanxiSchoolWords] ➖ 已为李彦希移除"语文学校词复习"：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 确保复盘快捷关键词存在：
 // - 本地为空 / 仍为旧版默认列表（说明用户未自定义）→ 替换为新默认列表
 // - 用户已自定义过（增删过词）→ 保留用户的词，不覆盖
@@ -3256,6 +3272,7 @@ function loadState() {
       addYanxiCalcTask(obj);
       renameYanxiWW1(obj);
       addQiannuoThursBilingual(obj);
+      removeYanxiSchoolWords(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
@@ -5819,6 +5836,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   addYanxiCalcTask(state);
   renameYanxiWW1(state);
   addQiannuoThursBilingual(state);
+  removeYanxiSchoolWords(state);
   swapReviewDates(state);
   save();
   render();
@@ -5960,6 +5978,7 @@ async function autoPullFromCloud() {
     addYanxiCalcTask(merged);
     renameYanxiWW1(merged);
     addQiannuoThursBilingual(merged);
+    removeYanxiSchoolWords(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
