@@ -2055,11 +2055,17 @@ function defaultTasksFor(childId, dateStr) {
     // getDay(): 周日=0（用户口径"7"），周一=1...周六=6 → 周日或奇数天=阅读理解，偶数天=英语语法
     const dow = dateStr ? new Date(dateStr + 'T00:00:00').getDay() : 1;
     const isReadComprehension = (dow === 0 || dow % 2 === 1);
+    // 第3/4项按星期换名字：
+    // 周六(dow=6)：四五快读新字→四五快读复习，WW1单词5个→WW单词复习
+    // 周日(dow=0)：四五快读新字→阅读作文学习，WW1单词5个→英语语法复习
+    // 其余天沿用原名
+    const kuaiduName = dow === 6 ? '四五快读复习' : dow === 0 ? '阅读作文学习' : '四五快读新字';
+    const wwName = dow === 6 ? 'WW单词复习' : dow === 0 ? '英语语法复习' : 'WW1单词5个';
     return [
       t('Koobits', 20),
       t('1 Mission', 15),
-      t('四五快读新字', 15),
-      t('WW1单词5个', 15),
+      t(kuaiduName, 15),
+      t(wwName, 15),
       isReadComprehension ? t('语文阅读理解', 15) : t('英语语法', 15),
       t('一页计算题', 15),
       t('自由玩耍', null, 'rest'),
@@ -3037,6 +3043,33 @@ function renameYanxiWW1(obj) {
   }
 }
 
+// 李彦希固定任务按星期重命名（历史数据迁移）：
+// 周六(dow=6)：四五快读新字→四五快读复习，WW1单词5个→WW单词复习
+// 周日(dow=0)：四五快读新字→阅读作文学习，WW1单词5个→英语语法复习
+// 幂等：无旧名则不动
+function renameYanxiWeeklyTasks(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    const map = {};
+    if (dow === 6) { map['四五快读新字'] = '四五快读复习'; map['WW1单词5个'] = 'WW单词复习'; }
+    else if (dow === 0) { map['四五快读新字'] = '阅读作文学习'; map['WW1单词5个'] = '英语语法复习'; }
+    else return;
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    let hit = false;
+    cd.tasks.forEach(task => {
+      if (task && task.name && map[task.name]) { task.name = map[task.name]; hit = true; }
+    });
+    if (hit) changed++;
+  });
+  if (changed > 0) {
+    console.log('[renameYanxiWeeklyTasks] 🔄 李彦希每周固定任务改名：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 给李芊诺所有"周四"的日期补上固定任务"学校双语作业"（15分钟）。
 // 幂等：当天已在"控笔练习"之后、休息任务之前插入；已含则跳过。
 // 只处理周四（getDay()===4），且跳过用户已手动调整过的（任务里已含该名）。
@@ -3322,6 +3355,7 @@ function loadState() {
       migrateYilinMissyTasks(obj);
       addYanxiCalcTask(obj);
       renameYanxiWW1(obj);
+      renameYanxiWeeklyTasks(obj);
       addQiannuoThursBilingual(obj);
       removeYanxiSchoolWords(obj);
       removeMissyNilaoshi(obj);
@@ -5888,6 +5922,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   migrateYilinMissyTasks(state);
   addYanxiCalcTask(state);
   renameYanxiWW1(state);
+  renameYanxiWeeklyTasks(state);
   addQiannuoThursBilingual(state);
   removeYanxiSchoolWords(state);
   removeMissyNilaoshi(state);
@@ -6032,6 +6067,7 @@ async function autoPullFromCloud() {
     migrateYilinMissyTasks(merged);
     addYanxiCalcTask(merged);
     renameYanxiWW1(merged);
+    renameYanxiWeeklyTasks(merged);
     addQiannuoThursBilingual(merged);
     removeYanxiSchoolWords(merged);
     removeMissyNilaoshi(merged);
