@@ -91,6 +91,21 @@
     transition: all .2s;
   }
   .btn-today:hover { background: rgba(255,255,255,.4); transform: translateY(-1px); }
+  /* 顶部导航栏微信分享按钮 */
+  .btn-share {
+    background: linear-gradient(135deg, #07c160, #059d4d); color: #fff;
+    border: none; padding: 8px 16px; border-radius: 12px; cursor: pointer;
+    font-size: 13px; font-weight: 700; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 12px rgba(7,193,96,.35); transition: all .2s;
+  }
+  .btn-share:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  .btn-share:active { transform: translateY(1px); opacity: .9; }
+  .wx-share-tip {
+    margin: 10px 0 0; padding: 10px 14px; background: #f3fbf6;
+    border: 1px solid #cdeeda; border-radius: 10px; color: #057a3a;
+    font-size: 13px; line-height: 1.7; text-align: center;
+  }
   .live-clock {
     background: rgba(0,0,0,.18); color: #fff;
     padding: 7px 14px; border-radius: 10px;
@@ -1025,8 +1040,57 @@
     <input type="date" id="datePicker">
     <span class="live-clock" id="liveClock" title="系统当前时间">12:27:58</span>
     <span class="weekday-pill" id="weekdayPill">周六</span>
+    <span class="spacer"></span>
+    <button id="wxShareBtn" class="btn-share" title="分享给微信朋友">📤 分享</button>
+  </div>
+  <div id="wxShareTip" class="wx-share-tip" style="display:none">
+    微信内无法直接弹出分享面板，<br>
+    请点右上角「···」→「发送给朋友」<br>
+    链接已自动复制到剪贴板
   </div>
 </header>
+
+<script>
+(function(){
+  var btn = document.getElementById('wxShareBtn');
+  var tip = document.getElementById('wxShareTip');
+  var url  = location.href.split('#')[0];
+  var title = document.title || '三娃每日任务分配';
+  var meta = document.querySelector('meta[name="description"]');
+  var desc = meta ? meta.content : title;
+
+  function inWeChat(){ return /MicroMessenger/i.test(navigator.userAgent); }
+  function copyLink(){
+    return new Promise(function(resolve){
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(resolve, resolve);
+      } else {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+        } catch(e){}
+        resolve();
+      }
+    });
+  }
+
+  btn.addEventListener('click', function(){
+    // 非微信浏览器：尽力唤起系统原生分享面板（面板内含微信）
+    if (navigator.share && !inWeChat()) {
+      navigator.share({ title: title, text: desc, url: url })
+        .catch(function(){});
+      return;
+    }
+    // 微信内置浏览器：复制链接 + 提示手动分享
+    copyLink().then(function(){
+      tip.style.display = 'block';
+      setTimeout(function(){ tip.style.display = 'none'; }, 6000);
+    });
+  });
+})();
+</script>
 
 <div class="shared-learning" style="display:none">
   <div class="title">📖 共同学习（每天都做）</div>
