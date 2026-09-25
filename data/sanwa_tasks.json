@@ -3476,8 +3476,9 @@
             "name": "语文词语",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899962570951rei",
@@ -3532,7 +3533,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1790328614841,
+        "taskSavedAt": 1790329156749,
         "reviewSavedAt": null
       },
       "yanxi": {
