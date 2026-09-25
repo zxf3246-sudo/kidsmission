@@ -2969,8 +2969,8 @@
             "errLinked": false
           },
           {
-            "id": "t1789962795664rniy",
-            "name": "四五快读第二册1课新字",
+            "id": "t1789962795664pxug",
+            "name": "1 Mission",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -2995,14 +2995,6 @@
           {
             "id": "t17899627956645l70",
             "name": "小龙1篇",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1789962795664pxug",
-            "name": "1 Mission",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -3053,7 +3045,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1790349108877,
+        "taskSavedAt": 1790349144927,
         "reviewSavedAt": null
       },
       "qiannuo": {
