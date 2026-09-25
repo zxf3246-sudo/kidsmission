@@ -2073,22 +2073,25 @@ function defaultTasksFor(childId, dateStr) {
     ];
   }
   if (childId === 'qiannuo') {
-    // 第七项按星期交替：1/3/5/7（周一、三、五、日）英语阅读练习；2/4/6（周二、四、六）语文练习
-    // getDay(): 周日=0（用户口径"7"），周一=1...周六=6 → 周日或奇数天=英语阅读练习，偶数天=语文练习
     const dow = dateStr ? new Date(dateStr + 'T00:00:00').getDay() : 1;
     const isEngReading = (dow === 0 || dow % 2 === 1);
-    return [
-      t('WWK3个新单词', 15),
-      t('600字1课生字', 15),
+    const tasks = [
+      t('WWK单词3个', 15),
+      t('600字新字5个', 15),
       t('数学计算练习', 20),
-      t('书法汉字练习', 15),
-      t('字母拼音练习', 10),
+      t('华文练字', 15),
       t('控笔练习', 10),
-      isEngReading ? t('英语阅读练习', 15) : t('语文练习', 15),
-      ...(dow === 4 ? [t('学校双语作业', 15)] : []),   // 每周四固定：学校双语作业
-      t('自由玩耍', null, 'rest'),
-      t('洗漱睡觉', null, 'rest'),
+      t('字母拼音', 10),
     ];
+    // 每周一(dow=1)固定：乘法口诀复习（新增在字母拼音之后）
+    if (dow === 1) tasks.push(t('乘法口诀复习', 10));
+    // 第七项按星期交替：1/3/5/7（周一、三、五、日）英语阅读练习；2/4/6（周二、四、六）语文练习
+    tasks.push(isEngReading ? t('英语阅读练习', 15) : t('语文练习', 15));
+    // 每周四固定：学校双语作业
+    if (dow === 4) tasks.push(t('学校双语作业', 15));
+    tasks.push(t('自由玩耍', null, 'rest'));
+    tasks.push(t('洗漱睡觉', null, 'rest'));
+    return tasks;
   }
   return [];
 }
@@ -2205,6 +2208,41 @@ function syncCourseHomework(childId, dateStr) {
       // 不应出现：移除动态任务；旧版同名任务（默认模板遗留）一并移除，保证无课日不出现
       if (idx !== -1) { tasks.splice(idx, 1); changed = true; }
       else if (legacyIdx !== -1) { tasks.splice(legacyIdx, 1); changed = true; }
+    }
+  });
+  return changed;
+}
+
+// ============ 小测复习动态任务 ============
+// 当"重要提示"里存在学校小测/听写类提醒，且倒计时恰为 5 天、3 天、明天(1 天)时，
+// 在当天任务栏为对应孩子显示一条"小测复习"动态任务；否则移除。
+// - 李彦希(yanxi)：标题含"小测"
+// - 李芊诺(qiannuo)：标题含"学校听写"
+function syncQuizReviewDynamic(dateStr) {
+  if (!dateStr || !state || !state.reminders) return false;
+  const triggers = [{ childId: 'yanxi',  kw: ['小测'] },
+                    { childId: 'qiannuo', kw: ['学校听写'] }];
+  let changed = false;
+  const todayT = new Date(dateStr + 'T00:00:00').getTime();
+  triggers.forEach(({ childId, kw }) => {
+    const cd = state.dates[dateStr] && state.dates[dateStr][childId];
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    // 当天存在符合条件的提醒（标题含任一关键词），且倒计时为 5/3/1 天
+    const hit = (state.reminders || []).some(r => {
+      if (r.childId !== childId) return false;
+      if (!kw.some(k => (r.title || '').includes(k))) return false;
+      const days = Math.round((new Date(r.date + 'T00:00:00').getTime() - todayT) / 86400000);
+      return days === 5 || days === 3 || days === 1;
+    });
+    const idx = cd.tasks.findIndex(t => t.courseTask === 'quizReview');
+    if (hit) {
+      if (idx === -1) {
+        const insertPos = courseHomeworkInsertPos(cd.tasks, childId);
+        cd.tasks.splice(insertPos, 0, { id: uid(), name: '小测复习', duration: 15, type: 'study', status: '', done: false, courseTask: 'quizReview' });
+        changed = true;
+      }
+    } else {
+      if (idx !== -1) { cd.tasks.splice(idx, 1); changed = true; }
     }
   });
   return changed;
@@ -3070,6 +3108,38 @@ function renameYanxiWeeklyTasks(obj) {
   }
 }
 
+// 李芊诺固定任务改名 + 周一补"乘法口诀复习"（历史数据迁移）：
+// WWK3个新单词→WWK单词3个；600字1课生字→600字新字5个；书法汉字练习→华文练字；字母拼音练习→字母拼音
+// 控笔练习/字母拼音已在新模板中交换顺序（控笔在前），这里只改名不重排顺序（顺序由重建逻辑保证）
+// 每周一(dow=1)：在"字母拼音"之后补入"乘法口诀复习"（幂等，已含则跳过）
+function renameQiannuoFixedTasks(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
+    if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    const NAME_MAP = {
+      'WWK3个新单词': 'WWK单词3个',
+      '600字1课生字': '600字新字5个',
+      '书法汉字练习': '华文练字',
+      '字母拼音练习': '字母拼音'
+    };
+    let hit = false;
+    cd.tasks.forEach(t => { if (t && t.name && NAME_MAP[t.name]) { t.name = NAME_MAP[t.name]; hit = true; } });
+    if (dow === 1 && !cd.tasks.some(t => t.name === '乘法口诀复习') && cd.tasks.some(t => t.name === '字母拼音')) {
+      const idx = cd.tasks.findIndex(t => t.name === '字母拼音');
+      cd.tasks.splice(idx + 1, 0, { id: uid(), name: '乘法口诀复习', duration: 10, type: 'study', done: false });
+      hit = true;
+    }
+    if (hit) changed++;
+  });
+  if (changed > 0) {
+    console.log('[renameQiannuoFixedTasks] 🔄 李芊诺固定任务改名/周一乘法口诀复习：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 给李芊诺所有"周四"的日期补上固定任务"学校双语作业"（15分钟）。
 // 幂等：当天已在"控笔练习"之后、休息任务之前插入；已含则跳过。
 // 只处理周四（getDay()===4），且跳过用户已手动调整过的（任务里已含该名）。
@@ -3147,11 +3217,12 @@ function upgradeLegacyTasks(obj, dateStr, childId) {
   const qiannuoAlt = (dow === 0 || dow % 2 === 1) ? '英语阅读练习' : '语文练习';
   const NEW = {
     yanxi: ['Koobits','1 Mission','四五快读新字','WW1单词5个',yanxiAlt,'语文学校词复习'],
-    qiannuo: ['WWK3个新单词','600字1课生字','数学计算练习','书法汉字练习','字母拼音练习','控笔练习',qiannuoAlt]
+    qiannuo: ['WWK单词3个','600字新字5个','数学计算练习','华文练字','控笔练习','字母拼音',qiannuoAlt]
   };
   const DUR = {
     'Koobits':20,'1 Mission':15,'四五快读新字':15,'WW1单词5个':15,'语文阅读理解':15,'英语语法':15,'语文学校词复习':15,
-    'WWK3个新单词':15,'600字1课生字':15,'数学计算练习':20,'书法汉字练习':15,'字母拼音练习':10,'控笔练习':10,'英语阅读练习':15,'语文练习':15
+    'WWK3个新单词':15,'600字1课生字':15,'数学计算练习':20,'书法汉字练习':15,'字母拼音练习':10,'控笔练习':10,'英语阅读练习':15,'语文练习':15,
+    'WWK单词3个':15,'600字新字5个':15,'华文练字':15,'字母拼音':10,'乘法口诀复习':10
   };
 
   const newTasks = NEW[childId].map(n => ({
@@ -3360,6 +3431,7 @@ function loadState() {
       removeYanxiSchoolWords(obj);
       removeMissyNilaoshi(obj);
       renameYilinWeeklyTasks(obj);
+      renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
@@ -3544,6 +3616,8 @@ function render() {
   // 同步课程作业：按课程动态出现/顺延/本周完成后隐藏
   let synced = false;
   CHILDREN.forEach(c => { if (syncCourseHomework(c.id, dateStr)) synced = true; });
+  // 小测复习动态任务：重要提示里的学校小测/听写在倒计时 5/3/1 天时显示
+  if (syncQuizReviewDynamic(dateStr)) synced = true;
   if (synced) save();
   // 切换日期时重置脏标记（按孩子保存时间判断是否有未保存更改由后续编辑触发）
   dirtyState = {};
@@ -5927,6 +6001,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   removeYanxiSchoolWords(state);
   removeMissyNilaoshi(state);
   renameYilinWeeklyTasks(state);
+  renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
   render();
@@ -6072,6 +6147,7 @@ async function autoPullFromCloud() {
     removeYanxiSchoolWords(merged);
     removeMissyNilaoshi(merged);
     renameYilinWeeklyTasks(merged);
+    renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
