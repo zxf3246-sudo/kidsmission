@@ -3514,32 +3514,36 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899962570992ukr",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899962570990gil",
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789996257099yaur",
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899962570996zq0",
@@ -3594,7 +3598,7 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790334506368,
         "reviewSavedAt": null
       },
       "qiannuo": {
