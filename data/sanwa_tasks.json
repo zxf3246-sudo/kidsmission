@@ -3593,7 +3593,7 @@
         "review": {
           "points": 4,
           "score": 88,
-          "summary": "",
+          "summary": "今天回来的比较晚，每日的基础任务完成的还算是不错，但是到了后来，看到另外两个任务完成都开始休息了，然后他也坐不住了。不在状态了，所以多余的任务就没强制完成，推到明天。",
           "reward": "",
           "other": "",
           "keywords": [
@@ -3607,7 +3607,7 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1790339364506,
-        "reviewSavedAt": 1790339666333
+        "reviewSavedAt": 1790339729293
       },
       "qiannuo": {
         "fixedClasses": [],
