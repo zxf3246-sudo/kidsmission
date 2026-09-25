@@ -3597,8 +3597,9 @@
           "reward": "",
           "other": "",
           "keywords": [
-            "发脾气",
-            "懒惰"
+            "懒惰",
+            "拖拖拉拉",
+            "准确率高"
           ],
           "savings": 0,
           "stars": 3.5
@@ -3606,7 +3607,7 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1790339364506,
-        "reviewSavedAt": 1790339626844
+        "reviewSavedAt": 1790339666333
       },
       "qiannuo": {
         "fixedClasses": [],
