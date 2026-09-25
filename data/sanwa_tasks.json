@@ -3491,14 +3491,6 @@
             "status": "done"
           },
           {
-            "id": "t17899962570955duu",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "fixy-20260925-pod",
             "name": "听播客",
             "duration": 30,
@@ -3534,7 +3526,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1790329859876,
+        "taskSavedAt": 1790329963410,
         "reviewSavedAt": null
       },
       "yanxi": {
