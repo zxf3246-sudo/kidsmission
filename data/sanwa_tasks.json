@@ -634,11 +634,6 @@
       "yilin": {
         "fixedClasses": [
           {
-            "name": "倪老师语文",
-            "time": "10:00-13:00",
-            "duration": 180
-          },
-          {
             "name": "线上TAL",
             "time": "15:00-17:00",
             "duration": 120
@@ -2497,11 +2492,6 @@
     "2026-09-26": {
       "yilin": {
         "fixedClasses": [
-          {
-            "name": "倪老师语文",
-            "time": "10:00-13:00",
-            "duration": 180
-          },
           {
             "name": "线上TAL",
             "time": "15:00-17:00",
