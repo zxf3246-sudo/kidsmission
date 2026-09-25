@@ -3575,7 +3575,7 @@
           {
             "id": "t1789996257099806p",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 150,
             "type": "rest",
             "done": true,
             "errLinked": false,
@@ -3602,7 +3602,7 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": 1790339356264,
+        "taskSavedAt": 1790339364506,
         "reviewSavedAt": null
       },
       "qiannuo": {
