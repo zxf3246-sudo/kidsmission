@@ -1945,8 +1945,7 @@ const WEEKLY_CLASSES = {
     4: [{name:'语文LA',        time:'15:00-16:00', duration:60},
         {name:'科学',          time:'19:30-21:30', duration:120}],
     5: [],
-    6: [{name:'倪老师语文',    time:'10:00-13:00', duration:180},
-        {name:'线上TAL',       time:'15:00-17:00', duration:120},
+    6: [{name:'线上TAL',       time:'15:00-17:00', duration:120},
         {name:'英语missy',     time:'19:45-21:45', duration:120}],
     0: [{name:'全科补习',      time:'09:00-13:30', duration:270},
         {name:'科学',          time:'19:30-21:30', duration:120}]
@@ -2963,6 +2962,25 @@ function removeMissyTueClass(obj) {
   }
 }
 
+// 从李怡霖所有日期的固定课程里剔除"倪老师语文"（用户要求删除周六该课程）
+function removeMissyNilaoshi(obj) {
+  if (!obj || !obj.dates) return;
+  let removed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (cd && Array.isArray(cd.fixedClasses)) {
+      const before = cd.fixedClasses.length;
+      cd.fixedClasses = cd.fixedClasses.filter(c => !(c.name && c.name.includes('倪老师语文')));
+      const removedNow = before - cd.fixedClasses.length;
+      if (removedNow > 0) console.log('[removeMissyNilaoshi] 🗑 移除倪老师语文', ds, removedNow, '条');
+      removed += removedNow;
+    }
+  });
+  if (removed > 0) {
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 将已保存数据中李彦希任务的"WW1单词10个"重命名为"WW1单词5个"
 // 幂等：无旧名称则不动（自动跳过已改/未命中日期）
 function renameYanxiWW1(obj) {
@@ -3273,6 +3291,7 @@ function loadState() {
       renameYanxiWW1(obj);
       addQiannuoThursBilingual(obj);
       removeYanxiSchoolWords(obj);
+      removeMissyNilaoshi(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
       console.log('[loadState] ✅ 从 localStorage 加载成功，日期数:', Object.keys(obj.dates||{}).length);
@@ -5837,6 +5856,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   renameYanxiWW1(state);
   addQiannuoThursBilingual(state);
   removeYanxiSchoolWords(state);
+  removeMissyNilaoshi(state);
   swapReviewDates(state);
   save();
   render();
@@ -5979,6 +5999,7 @@ async function autoPullFromCloud() {
     renameYanxiWW1(merged);
     addQiannuoThursBilingual(merged);
     removeYanxiSchoolWords(merged);
+    removeMissyNilaoshi(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
