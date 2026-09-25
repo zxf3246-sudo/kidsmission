@@ -69,19 +69,21 @@
     border: 1px solid rgba(255,255,255,.25); }
   header .sub { font-size: 13px; opacity: .92; position: relative; }
   .date-bar {
-    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    display: flex; flex-wrap: nowrap; gap: 8px; align-items: center;
     margin-top: 16px; background: rgba(255,255,255,.16);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     padding: 12px 16px; border-radius: 14px;
     border: 1px solid rgba(255,255,255,.18); position: relative;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
   }
   .date-bar input[type="date"] {
-    padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.25);
-    background: rgba(255,255,255,.95); font-size: 14px; font-weight: 500;
+    padding: 6px 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.95); font-size: 13px; font-weight: 500;
     color: var(--c-text); cursor: pointer; font-family: inherit;
+    flex: 0 0 auto; min-width: 0;
   }
-  .weekday-pill { background: rgba(255,255,255,.22); padding: 6px 14px;
-    border-radius: 16px; font-size: 13px; font-weight: 500;
+  .weekday-pill { background: rgba(255,255,255,.22); padding: 5px 10px;
+    border-radius: 14px; font-size: 12px; font-weight: 500; white-space: nowrap;
     border: 1px solid rgba(255,255,255,.2); }
   .btn-today {
     background: rgba(255,255,255,.25); color: #fff;
@@ -94,9 +96,9 @@
   /* 顶部导航栏微信分享按钮 */
   .btn-share {
     background: linear-gradient(135deg, #07c160, #059d4d); color: #fff;
-    border: none; padding: 8px 16px; border-radius: 12px; cursor: pointer;
-    font-size: 13px; font-weight: 700; font-family: inherit;
-    display: inline-flex; align-items: center; gap: 6px;
+    border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer;
+    font-size: 12px; font-weight: 700; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
     box-shadow: 0 4px 12px rgba(7,193,96,.35); transition: all .2s;
   }
   .btn-share:hover { transform: translateY(-1px); filter: brightness(1.08); }
@@ -108,9 +110,9 @@
   }
   .live-clock {
     background: rgba(0,0,0,.18); color: #fff;
-    padding: 7px 14px; border-radius: 10px;
-    font-size: 13px; font-weight: 700; font-family: 'Courier New', monospace;
-    border: 1px solid rgba(255,255,255,.15); letter-spacing: 1px;
+    padding: 5px 8px; border-radius: 10px;
+    font-size: 12px; font-weight: 700; font-family: 'Courier New', monospace;
+    border: 1px solid rgba(255,255,255,.15); letter-spacing: 0; white-space: nowrap;
   }
   .spacer { flex: 1; }
   .btn-hero {
@@ -1038,7 +1040,7 @@
   <h1><span class="logo">📚</span>三娃每日任务分配</h1>
   <div class="date-bar">
     <input type="date" id="datePicker">
-    <span class="live-clock" id="liveClock" title="系统当前时间">12:27:58</span>
+    <span class="live-clock" id="liveClock" title="系统当前时间">12:27</span>
     <span class="weekday-pill" id="weekdayPill">周六</span>
     <button id="wxShareBtn" class="btn-share" title="分享给微信朋友">📤 分享</button>
   </div>
@@ -6111,7 +6113,7 @@ function getLocalDateStr() {
 function updateLiveClock() {
   const now = new Date();
   const el = document.getElementById('liveClock');
-  if (el) el.textContent = pad2(now.getHours()) + ':' + pad2(now.getMinutes()) + ':' + pad2(now.getSeconds());
+  if (el) el.textContent = pad2(now.getHours()) + ':' + pad2(now.getMinutes());
 }
 
 function goToday() {
