@@ -3452,16 +3452,17 @@
             "name": "Missy作文阅读",
             "duration": 30,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1790320937959le2h",
             "name": "Missy作业背2句",
             "duration": null,
             "type": "study",
-            "done": true,
+            "done": false,
             "errLinked": false,
-            "status": "done"
+            "status": "empty"
           },
           {
             "id": "fixy-20260925-m2",
@@ -3483,8 +3484,9 @@
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899962570955duu",
