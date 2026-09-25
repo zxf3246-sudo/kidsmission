@@ -3443,16 +3443,9 @@
             "name": "学校作业",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790320937959le2h",
-            "name": "Missy作业背2句",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "fixy-20260925-m1",
@@ -3460,6 +3453,15 @@
             "duration": 30,
             "type": "study",
             "done": false
+          },
+          {
+            "id": "t1790320937959le2h",
+            "name": "Missy作业背2句",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "fixy-20260925-m2",
@@ -3688,15 +3690,6 @@
             "errLinked": false
           },
           {
-            "id": "t17899962571017kuw",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
             "id": "t179032086735430gm",
             "name": "思维训练",
             "duration": null,
@@ -3711,6 +3704,15 @@
             "type": "study",
             "done": false,
             "errLinked": false
+          },
+          {
+            "id": "t17899962571017kuw",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
           },
           {
             "id": "t1789996257099gr4e",
