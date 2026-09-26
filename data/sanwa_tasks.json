@@ -2826,14 +2826,17 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "自制力差"
+          ],
           "savings": 0,
           "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1790432836882,
-        "reviewSavedAt": 1790433210457
+        "reviewSavedAt": 1790433233346
       }
     },
     "2026-09-29": {
