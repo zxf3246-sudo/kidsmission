@@ -2607,7 +2607,7 @@
           {
             "id": "t1790390624387untd",
             "name": "Koobits测试",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -2698,8 +2698,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:00"
           }
         ],
         "review": {
@@ -2714,7 +2716,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1790425008567,
+        "taskSavedAt": 1790432770836,
         "reviewSavedAt": null
       },
       "qiannuo": {
