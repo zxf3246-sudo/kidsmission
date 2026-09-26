@@ -2694,6 +2694,15 @@
             "status": "done"
           },
           {
+            "id": "t179043281695008wb",
+            "name": "看电视",
+            "duration": 90,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t1789962795664onju",
             "name": "洗漱睡觉",
             "duration": null,
@@ -2716,7 +2725,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1790432770836,
+        "taskSavedAt": 1790432824428,
         "reviewSavedAt": null
       },
       "qiannuo": {
