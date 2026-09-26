@@ -2581,19 +2581,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "积极",
+            "老师表扬",
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1790432737012,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790432881458
       },
       "yanxi": {
         "fixedClasses": [
