@@ -3125,9 +3125,14 @@ function renameQiannuoFixedTasks(obj) {
   };
   Object.keys(obj.dates).forEach(ds => {
     const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
-    if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
-    const dow = new Date(ds + 'T00:00:00').getDay();
+    if (!cd) return;
     let hit = false;
+    // 固定课程改名：李芊诺的"LA"→"语文LA"
+    if (Array.isArray(cd.fixedClasses) && cd.fixedClasses.length) {
+      cd.fixedClasses.forEach(c => { if (c && c.name === 'LA') { c.name = '语文LA'; hit = true; } });
+    }
+    if (!Array.isArray(cd.tasks) || !cd.tasks.length) return;
+    const dow = new Date(ds + 'T00:00:00').getDay();
     // 改名
     cd.tasks.forEach(t => { if (t && t.name && NAME_MAP[t.name]) { t.name = NAME_MAP[t.name]; hit = true; } });
     // "乘法口诀复习"仅周一(dow=1)保留：周一确保存在，非周一一律移除
