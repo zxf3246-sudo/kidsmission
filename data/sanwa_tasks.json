@@ -2561,7 +2561,7 @@
           },
           {
             "id": "t1789962795659dk10",
-            "name": "中午睡觉",
+            "name": "午休",
             "duration": 150,
             "type": "rest",
             "done": true,
@@ -2574,8 +2574,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:25"
           }
         ],
         "review": {
@@ -2590,7 +2592,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1790432675034,
+        "taskSavedAt": 1790432737012,
         "reviewSavedAt": null
       },
       "yanxi": {
