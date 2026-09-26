@@ -2771,8 +2771,9 @@
             "name": "语法练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789962795666epkl",
@@ -2811,7 +2812,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1790425041295,
+        "taskSavedAt": 1790425045813,
         "reviewSavedAt": null
       }
     },
