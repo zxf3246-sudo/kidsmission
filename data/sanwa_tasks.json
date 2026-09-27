@@ -4725,38 +4725,6 @@
             "errLinked": false
           },
           {
-            "id": "t1790348711017391n",
-            "name": "Missy口语练习1个",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790348711017cvhd",
-            "name": "语文错题巩固",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790348711017mjvh",
-            "name": "科学错题巩固",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790348711017l77f",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790348711017bq2u",
             "name": "听播客",
             "duration": 30,
@@ -4766,7 +4734,7 @@
           },
           {
             "id": "t1790348711017ibwi",
-            "name": "学而思作业",
+            "name": "学而思在线作业",
             "duration": null,
             "type": "study",
             "status": "",
@@ -4802,7 +4770,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790472763246,
         "reviewSavedAt": null
       },
       "yanxi": {
