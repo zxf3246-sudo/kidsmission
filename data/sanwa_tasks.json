@@ -4827,15 +4827,6 @@
             "status": "done"
           },
           {
-            "id": "t1790348711017zk4u",
-            "name": "1篇阅读",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
             "id": "t1790348711017bdcf",
             "name": "英语过去式背诵5个",
             "duration": 15,
@@ -4892,7 +4883,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1790499152253,
+        "taskSavedAt": 1790499163202,
         "reviewSavedAt": null
       },
       "qiannuo": {
