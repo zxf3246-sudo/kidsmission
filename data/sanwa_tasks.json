@@ -4910,16 +4910,18 @@
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790348711017qt0k",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790348711017ccms",
@@ -4999,7 +5001,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790479655449,
         "reviewSavedAt": null
       }
     },
