@@ -4859,13 +4859,6 @@
             "errLinked": false
           },
           {
-            "id": "t1790474928333eu1g",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t1790348711017d3hn",
             "name": "自由玩耍",
             "duration": null,
@@ -4894,7 +4887,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1790480729651,
+        "taskSavedAt": 1790480740627,
         "reviewSavedAt": null
       },
       "qiannuo": {
