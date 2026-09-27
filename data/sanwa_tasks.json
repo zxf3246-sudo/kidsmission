@@ -4828,11 +4828,12 @@
           },
           {
             "id": "t1790348711017zk4u",
-            "name": "阅读作文学习",
+            "name": "1篇阅读",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790348711017bdcf",
@@ -4891,7 +4892,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1790499123335,
+        "taskSavedAt": 1790499139770,
         "reviewSavedAt": null
       },
       "qiannuo": {
