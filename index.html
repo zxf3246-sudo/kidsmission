@@ -3062,6 +3062,32 @@ function renameYilinWeeklyTasks(obj) {
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
+
+// 同步李怡霖周日固定课程到最新模板（用户要求：周日去掉科学课、增加画画课 15:00-18:00）
+// 幂等：仅处理周日(dow=0)，移除"科学 19:30-21:30"，并确保存在"画画课 15:00-18:00"
+function syncYilinSundayClasses(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    if (dow !== 0) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    const before = cd.fixedClasses.length;
+    // 1) 移除周日科学课（19:30-21:30）
+    cd.fixedClasses = cd.fixedClasses.filter(c =>
+      !(c.name && c.name === '科学' && c.time === '19:30-21:30'));
+    // 2) 确保周日有画画课 15:00-18:00
+    if (!cd.fixedClasses.some(c => c.name && c.name === '画画课' && c.time === '15:00-18:00')) {
+      cd.fixedClasses.push({ name: '画画课', time: '15:00-18:00', duration: 180 });
+    }
+    if (cd.fixedClasses.length !== before) changed++;
+  });
+  if (changed > 0) {
+    console.log('[syncYilinSundayClasses] 🔄 李怡霖周日固定课程已同步：科学课移除、画画课添加，共', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
 function renameYanxiWW1(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3445,6 +3471,7 @@ function loadState() {
       removeYanxiSchoolWords(obj);
       removeMissyNilaoshi(obj);
       renameYilinWeeklyTasks(obj);
+      syncYilinSundayClasses(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -6030,6 +6057,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   removeYanxiSchoolWords(state);
   removeMissyNilaoshi(state);
   renameYilinWeeklyTasks(state);
+  syncYilinSundayClasses(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -6176,6 +6204,7 @@ async function autoPullFromCloud() {
     removeYanxiSchoolWords(merged);
     removeMissyNilaoshi(merged);
     renameYilinWeeklyTasks(merged);
+    syncYilinSundayClasses(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
