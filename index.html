@@ -2693,8 +2693,11 @@ async function saveTasks(childId) {
   clearDirty(childId, 'task');
   save();
   renderChildren(dateStr);
-  showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在上传到云端...');
-  // 自动上传到云端
+  showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在刷新云端...');
+  // 先刷新（拉取合并）云端最新数据，再上传
+  try {
+    await autoPullFromCloud();
+  } catch (e) { console.error('Pull before saveTasks failed:', e); }
   try {
     await uploadToGist();
   } catch (e) {
@@ -2710,8 +2713,11 @@ async function saveReview(childId) {
   clearDirty(childId, 'review');
   save();
   renderChildren(dateStr);
-  showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在上传到云端...');
-  // 自动上传到云端
+  showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在刷新云端...');
+  // 先刷新（拉取合并）云端最新数据，再上传
+  try {
+    await autoPullFromCloud();
+  } catch (e) { console.error('Pull before saveReview failed:', e); }
   try {
     await uploadToGist();
   } catch (e) {
