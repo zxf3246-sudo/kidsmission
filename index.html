@@ -5944,8 +5944,32 @@ async function pullFromGist() {
     const content = decodeURIComponent(escape(atob(result.content.replace(/\n/g, ''))));
     const cloudState = JSON.parse(content);
     hideSyncProgress();
-    // 数据合并：本地独有日期自动并入；云端独有日期自动拉取；冲突日期弹窗解决
-    mergeCloudData(cloudState);
+    // 智能合并：按时间戳（taskSavedAt/reviewSavedAt）自动取最新，不弹冲突框
+    const localState = JSON.parse(localStorage.getItem('sanwa_tasks') || '{"dates":{}}');
+    const merged = mergeSmart(localState, cloudState);
+    // 补齐固定任务/迁移，与 autoPullFromCloud 一致
+    mergeDefaultReminders(merged);
+    ensureSummaryKeywords(merged);
+    removeMissyTueClass(merged);
+    migrateTaskFormat(merged);
+    migrateYilinMissyTasks(merged);
+    addYanxiCalcTask(merged);
+    renameYanxiWW1(merged);
+    renameYanxiWeeklyTasks(merged);
+    addQiannuoThursBilingual(merged);
+    removeYanxiSchoolWords(merged);
+    removeMissyNilaoshi(merged);
+    renameYilinWeeklyTasks(merged);
+    syncYilinSundayClasses(merged);
+    syncYanxiWedLaTime(merged);
+    renameQiannuoFixedTasks(merged);
+    swapReviewDates(merged);
+    removeAutoEnrichedTasks(merged);
+    localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
+    state = merged;
+    lastRemoteVersion = result ? result.sha : lastRemoteVersion;
+    render();
+    showToast('☁ 已从云端同步（智能合并）');
   } catch (e) {
     hideSyncProgress();
     showToast('❌ 拉取失败：' + e.message);
