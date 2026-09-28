@@ -2253,6 +2253,11 @@ function matchActivity(taskName) {
   }
   return null;
 }
+// 用本地时区生成 YYYY-MM-DD（避免 toISOString 在中国时区偏移到前一天）
+function localDateStr(d) {
+  const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+dd;
+}
 // 获取过去 N 天（不含 dateStr）该孩子的历史数据
 function getPastDatesInState(s, childId, dateStr, days) {
   if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return [];
@@ -2260,7 +2265,7 @@ function getPastDatesInState(s, childId, dateStr, days) {
   const target = new Date(dateStr + 'T00:00:00');
   for (let i = 1; i <= days; i++) {
     const d = new Date(target); d.setDate(d.getDate() - i);
-    const ds = d.toISOString().slice(0,10);
+    const ds = localDateStr(d);
     if (s.dates[ds] && s.dates[ds][childId]) {
       result.push({ date: ds, childData: s.dates[ds][childId] });
     }
@@ -2276,7 +2281,7 @@ function getWeekDatesInState(s, childId, dateStr) {
   const monday = new Date(target); monday.setDate(target.getDate() - diffToMonday);
   const result = [];
   for (let d = new Date(monday); d.getTime() <= target.getTime(); d.setDate(d.getDate() + 1)) {
-    const ds = d.toISOString().slice(0,10);
+    const ds = localDateStr(d);
     if (s.dates[ds] && s.dates[ds][childId]) {
       result.push({ date: ds, childData: s.dates[ds][childId] });
     }
@@ -2393,7 +2398,7 @@ function learnWeekdayPattern(s, childId, dateStr, sampleDays) {
   for (let i = 1; i <= sampleDays; i++) {
     const d = new Date(target); d.setDate(d.getDate() - i);
     if (d.getDay() !== targetDow) continue;
-    const ds = d.toISOString().slice(0,10);
+    const ds = localDateStr(d);
     if (s.dates[ds] && s.dates[ds][childId]) {
       weekdayDates.push({ date: ds, tasks: s.dates[ds][childId].tasks || [] });
     }
@@ -3475,7 +3480,7 @@ function loadState() {
   return fresh;
 }
 function initState() {
-  const today = new Date().toISOString().slice(0,10);
+  const today = localDateStr(new Date());
   return ensureDateOn({ dates: {}, sharedLearning: [...DEFAULT_SHARED_LEARNING], reminders: [...DEFAULT_REMINDERS],
     summaryKeywords: [...DEFAULT_SUMMARY_KEYWORDS] }, today);
 }
@@ -5645,7 +5650,7 @@ function downloadTextShare() {
 // ============ 数据导出/导入（JSON 备份，软件更新也不丢） ============
 function exportDataJSON() {
   try {
-    const today = new Date().toISOString().slice(0,10);
+    const today = localDateStr(new Date());
     const payload = {
       app: 'sanwa-daily-tasks',
       version: 1,
