@@ -1951,9 +1951,9 @@ const WEEKLY_CLASSES = {
         {name:'画画课',        time:'15:00-18:00', duration:180}]
   },
   yanxi: {
-    1: [{name:'语文LA',        time:'14:30-15:30', duration:60}],
+    1: [{name:'语文LA',        time:'15:30-16:30', duration:60}],
     2: [{name:'TTA AI',        time:'15:30-17:00', duration:90}],
-    3: [{name:'语文LA',        time:'15:30-16:30', duration:60}],
+    3: [{name:'语文LA',        time:'14:30-15:30', duration:60}],
     4: [{name:'编程',          time:'17:45-19:45', duration:120}],
     5: [{name:'TAL',           time:'14:45-16:45', duration:120}],
     6: [{name:'篮球',          time:'13:30-15:30', duration:120}],
@@ -3095,14 +3095,14 @@ function syncYilinSundayClasses(obj) {
   }
 }
 
-// 同步李彦希周三语文LA课程时间到最新模板（用户要求：周三语文LA改为 15:30-16:30）
-// 幂等：仅处理周三(dow=3)，将语文LA时间改为 15:30-16:30
+// 同步李彦希周一语文LA课程时间到最新模板（用户要求：周一语文LA改为 15:30-16:30）
+// 幂等：仅处理周一(dow=1)，将语文LA时间改为 15:30-16:30
 function syncYanxiWedLaTime(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
   Object.keys(obj.dates).forEach(ds => {
     const dow = new Date(ds + 'T00:00:00').getDay();
-    if (dow !== 3) return;
+    if (dow !== 1) return;
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
@@ -3112,7 +3112,7 @@ function syncYanxiWedLaTime(obj) {
     });
   });
   if (changed > 0) {
-    console.log('[syncYanxiWedLaTime] 🔄 李彦希周三语文LA时间已更新为 15:30-16:30，共', changed, '项');
+    console.log('[syncYanxiWedLaTime] 🔄 李彦希周一语文LA时间已更新为 15:30-16:30，共', changed, '项');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
@@ -3699,12 +3699,12 @@ function render() {
       cd.tasks.splice(mIdx, 1);
     }
   })();
-  // 强制周三李彦希"语文LA"时间 15:30-16:30（用户要求）
+  // 强制周一李彦希"语文LA"时间 15:30-16:30（用户要求）
   (() => {
     const cd = state.dates[dateStr] && state.dates[dateStr].yanxi;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     const dow = new Date(dateStr+'T00:00:00').getDay();
-    if (dow !== 3) return;
+    if (dow !== 1) return;
     cd.fixedClasses.forEach(c => {
       if (c && c.name && c.name === '语文LA' && c.time !== '15:30-16:30') {
         c.time = '15:30-16:30';
