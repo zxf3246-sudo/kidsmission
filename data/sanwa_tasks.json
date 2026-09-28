@@ -4877,12 +4877,14 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 7,
+          "score": 90,
           "summary": "总体表现也还可以，作业都做完了，补了很多页的数学计算题。",
           "reward": "复活10张加一包新的宝可梦卡。",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话"
+          ],
           "savings": 0,
           "stars": 0
         },
