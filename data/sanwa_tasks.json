@@ -4781,14 +4781,18 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "状态不好",
+            "批评",
+            "自我反思"
+          ],
           "savings": 0,
           "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1790474841710,
-        "reviewSavedAt": 1790565091758
+        "reviewSavedAt": 1790565124625
       },
       "yanxi": {
         "fixedClasses": [],
@@ -6274,6 +6278,8 @@
     "心不在焉",
     "注意力集中",
     "有进步",
-    "懒惰"
+    "懒惰",
+    "状态不好",
+    "自我反思"
   ]
 }
