@@ -3202,8 +3202,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:25"
           }
         ],
         "review": {
@@ -3218,7 +3220,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790597435223,
+        "taskSavedAt": 1790601943312,
         "reviewSavedAt": 1790599700442
       },
       "yanxi": {
