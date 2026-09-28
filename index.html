@@ -5770,9 +5770,7 @@ const SHARED_REPO = 'zxf3246-sudo/kidsmission';
 const SHARED_DATA_FILE = 'data/sanwa_tasks.json';
 const CLOUD_KEY = 'sanwa_cloud_config';
 let pullCtx = null;
-let autoSyncEnabled = true;
 let lastRemoteVersion = null;
-let syncTimer = null;
 
 function loadCloudConfig() {
   try {
@@ -6119,45 +6117,6 @@ document.getElementById('datePicker').addEventListener('change', render);
 updateCloudStatusUI();
 render();
 
-// ============ 🚀 自动同步启动 ============
-async function autoSyncStart() {
-  const cfg = loadCloudConfig();
-  if (!cfg.token || !cfg.repo) return;
-  
-  // 1. 页面打开时自动拉取云端最新
-  try {
-    await autoPullFromCloud();
-  } catch(e) {}
-  
-  // 2. 定时检查云端更新（每 60 秒一次；频率已调低以省流量/电量，保存即上传、切回页面即同步不受影响）
-  syncTimer = setInterval(async () => {
-    if (!autoSyncEnabled) return;
-    try { await autoPullFromCloud(); } catch(e) {}
-  }, 60000);
-  
-  // 3. 页面隐藏/切回来时检查更新
-  document.addEventListener('visibilitychange', async () => {
-    if (!document.hidden && autoSyncEnabled) {
-      try { await autoPullFromCloud(); } catch(e) {}
-    }
-  });
-  
-  // 4. 定时保存（每隔 60 秒自动上传一次本地改动）
-  setInterval(async () => {
-    if (!autoSyncEnabled) return;
-    const cfg2 = loadCloudConfig();
-    const localState = localStorage.getItem('sanwa_tasks');
-    if (cfg2.lastSync && localState) {
-      // 简单检查：有改动才上传
-      if (localState !== localStorage.getItem('_lastUploaded')) {
-        try { await uploadToGist(); } catch(e) {}
-      }
-    }
-  }, 60000);
-  
-  console.log('[自动同步] ✅ 已启动');
-}
-
 // 是否正在编辑某个输入框（用于避免自动同步打断手打内容）
 function anyInputFocused() {
   const el = document.activeElement;
@@ -6246,8 +6205,6 @@ uploadToGist = async function() {
   localStorage.setItem('_lastUploaded', localStorage.getItem('sanwa_tasks'));
   return result;
 };
-
-autoSyncStart();
 </script>
 
 <input type="file" id="importFileInput" accept=".json,application/json" style="display:none">
