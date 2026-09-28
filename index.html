@@ -568,13 +568,6 @@
     background: var(--theme); color: #fff; transform: translateY(-1px);
     box-shadow: 0 4px 10px color-mix(in srgb, var(--theme) 30%, transparent);
   }
-  .btn-pattern-task {
-    background: #fff; color: #6d28d9; border: 1px solid #c4b5fd;
-  }
-  .btn-pattern-task:hover {
-    background: #6d28d9; color: #fff; transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(109, 40, 217, .3);
-  }
   /* 快速添加任务输入框 */
   .quick-add-row {
     display: flex; gap: 6px; margin-top: 8px; padding: 6px 8px;
@@ -1187,7 +1180,6 @@
     <span class="qa-err" title="点击标记为错题重点" onclick="this.dataset.err=this.dataset.err==='1'?'0':'1';this.style.opacity=this.dataset.err==='1'?'1':'.35'" data-err="0" style="opacity: 0.35;">📚</span></div></div>
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('yilin')">＋ 添加任务</button>
-        <button class="btn-pattern-task" onclick="autoArrangeByPattern('yilin')">🧠 按习惯布置</button>
         <button class="btn-save-task" onclick="saveTasks('yilin')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
@@ -1420,7 +1412,6 @@
     <span class="qa-err" title="点击标记为错题重点" onclick="this.dataset.err=this.dataset.err==='1'?'0':'1';this.style.opacity=this.dataset.err==='1'?'1':'.35'" data-err="0" style="opacity: 0.35;">📚</span></div></div>
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('yanxi')">＋ 添加任务</button>
-        <button class="btn-pattern-task" onclick="autoArrangeByPattern('yanxi')">🧠 按习惯布置</button>
         <button class="btn-save-task" onclick="saveTasks('yanxi')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
@@ -1674,7 +1665,6 @@
     <span class="qa-err" title="点击标记为错题重点" onclick="this.dataset.err=this.dataset.err==='1'?'0':'1';this.style.opacity=this.dataset.err==='1'?'1':'.35'" data-err="0" style="opacity: 0.35;">📚</span></div></div>
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('qiannuo')">＋ 添加任务</button>
-        <button class="btn-pattern-task" onclick="autoArrangeByPattern('qiannuo')">🧠 按习惯布置</button>
         <button class="btn-save-task" onclick="saveTasks('qiannuo')">☁ 上传到云端</button>
       </div>
       <div class="save-status unsaved task-save-status">⚠ 任务尚未保存最终版本</div>
@@ -2464,52 +2454,6 @@ function inferTaskDuration(s, childId, taskName) {
   if (!entries.length) return null;
   entries.sort((a,b) => b[1] - a[1]);
   return +entries[0][0];
-}
-
-// 用学到的规律自动布置今日任务
-function autoArrangeByPattern(childId) {
-  const dateStr = document.getElementById('datePicker').value;
-  const pattern = learnWeekdayPattern(state, childId, dateStr, 60);
-  if (!pattern || !pattern.fixedTasks.length) {
-    showToast('📭 历史数据不足，暂学不出规律（需至少 2 天同星期几的记录）');
-    return;
-  }
-
-  const cd = state.dates[dateStr][childId];
-  if (!cd) return;
-
-  const existing = cd.tasks || [];
-  const restTasks = existing.filter(t => t.type === 'rest');
-
-  const newTasks = pattern.fixedTasks.map(p => {
-    const dur = inferTaskDuration(state, childId, p.name);
-    return { id: uid(), name: p.name, duration: dur, type: 'study', status: '', errLinked: false };
-  });
-
-  // 补上今日固定课程里尚未包含的任务名
-  const classNames = (cd.fixedClasses || []).map(c => c.name);
-  classNames.forEach(cn => {
-    if (!newTasks.some(t => t.name === cn)) {
-      const dur = inferTaskDuration(state, childId, cn);
-      newTasks.push({ id: uid(), name: cn, duration: dur, type: 'study', status: '', errLinked: false });
-    }
-  });
-
-  restTasks.forEach(rt => {
-    newTasks.push({ id: uid(), name: rt.name, duration: rt.duration, time: rt.time || null, type: 'rest', status: '', errLinked: false });
-  });
-
-  const msg = `🔍 学到了 ${pattern.totalSamples} 天「${pattern.weekdayLabel}」的规律：\n\n`
-    + pattern.fixedTasks.map((p,i) => `${i+1}. ${p.name}（出现 ${(p.freq*100).toFixed(0)}%）`).join('\n')
-    + `\n\n将生成 ${newTasks.length} 个任务，覆盖今日学习任务（休息任务保留）。确定吗？`;
-
-  if (!confirm(msg)) return;
-
-  cd.tasks = newTasks;
-  save();
-  markDirty(childId, 'task');
-  render();
-  showToast(`✨ 已按历史习惯自动布置（基于 ${pattern.totalSamples} 天 ${pattern.weekdayLabel} 数据）`);
 }
 
 // 预览今日的历史布置规律
@@ -3851,7 +3795,6 @@ function renderChildren(dateStr) {
       <div class="task-list" id="tasks-${c.id}"></div>
       <div class="child-actions">
         <button class="btn-add-task" onclick="openAddTask('${c.id}')">＋ 添加任务</button>
-        <button class="btn-pattern-task" onclick="autoArrangeByPattern('${c.id}')">🧠 按习惯布置</button>
         <button class="btn-save-task" onclick="saveTasks('${c.id}')">☁ 上传到云端</button>
       </div>
       ${taskSaveStatusHtml}
