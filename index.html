@@ -3699,6 +3699,18 @@ function render() {
       cd.tasks.splice(mIdx, 1);
     }
   })();
+  // 强制周三李彦希"语文LA"时间 15:30-16:30（用户要求）
+  (() => {
+    const cd = state.dates[dateStr] && state.dates[dateStr].yanxi;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    const dow = new Date(dateStr+'T00:00:00').getDay();
+    if (dow !== 3) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name && c.name === '语文LA' && c.time !== '15:30-16:30') {
+        c.time = '15:30-16:30';
+      }
+    });
+  })();
   // 同步课程作业：按课程动态出现/顺延/本周完成后隐藏
   let synced = false;
   CHILDREN.forEach(c => { if (syncCourseHomework(c.id, dateStr)) synced = true; });
