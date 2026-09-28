@@ -3185,7 +3185,8 @@
             "name": "听播客",
             "duration": 50,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t17899759487661fux",
@@ -3216,7 +3217,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790591766277,
+        "taskSavedAt": 1790595584482,
         "reviewSavedAt": null
       },
       "yanxi": {
