@@ -2945,6 +2945,13 @@ let dirtyState = {}; // { childId: { task: bool, review: bool } }
 function markDirty(childId, part) {
   if (!dirtyState[childId]) dirtyState[childId] = { task:false, review:false };
   dirtyState[childId][part] = true;
+  // 关键：编辑任务/复盘时即更新时间戳，避免云端旧数据(带着更大 taskSavedAt)覆盖本地刚做的修改
+  const ds = document.getElementById('datePicker').value;
+  const cd = state.dates[ds] && state.dates[ds][childId];
+  if (cd) {
+    if (part === 'task') cd.taskSavedAt = Date.now();
+    else if (part === 'review') cd.reviewSavedAt = Date.now();
+  }
 }
 function clearDirty(childId, part) {
   if (!dirtyState[childId]) return;
