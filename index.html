@@ -6231,10 +6231,41 @@ function mergeSmart(local, cloud) {
   const localDates = Object.keys(local.dates || {});
   const cloudDates = Object.keys(cloud.dates || {});
   const result = { ...local, dates: { ...(local.dates || {}) } };
+  const ALL = ['yilin','yanxi','qiannuo'];
   
-  // 云端有的日期，覆盖本地
   cloudDates.forEach(d => {
-    result.dates[d] = cloud.dates[d];
+    const localDate = result.dates[d];
+    const cloudDate = cloud.dates[d];
+    // 云端有但本地没有：直接采用
+    if (!localDate) { result.dates[d] = cloudDate; return; }
+    // 两端都有：按每个孩子的保存时间戳取较新版本，避免旧云端覆盖新本地（如"完成"状态被冲掉）
+    const mergedDate = {};
+    ALL.forEach(cid => {
+      const lc = localDate[cid];
+      const cc = cloudDate[cid];
+      if (!lc) { mergedDate[cid] = cc; return; }
+      if (!cc) { mergedDate[cid] = lc; return; }
+      const lTask = lc.taskSavedAt || 0;
+      const cTask = cc.taskSavedAt || 0;
+      const lRev  = lc.reviewSavedAt || 0;
+      const cRev  = cc.reviewSavedAt || 0;
+      // 任务取较新，复盘取较新（分别合并，避免互相覆盖）
+      const mergedChild = {
+        ...cc,
+        tasks: lTask >= cTask ? lc.tasks : cc.tasks,
+        taskSavedAt: Math.max(lTask, cTask) || lc.taskSavedAt || cc.taskSavedAt,
+        fixedClasses: lc.fixedClasses || cc.fixedClasses,
+        arrival: lc.arrival || cc.arrival,
+        sleep: lc.sleep || cc.sleep
+      };
+      mergedChild.review = lRev >= cRev ? (lc.review || cc.review) : (cc.review || lc.review);
+      mergedChild.reviewSavedAt = Math.max(lRev, cRev) || lc.reviewSavedAt || cc.reviewSavedAt;
+      mergedDate[cid] = mergedChild;
+    });
+    // 本地/云端额外的孩子 id 也各自补齐
+    Object.keys(localDate).forEach(cid => { if (!ALL.includes(cid) && mergedDate[cid] === undefined) mergedDate[cid] = localDate[cid]; });
+    Object.keys(cloudDate).forEach(cid => { if (!ALL.includes(cid) && mergedDate[cid] === undefined) mergedDate[cid] = cloudDate[cid]; });
+    result.dates[d] = mergedDate;
   });
   // 本地独有的日期，保留
   localDates.forEach(d => {
