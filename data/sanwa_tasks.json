@@ -4880,7 +4880,7 @@
           "points": 0,
           "score": null,
           "summary": "",
-          "reward": "",
+          "reward": "复活10张➕1包新的宝可梦卡",
           "other": "",
           "keywords": [],
           "savings": 0,
@@ -4889,7 +4889,7 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1790499163202,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790564756373
       },
       "qiannuo": {
         "fixedClasses": [
