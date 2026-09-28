@@ -199,70 +199,70 @@
         ],
         "tasks": [
           {
-            "id": "t17905974250466dtf",
+            "id": "t1790599311078qfwk",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046jugl",
+            "id": "t1790599311078722w",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046g6e4",
+            "id": "t1790599311078x69u",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046j535",
+            "id": "t1790599311078idh8",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046t0rp",
+            "id": "t1790599311078mmr8",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046b6ac",
+            "id": "t1790599311078ga3z",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046220s",
+            "id": "t17905993110785lu2",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046mzed",
+            "id": "t1790599311078lqmp",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17905974250461434",
+            "id": "t179059931107829ns",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17905974250460mnq",
+            "id": "t1790599311078gigy",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -2062,49 +2062,49 @@
         ],
         "tasks": [
           {
-            "id": "t1790597425046k48z",
+            "id": "t1790599311078ryst",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046yogi",
+            "id": "t1790599311078b7xn",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046dgq1",
+            "id": "t1790599311078txc5",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179059742504653wg",
+            "id": "t1790599311078oicc",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046wpiq",
+            "id": "t1790599311078sw84",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046vvj0",
+            "id": "t1790599311078afyh",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046lyc4",
+            "id": "t17905993110787zyo",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -2374,56 +2374,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1790597425046a9ro",
+            "id": "t17905993110783edp",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046uxar",
+            "id": "t1790599311078six0",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046hpso",
+            "id": "t1790599311078w3bd",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046vj8b",
+            "id": "t1790599311078birg",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046jj49",
+            "id": "t17905993110789f8b",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1790597425046wfig",
+            "id": "t1790599311078vcem",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1790597425046unfp",
+            "id": "t17905993110782lfb",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17905974250469vb7",
+            "id": "t1790599311078oy20",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -3410,10 +3410,11 @@
           {
             "id": "t1789975948767ooqk",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 40,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975948767cqiu",
@@ -3436,7 +3437,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790597467599,
+        "taskSavedAt": 1790599365910,
         "reviewSavedAt": null
       }
     },
