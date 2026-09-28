@@ -3665,19 +3665,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 89,
+          "summary": "回来的时候状态稍微有点不稳定，看到有自己不想做的作业，又开始在那磨叽。吃完饭以后状态稍微好了点，今天的数学题的准确率比昨天高。",
           "reward": "",
           "other": "做作业怪叫-0.5元",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "发脾气",
+            "准确率高"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790597453185,
-        "reviewSavedAt": 1790595309565
+        "reviewSavedAt": 1790599615452
       },
       "qiannuo": {
         "fixedClasses": [],
