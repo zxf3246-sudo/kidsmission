@@ -3175,7 +3175,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "fixy-20260928-pod",
@@ -3213,7 +3214,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790588973384,
+        "taskSavedAt": 1790588980216,
         "reviewSavedAt": null
       },
       "yanxi": {
