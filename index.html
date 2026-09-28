@@ -1953,7 +1953,7 @@ const WEEKLY_CLASSES = {
   yanxi: {
     1: [{name:'语文LA',        time:'14:30-15:30', duration:60}],
     2: [{name:'TTA AI',        time:'15:30-17:00', duration:90}],
-    3: [{name:'语文LA',        time:'14:30-15:30', duration:60}],
+    3: [{name:'语文LA',        time:'15:30-16:30', duration:60}],
     4: [{name:'编程',          time:'17:45-19:45', duration:120}],
     5: [{name:'TAL',           time:'14:45-16:45', duration:120}],
     6: [{name:'篮球',          time:'13:30-15:30', duration:120}],
@@ -3094,6 +3094,29 @@ function syncYilinSundayClasses(obj) {
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
+
+// 同步李彦希周三语文LA课程时间到最新模板（用户要求：周三语文LA改为 15:30-16:30）
+// 幂等：仅处理周三(dow=3)，将语文LA时间改为 15:30-16:30
+function syncYanxiWedLaTime(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    if (dow !== 3) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name && c.name === '语文LA') {
+        if (c.time !== '15:30-16:30') { c.time = '15:30-16:30'; changed++; }
+      }
+    });
+  });
+  if (changed > 0) {
+    console.log('[syncYanxiWedLaTime] 🔄 李彦希周三语文LA时间已更新为 15:30-16:30，共', changed, '项');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 function renameYanxiWW1(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3478,6 +3501,7 @@ function loadState() {
       removeMissyNilaoshi(obj);
       renameYilinWeeklyTasks(obj);
       syncYilinSundayClasses(obj);
+      syncYanxiWedLaTime(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -6062,6 +6086,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   removeMissyNilaoshi(state);
   renameYilinWeeklyTasks(state);
   syncYilinSundayClasses(state);
+  syncYanxiWedLaTime(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -6170,6 +6195,7 @@ async function autoPullFromCloud() {
     removeMissyNilaoshi(merged);
     renameYilinWeeklyTasks(merged);
     syncYilinSundayClasses(merged);
+    syncYanxiWedLaTime(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
