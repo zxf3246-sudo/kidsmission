@@ -3386,7 +3386,8 @@
             "name": "乘法口诀复习",
             "duration": 10,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1789975948767mpi1",
@@ -3429,8 +3430,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:00"
           }
         ],
         "review": {
@@ -3449,7 +3452,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790599365910,
+        "taskSavedAt": 1790601959902,
         "reviewSavedAt": 1790599482620
       }
     },
