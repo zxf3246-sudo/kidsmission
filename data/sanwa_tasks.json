@@ -3249,16 +3249,18 @@
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975948766tlds",
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975948766ttti",
@@ -3271,13 +3273,6 @@
           {
             "id": "t1790154702338dfee",
             "name": "3页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
-            "id": "t1790588957367kt0z",
-            "name": "一页计算题",
             "duration": 15,
             "type": "study",
             "done": false
@@ -3320,7 +3315,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790588270910,
+        "taskSavedAt": 1790588998335,
         "reviewSavedAt": null
       },
       "qiannuo": {
