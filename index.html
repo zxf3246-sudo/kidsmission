@@ -3362,6 +3362,9 @@ function addYanxiCalcTask(obj) {
       return;
     }
     if (cd.tasks.some(t => t.name === '一页计算题')) return; // 已存在
+    // 用户手动删除过：以手动为准，不再自动加回
+    if (obj.manualRemovedTasks && obj.manualRemovedTasks[ds] && obj.manualRemovedTasks[ds].yanxi &&
+        obj.manualRemovedTasks[ds].yanxi['一页计算题']) return;
     const calc = { id: uid(), name: '一页计算题', duration: 15, type: 'study', done: false };
     const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
     if (restIdx >= 0) cd.tasks.splice(restIdx, 0, calc);
@@ -4175,7 +4178,16 @@ function editTaskDuration(childId, idx, value, rerender) {
 }
 function delTask(childId, idx) {
   const dateStr = document.getElementById('datePicker').value;
-  state.dates[dateStr][childId].tasks.splice(idx,1);
+  const arr = state.dates[dateStr][childId].tasks;
+  const removed = arr[idx];
+  arr.splice(idx,1);
+  // 用户手动删除"一页计算题"时记录，避免 addYanxiCalcTask 在下次加载时又自动加回（以手动最新为准）
+  if (removed && removed.name === '一页计算题' && childId === 'yanxi') {
+    if (!state.manualRemovedTasks) state.manualRemovedTasks = {};
+    if (!state.manualRemovedTasks[dateStr]) state.manualRemovedTasks[dateStr] = {};
+    state.manualRemovedTasks[dateStr][childId] = (state.manualRemovedTasks[dateStr][childId] || {});
+    (state.manualRemovedTasks[dateStr][childId])['一页计算题'] = true;
+  }
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
