@@ -6259,6 +6259,11 @@ function mergeSmart(local, cloud) {
       result.dates[d] = local.dates[d];
     }
   });
+  // 合并全局"表现关键词"：取两端并集（去重），保证手机/电脑任一端新增的关键词都能同步显示
+  const lk = (local.summaryKeywords && Array.isArray(local.summaryKeywords)) ? local.summaryKeywords : [];
+  const ck = (cloud.summaryKeywords && Array.isArray(cloud.summaryKeywords)) ? cloud.summaryKeywords : [];
+  const kwSet = new Set([...lk, ...ck]);
+  if (kwSet.size > 0) result.summaryKeywords = [...kwSet];
   return result;
 }
 
