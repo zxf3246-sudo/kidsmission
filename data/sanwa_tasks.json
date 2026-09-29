@@ -2996,15 +2996,26 @@
             "name": "2页计算题",
             "duration": 30,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
+          },
+          {
+            "id": "t1790683866036zl83",
+            "name": "英语5个过去时",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899759393041g32",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 35,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899759393048sr3",
@@ -3027,7 +3038,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790683037816,
+        "taskSavedAt": 1790683877074,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -3060,8 +3071,9 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975939304c5fm",
@@ -3142,7 +3154,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790680480880,
+        "taskSavedAt": 1790683612946,
         "reviewSavedAt": null
       }
     },
