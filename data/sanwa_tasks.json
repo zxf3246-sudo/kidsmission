@@ -2923,7 +2923,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790673761922,
+        "taskSavedAt": 1790673795327,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -2940,8 +2940,9 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t178997593930480sn",
@@ -3018,7 +3019,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790600107298,
+        "taskSavedAt": 1790673792932,
         "reviewSavedAt": null
       },
       "qiannuo": {
