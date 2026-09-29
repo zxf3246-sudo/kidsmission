@@ -3057,16 +3057,18 @@
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17899759393043hlg",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975939304eres",
@@ -3087,20 +3089,13 @@
             "status": "done"
           },
           {
-            "id": "t17899759393048cot",
-            "name": "字母拼音",
-            "duration": 10,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1789975939304b098",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1789975939304bpgz",
@@ -3108,15 +3103,16 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790600059234mmwj",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview"
           },
           {
@@ -3134,7 +3130,8 @@
             "duration": null,
             "type": "rest",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1789975939304sw2s",
@@ -3157,7 +3154,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790683890540,
+        "taskSavedAt": 1790685841385,
         "reviewSavedAt": null
       }
     },
