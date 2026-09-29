@@ -3004,7 +3004,7 @@
           {
             "id": "t1790683866036zl83",
             "name": "英语5个过去时",
-            "duration": null,
+            "duration": 10,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -3040,7 +3040,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790683877074,
+        "taskSavedAt": 1790685734970,
         "reviewSavedAt": null
       },
       "qiannuo": {
