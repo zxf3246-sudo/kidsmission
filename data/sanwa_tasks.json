@@ -2987,8 +2987,9 @@
             "name": "英语语法",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790154702338pxiy",
@@ -2996,14 +2997,6 @@
             "duration": 15,
             "type": "study",
             "done": false
-          },
-          {
-            "id": "t1790680340099c10x",
-            "name": "英语过去式5个",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
           },
           {
             "id": "t17899759393041g32",
@@ -3034,7 +3027,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790680425750,
+        "taskSavedAt": 1790683026227,
         "reviewSavedAt": null
       },
       "qiannuo": {
