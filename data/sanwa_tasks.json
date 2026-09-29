@@ -2994,7 +2994,7 @@
           {
             "id": "t1790154702338pxiy",
             "name": "2页计算题",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": false
           },
@@ -3027,7 +3027,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790683026227,
+        "taskSavedAt": 1790683037816,
         "reviewSavedAt": null
       },
       "qiannuo": {
