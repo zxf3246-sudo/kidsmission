@@ -2873,6 +2873,15 @@
             "status": "done"
           },
           {
+            "id": "t17906829964686nev",
+            "name": "科学知识点1个",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t1789975939302tjl9",
             "name": "语文词语",
             "duration": 25,
@@ -2925,7 +2934,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790682981205,
+        "taskSavedAt": 1790683005526,
         "reviewSavedAt": null
       },
       "yanxi": {
