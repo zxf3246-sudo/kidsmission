@@ -3967,14 +3967,14 @@
           },
           {
             "id": "t179015470233848b9",
-            "name": "一页计算题",
+            "name": "1页计算题",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
             "id": "t1790003390091145o",
-            "name": "自由玩耍",
+            "name": "看电影",
             "duration": null,
             "type": "rest",
             "done": false,
@@ -4001,7 +4001,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790728993295,
         "reviewSavedAt": null
       },
       "qiannuo": {
