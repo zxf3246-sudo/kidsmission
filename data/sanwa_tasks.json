@@ -3885,49 +3885,9 @@
             "errLinked": false
           },
           {
-            "id": "t1790003390090pjb9",
-            "name": "Missy口语练习1个",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790003390090woyj",
-            "name": "语文词语",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t179000339009015tj",
-            "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790003390090507w",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17900033900909m56",
-            "name": "听播客",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790003390090cu6u",
-            "name": "自由活动",
-            "duration": null,
+            "name": "看电影",
+            "duration": 200,
             "type": "rest",
             "done": false,
             "errLinked": false
@@ -3953,7 +3913,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790728962722,
         "reviewSavedAt": null
       },
       "yanxi": {
