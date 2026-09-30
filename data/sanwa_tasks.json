@@ -2926,19 +2926,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 7,
+          "score": 89,
+          "summary": "目前一切都在规律进行，就是英语的每日作业感觉她自己都是不明不白的，自己找不到重点，但是时间安排的习惯上已经在慢慢摆正。",
+          "reward": "20分钟DJ",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "心不在焉",
+            "自制力强",
+            "拖拖拉拉"
+          ],
           "savings": 0,
           "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790686304154,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790728121425
       },
       "yanxi": {
         "fixedClasses": [
@@ -3146,7 +3150,7 @@
         "review": {
           "points": 7,
           "score": 89,
-          "summary": "目前一切都在规律进行，就是英语的每日作业感觉她自己都是不明不白的，自己找不到重点，但是时间安排的习惯上已经在慢慢摆正。",
+          "summary": "",
           "reward": "20分钟DJ",
           "other": "",
           "keywords": [
@@ -3160,7 +3164,7 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790685841385,
-        "reviewSavedAt": 1790728063420
+        "reviewSavedAt": 1790728081263
       }
     },
     "2026-09-28": {
