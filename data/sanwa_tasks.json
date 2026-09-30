@@ -2942,7 +2942,7 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790686304154,
-        "reviewSavedAt": 1790728121425
+        "reviewSavedAt": 1790728209211
       },
       "yanxi": {
         "fixedClasses": [
@@ -3034,19 +3034,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "keywords": [
+            "自我反思",
+            "准确率高",
+            "普普通通"
+          ],
+          "savings": -5,
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790685734970,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790728209208
       },
       "qiannuo": {
         "fixedClasses": [
@@ -6680,7 +6684,8 @@
     "有进步",
     "懒惰",
     "状态不好",
-    "自我反思"
+    "自我反思",
+    "普普通通"
   ],
   "manualRemovedTasks": {
     "2026-09-28": {
