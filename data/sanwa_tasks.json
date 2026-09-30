@@ -2937,12 +2937,12 @@
             "拖拖拉拉"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790686304154,
-        "reviewSavedAt": 1790728209211
+        "reviewSavedAt": 1790728644470
       },
       "yanxi": {
         "fixedClasses": [
@@ -3046,12 +3046,12 @@
             "生活习惯不好"
           ],
           "savings": -5,
-          "stars": 4
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790685734970,
-        "reviewSavedAt": 1790728342987
+        "reviewSavedAt": 1790728650053
       },
       "qiannuo": {
         "fixedClasses": [
@@ -3165,12 +3165,12 @@
             "生活习惯不好"
           ],
           "savings": 0,
-          "stars": 4
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790685841385,
-        "reviewSavedAt": 1790728570969
+        "reviewSavedAt": 1790728653987
       }
     },
     "2026-09-28": {
