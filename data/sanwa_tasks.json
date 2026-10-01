@@ -4231,19 +4231,24 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 6,
+          "score": 88,
+          "summary": "中午回来一直睡觉，睡了两个多小时，然后上了一会儿课就去参加李芊诺学校睡衣派对的活动了，回来的时候又八点多了，基本上没什么多余的时间去学习。然后磨磨唧唧背了一下科学的内容，感觉背的也不是很完整，再把Missy老师要求的背完了就去听播客睡觉了。",
           "reward": "",
-          "other": "",
-          "keywords": [],
+          "other": "参加睡衣派对",
+          "keywords": [
+            "拖拖拉拉",
+            "状态不好",
+            "心不在焉",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790861940158,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790862105689
       },
       "yanxi": {
         "fixedClasses": [
