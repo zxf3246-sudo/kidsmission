@@ -3971,31 +3971,36 @@
             "name": "语文阅读理解",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790749342424jdq2",
             "name": "2页计算题",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": true,
+            "status": "done"
           },
           {
             "id": "t1790003390091145o",
             "name": "看电影",
-            "duration": null,
+            "duration": 200,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17900033900914y1i",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "23:50"
           }
         ],
         "review": {
@@ -4010,7 +4015,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1790759129028,
+        "taskSavedAt": 1790831757372,
         "reviewSavedAt": null
       },
       "qiannuo": {
