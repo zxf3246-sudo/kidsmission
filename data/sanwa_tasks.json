@@ -4329,84 +4329,66 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1790146994243pxer",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790146994243o2f2",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790146994243mn6i",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243op2k",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243rtft",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243tdew",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17901469942439bh7",
-            "name": "语文练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790154702339dnyf",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
-            "done": false
+            "done": false,
+            "status": "undone"
           },
           {
             "id": "t1790146994243sxvv",
             "name": "学而思作业",
             "duration": null,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
             "courseTask": "xes"
           },
           {
             "id": "t1790146994243vo3o",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 180,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243g5ri",
@@ -4429,7 +4411,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790859680162,
         "reviewSavedAt": null
       }
     },
