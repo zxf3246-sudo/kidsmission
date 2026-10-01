@@ -4007,19 +4007,24 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 90,
+          "summary": "回来了以后各项作业都完成了，主要是现在碰到数学稍微难一些的题就沉不下心来，开始暴躁了，别的倒也没什么。这两天计算题的正确率有提高。",
           "reward": "",
-          "other": "",
-          "keywords": [],
+          "other": "老夫阿狗",
+          "keywords": [
+            "听话",
+            "真棒",
+            "高效率",
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790831757372,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790832213125
       },
       "qiannuo": {
         "fixedClasses": [
