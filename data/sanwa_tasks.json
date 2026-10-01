@@ -4151,14 +4151,6 @@
             "errLinked": false
           },
           {
-            "id": "t1790146994242n974",
-            "name": "Missy口语练习1个",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790146994242td6q",
             "name": "语文词语",
             "duration": 25,
@@ -4228,7 +4220,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790828578042,
+        "taskSavedAt": 1790828598798,
         "reviewSavedAt": null
       },
       "yanxi": {
