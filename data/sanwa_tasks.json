@@ -4430,19 +4430,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 6,
+          "score": 89,
+          "summary": "下午她把同学带家里来了，所以直到睡衣派对之前都没有学习，都跟同学在一起吃吃喝喝看电视。但是回来以后，还是把我布置的作业尽量补回去了，因为时间也不多，主要做了一些练字类目的，到睡觉前效率和状态都还可以。",
           "reward": "",
-          "other": "",
-          "keywords": [],
+          "other": "去参加学校睡衣派对。",
+          "keywords": [
+            "听话",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790861961508,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790862363575
       }
     },
     "2026-09-16": {
