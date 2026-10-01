@@ -3874,7 +3874,8 @@
             "duration": 30,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790003390090bj7u",
@@ -3882,7 +3883,8 @@
             "duration": 30,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790003390090cu6u",
@@ -3916,7 +3918,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790831725096,
+        "taskSavedAt": 1790831735854,
         "reviewSavedAt": null
       },
       "yanxi": {
