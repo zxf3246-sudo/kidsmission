@@ -4011,7 +4011,7 @@
           "score": 90,
           "summary": "回来了以后各项作业都完成了，主要是现在碰到数学稍微难一些的题就沉不下心来，开始暴躁了，别的倒也没什么。这两天计算题的正确率有提高。",
           "reward": "",
-          "other": "老夫阿狗",
+          "other": "去看复仇者联盟重映",
           "keywords": [
             "听话",
             "真棒",
@@ -4024,7 +4024,7 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790831757372,
-        "reviewSavedAt": 1790832213125
+        "reviewSavedAt": 1790832265784
       },
       "qiannuo": {
         "fixedClasses": [
@@ -4128,19 +4128,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "有进步",
+            "听话"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790831791487,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790832251029
       }
     },
     "2026-10-01": {
