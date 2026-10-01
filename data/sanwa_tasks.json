@@ -4242,56 +4242,63 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17901469942431lhz",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243ggvl",
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243mqbh",
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243ohr0",
             "name": "英语语法",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243eagh",
             "name": "一页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994243zkrv",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 120,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17901469942431tw1",
@@ -4299,7 +4306,8 @@
             "duration": null,
             "type": "rest",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "empty"
           }
         ],
         "review": {
@@ -4314,7 +4322,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1790859643109,
         "reviewSavedAt": null
       },
       "qiannuo": {
