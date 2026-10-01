@@ -4831,10 +4831,13 @@ async function exportReview() {
   const data = state.dates[dateStr];
   if (!data) return;
   const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
-  // 预加载各孩子头像（SVG data URL），供头部可爱风格绘制
+  // 预加载各孩子头像（SVG data URL）+ 复盘照片，供头部可爱风格绘制与照片展示
   const avatars = {};
+  const photos = {};
   await Promise.all(CHILDREN.map(async c => {
     avatars[c.id] = c.avatarImg ? await loadAvatarImage(c.avatarImg) : null;
+    const rv = data[c.id] && data[c.id].review;
+    photos[c.id] = (rv && rv.photo) ? await loadAvatarImage(rv.photo) : null;
   }));
   const { canvas: tmp, ctx } = newTmpCanvas();
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
@@ -4920,6 +4923,15 @@ async function exportReview() {
     cH += 52; // 本周积分 / 本周平均评分（紧凑）
     if (kwRows) cH += kwRows * 54 + 52; // 今日表现关键词（版面扩大：标题34 + chips行 + 间距）
     if (summaryLines.length) cH += summaryLines.length * 38 + 74; // 今日总结（版面扩大）
+    // 复盘照片高度（按比例，最大300px）
+    let photoH = 0;
+    if (photos[c.id]) {
+      const pw = CW - 56;
+      const iw = photos[c.id].width || 800, ih = photos[c.id].height || 600;
+      photoH = Math.round(pw * ih / iw);
+      if (photoH > 300) photoH = 300;
+      cH += 36 + photoH + 16; // 标题 + 图 + 间距
+    }
     if (rewardLines.length) cH += 32 + rewardLines.length * 24 + 18;
     if (otherLines.length) cH += 32 + otherLines.length * 24 + 18;
     if (cd.reviewSavedAt) cH += 30;
@@ -5071,6 +5083,23 @@ async function exportReview() {
       setFont(ctx, 22, false); ctx.fillStyle = '#334155';
       summaryLines.forEach((ln, i) => ctx.fillText(ln, x0+42, cy+10+i*38));
       cy += boxH + 16;
+    }
+    // 复盘照片（圆角展示，保持比例）
+    if (photos[c.id]) {
+      setFont(ctx, 22, true); ctx.fillStyle = col.dark;
+      ctx.fillText('📷 复盘照片', x0+28, cy); cy += 36;
+      const pw = CW - 56;
+      const iw = photos[c.id].width || 800, ih = photos[c.id].height || 600;
+      let ph = Math.round(pw * ih / iw);
+      if (ph > 300) ph = 300;
+      ctx.save();
+      imgRoundRect(ctx, x0+28, cy, pw, ph, 10); ctx.clip();
+      // cover 模式居中裁切，避免拉伸变形
+      const scale = Math.max(pw / iw, ph / ih);
+      const dw = iw * scale, dh = ih * scale;
+      ctx.drawImage(photos[c.id], x0+28 + (pw-dw)/2, cy + (ph-dh)/2, dw, dh);
+      ctx.restore();
+      cy += ph + 16;
     }
     // 奖励
     if (rewardLines.length) {
