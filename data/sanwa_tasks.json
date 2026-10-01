@@ -3907,19 +3907,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 4,
+          "score": 88,
+          "summary": "今天下午一直在补课，然后在补课班做的模拟试卷成绩还可以，大概有个八九十分的样子，现在语文应该是比较稳定的，在阅读理解上再深入一些，主要还是英语跟不上。",
           "reward": "",
-          "other": "",
-          "keywords": [],
+          "other": "看复仇者联盟4重映",
+          "keywords": [
+            "普普通通",
+            "懒惰"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790831735854,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1790832026535
       },
       "yanxi": {
         "fixedClasses": [
