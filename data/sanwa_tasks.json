@@ -4161,16 +4161,18 @@
             "name": "学校作业",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994242jeqm",
             "name": "Missy作文阅读",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790146994242td6q",
@@ -4178,15 +4180,17 @@
             "duration": 25,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t17901469942421bk0",
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179014699424265c1",
@@ -4199,10 +4203,11 @@
           {
             "id": "t1790146994242xxx2",
             "name": "自由活动",
-            "duration": null,
+            "duration": 180,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17901469942425ntk",
@@ -4225,7 +4230,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1790859622155,
+        "taskSavedAt": 1790859704214,
         "reviewSavedAt": null
       },
       "yanxi": {
