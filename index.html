@@ -757,6 +757,23 @@
     outline: none; border-color: var(--theme);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme) 15%, transparent);
   }
+  .btn-photo-upload {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1); color: #fff;
+    box-shadow: 0 3px 10px rgba(99,102,241,.25); user-select: none;
+  }
+  .btn-photo-upload:active { transform: translateY(1px); opacity: .92; }
+  .review-photo-wrap { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .review-photo {
+    width: 100%; max-width: 260px; border-radius: 10px;
+    border: 2px solid color-mix(in srgb, var(--theme) 25%, #fff);
+    box-shadow: var(--shadow-sm); cursor: zoom-in; object-fit: cover;
+  }
+  .btn-photo-del {
+    padding: 6px 12px; border: none; border-radius: 8px;
+    background: #fee2e2; color: #dc2626; font-size: 12px; font-weight: 700; cursor: pointer;
+  }
   .kw-field { margin-top: 10px; }
   .kw-bar {
     display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
@@ -2525,7 +2542,7 @@ function updateReview(childId, field, value, rerender) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
-  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0 };
+  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, photo:null };
   if (field === 'points') {
     cd.review.points = value === '' ? 0 : (+value || 0);
   } else if (field === 'savings') {
@@ -2541,6 +2558,8 @@ function updateReview(childId, field, value, rerender) {
     cd.review.reward = value;
   } else if (field === 'other') {
     cd.review.other = value;
+  } else if (field === 'photo') {
+    cd.review.photo = value; // dataURL 或 null
   }
   markDirty(childId, 'review');
   save();
@@ -2561,6 +2580,50 @@ function toggleReviewKeyword(childId, kw) {
   markDirty(childId, 'review');
   save();
   renderChildren(dateStr); // 重渲染以更新高亮选中态
+}
+
+// 复盘照片：从相册选择并压缩（最长边800px、JPEG质量0.72，控制体积便于云端同步）
+function handleReviewPhoto(childId, file) {
+  const dateStr = document.getElementById('datePicker').value;
+  const cd = state.dates[dateStr] && state.dates[dateStr][childId];
+  if (!cd) return;
+  if (!file || !/^image\//.test(file.type)) { showToast('请选择图片文件'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 800;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        const ratio = Math.min(MAX / w, MAX / h);
+        w = Math.round(w * ratio); h = Math.round(h * ratio);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.72);
+      cd.review.photo = dataUrl;
+      markDirty(childId, 'review');
+      save();
+      renderChildren(dateStr);
+      showToast('✓ 照片已添加');
+    };
+    img.onerror = () => showToast('图片读取失败，请重试');
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// 删除复盘照片
+function removeReviewPhoto(childId) {
+  const dateStr = document.getElementById('datePicker').value;
+  const cd = state.dates[dateStr] && state.dates[dateStr][childId];
+  if (!cd || !cd.review) return;
+  cd.review.photo = null;
+  markDirty(childId, 'review');
+  save();
+  renderChildren(dateStr);
+  showToast('已删除照片');
 }
 
 // 添加新的快捷关键词
@@ -3898,6 +3961,13 @@ function renderChildren(dateStr) {
           <textarea class="review-textarea lg" id="rv-summary-${c.id}" rows="6"
             placeholder="记录今天的表现亮点、问题、改进点……"
             onblur="updateReview('${c.id}','summary',this.value)">${escapeHtml(review.summary||'')}</textarea>
+        </div>
+        <div class="review-field">
+          <label>📷 复盘照片（从相册选择，自动压缩）</label>
+          ${review.photo
+            ? `<div class="review-photo-wrap"><img class="review-photo" src="${review.photo}" alt="复盘照片" onclick="window.open(this.src)"><button class="btn-photo-del" onclick="removeReviewPhoto('${c.id}')">🗑 删除照片</button></div>`
+            : `<label class="btn-photo-upload">📷 上传照片<input type="file" accept="image/*" style="display:none" onchange="handleReviewPhoto('${c.id}', this.files[0]); this.value=''"></label>`
+          }
         </div>
         <div class="review-field">
           <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
