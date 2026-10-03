@@ -5206,24 +5206,27 @@
             "name": "WW单词复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790349066746ke0v",
             "name": "英语语法",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790349066746bylz",
-            "name": "一页计算题",
+            "name": "2页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17906081517436k8i",
@@ -5272,7 +5275,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791008473967,
+        "taskSavedAt": 1791018513125,
         "reviewSavedAt": null
       },
       "qiannuo": {
