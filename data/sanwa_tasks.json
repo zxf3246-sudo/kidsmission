@@ -6249,48 +6249,54 @@
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787isb2",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787icc8",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787wh0c",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787j8po",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17906081107874m3d",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787wpp0",
@@ -6298,41 +6304,45 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t17906081107889e3p",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
             "courseTask": "quizReview"
           },
           {
             "id": "t1790608110788t13g",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "xes"
           },
           {
             "id": "t17906081107871bc2",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 180,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790608110787fhy1",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:55"
           }
         ],
         "review": {
@@ -6347,7 +6357,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791006957672,
         "reviewSavedAt": null
       }
     },
