@@ -6231,19 +6231,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 8,
+          "score": 90,
+          "summary": "总体效率还可以，基本把该做的都在上午做了，准确率也还算高，下午回来的时候就没做什么事了，因为当天是儿童节，所以给他们留了比较多的时间玩乐。现在状态可以的时候会自觉完成任务，表扬这一点。晚上李怡霖告状他私自拆了两包宝可梦，扣凉快，批评。",
           "reward": "",
           "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "keywords": [
+            "高效率",
+            "有进步"
+          ],
+          "savings": -2,
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1791006917939,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791007394761
       },
       "qiannuo": {
         "fixedClasses": [],
