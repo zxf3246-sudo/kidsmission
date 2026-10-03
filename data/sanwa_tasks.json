@@ -5229,6 +5229,15 @@
             "status": "done"
           },
           {
+            "id": "t1791018533059m9y2",
+            "name": "LA作业补做",
+            "duration": null,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t17906081517436k8i",
             "name": "小测复习",
             "duration": 15,
@@ -5275,7 +5284,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791018513125,
+        "taskSavedAt": 1791018539646,
         "reviewSavedAt": null
       },
       "qiannuo": {
