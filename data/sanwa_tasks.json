@@ -5273,11 +5273,6 @@
       "qiannuo": {
         "fixedClasses": [
           {
-            "name": "豌豆思维",
-            "time": "10:00-10:40",
-            "duration": 40
-          },
-          {
             "name": "语文LA",
             "time": "11:00-12:00",
             "duration": 60
@@ -5294,24 +5289,27 @@
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790349066746trvb",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790349066746bbj6",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790349066746qnum",
@@ -5374,7 +5372,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791008498195,
         "reviewSavedAt": null
       }
     },
