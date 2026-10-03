@@ -6353,19 +6353,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 8,
+          "score": 89,
+          "summary": "今天",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "勤奋",
+            "听话",
+            "高效率"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1791006957672,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791008160940
       }
     },
     "2026-10-09": {
@@ -7320,7 +7324,8 @@
     "自我反思",
     "普普通通",
     "生活习惯不好",
-    "态度敷衍"
+    "态度敷衍",
+    "勤奋"
   ],
   "manualRemovedTasks": {
     "2026-09-28": {
