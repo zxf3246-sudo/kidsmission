@@ -5575,7 +5575,7 @@
         "tasks": [
           {
             "id": "t1790350180992gnq6",
-            "name": "WWK单词3个",
+            "name": "英语单词错词复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -5583,7 +5583,7 @@
           },
           {
             "id": "t1790350180992nsct",
-            "name": "600字新字5个",
+            "name": "语文错字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -5594,8 +5594,9 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992agnh",
@@ -5617,14 +5618,6 @@
             "id": "t1790350180992h079",
             "name": "字母拼音",
             "duration": 10,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790350180992qt5t",
-            "name": "英语阅读练习",
-            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -5667,7 +5660,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791087138996,
         "reviewSavedAt": null
       }
     },
