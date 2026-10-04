@@ -5270,19 +5270,21 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 89,
+          "summary": "早上",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036898163,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791084505947
       },
       "qiannuo": {
         "fixedClasses": [
@@ -5384,7 +5386,7 @@
         "review": {
           "points": 6,
           "score": 89,
-          "summary": "正常表现，没什么特别的。",
+          "summary": "积极表现，早上起来就过来做作业了，比较早就写完了大部分的的作业，跟她平时的正常表现差不多，没什么特别的。上完课以后又回来补了一些作业，明天做个复习。",
           "reward": "",
           "other": "",
           "keywords": [
@@ -5399,7 +5401,7 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036904339,
-        "reviewSavedAt": 1791084460335
+        "reviewSavedAt": 1791084614644
       }
     },
     "2026-10-04": {
