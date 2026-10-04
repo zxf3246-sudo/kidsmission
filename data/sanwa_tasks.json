@@ -5272,11 +5272,12 @@
         "review": {
           "points": 7,
           "score": 89,
-          "summary": "早上",
+          "summary": "积极性还可以，也是在上午的时候完成了大部分的任务，比较好的一点是能说到做到，完成任务以后说了可以玩半个小时的Dojo,时间一到马上就把iPad拿过来了，还是比较自觉的。",
           "reward": "",
           "other": "",
           "keywords": [
-            "有进步"
+            "有进步",
+            "注意力集中"
           ],
           "savings": 0,
           "stars": 3.5
@@ -5284,7 +5285,7 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036898163,
-        "reviewSavedAt": 1791084505947
+        "reviewSavedAt": 1791084742122
       },
       "qiannuo": {
         "fixedClasses": [
