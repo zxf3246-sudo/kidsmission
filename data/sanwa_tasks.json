@@ -5822,10 +5822,11 @@
           {
             "id": "t17903501902584si7",
             "name": "四五快读复习",
-            "duration": 15,
+            "duration": 38,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350190259k3lu",
@@ -5841,14 +5842,14 @@
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview"
           },
           {
             "id": "t1790350190259h81a",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "status": "done",
             "done": true,
@@ -5857,7 +5858,7 @@
           {
             "id": "t17903501902596bpy",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 90,
             "type": "rest",
             "done": false,
             "errLinked": false
@@ -5883,7 +5884,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791192224201,
+        "taskSavedAt": 1791200303277,
         "reviewSavedAt": null
       },
       "qiannuo": {
