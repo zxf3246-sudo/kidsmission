@@ -5471,19 +5471,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 6,
+          "score": 89,
+          "summary": "李怡霖昨天一整天都在上课，然后晚上利用空余时间简单背了一下 Missy 要求背的东西。回去以后 Missy 检查了说效果其实不是很好。感觉她现在始终还是没有沉下心来静心的学习，就像她爸说的一样，注意力很容易被分散，真正沉下心来肯定不是这个状态。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "心不在焉",
+            "不在状态"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791159675262,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791184165513
       },
       "yanxi": {
         "fixedClasses": [],
@@ -5675,19 +5678,21 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 90,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4.5
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791159727493,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791183864637
       }
     },
     "2026-10-05": {
