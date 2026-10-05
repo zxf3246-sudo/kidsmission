@@ -5894,14 +5894,6 @@
             "errLinked": false
           },
           {
-            "id": "t17903501902594jo1",
-            "name": "600字新字复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790350190259ch81",
             "name": "数学计算练习",
             "duration": 20,
@@ -5978,7 +5970,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791184499548,
+        "taskSavedAt": 1791190806417,
         "reviewSavedAt": null
       }
     },
