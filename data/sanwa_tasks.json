@@ -5827,10 +5827,11 @@
           {
             "id": "t1790350190259k3lu",
             "name": "2页计算题",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350190259geo0",
@@ -5879,7 +5880,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791192204287,
+        "taskSavedAt": 1791192220954,
         "reviewSavedAt": null
       },
       "qiannuo": {
