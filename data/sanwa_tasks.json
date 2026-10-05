@@ -5780,13 +5780,13 @@
           "reward": "",
           "other": "",
           "keywords": [],
-          "savings": 0,
+          "savings": -12,
           "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791187779409,
-        "reviewSavedAt": 1791186906935
+        "reviewSavedAt": 1791187807981
       },
       "yanxi": {
         "fixedClasses": [
