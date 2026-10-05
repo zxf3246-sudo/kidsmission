@@ -5511,8 +5511,9 @@
             "name": "英语单词复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791087077616v2ad",
@@ -5520,39 +5521,45 @@
             "duration": null,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790350180992aqs9",
             "name": "2页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992izwx",
             "name": "学校小测复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992n6mt",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992vqzx",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "09:21"
           }
         ],
         "review": {
@@ -5567,7 +5574,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791087088372,
+        "taskSavedAt": 1791159700244,
         "reviewSavedAt": null
       },
       "qiannuo": {
