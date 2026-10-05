@@ -5803,16 +5803,18 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350190258ldma",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17903501902584si7",
@@ -5856,13 +5858,6 @@
             "courseTask": "quizReview"
           },
           {
-            "id": "t1791186885091p7t9",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t1790350190259h81a",
             "name": "语文LA作业",
             "duration": null,
@@ -5900,7 +5895,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791184462922,
+        "taskSavedAt": 1791190340410,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -7320,6 +7315,11 @@
       }
     },
     "2026-09-30": {
+      "yanxi": {
+        "一页计算题": true
+      }
+    },
+    "2026-10-05": {
       "yanxi": {
         "一页计算题": true
       }
