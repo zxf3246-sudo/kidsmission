@@ -5559,7 +5559,7 @@
             "done": true,
             "errLinked": false,
             "status": "done",
-            "time": "09:21"
+            "time": "21:21"
           }
         ],
         "review": {
@@ -5574,7 +5574,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791159700244,
+        "taskSavedAt": 1791159725228,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -5591,8 +5591,9 @@
             "name": "英语单词错词复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992nsct",
@@ -5600,7 +5601,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790350180992pzlk",
@@ -5616,49 +5618,55 @@
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992xxfa",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992h079",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17903501809944snx",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview"
           },
           {
             "id": "t1790350180992pyj6",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790350180992bnbi",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:21"
           }
         ],
         "review": {
@@ -5673,7 +5681,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791087138996,
+        "taskSavedAt": 1791159727493,
         "reviewSavedAt": null
       }
     },
