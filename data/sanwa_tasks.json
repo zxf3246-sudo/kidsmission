@@ -5825,14 +5825,6 @@
             "errLinked": false
           },
           {
-            "id": "t1790350190259nwoa",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790350190259k3lu",
             "name": "2页计算题",
             "duration": 15,
@@ -5887,7 +5879,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791190355063,
+        "taskSavedAt": 1791190364060,
         "reviewSavedAt": null
       },
       "qiannuo": {
