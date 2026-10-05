@@ -5781,7 +5781,7 @@
           "points": -35,
           "score": null,
           "summary": "",
-          "reward": "",
+          "reward": "-35兑换一个本子 -12新币换了一个贴纸本",
           "other": "",
           "keywords": [],
           "savings": -12,
@@ -5790,7 +5790,7 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791200276807,
-        "reviewSavedAt": 1791187807981
+        "reviewSavedAt": 1791202290761
       },
       "yanxi": {
         "fixedClasses": [
@@ -5885,12 +5885,12 @@
             "勤奋"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 4.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791200303277,
-        "reviewSavedAt": 1791201884758
+        "reviewSavedAt": 1791202176453
       },
       "qiannuo": {
         "fixedClasses": [],
