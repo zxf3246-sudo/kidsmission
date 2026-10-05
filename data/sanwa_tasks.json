@@ -5825,14 +5825,6 @@
             "errLinked": false
           },
           {
-            "id": "t1790350190258ettr",
-            "name": "WW1单词复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790350190259nwoa",
             "name": "语文阅读理解",
             "duration": 15,
@@ -5895,7 +5887,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791190340410,
+        "taskSavedAt": 1791190355063,
         "reviewSavedAt": null
       },
       "qiannuo": {
