@@ -7056,25 +7056,9 @@
             "errLinked": false
           },
           {
-            "id": "t1791253583802yiqp",
-            "name": "Missy口语练习1个",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t179125358380250wa",
             "name": "语文词语",
             "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1791253583802veyp",
-            "name": "科学知识点",
-            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -7124,7 +7108,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791258423463,
+        "taskSavedAt": 1791258464175,
         "reviewSavedAt": null
       },
       "yanxi": {
