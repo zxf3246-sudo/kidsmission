@@ -7223,7 +7223,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1791253583802tygs",
@@ -7296,7 +7297,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791258601002,
+        "taskSavedAt": 1791287260891,
         "reviewSavedAt": null
       }
     }
