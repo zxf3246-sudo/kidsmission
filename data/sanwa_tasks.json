@@ -7202,12 +7202,22 @@
             "errLinked": false
           },
           {
-            "id": "t17912535838020a8v",
-            "name": "数学计算练习",
-            "duration": 20,
+            "id": "t1791258382751q5co",
+            "name": "学而思作业",
+            "duration": null,
             "type": "study",
+            "status": "",
             "done": false,
-            "errLinked": false
+            "courseTask": "xes"
+          },
+          {
+            "id": "t1791253583802tygs",
+            "name": "小测复习",
+            "duration": 15,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "quizReview"
           },
           {
             "id": "t1791253583802swmq",
@@ -7232,24 +7242,6 @@
             "type": "study",
             "done": false,
             "errLinked": false
-          },
-          {
-            "id": "t1791253583802tygs",
-            "name": "小测复习",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
-          },
-          {
-            "id": "t1791258382751q5co",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
           },
           {
             "id": "t1791253583802tfo9",
@@ -7280,7 +7272,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791254155592,
+        "taskSavedAt": 1791258601002,
         "reviewSavedAt": null
       }
     }
