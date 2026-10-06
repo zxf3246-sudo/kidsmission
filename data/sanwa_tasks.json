@@ -7160,8 +7160,9 @@
             "name": "学校英语作业",
             "duration": null,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791253583802nqf7",
@@ -7192,7 +7193,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791269874683,
+        "taskSavedAt": 1791285346433,
         "reviewSavedAt": null
       },
       "qiannuo": {
