@@ -7230,37 +7230,40 @@
             "status": "undone"
           },
           {
-            "id": "t1791253583802tygs",
-            "name": "小测复习",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
-          },
-          {
             "id": "t1791253583802swmq",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1791253583802tygs",
+            "name": "小测复习",
+            "duration": 15,
+            "type": "study",
+            "status": "done",
+            "done": true,
+            "courseTask": "quizReview"
           },
           {
             "id": "t1791253583802k9ll",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791253583802d8py",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791258382751q5co",
@@ -7274,18 +7277,21 @@
           {
             "id": "t1791253583802tfo9",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 15,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791253583802gbqg",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:30"
           }
         ],
         "review": {
@@ -7300,7 +7306,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791287482510,
+        "taskSavedAt": 1791293827405,
         "reviewSavedAt": null
       }
     }
