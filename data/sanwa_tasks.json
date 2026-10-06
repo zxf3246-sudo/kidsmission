@@ -7156,14 +7156,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791253583802d60c",
-            "name": "WW1单词5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17912535838022cjf",
             "name": "英语语法",
             "duration": 15,
@@ -7208,7 +7200,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791254074494,
+        "taskSavedAt": 1791254088868,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -7221,16 +7213,8 @@
         ],
         "tasks": [
           {
-            "id": "t1791253583802ioet",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t179125358380247vp",
-            "name": "600字新字5个",
+            "name": "600字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7269,14 +7253,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791253583802ttjw",
-            "name": "语文练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791253583802tygs",
             "name": "小测复习",
             "duration": 15,
@@ -7284,15 +7260,6 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
-          },
-          {
-            "id": "t17912535838029zvr",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
           },
           {
             "id": "t1791253583802tfo9",
@@ -7323,7 +7290,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791254148962,
         "reviewSavedAt": null
       }
     }
