@@ -5793,7 +5793,7 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791253611969,
-        "reviewSavedAt": 1791202290761
+        "reviewSavedAt": 1791253678944
       },
       "yanxi": {
         "fixedClasses": [
@@ -5881,7 +5881,7 @@
         "review": {
           "points": -5,
           "score": 91,
-          "summary": "李彦希",
+          "summary": "昨天一开始的表现还挺好的，回来以后一直认真地做作业，准确率也比较高。直到晚上洗完澡以后，用他的积分换了宝可梦卡，没抽到想要的卡就开始发脾气了。然后发脾气持续了大概三四十分钟，虽然最后还是平静下来了，可是看得出来他的这个情绪管理还是不到位。",
           "reward": "-15分兑换了一包宝可梦卡",
           "other": "",
           "keywords": [
@@ -5896,7 +5896,7 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791253624452,
-        "reviewSavedAt": 1791202176453
+        "reviewSavedAt": 1791253693116
       },
       "qiannuo": {
         "fixedClasses": [],
