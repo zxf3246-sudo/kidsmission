@@ -5977,18 +5977,23 @@
         ],
         "review": {
           "points": 6,
-          "score": null,
+          "score": 88,
           "summary": "",
           "reward": "-50分换了货架贴纸",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "自制力差",
+            "普普通通",
+            "低效率"
+          ],
           "savings": 0,
           "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791253655810,
-        "reviewSavedAt": 1791203768227
+        "reviewSavedAt": 1791253713260
       }
     },
     "2026-10-02": {
