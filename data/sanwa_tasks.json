@@ -7039,11 +7039,6 @@
             "name": "Missy英语课",
             "time": "15:30-17:30",
             "duration": 120
-          },
-          {
-            "name": "科学",
-            "time": "20:40-22:40",
-            "duration": 120
           }
         ],
         "tasks": [
@@ -7124,7 +7119,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791293784994,
+        "taskSavedAt": 1791293805736,
         "reviewSavedAt": null
       },
       "yanxi": {
