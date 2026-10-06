@@ -7162,8 +7162,9 @@
             "name": "2页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791269867397ls4p",
@@ -7177,10 +7178,11 @@
           {
             "id": "t1791253583802nqf7",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179125358380217x6",
@@ -7203,7 +7205,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791285929901,
+        "taskSavedAt": 1791287243042,
         "reviewSavedAt": null
       },
       "qiannuo": {
