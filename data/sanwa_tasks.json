@@ -7142,10 +7142,11 @@
           {
             "id": "t17912535838027dh7",
             "name": "四五快读复习",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791253583802dzgv",
@@ -7193,7 +7194,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791285346433,
+        "taskSavedAt": 1791285929901,
         "reviewSavedAt": null
       },
       "qiannuo": {
