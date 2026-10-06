@@ -199,70 +199,70 @@
         ],
         "tasks": [
           {
-            "id": "t179125358379891tj",
+            "id": "t1791253795798b3fy",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17912535837984j12",
+            "id": "t17912537957986bh1",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17912535837985pgz",
+            "id": "t1791253795798lhe1",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791253583798urpm",
+            "id": "t1791253795798itsd",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179125358379889ov",
+            "id": "t1791253795798l60o",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17912535837981ofz",
+            "id": "t17912537957989epp",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791253583798ub4b",
+            "id": "t1791253795798xypf",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791253583798kx1n",
+            "id": "t1791253795798dwxa",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798p3d6",
+            "id": "t1791253795798jpiy",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798rf6q",
+            "id": "t1791253795798gwiu",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -2062,49 +2062,49 @@
         ],
         "tasks": [
           {
-            "id": "t1791253583798j21l",
+            "id": "t1791253795798ulo5",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798kooh",
+            "id": "t17912537957980qd0",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17912535837986nw4",
+            "id": "t1791253795798ei6r",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798qqgy",
+            "id": "t1791253795798pkrn",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798e024",
+            "id": "t17912537957989tsg",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179125358379894hi",
+            "id": "t1791253795798q8kj",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17912535837988zv3",
+            "id": "t1791253795798t7zu",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -2374,56 +2374,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1791253583798guwe",
+            "id": "t1791253795798eqoz",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798u3f3",
+            "id": "t1791253795798ci2i",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17912535837982u9o",
+            "id": "t1791253795798us6v",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798blma",
+            "id": "t1791253795798u65k",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791253583798fzr3",
+            "id": "t1791253795798p4vc",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179125358379844a1",
+            "id": "t17912537957987pz7",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791253583798ikbi",
+            "id": "t1791253795798tl7c",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791253583798ibfn",
+            "id": "t1791253795798x2nl",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -5978,7 +5978,7 @@
         "review": {
           "points": 6,
           "score": 88,
-          "summary": "",
+          "summary": "李芊诺昨天回来以后，表现得稍微没那么好。因为让她写作业的时候，她拖拖拉拉的，有不专心的表现。留的作业不是很多，但是完成的也比较慢，导致一个复习没有完成。所以说，昨天表现很一般。",
           "reward": "-50分换了货架贴纸",
           "other": "",
           "keywords": [
@@ -5992,8 +5992,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791253655810,
-        "reviewSavedAt": 1791253713260
+        "taskSavedAt": 1791253808245,
+        "reviewSavedAt": 1791253781155
       }
     },
     "2026-10-02": {
@@ -7111,7 +7111,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
@@ -7198,7 +7200,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "14:00",
         "sleep": "21:00",
@@ -7271,15 +7275,6 @@
             "errLinked": false
           },
           {
-            "id": "t17912535838029zvr",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
             "id": "t1791253583802tygs",
             "name": "小测复习",
             "duration": 15,
@@ -7287,6 +7282,15 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t17912535838029zvr",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
           },
           {
             "id": "t1791253583802tfo9",
@@ -7311,7 +7315,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": []
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
         },
         "arrival": "16:30",
         "sleep": "21:00",
