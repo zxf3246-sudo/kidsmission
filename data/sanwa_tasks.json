@@ -7262,10 +7262,10 @@
           {
             "id": "t1791258382751q5co",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "xes"
           },
           {
@@ -7297,7 +7297,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791287260891,
+        "taskSavedAt": 1791287482510,
         "reviewSavedAt": null
       }
     }
