@@ -7061,8 +7061,9 @@
             "name": "语文词语",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17912535838028i6y",
@@ -7070,7 +7071,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1791253583802rwyv",
@@ -7092,10 +7094,11 @@
           {
             "id": "t1791253583802m02f",
             "name": "自由活动",
-            "duration": null,
+            "duration": 35,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179125358380260e6",
@@ -7118,7 +7121,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791287233709,
+        "taskSavedAt": 1791288451089,
         "reviewSavedAt": null
       },
       "yanxi": {
