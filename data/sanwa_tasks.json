@@ -5782,18 +5782,21 @@
         ],
         "review": {
           "points": -35,
-          "score": null,
-          "summary": "",
+          "score": 89,
+          "summary": "李怡霖回来了以后，也是正常的做作业。现在他的语文背词的效率明显高了，科学的知识点背得也都还行，就是不知道实际考试会怎么样。但同时发现他的数学又掉下来了，所以近期可能要找Missy给他补一下数学。",
           "reward": "-35兑换一个本子 -12新币换了一个贴纸本",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "普普通通",
+            "态度敷衍"
+          ],
           "savings": -12,
           "stars": 0
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791253611969,
-        "reviewSavedAt": 1791253678944
+        "reviewSavedAt": 1791253871343
       },
       "yanxi": {
         "fixedClasses": [
