@@ -7371,6 +7371,14 @@
             "errLinked": false
           },
           {
+            "id": "t17913538534269cs6",
+            "name": "英语词语背诵",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791352713805fuga",
             "name": "自由活动",
             "duration": null,
@@ -7399,7 +7407,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791353827240,
+        "taskSavedAt": 1791353854403,
         "reviewSavedAt": null
       },
       "yanxi": {
