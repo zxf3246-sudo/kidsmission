@@ -7514,16 +7514,8 @@
         ],
         "tasks": [
           {
-            "id": "t1791352713805qzan",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791352713805dcu4",
-            "name": "600字新字5个",
+            "name": "600字错字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7607,7 +7599,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791353295058,
+        "taskSavedAt": 1791353948694,
         "reviewSavedAt": null
       }
     }
