@@ -7580,19 +7580,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 90,
+          "summary": "回来以后给她吃饭限时20坟冢，刚好时间到了她吃完了，以后都是这样限时20分钟，时间过了直接收碗。任务还是",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "注意力集中",
+            "有进步",
+            "积极"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791372404992,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791372671813
       }
     }
   },
