@@ -7554,14 +7554,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791352713805ceve",
-            "name": "英语阅读练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791352713805vw94",
             "name": "语文LA作业",
             "duration": null,
@@ -7599,7 +7591,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791353948694,
+        "taskSavedAt": 1791353956047,
         "reviewSavedAt": null
       }
     }
