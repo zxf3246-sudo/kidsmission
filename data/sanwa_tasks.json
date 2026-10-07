@@ -7483,8 +7483,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:12"
           }
         ],
         "review": {
@@ -7504,7 +7506,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791369750784,
+        "taskSavedAt": 1791381033123,
         "reviewSavedAt": 1791372577907
       },
       "qiannuo": {
