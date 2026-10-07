@@ -7773,15 +7773,7 @@
           },
           {
             "id": "t1791382445915aqt2",
-            "name": "四五快读新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1791382445915h91i",
-            "name": "WW1单词5个",
+            "name": "四五快读复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7797,7 +7789,7 @@
           },
           {
             "id": "t1791382445915cxkt",
-            "name": "一页计算题",
+            "name": "2页计算题",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7830,7 +7822,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791382558088,
         "reviewSavedAt": null
       },
       "qiannuo": {
