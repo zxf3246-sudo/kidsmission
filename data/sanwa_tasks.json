@@ -7331,14 +7331,6 @@
         ],
         "tasks": [
           {
-            "id": "t1791352713805e25i",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791352713805u2g9",
             "name": "Missy口语练习1个",
             "duration": 20,
@@ -7349,14 +7341,6 @@
           {
             "id": "t179135271380510t3",
             "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1791352713805liho",
-            "name": "数学练习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7407,7 +7391,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791353854403,
+        "taskSavedAt": 1791373449859,
         "reviewSavedAt": null
       },
       "yanxi": {
