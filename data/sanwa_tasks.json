@@ -7297,19 +7297,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 7,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "勤奋",
+            "心不在焉"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791293827405,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791353410952
       }
     },
     "2026-10-07": {
@@ -7603,7 +7607,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791353295058,
         "reviewSavedAt": null
       }
     }
