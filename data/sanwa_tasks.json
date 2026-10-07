@@ -7498,10 +7498,11 @@
           {
             "id": "t1791352713805dcu4",
             "name": "600字错字复习",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791352713805fnqu",
@@ -7549,6 +7550,14 @@
             "courseTask": "la"
           },
           {
+            "id": "t17913736114536psm",
+            "name": "小测复习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t17913527138059j5q",
             "name": "自由玩耍",
             "duration": null,
@@ -7581,7 +7590,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791373023809,
+        "taskSavedAt": 1791373623293,
         "reviewSavedAt": 1791372671813
       }
     }
