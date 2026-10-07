@@ -7201,17 +7201,21 @@
         "review": {
           "points": 8,
           "score": 89,
-          "summary": "",
+          "summary": "总体表现比较好，然后还是老毛病，晚上回来的时候，因为最后有一道计算题做错了，所以又发脾气了。但是发了一会儿脾气，自己平静下来就画画去了，稍微比昨天有所收敛。然后他自己还会知道自己发脾气这件事情是不对的，自己在那微微反思了一下。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "发脾气",
+            "自我反思",
+            "积极"
+          ],
           "savings": 0,
           "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791293796339,
-        "reviewSavedAt": 1791353149036
+        "reviewSavedAt": 1791353689776
       },
       "qiannuo": {
         "fixedClasses": [
