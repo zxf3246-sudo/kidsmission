@@ -7469,13 +7469,6 @@
             "courseTask": "quizReview"
           },
           {
-            "id": "t1791353456584g4cz",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false
-          },
-          {
             "id": "t1791352713805yhzp",
             "name": "自由玩耍",
             "duration": null,
@@ -7508,7 +7501,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791353276825,
+        "taskSavedAt": 1791353885767,
         "reviewSavedAt": 1791353669362
       },
       "qiannuo": {
@@ -7919,6 +7912,11 @@
       }
     },
     "2026-10-06": {
+      "yanxi": {
+        "一页计算题": true
+      }
+    },
+    "2026-10-07": {
       "yanxi": {
         "一页计算题": true
       }
