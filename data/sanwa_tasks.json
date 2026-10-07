@@ -7401,19 +7401,24 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 3,
+          "score": 85,
+          "summary": "下午是去上了3小时语文补习课的，回来吃完饭都快8点了，完成了一部分Missy留的作业，然后整个人态度很消极，剩下什么也没做，让她背单词也背不下来，一直在关心自己长青春痘的事。很明显的主次不分，看起来她真的没把PSLE当成什么很重要的事，自己现在水平这么低，但是一点也不着急，实属没吃什么苦，每天过的太舒服了。不在状态我也没强逼她学习，让她提早睡觉了。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "不在状态",
+            "拖拖拉拉",
+            "自制力差",
+            "态度敷衍"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 2.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791381018639,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791381286785
       },
       "yanxi": {
         "fixedClasses": [
