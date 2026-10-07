@@ -7444,14 +7444,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791352713805ynjg",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791352713805ppk0",
             "name": "2页计算题",
             "duration": 15,
@@ -7467,6 +7459,14 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t1791353913414qv26",
+            "name": "LA作业和改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
           },
           {
             "id": "t1791352713805yhzp",
@@ -7501,7 +7501,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791353885767,
+        "taskSavedAt": 1791353914830,
         "reviewSavedAt": 1791353669362
       },
       "qiannuo": {
