@@ -7551,8 +7551,9 @@
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791352713805vw94",
@@ -7596,7 +7597,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791372858391,
+        "taskSavedAt": 1791373023809,
         "reviewSavedAt": 1791372671813
       }
     }
