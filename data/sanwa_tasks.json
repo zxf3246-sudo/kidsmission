@@ -7428,14 +7428,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791352713805r1sp",
-            "name": "四五快读错字复习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791352713805qvev",
             "name": "WW1单词复习",
             "duration": 15,
@@ -7469,6 +7461,14 @@
             "courseTask": "quizReview"
           },
           {
+            "id": "t17913532754330fgi",
+            "name": "LA作业和改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791352713805yhzp",
             "name": "自由玩耍",
             "duration": null,
@@ -7497,7 +7497,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791353247061,
+        "taskSavedAt": 1791353276825,
         "reviewSavedAt": null
       },
       "qiannuo": {
