@@ -7557,15 +7557,16 @@
           {
             "id": "t17913736114536psm",
             "name": "小测复习",
-            "duration": null,
+            "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791352713805vw94",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "status": "done",
             "done": true,
@@ -7574,10 +7575,11 @@
           {
             "id": "t17913527138059j5q",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 25,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791352713805zo7n",
@@ -7585,7 +7587,8 @@
             "duration": null,
             "type": "rest",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "time": "20:24"
           }
         ],
         "review": {
@@ -7604,7 +7607,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791373741584,
+        "taskSavedAt": 1791375886345,
         "reviewSavedAt": 1791372671813
       }
     }
