@@ -7449,7 +7449,7 @@
           {
             "id": "t1791352713805ppk0",
             "name": "2页计算题",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -7463,6 +7463,15 @@
             "status": "done",
             "done": true,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t1791369736845hxv4",
+            "name": "学而思作业补做",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791352713805yhzp",
@@ -7498,7 +7507,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791369725194,
+        "taskSavedAt": 1791369750784,
         "reviewSavedAt": 1791353669362
       },
       "qiannuo": {
