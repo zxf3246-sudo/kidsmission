@@ -7533,8 +7533,9 @@
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17913527138059rsz",
@@ -7595,7 +7596,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791372404992,
+        "taskSavedAt": 1791372858391,
         "reviewSavedAt": 1791372671813
       }
     }
