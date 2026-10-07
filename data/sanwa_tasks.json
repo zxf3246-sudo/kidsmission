@@ -7701,14 +7701,6 @@
             "courseTask": "la"
           },
           {
-            "id": "t1791382445915zpi7",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791382445915qh9z",
             "name": "听播客",
             "duration": 30,
@@ -7745,7 +7737,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791382526601,
+        "taskSavedAt": 1791416902268,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -7833,16 +7825,8 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17913824459157h8u",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791382445915ls6m",
-            "name": "600字新字5个",
+            "name": "600字错字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -7925,7 +7909,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791416884805,
         "reviewSavedAt": null
       }
     }
