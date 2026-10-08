@@ -7660,7 +7660,7 @@
           {
             "id": "t1791382481135smah",
             "name": "Missy笔记15分钟",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false,
@@ -7685,7 +7685,7 @@
           {
             "id": "t1791382445916hmsv",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "status": "",
             "done": false,
@@ -7694,7 +7694,7 @@
           {
             "id": "t1791382445916npes",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "status": "",
             "done": false,
@@ -7737,7 +7737,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791416902268,
+        "taskSavedAt": 1791423793782,
         "reviewSavedAt": null
       },
       "yanxi": {
