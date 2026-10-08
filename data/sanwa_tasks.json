@@ -7835,19 +7835,23 @@
           }
         ],
         "review": {
-          "points": 0,
+          "points": 8,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "高效率",
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791467450632,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791468443204
       },
       "qiannuo": {
         "fixedClasses": [],
