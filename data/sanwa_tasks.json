@@ -7734,19 +7734,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 89,
+          "summary": "今天的状态比昨天稍微好一些，回来了以后主动对着任务列表一项一项完成，但是两个背诵任务最后没有做完。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791467421990,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791467568746
       },
       "yanxi": {
         "fixedClasses": [
