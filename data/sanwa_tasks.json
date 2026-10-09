@@ -6525,6 +6525,15 @@
             "courseTask": "xes"
           },
           {
+            "id": "t1791548545636jh66",
+            "name": "自由时间",
+            "duration": 60,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t17915406713857yjt",
             "name": "洗漱睡觉",
             "duration": null,
@@ -6546,7 +6555,7 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": 1791548498403,
+        "taskSavedAt": 1791548552858,
         "reviewSavedAt": 1791539625543
       },
       "qiannuo": {
