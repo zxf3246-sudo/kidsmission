@@ -8088,7 +8088,7 @@
           {
             "id": "t1791555216640fb9b",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 30,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -8096,7 +8096,7 @@
           {
             "id": "t1791555240140wfoe",
             "name": "1篇小龙",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -8104,7 +8104,7 @@
           {
             "id": "t1791555050793254f",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
             "done": false,
             "errLinked": false
@@ -8130,7 +8130,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791555242855,
+        "taskSavedAt": 1791555262272,
         "reviewSavedAt": null
       },
       "qiannuo": {
