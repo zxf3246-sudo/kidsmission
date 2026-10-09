@@ -8094,6 +8094,14 @@
             "errLinked": false
           },
           {
+            "id": "t1791555240140wfoe",
+            "name": "1篇小龙",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791555050793254f",
             "name": "自由玩耍",
             "duration": null,
@@ -8122,7 +8130,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791555217933,
+        "taskSavedAt": 1791555242855,
         "reviewSavedAt": null
       },
       "qiannuo": {
