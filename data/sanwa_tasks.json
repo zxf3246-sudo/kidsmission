@@ -6438,19 +6438,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 6,
+          "score": 87,
+          "summary": "今天回来以后也是一个浑浑噩噩的状态，做什么都磨磨唧唧，拖拖拉拉的。然后李彦希生日对她的打击不小，一直在问为什么他们就这么容易考高分，然后又说什么嫉妒，没动力。其实，真正的问题在她自己身上，她是不是真正的在努力只有她自己知道，她直到现在还是一种假着急，就是思想上紧张，实际上懒得动，这样当然永远不会有大的提高。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "找事儿",
+            "生活习惯不好"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1791548477205,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791548745413
       },
       "yanxi": {
         "fixedClasses": [
