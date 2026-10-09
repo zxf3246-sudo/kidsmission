@@ -6467,23 +6467,7 @@
           },
           {
             "id": "t17908288476155cva",
-            "name": "四五快读新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790828847615re4w",
-            "name": "WW1单词5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790828847615ix6c",
-            "name": "语文阅读理解",
+            "name": "四五快读错字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -6491,7 +6475,7 @@
           },
           {
             "id": "t1790828847615u2w2",
-            "name": "一页计算题",
+            "name": "2页计算题",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -6535,7 +6519,7 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791524605248,
         "reviewSavedAt": null
       },
       "qiannuo": {
