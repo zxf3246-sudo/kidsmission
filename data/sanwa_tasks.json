@@ -6614,15 +6614,6 @@
             "status": "done"
           },
           {
-            "id": "t1791554811136jf4v",
-            "name": "小测复习",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
-          },
-          {
             "id": "t1790828847615xl4s",
             "name": "自由玩耍",
             "duration": 60,
@@ -6636,8 +6627,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:42"
           }
         ],
         "review": {
@@ -6656,7 +6649,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1791548564780,
+        "taskSavedAt": 1791554869399,
         "reviewSavedAt": 1791549567529
       }
     },
