@@ -6526,16 +6526,8 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t179082884761573o9",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t179082884761527s9",
-            "name": "600字新字5个",
+            "name": "600字新字复习",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -6619,7 +6611,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791524623009,
         "reviewSavedAt": null
       }
     },
