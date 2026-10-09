@@ -6508,19 +6508,19 @@
           }
         ],
         "review": {
-          "points": 0,
+          "points": 10,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "savings": 75,
+          "stars": 4.5
         },
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1791525894669,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791539625543
       },
       "qiannuo": {
         "fixedClasses": [],
