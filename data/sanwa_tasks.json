@@ -8058,7 +8058,7 @@
           },
           {
             "id": "t1791555050793knww",
-            "name": "四五快读复习",
+            "name": "四五快读5个新字",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -8067,7 +8067,7 @@
           {
             "id": "t1791555050793clmy",
             "name": "英语语法1个",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8076,7 +8076,7 @@
           {
             "id": "t1791555050793e1bk",
             "name": "学校英语作业",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8084,8 +8084,8 @@
           },
           {
             "id": "t1791555050793modf",
-            "name": "2页计算题",
-            "duration": 15,
+            "name": "4页计算题",
+            "duration": 40,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8131,7 +8131,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791626968512,
+        "taskSavedAt": 1791627034567,
         "reviewSavedAt": 1791623036094
       },
       "qiannuo": {
