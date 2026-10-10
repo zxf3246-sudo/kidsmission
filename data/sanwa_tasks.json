@@ -8241,8 +8241,9 @@
             "name": "乘法口诀表背诵",
             "duration": null,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791632585485rwb0",
@@ -8256,18 +8257,21 @@
           {
             "id": "t1791555050793itxz",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791555050793w0ye",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:37"
           }
         ],
         "review": {
@@ -8285,7 +8289,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791632591774,
+        "taskSavedAt": 1791643076456,
         "reviewSavedAt": 1791633515366
       }
     },
