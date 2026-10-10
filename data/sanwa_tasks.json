@@ -199,70 +199,70 @@
         ],
         "tasks": [
           {
-            "id": "t17916430154318nbt",
+            "id": "t1791643436099yqud",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17916430154318wou",
+            "id": "t1791643436099r761",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791643015431e6q4",
+            "id": "t17916434360991ero",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17916430154310er2",
+            "id": "t1791643436099e80q",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431o4q1",
+            "id": "t1791643436099vzc0",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791643015431ag1e",
+            "id": "t1791643436099fq5y",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791643015431v2ze",
+            "id": "t1791643436099o5tr",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17916430154318e12",
+            "id": "t1791643436099s32h",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431aj4n",
+            "id": "t1791643436099y0tm",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431htl8",
+            "id": "t1791643436099hel4",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -2062,49 +2062,49 @@
         ],
         "tasks": [
           {
-            "id": "t1791643015431yugz",
+            "id": "t1791643436099lbu3",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179164301543174u8",
+            "id": "t1791643436099s2wp",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431eom1",
+            "id": "t17916434360990dgl",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431fa7s",
+            "id": "t1791643436099jzav",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431ndii",
+            "id": "t17916434360994gvg",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791643015431kaje",
+            "id": "t1791643436099sdkc",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17916430154317uc9",
+            "id": "t1791643436099d8dm",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -2374,56 +2374,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17916430154315do8",
+            "id": "t17916434360993kwn",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17916430154313asd",
+            "id": "t1791643436099963l",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431n7rs",
+            "id": "t1791643436099trdv",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431rwhg",
+            "id": "t1791643436099grkf",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431n2d3",
+            "id": "t1791643436099ng9p",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791643015431yk73",
+            "id": "t1791643436099orhy",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17916430154313ikh",
+            "id": "t179164343609909y8",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791643015431ia7x",
+            "id": "t179164343609918w2",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -8146,7 +8146,7 @@
         "review": {
           "points": 50,
           "score": 87,
-          "summary": "除了下午有一段时间在发脾气，其他时间表现的还是不错的，现在就是无法控制自己，生气，然后有的时候还哭，但是道理懂得，自己什么表现自己心里也清楚，就是无法完全控制自己。不懂得这个世界不是都能按他的想法去运作的。同时阅读理解到现在还是会有写不全答案的现象，感觉他们有一种错了，但是不会认真去改，然后下次还错的这种劲头。",
+          "summary": "除了下午有一段时间在发脾气，其他时间表现的还是不错的，现在就是无法控制自己，生气，然后有的时候还哭，但是道理懂得，自己什么表现自己心里也清楚，就是无法完全控制自己。不懂得这个世界不是都能按他的想法去运作的。同时阅读理解到现在还是会有写不全答案的现象，感觉他们有一种错了，但是不会认真去改，然后下次还错的这种劲头。晚上上完英语课，发现她学校做的成绩差的试卷不拿出来给我看，想瞒着我。跟老师又谈了一下，感觉她的状态还是不行，然后她自己也有自知之明，大概清楚现在自己什么情况，又表示还是想在考前尽量再冲一下，多说无益，看实际行动吧。",
           "reward": "",
           "other": "把昨天换成的钱今天又换回积分了，尺子-5块，阅读理解又错-5块。",
           "keywords": [
@@ -8161,7 +8161,7 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791643055758,
-        "reviewSavedAt": 1791633422508
+        "reviewSavedAt": 1791643608311
       },
       "qiannuo": {
         "fixedClasses": [
