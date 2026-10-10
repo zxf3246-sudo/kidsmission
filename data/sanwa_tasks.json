@@ -8140,20 +8140,23 @@
         ],
         "review": {
           "points": 50,
-          "score": null,
+          "score": 87,
           "summary": "",
           "reward": "",
-          "other": "",
+          "other": "把昨天换成的钱今天又换回积分了",
           "keywords": [
-            "找事儿"
+            "找事儿",
+            "发脾气",
+            "高效率",
+            "状态不好"
           ],
           "savings": -10,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791632526551,
-        "reviewSavedAt": 1791623036094
+        "reviewSavedAt": 1791633234744
       },
       "qiannuo": {
         "fixedClasses": [
@@ -8263,21 +8266,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 6,
+          "score": 89,
+          "summary": "表现还可以，基本从早到晚都在完成任务，看了一下写字部分，在我多次的警告下，总体比之前写的更加规范了。但是今天计算反而比较粗心，错了好几道不应该错的题。",
           "reward": "",
           "other": "",
           "keywords": [
-            "听话"
+            "听话",
+            "普普通通"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791632591774,
-        "reviewSavedAt": 1791602511273
+        "reviewSavedAt": 1791633188996
       }
     },
     "2026-10-11": {
