@@ -8180,7 +8180,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1791555050793hvkl",
@@ -8188,7 +8189,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1791555050793m578",
@@ -8235,6 +8237,15 @@
             "errLinked": false
           },
           {
+            "id": "t1791632585485rwb0",
+            "name": "绘本阅读",
+            "duration": 12,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
             "id": "t1791555050793itxz",
             "name": "自由玩耍",
             "duration": null,
@@ -8265,7 +8276,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1791627127028,
+        "taskSavedAt": 1791632591774,
         "reviewSavedAt": 1791602511273
       }
     },
