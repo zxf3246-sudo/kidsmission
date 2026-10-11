@@ -8305,6 +8305,11 @@
             "name": "画画课",
             "time": "15:00-18:00",
             "duration": 180
+          },
+          {
+            "name": "科学李老师",
+            "time": "20:15-22:15",
+            "duration": 120
           }
         ],
         "tasks": [
@@ -8369,7 +8374,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791678804364,
+        "taskSavedAt": 1791702586172,
         "reviewSavedAt": null
       },
       "yanxi": {
