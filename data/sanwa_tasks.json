@@ -8404,8 +8404,9 @@
             "name": "四五快读5个新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17915565367498hj7",
@@ -8442,6 +8443,14 @@
             "status": "done"
           },
           {
+            "id": "t1791690482447eais",
+            "name": "Spelling 20复习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791556536749sgkt",
             "name": "自由玩耍",
             "duration": null,
@@ -8470,7 +8479,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791690459617,
+        "taskSavedAt": 1791690505168,
         "reviewSavedAt": null
       },
       "qiannuo": {
