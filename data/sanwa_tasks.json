@@ -8424,14 +8424,6 @@
             "errLinked": false
           },
           {
-            "id": "t1791556536749trja",
-            "name": "2页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791678906981ynuw",
             "name": "英语1语法",
             "duration": 25,
@@ -8443,7 +8435,7 @@
           {
             "id": "t179168922177880v4",
             "name": "2页计算题",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": false
           },
@@ -8485,7 +8477,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791689268376,
+        "taskSavedAt": 1791689616142,
         "reviewSavedAt": null
       },
       "qiannuo": {
