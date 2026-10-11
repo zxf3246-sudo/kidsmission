@@ -8561,17 +8561,18 @@
             "name": "数学练习",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "t1791678972153anj6",
             "name": "英语练习",
             "duration": null,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17915565367505lfl",
@@ -8585,10 +8586,11 @@
           {
             "id": "t179155653674906f7",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 120,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791556536749goz1",
@@ -8611,7 +8613,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791702534303,
+        "taskSavedAt": 1791711529747,
         "reviewSavedAt": null
       }
     },
