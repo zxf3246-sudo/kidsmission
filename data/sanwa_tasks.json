@@ -8380,21 +8380,23 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17915565367492sjc",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791678864972pnfa",
             "name": "学校作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8447,7 +8449,7 @@
           {
             "id": "t1791690482447eais",
             "name": "Spelling 20复习",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8483,7 +8485,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791698444203,
+        "taskSavedAt": 1791698461492,
         "reviewSavedAt": null
       },
       "qiannuo": {
