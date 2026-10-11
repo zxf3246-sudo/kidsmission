@@ -199,70 +199,70 @@
         ],
         "tasks": [
           {
-            "id": "t1791718869997rh8j",
+            "id": "t17917189859512d38",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997i7l8",
+            "id": "t17917189859515pa9",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997uxil",
+            "id": "t1791718985951mwoz",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997hsz6",
+            "id": "t1791718985951zuc6",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179171886999755i6",
+            "id": "t1791718985951aop7",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997kg3r",
+            "id": "t1791718985951ikug",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179171886999746n7",
+            "id": "t1791718985951y8md",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17917188699971hl3",
+            "id": "t17917189859517gcx",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997cuqs",
+            "id": "t17917189859513gx5",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997i64u",
+            "id": "t1791718985951t4pg",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -2062,49 +2062,49 @@
         ],
         "tasks": [
           {
-            "id": "t1791718869997z2u8",
+            "id": "t1791718985951qq7n",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997j3uz",
+            "id": "t1791718985951zh02",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17917188699973z9k",
+            "id": "t1791718985951ld6i",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997dem7",
+            "id": "t1791718985951649m",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997ayl9",
+            "id": "t1791718985951i7u8",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997j8fo",
+            "id": "t1791718985951f6ek",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997z0oo",
+            "id": "t1791718985951j0a1",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -2374,56 +2374,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1791718869997g7sb",
+            "id": "t17917189859518omg",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997auw5",
+            "id": "t1791718985951nra7",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997ztwr",
+            "id": "t1791718985951kqhm",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997q1lx",
+            "id": "t179171898595184of",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1791718869997xiit",
+            "id": "t179171898595184x2",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17917188699978sjk",
+            "id": "t1791718985951vqi7",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997x2pz",
+            "id": "t17917189859515zsp",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1791718869997qlaw",
+            "id": "t1791718985951o4pu",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -8613,19 +8613,24 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 8,
+          "score": 90,
+          "summary": "李芊诺表现也不差，他的效率相对李希来说会低一些。但是除了上课时间，剩下的时间基本上也都是在认真地完成作业，理解能力也比较好。但是在复习错字错词方面还有一些小问题，这就充分说明之前容易错的东西，如果不反复的复习，后面还是容易错，她的耐力很好，每次都给她留的是最多的作业，但是她从来都是全部完成，没有任何逆反心理。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "准确率高",
+            "有进步",
+            "勤奋"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791711529747,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791719071571
       }
     },
     "2026-10-12": {
