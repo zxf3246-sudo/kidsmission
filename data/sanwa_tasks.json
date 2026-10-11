@@ -8434,7 +8434,7 @@
           {
             "id": "t1791678906981ynuw",
             "name": "英语1语法",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8450,7 +8450,7 @@
           {
             "id": "t1791689250088hbz7",
             "name": "学而思计算题",
-            "duration": null,
+            "duration": 5,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -8485,7 +8485,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791689258927,
+        "taskSavedAt": 1791689268376,
         "reviewSavedAt": null
       },
       "qiannuo": {
