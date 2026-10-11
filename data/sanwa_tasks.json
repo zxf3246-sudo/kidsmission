@@ -8414,8 +8414,9 @@
             "name": "阅读作文学习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791678906981ynuw",
@@ -8481,7 +8482,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791693780392,
+        "taskSavedAt": 1791694292777,
         "reviewSavedAt": null
       },
       "qiannuo": {
