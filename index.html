@@ -2047,8 +2047,8 @@ function defaultTasksFor(childId, dateStr) {
                   : '科学知识点';
     return [
     t('学校作业', 30),
-    t('Missy作文阅读', 30),
-    t('Missy口语练习1个', 20),
+    t('Missy听力', 30),
+    t('Missy笔记背诵和10MCQ', 20),
     t(langName, 25),
     t(sciName, 15),
     t('数学练习', 15),
@@ -3344,7 +3344,9 @@ function migrateTaskFormat(obj) {
   }
 }
 
-// 李怡霖固定任务升级：'Missy作业'（30分钟）→ 'Missy作文阅读'（30分钟）+ 'Missy口语练习1个'（20分钟），
+// 李怡霖固定任务升级：
+// 'Missy作业'（30分钟）→ 'Missy听力'（30分钟）+ 'Missy笔记背诵和10MCQ'（20分钟）
+// 历史数据改名：'Missy作文阅读'→'Missy听力'；'Missy口语练习1个'→'Missy笔记背诵和10MCQ'
 // 并在第一个休息任务前插入 '听播客'（30分钟）。幂等：已含新任务名则跳过。
 function migrateYilinMissyTasks(obj) {
   if (!obj || !obj.dates) return;
@@ -3352,25 +3354,37 @@ function migrateYilinMissyTasks(obj) {
   Object.keys(obj.dates).forEach(ds => {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
-    const missy = cd.tasks.find(t => t.name === 'Missy作业');
-    const hasNew = cd.tasks.some(t => t.name === 'Missy作文阅读' || t.name === 'Missy口语练习1个' || t.name === '听播客');
-    if (!missy || hasNew) return; // 无旧任务或已升级
-    const missyDone = !!missy.done;
-    const newArr = [];
+    let dayChanged = false;
+    // 1) 旧名字改名（保留完成状态）
     cd.tasks.forEach(t => {
-      if (t.name === 'Missy作业') {
-        newArr.push({ id: uid(), name: 'Missy作文阅读', duration: 30, type: 'study', done: missyDone });
-        newArr.push({ id: uid(), name: 'Missy口语练习1个', duration: 20, type: 'study', done: false });
-      } else {
-        newArr.push(t);
-      }
+      if (t.name === 'Missy作文阅读') { t.name = 'Missy听力'; dayChanged = true; }
+      else if (t.name === 'Missy口语练习1个') { t.name = 'Missy笔记背诵和10MCQ'; dayChanged = true; }
     });
-    // 在第一个休息任务前插入 听播客（30分钟）
-    const restIdx = newArr.findIndex(t => t.type === 'rest');
-    if (restIdx >= 0) newArr.splice(restIdx, 0, { id: uid(), name: '听播客', duration: 30, type: 'study', done: false });
-    else newArr.push({ id: uid(), name: '听播客', duration: 30, type: 'study', done: false });
-    cd.tasks = newArr;
-    changed++;
+    // 2) 旧旧版 'Missy作业' → 拆成两个新任务
+    const missy = cd.tasks.find(t => t.name === 'Missy作业');
+    if (missy && !cd.tasks.some(t => t.name === 'Missy听力' || t.name === 'Missy笔记背诵和10MCQ')) {
+      const missyDone = !!missy.done;
+      const newArr = [];
+      cd.tasks.forEach(t => {
+        if (t.name === 'Missy作业') {
+          newArr.push({ id: uid(), name: 'Missy听力', duration: 30, type: 'study', done: missyDone });
+          newArr.push({ id: uid(), name: 'Missy笔记背诵和10MCQ', duration: 20, type: 'study', done: false });
+        } else {
+          newArr.push(t);
+        }
+      });
+      cd.tasks = newArr;
+      dayChanged = true;
+    }
+    // 3) 确保存在 听播客（第一个休息任务前插入）
+    if (!cd.tasks.some(t => t.name === '听播客')) {
+      const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
+      const podcast = { id: uid(), name: '听播客', duration: 30, type: 'study', done: false };
+      if (restIdx >= 0) cd.tasks.splice(restIdx, 0, podcast);
+      else cd.tasks.push(podcast);
+      dayChanged = true;
+    }
+    if (dayChanged) changed++;
   });
   if (changed > 0) {
     console.log('[migrateYilinMissyTasks] 🗂 已更新李怡霖 Missy 任务：', changed, '天');
