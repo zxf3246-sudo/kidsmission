@@ -8350,10 +8350,11 @@
           {
             "id": "t1791556536749tjqu",
             "name": "自由活动",
-            "duration": null,
+            "duration": 20,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791556536749wha0",
@@ -8376,7 +8377,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1791718686650,
+        "taskSavedAt": 1791718694175,
         "reviewSavedAt": null
       },
       "yanxi": {
