@@ -8843,6 +8843,14 @@
             "courseTask": "la"
           },
           {
+            "id": "t1791769965323jttq",
+            "name": "数学除法练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791556716714wlt2",
             "name": "自由玩耍",
             "duration": null,
@@ -8871,7 +8879,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791769934978,
+        "taskSavedAt": 1791769966627,
         "reviewSavedAt": null
       },
       "qiannuo": {
