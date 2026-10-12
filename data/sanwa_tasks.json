@@ -8890,10 +8890,11 @@
           {
             "id": "t1791556716714wlt2",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 80,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791556716714ybck",
@@ -8916,7 +8917,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791797029596,
+        "taskSavedAt": 1791804467531,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -8997,10 +8998,11 @@
           {
             "id": "t1791556716714nay1",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 80,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791556716714dsu4",
@@ -9023,7 +9025,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791804443485,
+        "taskSavedAt": 1791804469690,
         "reviewSavedAt": null
       }
     },
