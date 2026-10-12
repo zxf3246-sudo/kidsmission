@@ -8776,7 +8776,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791814262955,
+        "taskSavedAt": 1791814267014,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -8910,8 +8910,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:30"
           }
         ],
         "review": {
@@ -8926,7 +8928,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791804467531,
+        "taskSavedAt": 1791814278652,
         "reviewSavedAt": null
       },
       "qiannuo": {
