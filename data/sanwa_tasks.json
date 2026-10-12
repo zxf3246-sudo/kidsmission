@@ -8859,6 +8859,14 @@
             "errLinked": false
           },
           {
+            "id": "t1791770603884akyw",
+            "name": "语文拼音练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791556716714wlt2",
             "name": "自由玩耍",
             "duration": null,
@@ -8887,7 +8895,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791770560609,
+        "taskSavedAt": 1791770607460,
         "reviewSavedAt": null
       },
       "qiannuo": {
