@@ -108,7 +108,7 @@
       "yanxi": {
         "fixedClasses": [
           {
-            "name": "TTA AI",
+            "name": "篮球",
             "time": "15:30-17:00",
             "duration": 90
           }
@@ -191,7 +191,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1791855868546,
         "reviewSavedAt": null
       },
       "qiannuo": {
