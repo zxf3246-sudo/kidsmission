@@ -16,14 +16,6 @@
         ],
         "tasks": [
           {
-            "id": "t1791557153218x3zb",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1791557153218dll0",
             "name": "Missy笔记背诵和10MCQ",
             "duration": 20,
@@ -103,7 +95,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791876698217,
+        "taskSavedAt": 1791876966470,
         "reviewSavedAt": null
       },
       "yanxi": {
