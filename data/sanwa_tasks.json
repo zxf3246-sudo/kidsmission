@@ -268,8 +268,9 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791853839590o725",
@@ -277,38 +278,42 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1791853839590rf9k",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17918538395909jwy",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791853839590o020",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791853839591vdxp",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
             "courseTask": "quizReview"
           },
@@ -317,25 +322,28 @@
             "name": "学而思作业",
             "duration": 15,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
             "courseTask": "xes"
           },
           {
             "id": "t179185383959040zs",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 90,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17918538395906s85",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:20"
           }
         ],
         "review": {
@@ -350,7 +358,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791881137323,
+        "taskSavedAt": 1791898090633,
         "reviewSavedAt": null
       }
     },
