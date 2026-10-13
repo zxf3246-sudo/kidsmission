@@ -240,19 +240,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 10,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "发脾气",
+            "找事儿",
+            "勤奋"
+          ],
           "savings": 0,
           "stars": 0
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791898056014,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791898179996
       },
       "qiannuo": {
         "fixedClasses": [
