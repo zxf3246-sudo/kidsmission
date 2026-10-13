@@ -165,7 +165,7 @@
           {
             "id": "t1791855886648gdf6",
             "name": "过去时5个",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -173,7 +173,7 @@
           {
             "id": "t1791855898395hs2s",
             "name": "语文阅读理解",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -181,7 +181,7 @@
           {
             "id": "t1791855909925qpud",
             "name": "语文写作练习",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -189,7 +189,7 @@
           {
             "id": "t17918559367752epy",
             "name": "练字1页",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -197,7 +197,7 @@
           {
             "id": "t1791855951468m1y8",
             "name": "数学练习",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -231,7 +231,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791855953726,
+        "taskSavedAt": 1791855982359,
         "reviewSavedAt": null
       },
       "qiannuo": {
