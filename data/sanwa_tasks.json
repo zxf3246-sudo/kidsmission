@@ -88,19 +88,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 7,
+          "score": 86,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "反复出错",
+            "自制力差"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791898034302,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791898255643
       },
       "yanxi": {
         "fixedClasses": [
