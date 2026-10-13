@@ -18,7 +18,7 @@
           {
             "id": "t1791557153218dll0",
             "name": "Missy笔记背诵和10MCQ",
-            "duration": 20,
+            "duration": 60,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -45,7 +45,7 @@
           {
             "id": "t1791557153218j93r",
             "name": "科学知识点",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -96,7 +96,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791881123014,
+        "taskSavedAt": 1791881156340,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -305,7 +305,7 @@
           {
             "id": "t17918538395915gfl",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "status": "",
             "done": false,
@@ -340,7 +340,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791853907334,
+        "taskSavedAt": 1791881137323,
         "reviewSavedAt": null
       }
     },
