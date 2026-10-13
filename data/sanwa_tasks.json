@@ -240,10 +240,10 @@
           }
         ],
         "review": {
-          "points": 10,
+          "points": -5,
           "score": 88,
           "summary": "",
-          "reward": "",
+          "reward": "-15分换了一包宝可梦",
           "other": "",
           "keywords": [
             "发脾气",
@@ -256,7 +256,7 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791898056014,
-        "reviewSavedAt": 1791898193345
+        "reviewSavedAt": 1791898223064
       },
       "qiannuo": {
         "fixedClasses": [
