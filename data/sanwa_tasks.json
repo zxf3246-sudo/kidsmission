@@ -9,8 +9,8 @@
             "duration": 120
           },
           {
-            "name": "科学",
-            "time": "20:40-22:40",
+            "name": "科学李老师",
+            "time": "19:45-21:45",
             "duration": 120
           }
         ],
@@ -96,7 +96,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791881068848,
+        "taskSavedAt": 1791881123014,
         "reviewSavedAt": null
       },
       "yanxi": {
