@@ -143,8 +143,9 @@
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17918538395903w2i",
@@ -169,8 +170,9 @@
             "name": "过去时5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791855898395hs2s",
@@ -186,8 +188,9 @@
             "name": "语文写作练习",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17918559367752epy",
@@ -219,18 +222,21 @@
           {
             "id": "t1791853839590g9kq",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 100,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791853839590nk5l",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:20"
           }
         ],
         "review": {
@@ -245,7 +251,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791883977209,
+        "taskSavedAt": 1791898056014,
         "reviewSavedAt": null
       },
       "qiannuo": {
