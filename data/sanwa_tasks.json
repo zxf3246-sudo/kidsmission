@@ -206,8 +206,9 @@
             "name": "数学练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791861476724brfc",
@@ -247,7 +248,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791873405687,
+        "taskSavedAt": 1791874211382,
         "reviewSavedAt": null
       },
       "qiannuo": {
