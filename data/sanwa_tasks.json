@@ -138,8 +138,9 @@
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17919641664161ffo",
@@ -196,6 +197,14 @@
             "status": "done"
           },
           {
+            "id": "t1791968571956cnq4",
+            "name": "语文写作学习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791964166416m8r3",
             "name": "自由玩耍",
             "duration": null,
@@ -224,7 +233,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791968553443,
+        "taskSavedAt": 1791968575134,
         "reviewSavedAt": null
       },
       "qiannuo": {
