@@ -34,31 +34,35 @@
             "duration": 25,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t17919807191349vz7",
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17919807191340avu",
             "name": "数学练习",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791980719134ah6g",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17919807191346fe2",
@@ -89,7 +93,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791980725287,
+        "taskSavedAt": 1791980841140,
         "reviewSavedAt": null
       },
       "yanxi": {
