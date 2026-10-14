@@ -3447,12 +3447,45 @@ function swapReviewDates(obj) {
   }
 }
 
+// 李彦希"计算题"任务去重：用户把"一页计算题"重命名（如"2页计算题"）后，
+// 旧逻辑会再补一条"一页计算题"造成重复。这里按名称去重：
+// 同名只留一条；若当天已有重命名版本（非"一页计算题"），则删除"一页计算题"。
+// 幂等：只处理同一天存在多条"计算题"任务的情况。
+const YANXI_CALC_RE = /^(?:一页|\d+页)计算题$/;
+function dedupeYanxiCalcTasks(obj) {
+  if (!obj || !obj.dates) return 0;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    const calc = cd.tasks.filter(t => YANXI_CALC_RE.test((t && t.name) || ''));
+    if (calc.length <= 1) return;
+    const hasRenamed = calc.some(t => t.name !== '一页计算题');
+    const kept = {};
+    const before = cd.tasks.length;
+    cd.tasks = cd.tasks.filter(t => {
+      if (!YANXI_CALC_RE.test((t && t.name) || '')) return true;
+      if (t.name === '一页计算题' && hasRenamed) return false;
+      if (kept[t.name]) return false;
+      kept[t.name] = true;
+      return true;
+    });
+    if (cd.tasks.length !== before) changed++;
+  });
+  if (changed > 0) {
+    console.log('[dedupeYanxiCalcTasks] 🧹 已清理李彦希重复的"计算题"任务：', changed, '天');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+  return changed;
+}
+
 // 从今天起（含今天）给李彦希固定任务增加"一页计算题"（15分钟）
 // 幂等：任务已含"一页计算题"则跳过；插入位置与默认模板一致（第一个休息任务前）
 // 起始日期用动态"今天"（getLocalDateStr），避免硬编码日期漂移；
 // 并清理落在"今天"之前被误加的这一项
 function addYanxiCalcTask(obj) {
   if (!obj || !obj.dates) return;
+  dedupeYanxiCalcTasks(obj); // 先清理历史重复项
   const start = getLocalDateStr(); // 用户要求从今天开始（取真实当天）
   let changed = 0;
   Object.keys(obj.dates).forEach(ds => {
@@ -3465,7 +3498,8 @@ function addYanxiCalcTask(obj) {
       if (cd.tasks.length !== before) changed++;
       return;
     }
-    if (cd.tasks.some(t => t.name === '一页计算题')) return; // 已存在
+    // 已存在"计算题"任务（含用户重命名的，如"2页计算题"）则跳过，避免重复出现
+    if (cd.tasks.some(t => (t.name || '').includes('计算题'))) return;
     // 用户手动删除过：以手动为准，不再自动加回
     if (obj.manualRemovedTasks && obj.manualRemovedTasks[ds] && obj.manualRemovedTasks[ds].yanxi &&
         obj.manualRemovedTasks[ds].yanxi['一页计算题']) return;
@@ -4305,8 +4339,8 @@ function delTask(childId, idx) {
   const arr = state.dates[dateStr][childId].tasks;
   const removed = arr[idx];
   arr.splice(idx,1);
-  // 用户手动删除"一页计算题"时记录，避免 addYanxiCalcTask 在下次加载时又自动加回（以手动最新为准）
-  if (removed && removed.name === '一页计算题' && childId === 'yanxi') {
+  // 用户手动删除"计算题"任务（含重命名）时记录，避免 addYanxiCalcTask 在下次加载时又自动加回
+  if (removed && (removed.name || '').includes('计算题') && childId === 'yanxi') {
     if (!state.manualRemovedTasks) state.manualRemovedTasks = {};
     if (!state.manualRemovedTasks[dateStr]) state.manualRemovedTasks[dateStr] = {};
     state.manualRemovedTasks[dateStr][childId] = (state.manualRemovedTasks[dateStr][childId] || {});
