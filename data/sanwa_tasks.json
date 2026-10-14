@@ -222,19 +222,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 88,
           "summary": "",
           "reward": "-20分换了宝可梦卡",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "拖拖拉拉",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791969120373,
-        "reviewSavedAt": 1791974732529
+        "reviewSavedAt": 1791974770390
       },
       "qiannuo": {
         "fixedClasses": [
