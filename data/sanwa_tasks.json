@@ -85,19 +85,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 88,
+          "summary": "今天李怡霖的总体表现还可以，因为大部分时间都在上课。然后回来以后，让她做了两个作业。英语是听力作业，准确率很高，基本上就是满分，已经是她做的听力练习里面分数最高的了。这一点值得表扬。但是数学Missy老师明明上课教过相同类型的题目，到了晚上给她出了新的题目，她就完全不会做，最后都是要我再教她一遍，才懵懵懂懂地知道。也就是说，她现在这个数学课吸收率还是太低了。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "不在状态",
+            "普普通通",
+            "有进步"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791985295374,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791985534394
       },
       "yanxi": {
         "fixedClasses": [
