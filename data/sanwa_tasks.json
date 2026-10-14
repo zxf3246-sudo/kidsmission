@@ -292,7 +292,7 @@
           {
             "id": "t1791980719134oer7",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "status": "done",
             "done": true,
@@ -301,7 +301,7 @@
           {
             "id": "t1791980719134z09y",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "status": "done",
             "done": true,
@@ -338,7 +338,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1791980779409,
+        "taskSavedAt": 1791980792090,
         "reviewSavedAt": null
       }
     },
