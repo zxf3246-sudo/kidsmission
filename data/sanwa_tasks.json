@@ -240,7 +240,7 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791985304444,
-        "reviewSavedAt": 1791985629529
+        "reviewSavedAt": 1791985690278
       },
       "qiannuo": {
         "fixedClasses": [
@@ -344,19 +344,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 4,
+          "score": 87,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "心不在焉",
+            "拖拖拉拉"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791985310665,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1791985687520
       }
     },
     "2026-10-13": {
