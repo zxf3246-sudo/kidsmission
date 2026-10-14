@@ -6059,6 +6059,7 @@ async function uploadToGist() {
   try {
     // 先获取文件 sha（如果文件已存在）
     let sha = null;
+    let cloudDateCount = 0;
     try {
       const headResp = await fetch(
         `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
@@ -6067,8 +6068,23 @@ async function uploadToGist() {
       if (headResp.ok) {
         const headData = await headResp.json();
         sha = headData.sha;
+        // 读取云端现有数据的天数，用于"防清空"校验
+        if (headData.content) {
+          try {
+            const cs = JSON.parse(decodeURIComponent(escape(atob(headData.content.replace(/\n/g, '')))));
+            cloudDateCount = Object.keys(cs.dates || {}).length;
+          } catch (_) {}
+        }
       }
     } catch (e) {}
+
+    // 防清空保险：本地天数远少于云端（如本机 localStorage 为空/被误重置），拒绝上传，避免覆盖掉云端完整数据
+    const localDateCount = Object.keys(state.dates || {}).length;
+    if (cloudDateCount >= 5 && localDateCount < Math.ceil(cloudDateCount * 0.6)) {
+      hideSyncProgress();
+      showToast('⚠ 已阻止上传：本机仅 ' + localDateCount + ' 天，云端有 ' + cloudDateCount + ' 天，疑似数据异常。请先在云同步里「↓ 拉取」恢复后再上传');
+      return;
+    }
 
     const payload = {
       message: 'sync: ' + new Date().toLocaleString('zh-CN'),
@@ -6403,6 +6419,17 @@ async function autoPullFromCloud() {
   }
 }
 
+// 判断某天某孩子的任务是否仍是"未经用户修改的默认模板"（只比较学习类任务名）
+// 动态插入的课程作业（学而思作业/语文LA作业/小测复习）会被剔除后再比较
+function isDefaultTaskSet(childId, dateStr, tasks) {
+  if (!Array.isArray(tasks)) return false;
+  const def = defaultTasksFor(childId, dateStr).filter(t => t.type !== 'rest').map(t => t.name);
+  const dyn = new Set(['学而思作业','语文LA作业','小测复习']);
+  const names = tasks.filter(t => t && t.type !== 'rest').map(t => t.name).filter(n => !dyn.has(n));
+  if (names.length !== def.length) return false;
+  return names.every((n, i) => n === def[i]);
+}
+
 function mergeSmart(local, cloud) {
   const localDates = Object.keys(local.dates || {});
   const cloudDates = Object.keys(cloud.dates || {});
@@ -6425,10 +6452,18 @@ function mergeSmart(local, cloud) {
       const cTask = cc.taskSavedAt || 0;
       const lRev  = lc.reviewSavedAt || 0;
       const cRev  = cc.reviewSavedAt || 0;
-      // 任务取较新，复盘取较新（分别合并，避免互相覆盖）
+      // 任务取舍：用户手动改过的版本优先于"未经修改的默认模板"，避免默认把手动修改覆盖掉；
+      // 两端都为默认或都已被手动修改时，再按保存时间取较新
+      const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
+      const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
+      let takeLocal;
+      if (lPristine && !cPristine) takeLocal = false;
+      else if (!lPristine && cPristine) takeLocal = true;
+      else takeLocal = lTask >= cTask;
+      // 任务取较新（或非默认版本），复盘取较新（分别合并，避免互相覆盖）
       const mergedChild = {
         ...cc,
-        tasks: lTask >= cTask ? lc.tasks : cc.tasks,
+        tasks: takeLocal ? lc.tasks : cc.tasks,
         taskSavedAt: Math.max(lTask, cTask) || lc.taskSavedAt || cc.taskSavedAt,
         fixedClasses: lc.fixedClasses || cc.fixedClasses,
         arrival: lc.arrival || cc.arrival,
