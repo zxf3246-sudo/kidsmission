@@ -1969,7 +1969,7 @@ const WEEKLY_CLASSES = {
   qiannuo: {
     1: [],
     2: [{name:'学而思',        time:'17:00-18:30', duration:90}],
-    3: [{name:'语文LA',        time:'17:00-17:25', duration:25}],
+    3: [{name:'语文LA',        time:'17:00-18:00', duration:60}],
     4: [],
     5: [],
     6: [{name:'豌豆思维',      time:'10:00-10:40', duration:40},
@@ -3114,6 +3114,28 @@ function syncYilinSundayClasses(obj) {
   }
 }
 
+// 同步李芊诺周三"语文LA"固定课程时间到最新模板（17:00-18:00）
+// 幂等：仅处理周三(dow=3)，已为 17:00-18:00 则跳过
+function syncQiannuoWedLaTime(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (new Date(ds + 'T00:00:00').getDay() !== 3) return;
+    const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name === '语文LA') {
+        if (c.time !== '17:00-18:00') { c.time = '17:00-18:00'; changed++; }
+        if (c.duration !== 60) { c.duration = 60; changed++; }
+      }
+    });
+  });
+  if (changed > 0) {
+    console.log('[syncQiannuoWedLaTime] 🔄 李芊诺周三语文LA时间已同步为 17:00-18:00，共', changed, '项');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 同步李彦希固定课程语文LA时间到最新模板
 // 幂等：周一(dow=1)语文LA改为 15:30-16:30；周三(dow=3)语文LA改回 14:30-15:30
 function syncYanxiWedLaTime(obj) {
@@ -3540,6 +3562,7 @@ function loadState() {
       renameYilinWeeklyTasks(obj);
       syncYilinSundayClasses(obj);
       syncYanxiWedLaTime(obj);
+      syncQiannuoWedLaTime(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -3747,6 +3770,18 @@ function render() {
     cd.fixedClasses.forEach(c => {
       if (c && c.name && c.name === '语文LA' && c.time !== target) {
         c.time = target;
+      }
+    });
+  })();
+  // 强制李芊诺周三"语文LA"时间：17:00-18:00（用户要求）
+  (() => {
+    const cd = state.dates[dateStr] && state.dates[dateStr].qiannuo;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    if (new Date(dateStr+'T00:00:00').getDay() !== 3) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name === '语文LA') {
+        if (c.time !== '17:00-18:00') c.time = '17:00-18:00';
+        if (c.duration !== 60) c.duration = 60;
       }
     });
   })();
@@ -6080,6 +6115,7 @@ async function pullFromGist() {
     renameYilinWeeklyTasks(merged);
     syncYilinSundayClasses(merged);
     syncYanxiWedLaTime(merged);
+    syncQiannuoWedLaTime(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
@@ -6206,6 +6242,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   renameYilinWeeklyTasks(state);
   syncYilinSundayClasses(state);
   syncYanxiWedLaTime(state);
+  syncQiannuoWedLaTime(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -6315,6 +6352,7 @@ async function autoPullFromCloud() {
     renameYilinWeeklyTasks(merged);
     syncYilinSundayClasses(merged);
     syncYanxiWedLaTime(merged);
+    syncQiannuoWedLaTime(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
