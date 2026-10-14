@@ -6354,6 +6354,19 @@ document.getElementById('datePicker').addEventListener('change', render);
 updateCloudStatusUI();
 render();
 
+// 打开页面即自动拉取云端最新数据（无需再手动点"拉取"）
+let _lastAutoPullAt = 0;
+function maybeAutoPull(force) {
+  const now = Date.now();
+  if (!force && now - _lastAutoPullAt < 15000) return; // 15秒内不重复请求
+  _lastAutoPullAt = now;
+  autoPullFromCloud().catch(() => {});
+}
+setTimeout(() => maybeAutoPull(true), 300);
+// 从聊天窗口返回、切回前台时自动同步一次
+document.addEventListener('visibilitychange', () => { if (!document.hidden) maybeAutoPull(false); });
+window.addEventListener('focus', () => maybeAutoPull(false));
+
 // 是否正在编辑某个输入框（用于避免自动同步打断手打内容）
 function anyInputFocused() {
   const el = document.activeElement;
