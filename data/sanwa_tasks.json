@@ -181,6 +181,14 @@
             "errLinked": false
           },
           {
+            "id": "t1791964238973rmoq",
+            "name": "语文练字半页",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1791964166416m8r3",
             "name": "自由玩耍",
             "duration": null,
@@ -209,7 +217,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791964206044,
+        "taskSavedAt": 1791964240566,
         "reviewSavedAt": null
       },
       "qiannuo": {
