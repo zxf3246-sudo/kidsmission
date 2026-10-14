@@ -154,7 +154,7 @@
           {
             "id": "t1791964166416xx4f",
             "name": "语文阅读理解",
-            "duration": 15,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -163,7 +163,7 @@
           {
             "id": "t17919641664160bg0",
             "name": "2页计算题",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -172,7 +172,7 @@
           {
             "id": "t17919641956870j04",
             "name": "数学练习",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -181,7 +181,7 @@
           {
             "id": "t17919642046692q9n",
             "name": "英语语法练习",
-            "duration": null,
+            "duration": 20,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -190,7 +190,7 @@
           {
             "id": "t1791964238973rmoq",
             "name": "语文练字半页",
-            "duration": null,
+            "duration": 25,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -199,7 +199,7 @@
           {
             "id": "t1791968571956cnq4",
             "name": "语文写作学习",
-            "duration": null,
+            "duration": 30,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -233,7 +233,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791968575134,
+        "taskSavedAt": 1791969120373,
         "reviewSavedAt": null
       },
       "qiannuo": {
