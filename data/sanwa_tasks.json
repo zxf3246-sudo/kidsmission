@@ -187,16 +187,18 @@
             "name": "语文写作学习",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791964166416m8r3",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 100,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1791964166416c8jh",
@@ -223,7 +225,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1791969120373,
+        "taskSavedAt": 1791980814309,
         "reviewSavedAt": 1791974770390
       },
       "qiannuo": {
