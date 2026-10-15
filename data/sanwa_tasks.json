@@ -94,19 +94,19 @@
           }
         ],
         "review": {
-          "points": 0,
+          "points": 7,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "savings": -7,
+          "stars": 3.5
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792075245877,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792075417406
       },
       "yanxi": {
         "fixedClasses": [
@@ -201,19 +201,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 8,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "积极",
+            "真棒"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792075267845,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792075397288
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -307,14 +311,18 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "听话",
+            "勤奋"
+          ],
           "savings": 0,
           "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792075291029,
-        "reviewSavedAt": 1792068496229
+        "reviewSavedAt": 1792075315348
       }
     },
     "2026-10-14": {
