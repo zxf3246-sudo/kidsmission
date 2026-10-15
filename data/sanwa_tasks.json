@@ -4,11 +4,6 @@
       "yilin": {
         "fixedClasses": [
           {
-            "name": "语文LA",
-            "time": "15:00-16:00",
-            "duration": 60
-          },
-          {
             "name": "科学",
             "time": "19:30-21:30",
             "duration": 120
@@ -61,15 +56,6 @@
             "status": "done"
           },
           {
-            "id": "t17920559478802qb7",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t17920430626589l9m",
             "name": "数学练习",
             "duration": 15,
@@ -114,7 +100,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1792055853564,
+        "taskSavedAt": 1792056069386,
         "reviewSavedAt": null
       },
       "yanxi": {
