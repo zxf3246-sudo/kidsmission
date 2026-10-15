@@ -174,7 +174,7 @@
           {
             "id": "t179204313423808u6",
             "name": "数学练习",
-            "duration": null,
+            "duration": 0,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -183,18 +183,21 @@
           {
             "id": "t17920430626587o8k",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 80,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17920430626588dna",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:30"
           }
         ],
         "review": {
@@ -209,7 +212,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1792056050215,
+        "taskSavedAt": 1792075267845,
         "reviewSavedAt": null
       },
       "qiannuo": {
