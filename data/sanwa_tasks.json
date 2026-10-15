@@ -31,7 +31,7 @@
           {
             "id": "t1792043062658jzix",
             "name": "Missy作业和10MCQ",
-            "duration": 20,
+            "duration": 60,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -100,7 +100,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1792055837591,
+        "taskSavedAt": 1792055853564,
         "reviewSavedAt": null
       },
       "yanxi": {
