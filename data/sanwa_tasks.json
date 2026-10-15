@@ -274,14 +274,6 @@
             "status": "done"
           },
           {
-            "id": "t1792055946216j7bh",
-            "name": "语文练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792055946216f2o3",
             "name": "学校双语作业",
             "duration": 15,
@@ -318,7 +310,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1792055956875,
+        "taskSavedAt": 1792055982242,
         "reviewSavedAt": null
       }
     },
