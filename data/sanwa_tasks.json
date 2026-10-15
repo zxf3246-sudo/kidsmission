@@ -133,8 +133,9 @@
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179204306265878ul",
@@ -157,8 +158,9 @@
             "name": "一页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179204313423808u6",
@@ -197,7 +199,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1792047681743,
+        "taskSavedAt": 1792051999838,
         "reviewSavedAt": null
       },
       "qiannuo": {
