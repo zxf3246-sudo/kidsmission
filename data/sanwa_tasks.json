@@ -158,8 +158,9 @@
             "name": "WW1单词5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792043062658ykl7",
@@ -167,7 +168,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t17920430626588v4c",
@@ -183,8 +185,9 @@
             "name": "数学练习",
             "duration": null,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17920430626587o8k",
@@ -215,7 +218,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1792051999838,
+        "taskSavedAt": 1792056050215,
         "reviewSavedAt": null
       },
       "qiannuo": {
