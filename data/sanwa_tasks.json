@@ -178,6 +178,14 @@
             "errLinked": false
           },
           {
+            "id": "t17920431744090rre",
+            "name": "LA作业",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t17920430626587o8k",
             "name": "自由玩耍",
             "duration": null,
@@ -206,7 +214,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1792043142644,
+        "taskSavedAt": 1792043175959,
         "reviewSavedAt": null
       },
       "qiannuo": {
