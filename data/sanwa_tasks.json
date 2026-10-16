@@ -50,15 +50,6 @@
             "status": "done"
           },
           {
-            "id": "t1792163175015s7i4",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
-          },
-          {
             "id": "t1792135544460mqjw",
             "name": "数学练习",
             "duration": 25,
@@ -121,7 +112,7 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1792162325626,
+        "taskSavedAt": 1792163215502,
         "reviewSavedAt": 1792163118778
       },
       "yanxi": {
