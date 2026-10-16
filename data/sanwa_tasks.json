@@ -253,16 +253,18 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792146200229aqgf",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17921462002290ryg",
@@ -287,41 +289,37 @@
             "name": "英语练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t179214620023036hm",
-            "name": "小测复习",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17921462950923pbl",
             "name": "数学练习",
-            "duration": null,
+            "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792146200229x3mx",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 90,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792146200229uc23",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:08"
           }
         ],
         "review": {
@@ -336,7 +334,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1792146300002,
+        "taskSavedAt": 1792162385803,
         "reviewSavedAt": null
       }
     },
