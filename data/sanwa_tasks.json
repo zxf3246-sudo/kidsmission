@@ -213,19 +213,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 7,
+          "score": 89,
           "summary": "",
-          "reward": "",
+          "reward": "周末完成任务dojo45分钟",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "听话",
+            "勤奋"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1792162354386,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792162704174
       },
       "qiannuo": {
         "fixedClasses": [],
