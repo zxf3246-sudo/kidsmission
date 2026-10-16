@@ -108,16 +108,18 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792143436077axhc",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792143436077afqq",
@@ -189,7 +191,7 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792143457182,
         "reviewSavedAt": null
       },
       "qiannuo": {
