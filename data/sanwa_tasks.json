@@ -10849,15 +10849,6 @@
             "errLinked": false
           },
           {
-            "id": "t1792243704849nzn1",
-            "name": "学而思作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
             "id": "t1792243704849hmrz",
             "name": "语文LA作业",
             "duration": null,
@@ -10893,7 +10884,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792244011969,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -11403,6 +11394,9 @@
         "阅读作文学习": true,
         "语文阅读理解": true,
         "英语语法复习": true
+      },
+      "yilin": {
+        "学而思作业": true
       }
     }
   }
