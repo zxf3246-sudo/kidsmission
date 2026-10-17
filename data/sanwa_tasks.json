@@ -10817,22 +10817,6 @@
             "errLinked": false
           },
           {
-            "id": "t1792243704848m9gg",
-            "name": "语文错题巩固",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792243704848a0jm",
-            "name": "科学错题巩固",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792243704848wqqw",
             "name": "数学练习",
             "duration": 15,
@@ -10883,7 +10867,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792244047493,
+        "taskSavedAt": 1792244077814,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -11396,7 +11380,9 @@
       },
       "yilin": {
         "学而思作业": true,
-        "语文LA作业": true
+        "语文LA作业": true,
+        "语文错题巩固": true,
+        "科学错题巩固": true
       }
     }
   }
