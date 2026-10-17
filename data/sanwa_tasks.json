@@ -147,7 +147,7 @@
           },
           {
             "id": "t1790844811793hggt",
-            "name": "四五快读复习",
+            "name": "四五快读5字",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -155,7 +155,7 @@
           },
           {
             "id": "t17908448117935vj9",
-            "name": "WW单词复习",
+            "name": "WW单词5个",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -177,6 +177,22 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t17922179237914f1p",
+            "name": "语文写作练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1792217936459fruf",
+            "name": "数学错题复习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
           },
           {
             "id": "t1790844811793pesg",
@@ -207,7 +223,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792163543291,
+        "taskSavedAt": 1792217938165,
         "reviewSavedAt": null
       },
       "qiannuo": {
