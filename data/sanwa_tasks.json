@@ -16,14 +16,6 @@
         ],
         "tasks": [
           {
-            "id": "t1790844811793m890",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1790844811793oyqh",
             "name": "Missy听力",
             "duration": 30,
@@ -105,7 +97,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792237707590,
+        "taskSavedAt": 1792237712991,
         "reviewSavedAt": null
       },
       "yanxi": {
