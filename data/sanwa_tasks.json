@@ -10918,7 +10918,7 @@
           {
             "id": "t17922439283769lpc",
             "name": "WW2 5个新词",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -10926,7 +10926,7 @@
           {
             "id": "t1792243952495ew4l",
             "name": "四五快读 5新字",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -11006,7 +11006,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792243962798,
+        "taskSavedAt": 1792243974231,
         "reviewSavedAt": null
       },
       "qiannuo": {
