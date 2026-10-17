@@ -26,7 +26,7 @@
           },
           {
             "id": "t1790844811793ok3s",
-            "name": "Missy笔记背诵和10MCQ",
+            "name": "Missy10MCQ",
             "duration": 20,
             "type": "study",
             "done": true,
@@ -50,6 +50,15 @@
             "done": true,
             "errLinked": false,
             "status": "done"
+          },
+          {
+            "id": "t1792237772249kamt",
+            "name": "Missy笔记背诵",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "status": "undone"
           },
           {
             "id": "t1790844811793glf2",
@@ -97,7 +106,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792237712991,
+        "taskSavedAt": 1792237797575,
         "reviewSavedAt": null
       },
       "yanxi": {
