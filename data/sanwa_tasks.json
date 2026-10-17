@@ -28,40 +28,36 @@
             "name": "Missy听力",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793ok3s",
             "name": "Missy笔记背诵和10MCQ",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793yg9i",
             "name": "语文词语复习",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793oti4",
             "name": "科学知识点复习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1790844811793uoux",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793glf2",
@@ -87,15 +83,6 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
-          },
-          {
-            "id": "t1792232469716qv2u",
-            "name": "语文LA作业",
-            "duration": null,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
           },
           {
             "id": "t1790844811793u1tb",
@@ -126,7 +113,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792217882910,
+        "taskSavedAt": 1792232945952,
         "reviewSavedAt": null
       },
       "yanxi": {
