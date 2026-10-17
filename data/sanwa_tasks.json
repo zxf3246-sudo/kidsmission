@@ -302,6 +302,22 @@
             "errLinked": false
           },
           {
+            "id": "t1792217962078javo",
+            "name": "数学练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1792217970828hfry",
+            "name": "英语练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1792217852158zfei",
             "name": "自由玩耍",
             "duration": null,
@@ -330,7 +346,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792217973287,
         "reviewSavedAt": null
       }
     },
