@@ -2174,6 +2174,8 @@ function syncCourseHomework(childId, dateStr) {
     const legacyIdx = tasks.findIndex(t => !t.courseTask && ch.matchTask(t.name || ''));
     if (shouldShow) {
       if (idx === -1) {
+        // 用户手动删过该作业：尊重手动结果，不再自动补回
+        if (legacyIdx === -1 && isTaskManuallyRemoved(state, dateStr, childId, ch.taskName)) return;
         // 插入位置：李怡霖紧跟"科学知识点"；否则插在第一个休息任务前；语文LA作业紧随学而思作业
         let insertPos;
         if (ch.key === 'la') {
@@ -2245,7 +2247,9 @@ function syncQuizReviewDynamic(dateStr) {
     if (hit) {
       // 若当天已存在含"小测"字样的任务（如用户手动加的"英语小测复习"），视为已覆盖，不重复插入
       const hasExisting = cd.tasks.some(t => t.courseTask === 'quizReview' || (t && (t.name || '').includes('小测') && t.name !== '小测复习'));
-      if (idx === -1 && !hasExisting) {
+      // 用户手动删过"小测复习"：尊重手动结果，不再自动补回
+      const removedByUser = isTaskManuallyRemoved(state, dateStr, childId, '小测复习');
+      if (idx === -1 && !hasExisting && !removedByUser) {
         const insertPos = courseHomeworkInsertPos(cd.tasks, childId);
         cd.tasks.splice(insertPos, 0, { id: uid(), name: '小测复习', duration: 15, type: 'study', status: '', done: false, courseTask: 'quizReview' });
         changed = true;
@@ -3233,10 +3237,11 @@ function renameQiannuoFixedTasks(obj) {
     const dow = new Date(ds + 'T00:00:00').getDay();
     // 改名
     cd.tasks.forEach(t => { if (t && t.name && NAME_MAP[t.name]) { t.name = NAME_MAP[t.name]; hit = true; } });
-    // "乘法口诀复习"仅周一(dow=1)保留：周一确保存在，非周一一律移除
+    // "乘法口诀复习"仅周一(dow=1)保留：周一确保存在（用户手动删过则尊重），非周一一律移除
     const mIdx = cd.tasks.findIndex(t => t.name === '乘法口诀复习');
     if (dow === 1) {
-      if (mIdx === -1 && cd.tasks.some(t => t.name === '字母拼音')) {
+      if (mIdx === -1 && cd.tasks.some(t => t.name === '字母拼音') &&
+          !isTaskManuallyRemoved(obj, ds, 'qiannuo', '乘法口诀复习')) {
         const i = cd.tasks.findIndex(t => t.name === '字母拼音');
         cd.tasks.splice(i + 1, 0, { id: uid(), name: '乘法口诀复习', duration: 10, type: 'study', done: false });
         hit = true;
@@ -3264,6 +3269,7 @@ function addQiannuoThursBilingual(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
     if (!cd || !Array.isArray(cd.tasks) || !cd.tasks.length) return;
     if (cd.tasks.some(t => t.name === '学校双语作业')) return; // 已存在
+    if (isTaskManuallyRemoved(obj, ds, 'qiannuo', '学校双语作业')) return; // 用户手动删过则尊重
     const task = { id: uid(), name: '学校双语作业', duration: 15, type: 'study', done: false };
     const wingIdx = cd.tasks.findIndex(t => t.type === 'rest');
     if (wingIdx >= 0) cd.tasks.splice(wingIdx, 0, task);
@@ -3398,8 +3404,8 @@ function migrateYilinMissyTasks(obj) {
       cd.tasks = newArr;
       dayChanged = true;
     }
-    // 3) 确保存在 听播客（第一个休息任务前插入）
-    if (!cd.tasks.some(t => t.name === '听播客')) {
+    // 3) 确保存在 听播客（第一个休息任务前插入）；用户手动删过则尊重，不再补回
+    if (!cd.tasks.some(t => t.name === '听播客') && !isTaskManuallyRemoved(obj, ds, 'yilin', '听播客')) {
       const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
       const podcast = { id: uid(), name: '听播客', duration: 30, type: 'study', done: false };
       if (restIdx >= 0) cd.tasks.splice(restIdx, 0, podcast);
@@ -3447,24 +3453,50 @@ function swapReviewDates(obj) {
   }
 }
 
+// 判断是否为"计算题"系列任务名（一页计算题 / 2页计算题 / 3页计算题…）
+// 用函数而非顶层 const：页面初始化早期就会调用迁移逻辑，顶层 const 会触发暂时性死区(TDZ)报错
+function isCalcTaskName(name) {
+  return /^(?:一页|\d+页)计算题$/.test((name || '').trim());
+}
+
+// ====== "手动改过/删过即为最终版" 通用记录（持久化在 state.manualRemovedTasks） ======
+// 记录用户手动删除、或改名前的原任务名；所有"自动补回默认任务"的逻辑都先查询这里，
+// 避免刷新后用户删掉/改名的固定任务又冒出来。
+function isTaskManuallyRemoved(obj, dateStr, childId, name) {
+  const m = obj && obj.manualRemovedTasks && obj.manualRemovedTasks[dateStr] && obj.manualRemovedTasks[dateStr][childId];
+  if (!m) return false;
+  const n = (name || '').trim();
+  if (m[n]) return true;
+  // "计算题"系列：删除过任一页数版本，视为该系列已删
+  if (isCalcTaskName(n) && Object.keys(m).some(k => isCalcTaskName(k))) return true;
+  return false;
+}
+function markTaskRemoved(obj, dateStr, childId, name) {
+  const n = (name || '').trim();
+  if (!obj || !n) return;
+  if (!obj.manualRemovedTasks) obj.manualRemovedTasks = {};
+  if (!obj.manualRemovedTasks[dateStr]) obj.manualRemovedTasks[dateStr] = {};
+  if (!obj.manualRemovedTasks[dateStr][childId]) obj.manualRemovedTasks[dateStr][childId] = {};
+  obj.manualRemovedTasks[dateStr][childId][n] = true;
+}
+
 // 李彦希"计算题"任务去重：用户把"一页计算题"重命名（如"2页计算题"）后，
 // 旧逻辑会再补一条"一页计算题"造成重复。这里按名称去重：
 // 同名只留一条；若当天已有重命名版本（非"一页计算题"），则删除"一页计算题"。
 // 幂等：只处理同一天存在多条"计算题"任务的情况。
-const YANXI_CALC_RE = /^(?:一页|\d+页)计算题$/;
 function dedupeYanxiCalcTasks(obj) {
   if (!obj || !obj.dates) return 0;
   let changed = 0;
   Object.keys(obj.dates).forEach(ds => {
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.tasks)) return;
-    const calc = cd.tasks.filter(t => YANXI_CALC_RE.test((t && t.name) || ''));
+    const calc = cd.tasks.filter(t => isCalcTaskName(t && t.name));
     if (calc.length <= 1) return;
     const hasRenamed = calc.some(t => t.name !== '一页计算题');
     const kept = {};
     const before = cd.tasks.length;
     cd.tasks = cd.tasks.filter(t => {
-      if (!YANXI_CALC_RE.test((t && t.name) || '')) return true;
+      if (!isCalcTaskName(t && t.name)) return true;
       if (t.name === '一页计算题' && hasRenamed) return false;
       if (kept[t.name]) return false;
       kept[t.name] = true;
@@ -3499,10 +3531,9 @@ function addYanxiCalcTask(obj) {
       return;
     }
     // 已存在"计算题"任务（含用户重命名的，如"2页计算题"）则跳过，避免重复出现
-    if (cd.tasks.some(t => (t.name || '').includes('计算题'))) return;
-    // 用户手动删除过：以手动为准，不再自动加回
-    if (obj.manualRemovedTasks && obj.manualRemovedTasks[ds] && obj.manualRemovedTasks[ds].yanxi &&
-        obj.manualRemovedTasks[ds].yanxi['一页计算题']) return;
+    if (cd.tasks.some(t => isCalcTaskName(t && t.name))) return;
+    // 用户手动删除/改名过：以手动为准，不再自动加回
+    if (isTaskManuallyRemoved(obj, ds, 'yanxi', '一页计算题')) return;
     const calc = { id: uid(), name: '一页计算题', duration: 15, type: 'study', done: false };
     const restIdx = cd.tasks.findIndex(t => t.type === 'rest');
     if (restIdx >= 0) cd.tasks.splice(restIdx, 0, calc);
@@ -3779,14 +3810,15 @@ function render() {
   if (new Date(dateStr+'T00:00:00').getDay() === 4) {
     addQiannuoThursBilingual(state);
   }
-  // 强制当前日期正确：李芊诺"乘法口诀复习"仅周一保留（非周一移除）
+  // 强制当前日期正确：李芊诺"乘法口诀复习"仅周一保留（非周一移除；周一缺失时补上，但用户手动删过则尊重）
   (() => {
     const cd = state.dates[dateStr] && state.dates[dateStr].qiannuo;
     if (!cd || !Array.isArray(cd.tasks)) return;
     const dow = new Date(dateStr+'T00:00:00').getDay();
     const mIdx = cd.tasks.findIndex(t => t.name === '乘法口诀复习');
     if (dow === 1) {
-      if (mIdx === -1 && cd.tasks.some(t => t.name === '字母拼音')) {
+      if (mIdx === -1 && cd.tasks.some(t => t.name === '字母拼音') &&
+          !isTaskManuallyRemoved(state, dateStr, 'qiannuo', '乘法口诀复习')) {
         const i = cd.tasks.findIndex(t => t.name === '字母拼音');
         cd.tasks.splice(i + 1, 0, { id: uid(), name: '乘法口诀复习', duration: 10, type: 'study', done: false });
       }
@@ -4300,7 +4332,11 @@ function editTaskName(childId, idx, val) {
   const dateStr = document.getElementById('datePicker').value;
   const n = val.trim();
   if (!n) { renderChildren(dateStr); return; }
-  state.dates[dateStr][childId].tasks[idx].name = n;
+  const task = state.dates[dateStr][childId].tasks[idx];
+  const oldName = task.name;
+  task.name = n;
+  // 改名时记录原名，避免"自动补回默认任务"的逻辑又把原任务加回来（手动改名即最终版）
+  if (oldName && oldName !== n) markTaskRemoved(state, dateStr, childId, oldName);
   markDirty(childId, 'task');
   save();
 }
@@ -4339,13 +4375,9 @@ function delTask(childId, idx) {
   const arr = state.dates[dateStr][childId].tasks;
   const removed = arr[idx];
   arr.splice(idx,1);
-  // 用户手动删除"计算题"任务（含重命名）时记录，避免 addYanxiCalcTask 在下次加载时又自动加回
-  if (removed && (removed.name || '').includes('计算题') && childId === 'yanxi') {
-    if (!state.manualRemovedTasks) state.manualRemovedTasks = {};
-    if (!state.manualRemovedTasks[dateStr]) state.manualRemovedTasks[dateStr] = {};
-    state.manualRemovedTasks[dateStr][childId] = (state.manualRemovedTasks[dateStr][childId] || {});
-    (state.manualRemovedTasks[dateStr][childId])['一页计算题'] = true;
-  }
+  // 记录被删除的任务名（按 日期+孩子），所有自动补回默认任务的逻辑都会先查这个记录，
+  // 保证"手动删掉的固定任务刷新后不再自动出现"
+  if (removed && removed.name) markTaskRemoved(state, dateStr, childId, removed.name);
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
@@ -4353,6 +4385,10 @@ function resetChild(childId) {
   if (!confirm('确认重置该孩子的任务为默认？')) return;
   const dateStr = document.getElementById('datePicker').value;
   state.dates[dateStr][childId].tasks = defaultTasksFor(childId, dateStr);
+  // 明确重置为默认时，清除该日该孩子的"手动删除/改名"记录
+  if (state.manualRemovedTasks && state.manualRemovedTasks[dateStr]) {
+    delete state.manualRemovedTasks[dateStr][childId];
+  }
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
@@ -6502,6 +6538,23 @@ function mergeSmart(local, cloud) {
   const ck = (cloud.summaryKeywords && Array.isArray(cloud.summaryKeywords)) ? cloud.summaryKeywords : [];
   const kwSet = new Set([...lk, ...ck]);
   if (kwSet.size > 0) result.summaryKeywords = [...kwSet];
+  // "手动删除/改名"记录取两端并集：保证在一台设备上删掉的固定任务，另一台也不会被自动补回
+  const rm = {};
+  [local.manualRemovedTasks || {}, cloud.manualRemovedTasks || {}].forEach(src => {
+    Object.keys(src).forEach(ds => {
+      const kids = src[ds] || {};
+      Object.keys(kids).forEach(cid => {
+        const names = kids[cid] || {};
+        Object.keys(names).forEach(n => {
+          if (!names[n]) return;
+          if (!rm[ds]) rm[ds] = {};
+          if (!rm[ds][cid]) rm[ds][cid] = {};
+          rm[ds][cid][n] = true;
+        });
+      });
+    });
+  });
+  if (Object.keys(rm).length > 0) result.manualRemovedTasks = rm;
   return result;
 }
 
