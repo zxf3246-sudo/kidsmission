@@ -288,14 +288,6 @@
             "status": "done"
           },
           {
-            "id": "t1792217852158g62s",
-            "name": "语文练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792217962078javo",
             "name": "数学练习",
             "duration": null,
@@ -303,14 +295,6 @@
             "done": true,
             "errLinked": false,
             "status": "done"
-          },
-          {
-            "id": "t1792217970828hfry",
-            "name": "英语练习",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
           },
           {
             "id": "t1792217852158zfei",
@@ -341,7 +325,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792240391330,
+        "taskSavedAt": 1792240401485,
         "reviewSavedAt": null
       }
     },
@@ -11065,7 +11049,8 @@
       },
       "qiannuo": {
         "数学练习": true,
-        "英语练习": true
+        "英语练习": true,
+        "语文练习": true
       }
     }
   }
