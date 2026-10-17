@@ -7502,19 +7502,23 @@
           }
         ],
         "review": {
-          "points": 0,
+          "points": 8,
           "score": null,
           "summary": "",
-          "reward": "",
+          "reward": "语文听写全对+1分 1张小卡",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "反复出错",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792241069969,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792241157739
       },
       "yanxi": {
         "fixedClasses": [
@@ -7706,10 +7710,11 @@
           {
             "id": "t1792217852158zfei",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 50,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17922178521580vvj",
@@ -7732,7 +7737,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792240401485,
+        "taskSavedAt": 1792241088672,
         "reviewSavedAt": null
       }
     },
