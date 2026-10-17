@@ -1266,7 +1266,7 @@
           <textarea class="review-textarea lg" id="rv-summary-yilin" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yilin','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
-          <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
+          <label>今日奖惩（可写实物、特权、活动等，留空表示无）</label>
           <input type="text" class="review-input" id="rv-reward-yilin" value="" placeholder="如：看动画20分钟 / 吃冰淇淋 / 选周末活动" onblur="updateReview('yilin','reward',this.value)">
         </div>
         <div class="review-field">
@@ -1498,7 +1498,7 @@
           <textarea class="review-textarea lg" id="rv-summary-yanxi" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('yanxi','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
-          <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
+          <label>今日奖惩（可写实物、特权、活动等，留空表示无）</label>
           <input type="text" class="review-input" id="rv-reward-yanxi" value="" placeholder="如：看动画20分钟 / 吃冰淇淋 / 选周末活动" onblur="updateReview('yanxi','reward',this.value)">
         </div>
         <div class="review-field">
@@ -1751,7 +1751,7 @@
           <textarea class="review-textarea lg" id="rv-summary-qiannuo" rows="6" placeholder="记录今天的表现亮点、问题、改进点……" onblur="updateReview('qiannuo','summary',this.value)"></textarea>
         </div>
         <div class="review-field">
-          <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
+          <label>今日奖惩（可写实物、特权、活动等，留空表示无）</label>
           <input type="text" class="review-input" id="rv-reward-qiannuo" value="" placeholder="如：看动画20分钟 / 吃冰淇淋 / 选周末活动" onblur="updateReview('qiannuo','reward',this.value)">
         </div>
         <div class="review-field">
@@ -4092,7 +4092,7 @@ function renderChildren(dateStr) {
           }
         </div>
         <div class="review-field">
-          <label>今日奖励（可写实物、特权、活动等，留空表示无）</label>
+          <label>今日奖惩（可写实物、特权、活动等，留空表示无）</label>
           <input type="text" class="review-input" id="rv-reward-${c.id}"
             value="${escapeHtml(review.reward||'')}" placeholder="如：看动画20分钟 / 吃冰淇淋 / 选周末活动"
             onblur="updateReview('${c.id}','reward',this.value)">
@@ -4991,7 +4991,7 @@ async function exportReview() {
   setFont(ctx, 20, false); ctx.fillStyle = 'rgba(255,255,255,.95)';
   ctx.fillText(`${dateStr}    ${dow}`, x0+32, y+76);
   setFont(ctx, 14, false); ctx.fillStyle = 'rgba(255,255,255,.8)';
-  ctx.fillText('学习时长 · 积分记录 · 百分评分 · 总结奖励', x0+32, y+108);
+  ctx.fillText('学习时长 · 积分记录 · 百分评分 · 总结奖惩', x0+32, y+108);
   y += hH + 20;
 
   // 孩子卡片
@@ -5236,7 +5236,7 @@ async function exportReview() {
     // 奖励
     if (rewardLines.length) {
       setFont(ctx, 16, true); ctx.fillStyle = '#78350f';
-      ctx.fillText('🎁 今日奖励', x0+28, cy); cy += 28;
+      ctx.fillText('🎁 今日奖惩', x0+28, cy); cy += 28;
       const boxH = rewardLines.length * 24 + 18;
       const rg = ctx.createLinearGradient(x0+28, cy, x0+CW-28, cy+boxH);
       rg.addColorStop(0, '#fef3c7'); rg.addColorStop(1, '#fde68a');
@@ -5823,7 +5823,7 @@ async function exportTasksText() {
     
     // 复盘（文字导出不显示评分和总结，仅保留奖励）
     const r = cd.review || {};
-    if (r.reward) text += `🎁 奖励：${r.reward}\n`;
+    if (r.reward) text += `🎁 奖惩：${r.reward}\n`;
     
     text += '\n';
   });
