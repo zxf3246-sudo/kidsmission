@@ -184,10 +184,11 @@
           {
             "id": "t1790844811793pesg",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 90,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793xebk",
@@ -210,7 +211,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792237727566,
+        "taskSavedAt": 1792240374661,
         "reviewSavedAt": null
       },
       "qiannuo": {
