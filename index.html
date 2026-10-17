@@ -3479,6 +3479,13 @@ function markTaskRemoved(obj, dateStr, childId, name) {
   if (!obj.manualRemovedTasks[dateStr][childId]) obj.manualRemovedTasks[dateStr][childId] = {};
   obj.manualRemovedTasks[dateStr][childId][n] = true;
 }
+// 用户又把同名任务加回来时，撤销该"已删除"记录：以最后一次手动操作为准，后面可覆盖前面
+function clearTaskRemoved(obj, dateStr, childId, name) {
+  const n = (name || '').trim();
+  if (!obj || !n || !obj.manualRemovedTasks) return;
+  const m = obj.manualRemovedTasks[dateStr] && obj.manualRemovedTasks[dateStr][childId];
+  if (m && m[n]) delete m[n];
+}
 
 // 李彦希"计算题"任务去重：用户把"一页计算题"重命名（如"2页计算题"）后，
 // 旧逻辑会再补一条"一页计算题"造成重复。这里按名称去重：
@@ -4225,6 +4232,8 @@ function quickAddTask(childId, inputEl) {
   };
   const arr = state.dates[dateStr][childId].tasks;
   arr.splice(defaultInsertIndex(arr, task.type), 0, task);
+  // 手动加回同名任务 → 撤销此前的"已删除"记录（最后一次手动操作为准）
+  clearTaskRemoved(state, dateStr, childId, name);
   markDirty(childId, 'task');
   save();
   renderChildren(dateStr);
@@ -4312,6 +4321,8 @@ function saveTask() {
   };
   const arr = state.dates[dateStr][modalCtx.childId].tasks;
   arr.splice(defaultInsertIndex(arr, task.type), 0, task);
+  // 手动加回同名任务 → 撤销此前的"已删除"记录（最后一次手动操作为准）
+  clearTaskRemoved(state, dateStr, modalCtx.childId, name);
   markDirty(modalCtx.childId, 'task');
   save(); closeModal(); renderChildren(dateStr);
 }
@@ -4335,8 +4346,10 @@ function editTaskName(childId, idx, val) {
   const task = state.dates[dateStr][childId].tasks[idx];
   const oldName = task.name;
   task.name = n;
-  // 改名时记录原名，避免"自动补回默认任务"的逻辑又把原任务加回来（手动改名即最终版）
+  // 改名：记录原名（避免自动补回原任务）；同时撤销"新名"的已删除记录
+  // —— 以最后一次手动操作为准，后面的手动操作可以覆盖前面的记录
   if (oldName && oldName !== n) markTaskRemoved(state, dateStr, childId, oldName);
+  clearTaskRemoved(state, dateStr, childId, n);
   markDirty(childId, 'task');
   save();
 }
