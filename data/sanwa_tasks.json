@@ -237,16 +237,18 @@
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17922178521581ba8",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792217852158txq3",
@@ -271,8 +273,9 @@
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792217852158iajd",
@@ -336,7 +339,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792232502098,
+        "taskSavedAt": 1792237858074,
         "reviewSavedAt": null
       }
     },
