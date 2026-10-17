@@ -10841,6 +10841,14 @@
             "errLinked": false
           },
           {
+            "id": "t1792244043922q2gt",
+            "name": "科学练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t17922437048489s8x",
             "name": "听播客",
             "duration": 30,
@@ -10875,7 +10883,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792244030671,
+        "taskSavedAt": 1792244047493,
         "reviewSavedAt": null
       },
       "yanxi": {
