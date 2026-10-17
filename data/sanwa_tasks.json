@@ -164,20 +164,13 @@
             "courseTask": "quizReview"
           },
           {
-            "id": "t17922179237914f1p",
-            "name": "语文写作练习",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792217936459fruf",
             "name": "数学错题复习",
-            "duration": null,
+            "duration": 35,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1790844811793pesg",
@@ -208,7 +201,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792234889348,
+        "taskSavedAt": 1792237727566,
         "reviewSavedAt": null
       },
       "qiannuo": {
