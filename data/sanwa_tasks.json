@@ -10662,22 +10662,6 @@
         ],
         "tasks": [
           {
-            "id": "t1791711461248pabb",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17917114612488r40",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17917114612480n2w",
             "name": "数学计算练习",
             "duration": 20,
@@ -10764,7 +10748,7 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792335682114,
         "reviewSavedAt": null
       }
     },
@@ -11701,6 +11685,10 @@
         "英语语法": true,
         "一页计算题": true,
         "语文LA作业": true
+      },
+      "qiannuo": {
+        "WWK单词3个": true,
+        "600字新字5个": true
       }
     }
   }
