@@ -10973,12 +10973,12 @@
             "自我反思"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792333853090,
-        "reviewSavedAt": 1792334171122
+        "reviewSavedAt": 1792334554833
       },
       "qiannuo": {
         "fixedClasses": [
@@ -11116,7 +11116,7 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792333888450,
-        "reviewSavedAt": 1792334535529
+        "reviewSavedAt": 1792334559202
       }
     }
   },
