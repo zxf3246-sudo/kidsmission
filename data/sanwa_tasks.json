@@ -11356,36 +11356,40 @@
         ],
         "tasks": [
           {
-            "id": "t17925783761638jnz",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792578376163rsyr",
             "name": "Missy笔记复习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179257837616357ik",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1792586178492klri",
+            "name": "Missy错题复习",
+            "duration": 60,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792578376163plox",
             "name": "自由活动",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792578376163ro6s",
@@ -11408,7 +11412,7 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1792578442436,
+        "taskSavedAt": 1792586197414,
         "reviewSavedAt": null
       },
       "yanxi": {
@@ -11967,7 +11971,8 @@
         "语文词语": true,
         "科学知识点": true,
         "Missy笔记背诵和10MCQ": true,
-        "数学练习": true
+        "数学练习": true,
+        "学校作业": true
       },
       "yanxi": {
         "四五快读新字": true,
