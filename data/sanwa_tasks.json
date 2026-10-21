@@ -11423,48 +11423,36 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17925783761634noe",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792578376163zo03",
-            "name": "四五快读新字",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792578376163vh62",
-            "name": "WW1单词5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17925783761630667",
-            "name": "语文阅读理解",
+            "name": "语文阅读理解讲解",
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "empty"
           },
           {
             "id": "t179257837616317wv",
             "name": "一页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792578376163jafw",
@@ -11511,7 +11499,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792578480593,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -11974,6 +11962,11 @@
         "科学知识点": true,
         "Missy笔记背诵和10MCQ": true,
         "数学练习": true
+      },
+      "yanxi": {
+        "四五快读新字": true,
+        "WW1单词5个": true,
+        "语文阅读理解": true
       }
     }
   }
