@@ -11403,19 +11403,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 7,
+          "score": 89,
+          "summary": "下午去补课，试卷做的挺好的，EPY的目标是语文的选择题错1题以内，然后大题尽量不错，之前老师教过的不应该错，争取能把语文拿到AL1,因为明天就是很关键的英语Paper2,所以晚上都在复习老师的笔记和错题，中途有一点容易受到影响的小分心，希望明天考试顺利。",
+          "reward": "换了两张宋雨琦小卡",
           "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
+          "keywords": [
+            "听话",
+            "有进步"
+          ],
+          "savings": 5,
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792591452857,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792591667094
       },
       "yanxi": {
         "fixedClasses": [
