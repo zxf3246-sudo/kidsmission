@@ -11504,19 +11504,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 8,
+          "score": 88,
+          "summary": "回来检查作业发现他把简单的全部都做了，然后难的他自己就没有进行深入思考，直接摆烂不做，回来我教过他以后大概懂得了一些，在我的指导下尝试做，但是能不能完全理解还未必。有一点挺好的就是开始自觉学习一些成语，然后再说出来，尝试用在生活当中，这种方法更利于正确的记住成语，值得鼓励。",
+          "reward": "-15分换了一包新的宝可梦。",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "发脾气",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792591463412,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792591866210
       },
       "qiannuo": {
         "fixedClasses": [
