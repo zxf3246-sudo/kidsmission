@@ -11770,7 +11770,7 @@
           {
             "id": "t1792657834465kmhd",
             "name": "小测复习",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -11805,7 +11805,7 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1792657855769,
+        "taskSavedAt": 1792657866602,
         "reviewSavedAt": null
       },
       "qiannuo": {
