@@ -2047,7 +2047,6 @@ function defaultTasksFor(childId, dateStr) {
                   : '科学知识点';
     return [
     t('学校作业', 30),
-    t('Missy听力', 30),
     t('Missy笔记背诵和10MCQ', 20),
     t(langName, 25),
     t(sciName, 15),
@@ -3420,6 +3419,26 @@ function migrateYilinMissyTasks(obj) {
   }
 }
 
+// 从今天起移除李怡霖固定任务中的"Missy听力"（历史日期保留原记录）
+// 幂等：仅处理今天及以后的日期，已无该任务则不动
+function removeYilinMissyListening(obj, todayStr) {
+  if (!obj || !obj.dates) return;
+  const today = todayStr || localDateStr(new Date());
+  let removed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (ds < today) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    const before = cd.tasks.length;
+    cd.tasks = cd.tasks.filter(t => !(t && t.name === 'Missy听力'));
+    removed += before - cd.tasks.length;
+  });
+  if (removed > 0) {
+    console.log('[removeYilinMissyListening] 🗑 已移除李怡霖"Missy听力"：', removed, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 一次性迁移：对调 9/22 与 9/23 两天的复盘数据（所有孩子）
 // 用户误将 9/22 的复盘登记到 9/23 上，因此交换两天的 review 对象
 // 用 localStorage 标记保证只执行一次，避免刷新后反复对调
@@ -3625,6 +3644,7 @@ function loadState() {
       removeMissyTueClass(obj);
       migrateTaskFormat(obj);
       migrateYilinMissyTasks(obj);
+      removeYilinMissyListening(obj);
       addYanxiCalcTask(obj);
       renameYanxiWW1(obj);
       renameYanxiWeeklyTasks(obj);
@@ -3831,6 +3851,17 @@ function render() {
       }
     } else if (mIdx !== -1) {
       cd.tasks.splice(mIdx, 1);
+    }
+  })();
+  // 从今天起移除李怡霖"Missy听力"（历史日期保留原记录）
+  (() => {
+    const cd = state.dates[dateStr] && state.dates[dateStr].yilin;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    if (dateStr < localDateStr(new Date())) return;
+    const i = cd.tasks.findIndex(t => t && t.name === 'Missy听力');
+    if (i !== -1) {
+      cd.tasks.splice(i, 1);
+      try { localStorage.setItem('sanwa_tasks', JSON.stringify(state)); } catch(_) {}
     }
   })();
   // 强制李彦希"语文LA"时间：周一 15:30-16:30、周三 14:30-15:30（用户要求）
@@ -6205,6 +6236,7 @@ async function pullFromGist() {
     removeMissyTueClass(merged);
     migrateTaskFormat(merged);
     migrateYilinMissyTasks(merged);
+    removeYilinMissyListening(merged);
     addYanxiCalcTask(merged);
     renameYanxiWW1(merged);
     renameYanxiWeeklyTasks(merged);
@@ -6332,6 +6364,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   removeMissyTueClass(state);
   migrateTaskFormat(state);
   migrateYilinMissyTasks(state);
+  removeYilinMissyListening(state);
   addYanxiCalcTask(state);
   renameYanxiWW1(state);
   renameYanxiWeeklyTasks(state);
@@ -6455,6 +6488,7 @@ async function autoPullFromCloud() {
     removeMissyTueClass(merged);
     migrateTaskFormat(merged);
     migrateYilinMissyTasks(merged);
+    removeYilinMissyListening(merged);
     addYanxiCalcTask(merged);
     renameYanxiWW1(merged);
     renameYanxiWeeklyTasks(merged);
