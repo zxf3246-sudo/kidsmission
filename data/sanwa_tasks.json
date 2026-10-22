@@ -11244,19 +11244,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 6,
+          "score": 87,
+          "summary": "下午回来做作业的时候心态还算比较平稳，只不过是感觉作业有点多就会叨叨几句。晚上去上机器人课，对内容掌握的还可以，都听懂了。但是晚上下课回来，急于换积木，然后他本身的鲨鱼积木又丢了零件，情绪开始爆发大喊大叫，提出批评！",
+          "reward": "情绪问题-1分",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "发脾气",
+            "心不在焉",
+            "批评"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792679991598,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792680419316
       },
       "qiannuo": {
         "fixedClasses": [],
