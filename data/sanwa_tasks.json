@@ -11349,19 +11349,22 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 88,
+          "summary": "无功无过的一天，最后快9点才完成我给布置的普通作业。效率比较慢，应该是我不在的时候有拖拉的表现。然后现在600字超学了太多，有很多她完全不会的直接让背的话学习效果会大打折扣。我还是从她平时该学但是不扎实的内容去复习，给她巩固一下。认600字先停掉或者换成1A.",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "心不在焉"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792680031984,
-        "reviewSavedAt": null
+        "reviewSavedAt": 1792680574432
       }
     },
     "2026-10-19": {
