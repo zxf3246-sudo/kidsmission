@@ -12127,32 +12127,36 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792680042588hvy5",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179268004258841ie",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792680042588ld4y",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792680042589c3hy",
@@ -12201,7 +12205,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1792753949640,
+        "taskSavedAt": 1792754063448,
         "reviewSavedAt": null
       }
     }
