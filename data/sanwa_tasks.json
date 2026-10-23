@@ -12003,7 +12003,7 @@
         "review": {
           "points": 7,
           "score": 88,
-          "summary": "。",
+          "summary": "今天总体表现还可以，回来了以后，虽然看起来有点无奈的不情不愿地做任务，但是最后任务还都是做完了。然后晚上跟她聊天的时候，她提出感觉虽然努力，但是看不到什么效果。所以我建议她尝试改变一下学习方法，还是像我之前有尝试过的专攻一个类型的题，彻底弄明白了以后，再就是逐一攻破其他的，从科学开始练手。",
           "reward": "",
           "other": "",
           "keywords": [
@@ -12018,7 +12018,7 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1792767480722,
-        "reviewSavedAt": 1792768160985
+        "reviewSavedAt": 1792768276239
       },
       "yanxi": {
         "fixedClasses": [
@@ -12107,12 +12107,12 @@
             "唧唧歪歪"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 3
         },
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1792767504916,
-        "reviewSavedAt": 1792768248026
+        "reviewSavedAt": 1792768262318
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -12211,12 +12211,12 @@
             "普普通通"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1792767530054,
-        "reviewSavedAt": 1792768189644
+        "reviewSavedAt": 1792768258295
       }
     }
   },
