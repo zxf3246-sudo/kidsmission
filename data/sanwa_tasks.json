@@ -12166,25 +12166,28 @@
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview"
           },
           {
             "id": "t1792680042588myb1",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 100,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792680042588v8ua",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "22:00"
           }
         ],
         "review": {
@@ -12199,7 +12202,7 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1792755974195,
+        "taskSavedAt": 1792767530054,
         "reviewSavedAt": null
       }
     }
