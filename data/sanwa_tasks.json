@@ -12717,7 +12717,7 @@
           },
           {
             "id": "t1792854899832xmff",
-            "name": "英语阅读练习",
+            "name": "英语1-20默写",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -12759,7 +12759,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": null,
+        "taskSavedAt": 1792855894877,
         "reviewSavedAt": null
       }
     }
@@ -13188,6 +13188,9 @@
         "阅读作文学习": true,
         "语文阅读理解": true,
         "英语语法复习": true
+      },
+      "qiannuo": {
+        "英语阅读练习": true
       }
     }
   }
