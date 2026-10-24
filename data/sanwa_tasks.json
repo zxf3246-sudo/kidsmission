@@ -157,14 +157,6 @@
             "errLinked": false
           },
           {
-            "id": "t17928138313676gw9",
-            "name": "英语语法",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792813831367gzc1",
             "name": "2页计算题",
             "duration": 15,
@@ -180,6 +172,14 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t1792814293442c135",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
           },
           {
             "id": "t179281383136717h9",
@@ -210,7 +210,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792813849599,
+        "taskSavedAt": 1792814296380,
         "reviewSavedAt": null
       },
       "qiannuo": {
@@ -12941,7 +12941,8 @@
         "数学练习": true
       },
       "yanxi": {
-        "一页计算题": true
+        "一页计算题": true,
+        "英语语法": true
       }
     }
   }
