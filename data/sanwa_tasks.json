@@ -133,33 +133,46 @@
             "name": "2页计算题",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t1792813831369o7lx",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t1792847701085qatt",
+            "name": "学而思作业",
+            "duration": 40,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t179281383136717h9",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 180,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done"
           },
           {
             "id": "t17928138313670i23",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "time": "21:40"
           }
         ],
         "review": {
@@ -174,7 +187,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1792830257378,
+        "taskSavedAt": 1792847721466,
         "reviewSavedAt": null
       },
       "qiannuo": {
