@@ -12647,6 +12647,36 @@
             "status": "done"
           },
           {
+            "id": "t1792913209537ryve",
+            "name": "2篇阅读理解",
+            "duration": 60,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t179291322445188et",
+            "name": "LA作业补完",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792913428606y2k9",
+            "name": "学而思作业",
+            "duration": 35,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
             "id": "t1792854899832u65n",
             "name": "自由玩耍",
             "duration": null,
@@ -12675,9 +12705,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792907274756,
+        "taskSavedAt": 1792913453170,
         "reviewSavedAt": null,
-        "taskVer": 33,
+        "taskVer": 53,
         "reviewVer": 0
       },
       "qiannuo": {
@@ -12692,6 +12722,16 @@
           {
             "id": "t1792854899832e9jp",
             "name": "600字学习",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792912566017lyx9",
+            "name": "WW新词",
             "duration": 15,
             "type": "study",
             "done": true,
@@ -12770,6 +12810,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1792912589493fmtn",
+            "name": "学校作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1792854899832g5ma",
             "name": "小测复习",
             "duration": 15,
@@ -12807,9 +12856,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792912544861,
+        "taskSavedAt": 1792912602332,
         "reviewSavedAt": null,
-        "taskVer": 31,
+        "taskVer": 50,
         "reviewVer": 0
       }
     }
