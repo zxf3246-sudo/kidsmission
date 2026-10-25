@@ -12810,6 +12810,16 @@
             "manualTouched": true
           },
           {
+            "id": "t1792913532282yg4h",
+            "name": "LA作业",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
             "id": "t1792912589493fmtn",
             "name": "学校作业",
             "duration": 20,
@@ -12840,8 +12850,10 @@
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           }
         ],
         "review": {
@@ -12856,9 +12868,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792912602332,
+        "taskSavedAt": 1792913541234,
         "reviewSavedAt": null,
-        "taskVer": 50,
+        "taskVer": 59,
         "reviewVer": 0
       }
     }
