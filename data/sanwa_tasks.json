@@ -12711,19 +12711,13 @@
         "tasks": [
           {
             "id": "t1792854899832e9jp",
-            "name": "WWK单词3个",
+            "name": "600字学习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17928548998328p4q",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792854899832xszh",
@@ -12811,9 +12805,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792907298301,
+        "taskSavedAt": 1792907557972,
         "reviewSavedAt": null,
-        "taskVer": 7,
+        "taskVer": 11,
         "reviewVer": 0
       }
     }
@@ -13245,7 +13239,9 @@
         "WW单词学习": true
       },
       "qiannuo": {
-        "英语阅读练习": true
+        "英语阅读练习": true,
+        "600字新字5个": true,
+        "WWK单词3个": true
       }
     }
   }
