@@ -1,5 +1,330 @@
 {
   "dates": {
+    "2026-10-25": {
+      "yilin": {
+        "fixedClasses": [
+          {
+            "name": "全科补习",
+            "time": "09:00-13:30",
+            "duration": 270
+          },
+          {
+            "name": "画画课",
+            "time": "15:00-18:00",
+            "duration": 180
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1792854899831cpbd",
+            "name": "Missy数学练习",
+            "duration": 15,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "status": "empty"
+          },
+          {
+            "id": "t1792854899831i0br",
+            "name": "听播客",
+            "duration": 30,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1792854899832peba",
+            "name": "学而思作业",
+            "duration": 15,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "xes"
+          },
+          {
+            "id": "t17928548998314ogl",
+            "name": "自由活动",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1792854899831gxqa",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": "",
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
+        "taskSavedAt": 1792898241671,
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
+      },
+      "yanxi": {
+        "fixedClasses": [],
+        "tasks": [
+          {
+            "id": "t17928548998327pok",
+            "name": "Koobits",
+            "duration": 5,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792854899832pg8r",
+            "name": "1 Mission",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          },
+          {
+            "id": "t17928548998321u7r",
+            "name": "一页计算题",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done"
+          },
+          {
+            "id": "t1792907215157ufem",
+            "name": "WW单词学习",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792907242943lnux",
+            "name": "1misson学习精讲",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792913209537ryve",
+            "name": "2篇阅读理解",
+            "duration": 60,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792854899832u65n",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t17928548998325a55",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": "",
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
+        "taskSavedAt": 1792913453170,
+        "reviewSavedAt": null,
+        "taskVer": 53,
+        "reviewVer": 0
+      },
+      "qiannuo": {
+        "fixedClasses": [
+          {
+            "name": "豌豆思维",
+            "time": "10:00-10:40",
+            "duration": 40
+          }
+        ],
+        "tasks": [
+          {
+            "id": "t1792854899832e9jp",
+            "name": "600字学习",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792912566017lyx9",
+            "name": "WW新词",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792854899832xszh",
+            "name": "数学计算练习",
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          },
+          {
+            "id": "t1792854899832rmag",
+            "name": "华文练字",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          },
+          {
+            "id": "t1792854899832sdwy",
+            "name": "控笔练习",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          },
+          {
+            "id": "t17928548998328v7a",
+            "name": "字母拼音",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792907926589g19l",
+            "name": "语文1A词语",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792907595179f3gk",
+            "name": "数学练习",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792854899832xmff",
+            "name": "英语1-20默写",
+            "duration": 15,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          },
+          {
+            "id": "t1792912589493fmtn",
+            "name": "学校作业",
+            "duration": 20,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
+            "id": "t1792854899832g5ma",
+            "name": "小测复习",
+            "duration": 15,
+            "type": "study",
+            "status": "",
+            "done": false,
+            "courseTask": "quizReview"
+          },
+          {
+            "id": "t1792854899832z7xw",
+            "name": "自由玩耍",
+            "duration": null,
+            "type": "rest",
+            "done": false,
+            "errLinked": false
+          },
+          {
+            "id": "t1792854899832xlr8",
+            "name": "洗漱睡觉",
+            "duration": null,
+            "type": "rest",
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
+          }
+        ],
+        "review": {
+          "points": 0,
+          "score": null,
+          "summary": "",
+          "reward": "",
+          "other": "",
+          "keywords": [],
+          "savings": 0,
+          "stars": 0
+        },
+        "arrival": "08:00",
+        "sleep": "21:15",
+        "taskSavedAt": 1792913541234,
+        "reviewSavedAt": null,
+        "taskVer": 59,
+        "reviewVer": 0
+      }
+    },
     "2026-10-24": {
       "yilin": {
         "fixedClasses": [
@@ -88,7 +413,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792852951916,
-        "reviewSavedAt": 1792853665851
+        "reviewSavedAt": 1792853665851,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -190,7 +517,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792847721466,
-        "reviewSavedAt": 1792847931249
+        "reviewSavedAt": 1792847931249,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -301,7 +630,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792847767740,
-        "reviewSavedAt": 1792848154606
+        "reviewSavedAt": 1792848154606,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-17": {
@@ -420,7 +751,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792247081634,
-        "reviewSavedAt": 1792246774314
+        "reviewSavedAt": 1792246774314,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -518,7 +851,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792247094961,
-        "reviewSavedAt": 1792246876009
+        "reviewSavedAt": 1792246876009,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -639,7 +974,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1792247107553,
-        "reviewSavedAt": 1792247050705
+        "reviewSavedAt": 1792247050705,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-16": {
@@ -764,7 +1101,9 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1792163215502,
-        "reviewSavedAt": 1792163118778
+        "reviewSavedAt": 1792163118778,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -875,7 +1214,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1792162354386,
-        "reviewSavedAt": 1792162905872
+        "reviewSavedAt": 1792162905872,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -997,7 +1338,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1792163197575,
-        "reviewSavedAt": 1792162616727
+        "reviewSavedAt": 1792162616727,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-15": {
@@ -1120,7 +1463,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792075245877,
-        "reviewSavedAt": 1792076376859
+        "reviewSavedAt": 1792076376859,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -1224,7 +1569,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792075267845,
-        "reviewSavedAt": 1792075650364
+        "reviewSavedAt": 1792075650364,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -1329,7 +1676,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792075291029,
-        "reviewSavedAt": 1792076355653
+        "reviewSavedAt": 1792076355653,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-14": {
@@ -1433,7 +1782,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791985295374,
-        "reviewSavedAt": 1791985559310
+        "reviewSavedAt": 1791985559310,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -1572,7 +1923,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791985304444,
-        "reviewSavedAt": 1791985690278
+        "reviewSavedAt": 1791985690278,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -1691,7 +2044,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791985310665,
-        "reviewSavedAt": 1791985830381
+        "reviewSavedAt": 1791985830381,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-13": {
@@ -1800,7 +2155,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791900464553,
-        "reviewSavedAt": 1791899649496
+        "reviewSavedAt": 1791899649496,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -1956,7 +2313,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791898056014,
-        "reviewSavedAt": 1791899788895
+        "reviewSavedAt": 1791899788895,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -2068,7 +2427,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791898090633,
-        "reviewSavedAt": 1791899867095
+        "reviewSavedAt": 1791899867095,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-22": {
@@ -2145,22 +2506,23 @@
         ],
         "review": {
           "points": 5,
-          "score": 88,
-          "summary": "李怡霖今天的学习效率还是挺高的，Missy老师布置的任务有去打卡完成，现在短期内看不出效果，因为这些都是长期累积的东西。听播客的时候为了防止她又心不在焉去弄微信，我已经跟她说清楚了规则，只能听，不能动。",
+          "score": 87,
+          "summary": "按照任务积极完成，就是不知道真正吸收进去多少，反正还是那句话，是不是做样子只有她自己知道。到了目前这个阶段，老师和家长的帮助都是辅助，她自己不学的话也是一点用都没有。",
           "reward": "",
           "other": "",
+          "savings": 0,
+          "stars": 4,
           "keywords": [
             "高效率",
-            "积极",
-            "有进步"
-          ],
-          "savings": 0,
-          "stars": 4
+            "积极"
+          ]
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790088773932,
-        "reviewSavedAt": 1790144464683
+        "reviewSavedAt": 1790144464683,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -2250,23 +2612,25 @@
           }
         ],
         "review": {
-          "points": 3,
-          "score": 87,
-          "summary": "今天李彦希的效率依旧低下，看他状态不对，中间一段时间让他和李芊诺下楼玩了一会，但是回来还是做的题准确率不高，一堆错的。又在提生日的时候可不可以要一个宝可梦的玩具，但是他最近的表现不配，我说了要接下来继续观察几天。",
+          "points": 0,
+          "score": 88,
+          "summary": "今天李彦希的效率有点低下，应该说最近的效率都不太高，好像只要没有什么奖励的话他学习都提不起积极性。但是喜欢主动跟我分享学校学到的，或者见到的一些新的事物，这点挺好的。他想靠成绩去得到新的宝可梦卡，不知道这个奖励又能坚持多久。",
           "reward": "",
           "other": "",
+          "savings": 0,
+          "stars": 4,
           "keywords": [
             "低效率",
             "准确率低",
-            "拖拖拉拉"
-          ],
-          "savings": 0,
-          "stars": 4
+            "心不在焉"
+          ]
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790088798895,
-        "reviewSavedAt": 1790144527133
+        "reviewSavedAt": 1790144527133,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -2278,70 +2642,70 @@
         ],
         "tasks": [
           {
-            "id": "t1792912529512bj6h",
+            "id": "t1792917779674g938",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17929125295121qtf",
+            "id": "t1792917779674f89t",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179291252951292wn",
+            "id": "t17929177796742l5f",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17929125295127cbo",
+            "id": "t1792917779674fdhp",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512zf6g",
+            "id": "t1792917779674kvb8",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17929125295124byr",
+            "id": "t1792917779674qqd5",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1792912529512mhbh",
+            "id": "t1792917779674pgpl",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17929125295124yia",
+            "id": "t1792917779674ck9v",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512v2qw",
+            "id": "t1792917779674qv8x",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512cnve",
+            "id": "t1792917779674qxwu",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -2377,22 +2741,24 @@
           }
         ],
         "review": {
-          "points": 6,
+          "points": 5,
           "score": 88,
-          "summary": "各方面都比较好，除了吃饭的时候有点磨磨唧唧，学习的时候总是提一些与学习无关的事情。之后立一个规矩，所有别的事情只能在休息时间提，学习的时候就专注学习。",
+          "summary": "依旧稳定发挥，没什么特别的，由于回家比较晚，学而思的作业没时间做，明天做的时候看看她吸收的怎么样。",
           "reward": "",
           "other": "",
-          "keywords": [
-            "听话",
-            "注意力集中"
-          ],
           "savings": 0,
-          "stars": 4
+          "stars": 4,
+          "keywords": [
+            "注意力集中",
+            "听话"
+          ]
         },
         "arrival": "19:00",
         "sleep": "21:00",
         "taskSavedAt": 1790088810476,
-        "reviewSavedAt": 1790144571053
+        "reviewSavedAt": 1790144571053,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-21": {
@@ -2499,7 +2865,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790001678537,
-        "reviewSavedAt": 1790000391646
+        "reviewSavedAt": 1790000391646,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -2620,7 +2988,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790000011674,
-        "reviewSavedAt": 1790000445113
+        "reviewSavedAt": 1790000445113,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -2733,7 +3103,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1789995927642,
-        "reviewSavedAt": 1790001108930
+        "reviewSavedAt": 1790001108930,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-19": {
@@ -2849,7 +3221,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789962571558,
-        "reviewSavedAt": 1789831935548
+        "reviewSavedAt": 1789831935548,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -2954,7 +3328,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789832560198,
-        "reviewSavedAt": 1789833783408
+        "reviewSavedAt": 1789833783408,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -3069,7 +3445,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1789828713738,
-        "reviewSavedAt": 1789831932616
+        "reviewSavedAt": 1789831932616,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-17": {
@@ -3184,7 +3562,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": 1789812282423
+        "reviewSavedAt": 1789812282423,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "yanxi": {
         "fixedClasses": [
@@ -3278,7 +3658,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -3381,7 +3763,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       }
     },
     "2026-09-18": {
@@ -3479,7 +3863,9 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": null,
-        "reviewSavedAt": 1789812295191
+        "reviewSavedAt": 1789812295191,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "yanxi": {
         "fixedClasses": [
@@ -3593,7 +3979,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1789965437430,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -3702,7 +4090,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1789965446213,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       }
     },
     "2026-09-20": {
@@ -3777,7 +4167,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1789962604848,
-        "reviewSavedAt": 1789906368308
+        "reviewSavedAt": 1789906368308,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [],
@@ -3867,7 +4259,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1789901353679,
-        "reviewSavedAt": 1789901318710
+        "reviewSavedAt": 1789901318710,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -3948,7 +4342,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1789895113287,
-        "reviewSavedAt": 1789903136239
+        "reviewSavedAt": 1789903136239,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-23": {
@@ -4032,21 +4428,24 @@
         ],
         "review": {
           "points": 5,
-          "score": 87,
-          "summary": "按照任务积极完成，就是不知道真正吸收进去多少，反正还是那句话，是不是做样子只有她自己知道。到了目前这个阶段，老师和家长的帮助都是辅助，她自己不学的话也是一点用都没有。",
+          "score": 88,
+          "summary": "李怡霖今天的学习效率还是挺高的，Missy老师布置的任务有去打卡完成，现在短期内看不出效果，因为这些都是长期累积的东西。听播客的时候为了防止她又心不在焉去弄微信，我已经跟她说清楚了规则，只能听，不能动。",
           "reward": "",
           "other": "",
-          "savings": 0,
-          "stars": 4,
           "keywords": [
             "高效率",
-            "积极"
-          ]
+            "积极",
+            "有进步"
+          ],
+          "savings": 0,
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790170050194,
-        "reviewSavedAt": 1790170506292
+        "reviewSavedAt": 1790170506292,
+        "taskVer": 0,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -4119,23 +4518,25 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": 88,
-          "summary": "今天李彦希的效率有点低下，应该说最近的效率都不太高，好像只要没有什么奖励的话他学习都提不起积极性。但是喜欢主动跟我分享学校学到的，或者见到的一些新的事物，这点挺好的。他想靠成绩去得到新的宝可梦卡，不知道这个奖励又能坚持多久。",
+          "points": 3,
+          "score": 87,
+          "summary": "今天李彦希的效率依旧低下，看他状态不对，中间一段时间让他和李芊诺下楼玩了一会，但是回来还是做的题准确率不高，一堆错的。又在提生日的时候可不可以要一个宝可梦的玩具，但是他最近的表现不配，我说了要接下来继续观察几天。",
           "reward": "",
           "other": "",
-          "savings": 0,
-          "stars": 4,
           "keywords": [
             "低效率",
             "准确率低",
-            "心不在焉"
-          ]
+            "拖拖拉拉"
+          ],
+          "savings": 0,
+          "stars": 4
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790169509168,
-        "reviewSavedAt": 1790170321469
+        "reviewSavedAt": 1790170321469,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -4147,49 +4548,49 @@
         ],
         "tasks": [
           {
-            "id": "t1792912529512zvy1",
+            "id": "t1792917779674joue",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512zt01",
+            "id": "t1792917779674bmcz",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512rztz",
+            "id": "t17929177796745jua",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17929125295120r6f",
+            "id": "t1792917779674yk0n",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512tigh",
+            "id": "t1792917779674e0vn",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17929125295124zuk",
+            "id": "t1792917779674tmyj",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1792912529512tbjw",
+            "id": "t1792917779674hrii",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -4234,22 +4635,24 @@
           }
         ],
         "review": {
-          "points": 5,
+          "points": 6,
           "score": 88,
-          "summary": "依旧稳定发挥，没什么特别的，由于回家比较晚，学而思的作业没时间做，明天做的时候看看她吸收的怎么样。",
+          "summary": "各方面都比较好，除了吃饭的时候有点磨磨唧唧，学习的时候总是提一些与学习无关的事情。之后立一个规矩，所有别的事情只能在休息时间提，学习的时候就专注学习。",
           "reward": "",
           "other": "",
-          "savings": 0,
-          "stars": 4,
           "keywords": [
-            "注意力集中",
-            "听话"
-          ]
+            "听话",
+            "注意力集中"
+          ],
+          "savings": 0,
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790169599982,
-        "reviewSavedAt": 1790168556936
+        "reviewSavedAt": 1790168556936,
+        "taskVer": 0,
+        "reviewVer": 1
       }
     },
     "2026-09-24": {
@@ -4365,7 +4768,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790257807035,
-        "reviewSavedAt": 1790258306918
+        "reviewSavedAt": 1790258306918,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -4453,62 +4858,64 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790257820821,
-        "reviewSavedAt": 1790258368837
+        "reviewSavedAt": 1790258368837,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1792912529512r2rm",
+            "id": "t1792917779674t415",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17929125295124f17",
+            "id": "t1792917779674oue8",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512cc0c",
+            "id": "t17929177796741a25",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512t8fu",
+            "id": "t1792917779674boqc",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512btt8",
+            "id": "t1792917779674mde0",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1792912529512bqub",
+            "id": "t1792917779674f9mi",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1792912529512t680",
+            "id": "t17929177796747w5y",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17929125295127eh8",
+            "id": "t1792917779674bi22",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -4562,7 +4969,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790257860039,
-        "reviewSavedAt": 1790258568112
+        "reviewSavedAt": 1790258568112,
+        "taskVer": 0,
+        "reviewVer": 1
       }
     },
     "2026-09-26": {
@@ -4687,7 +5096,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1790432737012,
-        "reviewSavedAt": 1790432979449
+        "reviewSavedAt": 1790432979449,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -4807,7 +5218,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1790432832412,
-        "reviewSavedAt": 1790433172907
+        "reviewSavedAt": 1790433172907,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -4918,7 +5331,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1790432836882,
-        "reviewSavedAt": 1790433417838
+        "reviewSavedAt": 1790433417838,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-29": {
@@ -5029,7 +5444,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790728865314,
-        "reviewSavedAt": 1790728644470
+        "reviewSavedAt": 1790728644470,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -5140,7 +5557,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790728874493,
-        "reviewSavedAt": 1790728650053
+        "reviewSavedAt": 1790728650053,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -5261,7 +5680,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790728889131,
-        "reviewSavedAt": 1790728653987
+        "reviewSavedAt": 1790728653987,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-28": {
@@ -5354,7 +5775,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790601943312,
-        "reviewSavedAt": 1790602392914
+        "reviewSavedAt": 1790602392914,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -5464,7 +5887,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790601936253,
-        "reviewSavedAt": 1790599713875
+        "reviewSavedAt": 1790599713875,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -5586,7 +6011,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790601959902,
-        "reviewSavedAt": 1790599482620
+        "reviewSavedAt": 1790599482620,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-25": {
@@ -5696,7 +6123,9 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1790339321935,
-        "reviewSavedAt": 1790339903591
+        "reviewSavedAt": 1790339903591,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -5798,7 +6227,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1790345380990,
-        "reviewSavedAt": 1790339993264
+        "reviewSavedAt": 1790339993264,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -5940,7 +6371,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1790345389595,
-        "reviewSavedAt": 1790339599515
+        "reviewSavedAt": 1790339599515,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-30": {
@@ -6014,7 +6447,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790831735854,
-        "reviewSavedAt": 1790832026535
+        "reviewSavedAt": 1790832026535,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -6116,7 +6551,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790831757372,
-        "reviewSavedAt": 1790832265784
+        "reviewSavedAt": 1790832265784,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -6235,7 +6672,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790831791487,
-        "reviewSavedAt": 1790832357959
+        "reviewSavedAt": 1790832357959,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-01": {
@@ -6340,7 +6779,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1790861940158,
-        "reviewSavedAt": 1790862105689
+        "reviewSavedAt": 1790862105689,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -6434,7 +6875,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1790861951757,
-        "reviewSavedAt": 1790862223025
+        "reviewSavedAt": 1790862223025,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -6529,7 +6972,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1790861961508,
-        "reviewSavedAt": 1790863581754
+        "reviewSavedAt": 1790863581754,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-09-16": {
@@ -6626,7 +7071,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "yanxi": {
         "fixedClasses": [
@@ -6714,7 +7161,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "qiannuo": {
         "fixedClasses": [
@@ -6827,7 +7276,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": null,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       }
     },
     "2026-09-27": {
@@ -6918,7 +7369,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1790474841710,
-        "reviewSavedAt": 1790862503890
+        "reviewSavedAt": 1790862503890,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [],
@@ -7023,7 +7476,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1790565463818,
-        "reviewSavedAt": 1790565068948
+        "reviewSavedAt": 1790565068948,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -7144,7 +7599,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1790564572461,
-        "reviewSavedAt": 1790564732305
+        "reviewSavedAt": 1790564732305,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-03": {
@@ -7261,7 +7718,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036890697,
-        "reviewSavedAt": 1791086481267
+        "reviewSavedAt": 1791086481267,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -7380,7 +7839,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036898163,
-        "reviewSavedAt": 1791084749919
+        "reviewSavedAt": 1791084749919,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -7497,7 +7958,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791036904339,
-        "reviewSavedAt": 1791084614644
+        "reviewSavedAt": 1791084614644,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-04": {
@@ -7578,7 +8041,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791159675262,
-        "reviewSavedAt": 1791184165513
+        "reviewSavedAt": 1791184165513,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [],
@@ -7675,7 +8140,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791159734579,
-        "reviewSavedAt": 1791184231703
+        "reviewSavedAt": 1791184231703,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -7785,7 +8252,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791159727493,
-        "reviewSavedAt": 1791184327484
+        "reviewSavedAt": 1791184327484,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-05": {
@@ -7888,7 +8357,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791253611969,
-        "reviewSavedAt": 1791253883566
+        "reviewSavedAt": 1791253883566,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -7991,7 +8462,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791253624452,
-        "reviewSavedAt": 1791253693116
+        "reviewSavedAt": 1791253693116,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -8095,7 +8568,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791253808245,
-        "reviewSavedAt": 1791253781155
+        "reviewSavedAt": 1791253781155,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-02": {
@@ -8205,7 +8680,9 @@
         "arrival": "08:30",
         "sleep": "22:00",
         "taskSavedAt": 1791006888953,
-        "reviewSavedAt": 1791018385267
+        "reviewSavedAt": 1791018385267,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -8314,7 +8791,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1791006917939,
-        "reviewSavedAt": 1791018361808
+        "reviewSavedAt": 1791018361808,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -8437,7 +8916,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1791006957672,
-        "reviewSavedAt": 1791018253439
+        "reviewSavedAt": 1791018253439,
+        "taskVer": 0,
+        "reviewVer": 1
       }
     },
     "2026-10-09": {
@@ -8544,7 +9025,9 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1791554841112,
-        "reviewSavedAt": 1791549230876
+        "reviewSavedAt": 1791549230876,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -8637,7 +9120,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1791555044995,
-        "reviewSavedAt": 1791549320371
+        "reviewSavedAt": 1791549320371,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -8733,7 +9218,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1791554869399,
-        "reviewSavedAt": 1791549567529
+        "reviewSavedAt": 1791549567529,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-06": {
@@ -8826,7 +9313,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791293805736,
-        "reviewSavedAt": 1791353677027
+        "reviewSavedAt": 1791353677027,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -8919,7 +9408,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791293796339,
-        "reviewSavedAt": 1791353689776
+        "reviewSavedAt": 1791353689776,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -9021,7 +9512,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791293827405,
-        "reviewSavedAt": 1791353520668
+        "reviewSavedAt": 1791353520668,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-07": {
@@ -9122,7 +9615,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791381018639,
-        "reviewSavedAt": 1791381310215
+        "reviewSavedAt": 1791381310215,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -9216,7 +9711,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791381033123,
-        "reviewSavedAt": 1791381418729
+        "reviewSavedAt": 1791381418729,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -9327,7 +9824,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791381048157,
-        "reviewSavedAt": 1791381542833
+        "reviewSavedAt": 1791381542833,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-08": {
@@ -9453,7 +9952,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791467421990,
-        "reviewSavedAt": 1791468416600
+        "reviewSavedAt": 1791468416600,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -9555,7 +10056,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791467450632,
-        "reviewSavedAt": 1791468735374
+        "reviewSavedAt": 1791468735374,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -9651,7 +10154,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791467473415,
-        "reviewSavedAt": 1791468712169
+        "reviewSavedAt": 1791468712169,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-10": {
@@ -9769,7 +10274,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791643026286,
-        "reviewSavedAt": 1791643695300
+        "reviewSavedAt": 1791643695300,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -9890,7 +10397,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791643055758,
-        "reviewSavedAt": 1791643703677
+        "reviewSavedAt": 1791643703677,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -10019,7 +10528,9 @@
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1791643076456,
-        "reviewSavedAt": 1791633515366
+        "reviewSavedAt": 1791633515366,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-11": {
@@ -10115,7 +10626,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791729264594,
-        "reviewSavedAt": 1791719300641
+        "reviewSavedAt": 1791719300641,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [],
@@ -10241,7 +10754,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791729283552,
-        "reviewSavedAt": 1791718934591
+        "reviewSavedAt": 1791718934591,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -10371,7 +10886,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1791729295813,
-        "reviewSavedAt": 1791719071571
+        "reviewSavedAt": 1791719071571,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-12": {
@@ -10489,7 +11006,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1791814267014,
-        "reviewSavedAt": 1791814397177
+        "reviewSavedAt": 1791814397177,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -10646,7 +11165,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1791814278652,
-        "reviewSavedAt": 1791814580652
+        "reviewSavedAt": 1791814580652,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -10768,7 +11289,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1791814296748,
-        "reviewSavedAt": 1791814685507
+        "reviewSavedAt": 1791814685507,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-20": {
@@ -10856,7 +11379,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792335510732,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "yanxi": {
         "fixedClasses": [
@@ -10946,7 +11471,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792335655920,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "qiannuo": {
         "fixedClasses": [
@@ -11045,7 +11572,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792338142144,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       }
     },
     "2026-10-18": {
@@ -11125,7 +11654,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792333918526,
-        "reviewSavedAt": 1792334583429
+        "reviewSavedAt": 1792334583429,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [],
@@ -11239,7 +11770,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792333853090,
-        "reviewSavedAt": 1792334554833
+        "reviewSavedAt": 1792334554833,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -11377,7 +11910,9 @@
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792333888450,
-        "reviewSavedAt": 1792334559202
+        "reviewSavedAt": 1792334559202,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-19": {
@@ -11460,7 +11995,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792335225080,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "yanxi": {
         "fixedClasses": [
@@ -11563,7 +12100,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792411284475,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -11646,7 +12185,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792335460628,
-        "reviewSavedAt": null
+        "reviewSavedAt": null,
+        "taskVer": 1,
+        "reviewVer": 0
       }
     },
     "2026-10-21": {
@@ -11722,7 +12263,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792591452857,
-        "reviewSavedAt": 1792592216076
+        "reviewSavedAt": 1792592216076,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -11815,7 +12358,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792591463412,
-        "reviewSavedAt": 1792591874158
+        "reviewSavedAt": 1792591874158,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [
@@ -11926,7 +12471,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792591478558,
-        "reviewSavedAt": 1792592114090
+        "reviewSavedAt": 1792592114090,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-22": {
@@ -12026,7 +12573,9 @@
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1792679972016,
-        "reviewSavedAt": 1792680253330
+        "reviewSavedAt": 1792680253330,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -12110,7 +12659,9 @@
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1792679991598,
-        "reviewSavedAt": 1792680419316
+        "reviewSavedAt": 1792680419316,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -12214,7 +12765,9 @@
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1792680031984,
-        "reviewSavedAt": 1792680574432
+        "reviewSavedAt": 1792680574432,
+        "taskVer": 1,
+        "reviewVer": 1
       }
     },
     "2026-10-23": {
@@ -12322,7 +12875,9 @@
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1792767480722,
-        "reviewSavedAt": 1792768276239
+        "reviewSavedAt": 1792768276239,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "yanxi": {
         "fixedClasses": [
@@ -12407,7 +12962,9 @@
         "arrival": "14:00",
         "sleep": "22:00",
         "taskSavedAt": 1792767504916,
-        "reviewSavedAt": 1792768262318
+        "reviewSavedAt": 1792768262318,
+        "taskVer": 1,
+        "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -12511,367 +13068,9 @@
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1792767530054,
-        "reviewSavedAt": 1792768258295
-      }
-    },
-    "2026-10-25": {
-      "yilin": {
-        "fixedClasses": [
-          {
-            "name": "全科补习",
-            "time": "09:00-13:30",
-            "duration": 270
-          },
-          {
-            "name": "画画课",
-            "time": "15:00-18:00",
-            "duration": 180
-          },
-          {
-            "name": "科学李老师",
-            "time": "19:30-21:30",
-            "duration": 120
-          }
-        ],
-        "tasks": [
-          {
-            "id": "t1792854899831cpbd",
-            "name": "Missy数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false,
-            "status": "empty"
-          },
-          {
-            "id": "t1792854899831i0br",
-            "name": "听播客",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792854899832peba",
-            "name": "学而思作业",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
-          },
-          {
-            "id": "t17928548998314ogl",
-            "name": "自由活动",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792854899831gxqa",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          }
-        ],
-        "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
-          "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
-        },
-        "arrival": "08:00",
-        "sleep": "21:15",
-        "taskSavedAt": 1792898241671,
-        "reviewSavedAt": null,
+        "reviewSavedAt": 1792768258295,
         "taskVer": 1,
-        "reviewVer": 0
-      },
-      "yanxi": {
-        "fixedClasses": [],
-        "tasks": [
-          {
-            "id": "t17928548998327pok",
-            "name": "Koobits",
-            "duration": 5,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792854899832pg8r",
-            "name": "1 Mission",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          },
-          {
-            "id": "t17928548998321u7r",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
-            "id": "t1792907215157ufem",
-            "name": "WW单词学习",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792907242943lnux",
-            "name": "1misson学习精讲",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792913209537ryve",
-            "name": "2篇阅读理解",
-            "duration": 60,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t179291322445188et",
-            "name": "LA作业补完",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792913428606y2k9",
-            "name": "学而思作业",
-            "duration": 35,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792854899832u65n",
-            "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17928548998325a55",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          }
-        ],
-        "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
-          "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
-        },
-        "arrival": "08:00",
-        "sleep": "21:15",
-        "taskSavedAt": 1792913453170,
-        "reviewSavedAt": null,
-        "taskVer": 53,
-        "reviewVer": 0
-      },
-      "qiannuo": {
-        "fixedClasses": [
-          {
-            "name": "豌豆思维",
-            "time": "10:00-10:40",
-            "duration": 40
-          }
-        ],
-        "tasks": [
-          {
-            "id": "t1792854899832e9jp",
-            "name": "600字学习",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792912566017lyx9",
-            "name": "WW新词",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792854899832xszh",
-            "name": "数学计算练习",
-            "duration": 20,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          },
-          {
-            "id": "t1792854899832rmag",
-            "name": "华文练字",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          },
-          {
-            "id": "t1792854899832sdwy",
-            "name": "控笔练习",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          },
-          {
-            "id": "t17928548998328v7a",
-            "name": "字母拼音",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792907926589g19l",
-            "name": "语文1A词语",
-            "duration": 10,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792907595179f3gk",
-            "name": "数学练习",
-            "duration": 30,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792854899832xmff",
-            "name": "英语1-20默写",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          },
-          {
-            "id": "t1792913532282yg4h",
-            "name": "LA作业",
-            "duration": 15,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "manualTouched": true,
-            "status": "done"
-          },
-          {
-            "id": "t1792912589493fmtn",
-            "name": "学校作业",
-            "duration": 20,
-            "type": "study",
-            "done": false,
-            "errLinked": false,
-            "manualTouched": true
-          },
-          {
-            "id": "t1792854899832g5ma",
-            "name": "小测复习",
-            "duration": 15,
-            "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
-          },
-          {
-            "id": "t1792854899832z7xw",
-            "name": "自由玩耍",
-            "duration": null,
-            "type": "rest",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792854899832xlr8",
-            "name": "洗漱睡觉",
-            "duration": null,
-            "type": "rest",
-            "done": true,
-            "errLinked": false,
-            "status": "done",
-            "manualTouched": true
-          }
-        ],
-        "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
-          "other": "",
-          "keywords": [],
-          "savings": 0,
-          "stars": 0
-        },
-        "arrival": "08:00",
-        "sleep": "21:15",
-        "taskSavedAt": 1792913541234,
-        "reviewSavedAt": null,
-        "taskVer": 59,
-        "reviewVer": 0
+        "reviewVer": 1
       }
     }
   },
