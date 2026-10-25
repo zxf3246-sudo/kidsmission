@@ -12600,18 +12600,22 @@
           {
             "id": "t17928548998327pok",
             "name": "Koobits",
-            "duration": 20,
+            "duration": 5,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792854899832pg8r",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17928548998321u7r",
@@ -12691,9 +12695,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792907265681,
+        "taskSavedAt": 1792907274756,
         "reviewSavedAt": null,
-        "taskVer": 26,
+        "taskVer": 33,
         "reviewVer": 0
       },
       "qiannuo": {
