@@ -12818,36 +12818,41 @@
             "name": "学校作业",
             "duration": 20,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792854899832g5ma",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
+            "status": "done",
+            "done": true,
+            "courseTask": "quizReview",
+            "manualTouched": true
           },
           {
             "id": "t1792854899832z7xw",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792854899832xlr8",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty",
-            "manualTouched": true
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:10"
           }
         ],
         "review": {
@@ -12862,9 +12867,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792913560434,
+        "taskSavedAt": 1792939424968,
         "reviewSavedAt": null,
-        "taskVer": 61,
+        "taskVer": 74,
         "reviewVer": 0
       }
     }
