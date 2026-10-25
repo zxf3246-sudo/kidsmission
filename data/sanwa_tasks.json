@@ -12628,6 +12628,14 @@
             "errLinked": false
           },
           {
+            "id": "t17928982862714pze",
+            "name": "WW单词学习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false
+          },
+          {
             "id": "t1792854899832u65n",
             "name": "自由玩耍",
             "duration": null,
@@ -12656,7 +12664,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792898158081,
+        "taskSavedAt": 1792898287429,
         "reviewSavedAt": null
       },
       "qiannuo": {
