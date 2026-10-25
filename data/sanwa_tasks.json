@@ -12623,18 +12623,9 @@
             "status": "done"
           },
           {
-            "id": "t17928982862714pze",
-            "name": "WW单词学习",
-            "duration": null,
-            "type": "study",
-            "done": true,
-            "errLinked": false,
-            "status": "done"
-          },
-          {
             "id": "t1792907198768mw70",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 40,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -12644,7 +12635,27 @@
           {
             "id": "t1792907215157ufem",
             "name": "WW单词学习",
-            "duration": null,
+            "duration": 20,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792907228491rcbc",
+            "name": "LA作业完成",
+            "duration": 10,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
+            "id": "t1792907242943lnux",
+            "name": "1misson学习精讲",
+            "duration": 30,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -12680,9 +12691,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792907217546,
+        "taskSavedAt": 1792907265681,
         "reviewSavedAt": null,
-        "taskVer": 6,
+        "taskVer": 26,
         "reviewVer": 0
       },
       "qiannuo": {
@@ -13218,7 +13229,8 @@
       "yanxi": {
         "阅读作文学习": true,
         "语文阅读理解": true,
-        "英语语法复习": true
+        "英语语法复习": true,
+        "WW单词学习": true
       },
       "qiannuo": {
         "英语阅读练习": true
