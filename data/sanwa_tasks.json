@@ -12554,7 +12554,7 @@
           {
             "id": "t1792854899832peba",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "status": "",
             "done": false,
@@ -12589,7 +12589,7 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792898227637,
+        "taskSavedAt": 1792898241671,
         "reviewSavedAt": null
       },
       "yanxi": {
