@@ -12539,42 +12539,51 @@
             "name": "Missy数学练习",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty"
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792854899831i0br",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792854899832peba",
             "name": "学而思作业",
             "duration": 15,
             "type": "study",
-            "status": "",
+            "status": "undone",
             "done": false,
-            "courseTask": "xes"
+            "courseTask": "xes",
+            "manualTouched": true
           },
           {
             "id": "t17928548998314ogl",
             "name": "自由活动",
-            "duration": null,
+            "duration": 30,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792854899831gxqa",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "22:10"
           }
         ],
         "review": {
@@ -12589,9 +12598,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792898241671,
+        "taskSavedAt": 1792939363139,
         "reviewSavedAt": null,
-        "taskVer": 1,
+        "taskVer": 22,
         "reviewVer": 0
       },
       "yanxi": {
