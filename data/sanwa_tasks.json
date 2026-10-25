@@ -12678,18 +12678,23 @@
           {
             "id": "t1792854899832u65n",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17928548998325a55",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "time": "21:09",
+            "manualTouched": true,
+            "status": "done"
           }
         ],
         "review": {
@@ -12704,9 +12709,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792939381402,
+        "taskSavedAt": 1792939400797,
         "reviewSavedAt": null,
-        "taskVer": 59,
+        "taskVer": 72,
         "reviewVer": 0
       },
       "qiannuo": {
