@@ -2705,14 +2705,13 @@ async function saveTasks(childId) {
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
   cd.taskSavedAt = Date.now();
+  // 手动编辑计数：合并时优先保留"被手动改过"的版本，避免被其他设备的默认模板覆盖
+  cd.taskVer = (+cd.taskVer || 0) + 1;
   clearDirty(childId, 'task');
   save();
   renderChildren(dateStr);
-  showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在刷新云端...');
-  // 先刷新（拉取合并）云端最新数据，再上传
-  try {
-    await autoPullFromCloud();
-  } catch (e) { console.error('Pull before saveTasks failed:', e); }
+  showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在上传云端...');
+  // 直接上传以本地为准（不再先拉取合并，避免刚保存的修改被云端旧数据覆盖）
   try {
     await uploadToGist();
   } catch (e) {
@@ -2725,14 +2724,12 @@ async function saveReview(childId) {
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
   cd.reviewSavedAt = Date.now();
+  cd.reviewVer = (+cd.reviewVer || 0) + 1;
   clearDirty(childId, 'review');
   save();
   renderChildren(dateStr);
-  showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在刷新云端...');
-  // 先刷新（拉取合并）云端最新数据，再上传
-  try {
-    await autoPullFromCloud();
-  } catch (e) { console.error('Pull before saveReview failed:', e); }
+  showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在上传云端...');
+  // 直接上传以本地为准（不再先拉取合并，避免刚保存的复盘被云端旧数据覆盖）
   try {
     await uploadToGist();
   } catch (e) {
@@ -2964,8 +2961,14 @@ function markDirty(childId, part) {
   const ds = document.getElementById('datePicker').value;
   const cd = state.dates[ds] && state.dates[ds][childId];
   if (cd) {
-    if (part === 'task') cd.taskSavedAt = Date.now();
-    else if (part === 'review') cd.reviewSavedAt = Date.now();
+    if (part === 'task') {
+      cd.taskSavedAt = Date.now();
+      // 手动编辑计数 +1：合并时"手动改过的版本"永远优先于另一台设备的默认模板
+      cd.taskVer = (+cd.taskVer || 0) + 1;
+    } else if (part === 'review') {
+      cd.reviewSavedAt = Date.now();
+      cd.reviewVer = (+cd.reviewVer || 0) + 1;
+    }
   }
 }
 function clearDirty(childId, part) {
@@ -3691,7 +3694,9 @@ function ensureDateOn(s, dateStr) {
         arrival: override.arrival || c.arrival,
         sleep: override.sleep || c.sleep,
         taskSavedAt: null,
-        reviewSavedAt: null
+        taskVer: 0,
+        reviewSavedAt: null,
+        reviewVer: 0
       };
       // 已按用户要求关闭智能推荐自动填充（不再往任务里注入亲子瑜伽等活动）
     });
@@ -3739,7 +3744,22 @@ function ensureDateOn(s, dateStr) {
         });
       }
       if (child.taskSavedAt === undefined) child.taskSavedAt = null;
+      if (child.taskVer === undefined) child.taskVer = 0;
       if (child.reviewSavedAt === undefined) child.reviewSavedAt = null;
+      if (child.reviewVer === undefined) child.reviewVer = 0;
+      // 历史数据补种子：已被手动改过（不是默认模板）的任务/有内容的复盘记 1 次编辑，
+      // 使其在合并时优先于其他设备的默认版本
+      if (!child.taskVer && Array.isArray(child.tasks) && child.tasks.length &&
+          !isDefaultTaskSet(c.id, dateStr, child.tasks)) {
+        child.taskVer = 1;
+      }
+      if (!child.reviewVer && child.review) {
+        const rv = child.review;
+        const hasReview = (+rv.points || 0) !== 0 || (+rv.score || 0) > 0 ||
+          (rv.summary || '').trim() || (rv.reward || '').trim() || (rv.other || '').trim() ||
+          (Array.isArray(rv.keywords) && rv.keywords.length);
+        if (hasReview) child.reviewVer = 1;
+      }
       if (!child.arrival) child.arrival = override.arrival || c.arrival;
       if (!child.sleep) child.sleep = override.sleep || c.sleep;
     });
@@ -6188,6 +6208,11 @@ async function uploadToGist() {
       const errText = await resp.text();
       throw new Error('HTTP ' + resp.status + ' ' + errText.slice(0, 120));
     }
+    // 记录新版本 SHA，避免随后的自动拉取又用旧数据合并
+    try {
+      const up = await resp.json();
+      if (up && up.content && up.content.sha) lastRemoteVersion = up.content.sha;
+    } catch (_) {}
     cfg.lastSync = new Date().toISOString();
     persistCloudConfig(cfg);
     hideSyncProgress();
@@ -6526,7 +6551,33 @@ function isDefaultTaskSet(childId, dateStr, tasks) {
   return names.every((n, i) => n === def[i]);
 }
 
+// 为历史数据补齐"手动编辑次数"：任务不是默认模板、或复盘有内容 → 记为 1 次手动编辑
+// 目的：合并时手动改动过的版本优先于其他设备未经修改的默认版本
+function fillManualVersions(obj) {
+  if (!obj || !obj.dates) return;
+  Object.keys(obj.dates).forEach(ds => {
+    CHILDREN.forEach(c => {
+      const cd = obj.dates[ds] && obj.dates[ds][c.id];
+      if (!cd) return;
+      if (cd.taskVer === undefined) cd.taskVer = 0;
+      if (!cd.taskVer && Array.isArray(cd.tasks) && cd.tasks.length &&
+          !isDefaultTaskSet(c.id, ds, cd.tasks)) cd.taskVer = 1;
+      if (cd.reviewVer === undefined) cd.reviewVer = 0;
+      if (!cd.reviewVer && cd.review) {
+        const rv = cd.review;
+        const hasReview = (+rv.points || 0) !== 0 || (+rv.score || 0) > 0 ||
+          (rv.summary || '').trim() || (rv.reward || '').trim() || (rv.other || '').trim() ||
+          (Array.isArray(rv.keywords) && rv.keywords.length);
+        if (hasReview) cd.reviewVer = 1;
+      }
+    });
+  });
+}
+
 function mergeSmart(local, cloud) {
+  // 合并前先给两端的历史数据补齐手动编辑计数，保证"改过的"优先于"默认的"
+  fillManualVersions(local);
+  fillManualVersions(cloud);
   const localDates = Object.keys(local.dates || {});
   const cloudDates = Object.keys(cloud.dates || {});
   const result = { ...local, dates: { ...(local.dates || {}) } };
@@ -6548,12 +6599,17 @@ function mergeSmart(local, cloud) {
       const cTask = cc.taskSavedAt || 0;
       const lRev  = lc.reviewSavedAt || 0;
       const cRev  = cc.reviewSavedAt || 0;
-      // 任务取舍：用户手动改过的版本优先于"未经修改的默认模板"，避免默认把手动修改覆盖掉；
-      // 两端都为默认或都已被手动修改时，再按保存时间取较新
+      const lVer  = +lc.taskVer || 0;
+      const cVer  = +cc.taskVer || 0;
+      const lRV   = +lc.reviewVer || 0;
+      const cRV   = +cc.reviewVer || 0;
+      // 任务取舍：手动编辑次数多的一方优先（"最后一次手动改动为主"）；
+      // 次数相同再按"是否默认模板"，最后才按保存时间
       const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
       const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
       let takeLocal;
-      if (lPristine && !cPristine) takeLocal = false;
+      if (lVer !== cVer) takeLocal = lVer > cVer;
+      else if (lPristine && !cPristine) takeLocal = false;
       else if (!lPristine && cPristine) takeLocal = true;
       else takeLocal = lTask >= cTask;
       // 任务取较新（或非默认版本），复盘取较新（分别合并，避免互相覆盖）
@@ -6561,12 +6617,16 @@ function mergeSmart(local, cloud) {
         ...cc,
         tasks: takeLocal ? lc.tasks : cc.tasks,
         taskSavedAt: Math.max(lTask, cTask) || lc.taskSavedAt || cc.taskSavedAt,
+        taskVer: Math.max(lVer, cVer),
         fixedClasses: lc.fixedClasses || cc.fixedClasses,
         arrival: lc.arrival || cc.arrival,
         sleep: lc.sleep || cc.sleep
       };
-      mergedChild.review = lRev >= cRev ? (lc.review || cc.review) : (cc.review || lc.review);
+      mergedChild.review = (lRV !== cRV)
+        ? (lRV > cRV ? (lc.review || cc.review) : (cc.review || lc.review))
+        : (lRev >= cRev ? (lc.review || cc.review) : (cc.review || lc.review));
       mergedChild.reviewSavedAt = Math.max(lRev, cRev) || lc.reviewSavedAt || cc.reviewSavedAt;
+      mergedChild.reviewVer = Math.max(lRV, cRV);
       mergedDate[cid] = mergedChild;
     });
     // 本地/云端额外的孩子 id 也各自补齐
