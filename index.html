@@ -3105,11 +3105,12 @@ function syncYilinSundayClasses(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     const before = cd.fixedClasses.length;
-    // 1) 移除周日科学课（19:30-21:30）
+    // 1) 移除周日科学课（19:30-21:30）——用户手动改过的课程不强制移除
     cd.fixedClasses = cd.fixedClasses.filter(c =>
-      !(c.name && c.name === '科学' && c.time === '19:30-21:30'));
-    // 2) 确保周日有画画课 15:00-18:00
-    if (!cd.fixedClasses.some(c => c.name && c.name === '画画课' && c.time === '15:00-18:00')) {
+      !(c.name && c.name === '科学' && c.time === '19:30-21:30' && !c.manualTouched));
+    // 2) 确保周日有画画课 15:00-18:00——用户手动删过则不再补回
+    if (!cd.fixedClasses.some(c => c.name && c.name === '画画课' && c.time === '15:00-18:00') &&
+        !isTaskManuallyRemoved(obj, ds, 'yilin', '画画课')) {
       cd.fixedClasses.push({ name: '画画课', time: '15:00-18:00', duration: 180 });
     }
     if (cd.fixedClasses.length !== before) changed++;
@@ -3130,7 +3131,7 @@ function syncQiannuoWedLaTime(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name === '语文LA') {
+      if (c && c.name === '语文LA' && !c.manualTouched) {
         if (c.time !== '17:00-18:00') { c.time = '17:00-18:00'; changed++; }
         if (c.duration !== 60) { c.duration = 60; changed++; }
       }
@@ -3155,7 +3156,7 @@ function syncYanxiWedLaTime(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name && c.name === '语文LA') {
+      if (c && c.name && c.name === '语文LA' && !c.manualTouched) {
         if (c.time !== target) { c.time = target; changed++; }
       }
     });
@@ -3293,7 +3294,7 @@ function removeAutoEnrichedTasks(obj) {
     Object.values(kids || {}).forEach(cd => {
       if (!cd || !Array.isArray(cd.tasks)) return;
       const before = cd.tasks.length;
-      cd.tasks = cd.tasks.filter(t => !t.autoEnriched);
+      cd.tasks = cd.tasks.filter(t => !t.autoEnriched || t.manualTouched);
       if (cd.tasks.length !== before) changed++;
     });
   });
@@ -3879,7 +3880,7 @@ function render() {
     if (!cd || !Array.isArray(cd.tasks)) return;
     if (dateStr < localDateStr(new Date())) return;
     const i = cd.tasks.findIndex(t => t && t.name === 'Missy听力');
-    if (i !== -1) {
+    if (i !== -1 && !cd.tasks[i].manualTouched) {
       cd.tasks.splice(i, 1);
       try { localStorage.setItem('sanwa_tasks', JSON.stringify(state)); } catch(_) {}
     }
@@ -3892,7 +3893,7 @@ function render() {
     const target = { 1: '15:30-16:30', 3: '14:30-15:30' }[dow];
     if (!target) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name && c.name === '语文LA' && c.time !== target) {
+      if (c && c.name && c.name === '语文LA' && !c.manualTouched && c.time !== target) {
         c.time = target;
       }
     });
@@ -3903,7 +3904,7 @@ function render() {
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     if (new Date(dateStr+'T00:00:00').getDay() !== 3) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name === '语文LA') {
+      if (c.name === '语文LA' && !c.manualTouched) {
         if (c.time !== '17:00-18:00') c.time = '17:00-18:00';
         if (c.duration !== 60) c.duration = 60;
       }
@@ -4279,7 +4280,8 @@ function quickAddTask(childId, inputEl) {
     duration: (dur !== null && !isNaN(dur)) ? Math.max(0, dur) : null,
     type: typeSelect.value || 'study',
     done: false,
-    errLinked: errSpan.dataset.err === '1'
+    errLinked: errSpan.dataset.err === '1',
+    manualTouched: true
   };
   const arr = state.dates[dateStr][childId].tasks;
   arr.splice(defaultInsertIndex(arr, task.type), 0, task);
@@ -4368,7 +4370,8 @@ function saveTask() {
     duration: dur ? +dur : null,
     type: document.getElementById('taskType').value,
     done: false,
-    errLinked: document.getElementById('taskErrLinked').value === '1'
+    errLinked: document.getElementById('taskErrLinked').value === '1',
+    manualTouched: true
   };
   const arr = state.dates[dateStr][modalCtx.childId].tasks;
   arr.splice(defaultInsertIndex(arr, task.type), 0, task);
@@ -4387,6 +4390,7 @@ function cycleTaskStatus(childId, idx) {
   task.status = next;
   // 同步旧 done 字段，保持其他逻辑兼容
   task.done = (next === 'done');
+  task.manualTouched = true;
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
@@ -4397,6 +4401,7 @@ function editTaskName(childId, idx, val) {
   const task = state.dates[dateStr][childId].tasks[idx];
   const oldName = task.name;
   task.name = n;
+  task.manualTouched = true;
   // 改名：记录原名（避免自动补回原任务）；同时撤销"新名"的已删除记录
   // —— 以最后一次手动操作为准，后面的手动操作可以覆盖前面的记录
   if (oldName && oldName !== n) markTaskRemoved(state, dateStr, childId, oldName);
@@ -4416,6 +4421,7 @@ function editTaskTime(childId, idx, value, rerender) {
   const task = state.dates[dateStr][childId].tasks[idx];
   if (task) {
     task.time = v;
+    task.manualTouched = true;
     markDirty(childId, 'task');
     save();
     if (rerender) renderChildren(dateStr);
@@ -4429,6 +4435,7 @@ function editTaskDuration(childId, idx, value, rerender) {
   const task = state.dates[dateStr][childId].tasks[idx];
   if (task) {
     task.duration = v;
+    task.manualTouched = true;
     markDirty(childId, 'task');
     save();
     if (rerender) renderChildren(dateStr);
@@ -4621,13 +4628,14 @@ function addFixedClass(childId) {
   const name = prompt('课程名称：', '');
   if (!name) return;
   state.dates[dateStr][childId].fixedClasses.push({
-    name, time: timeStr, duration: calcDuration(timeStr)
+    name, time: timeStr, duration: calcDuration(timeStr), manualTouched: true
   });
   state.dates[dateStr][childId].fixedClasses.sort((a,b) => {
     const aStart = (a.time||'').split('-')[0]; const bStart = (b.time||'').split('-')[0];
     return timeToMinutes(aStart) - timeToMinutes(bStart);
   });
   syncCourseHomework(childId, dateStr);
+  markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
 function editFixedClass(childId, idx, val) {
@@ -4635,14 +4643,20 @@ function editFixedClass(childId, idx, val) {
   const n = val.trim();
   if (!n) { renderChildren(dateStr); return; }
   state.dates[dateStr][childId].fixedClasses[idx].name = n;
+  state.dates[dateStr][childId].fixedClasses[idx].manualTouched = true;
   const changed = syncCourseHomework(childId, dateStr);
+  markDirty(childId, 'task');
   save();
   if (changed) renderChildren(dateStr);
 }
 function delFixedClass(childId, idx) {
   const dateStr = document.getElementById('datePicker').value;
+  const removed = state.dates[dateStr][childId].fixedClasses[idx];
   state.dates[dateStr][childId].fixedClasses.splice(idx,1);
+  // 记录被删除的课程名：自动补课程逻辑不再补回（最后一次手动操作为准）
+  if (removed && removed.name) markTaskRemoved(state, dateStr, childId, removed.name);
   syncCourseHomework(childId, dateStr);
+  markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
 
@@ -6611,7 +6625,8 @@ function mergeSmart(local, cloud) {
       if (lVer !== cVer) takeLocal = lVer > cVer;
       else if (lPristine && !cPristine) takeLocal = false;
       else if (!lPristine && cPristine) takeLocal = true;
-      else takeLocal = lTask >= cTask;
+      // 本地手动版本没有时间戳（历史数据）时不被云端覆盖：手动修改过的就是最终版
+      else takeLocal = (lTask === 0) ? true : lTask >= cTask;
       // 任务取较新（或非默认版本），复盘取较新（分别合并，避免互相覆盖）
       const mergedChild = {
         ...cc,
