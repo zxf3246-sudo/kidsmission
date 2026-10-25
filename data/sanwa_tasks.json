@@ -12587,21 +12587,23 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 88,
+          "summary": "今天一整天都在上课，具体情况等老师反馈，明天就科学考试了，说再多都是猜测，最后还是要通过她的成绩才能有所反映。反正说来说去都是那几个问题，考试过后就要把点对点的复习融入实际学习中去了，时间还是比较紧张的，主要是效率越低越浪费时间，时间越不够用，有效学习才是最重要的。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1792939363139,
-        "reviewSavedAt": null,
+        "reviewSavedAt": 1792940376183,
         "taskVer": 22,
-        "reviewVer": 0
+        "reviewVer": 14
       },
       "yanxi": {
         "fixedClasses": [],
