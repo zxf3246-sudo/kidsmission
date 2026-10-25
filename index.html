@@ -6677,9 +6677,15 @@ async function autoPullFromCloud() {
 
   const localState = JSON.parse(localStorage.getItem('sanwa_tasks') || '{"dates":{}}');
 
-  // 合并策略：云端更新过的日期优先
+  // 合并策略：以"最后一次手动修改"为准（时间戳优先，详见 mergeSmart）
   const merged = mergeSmart(localState, cloudState);
-  if (JSON.stringify(localState) !== JSON.stringify(merged)) {
+  const sameAsLocal = JSON.stringify(localState) === JSON.stringify(merged);
+  const sameAsCloud = JSON.stringify(merged) === JSON.stringify(cloudState);
+  // 本地已是最新结果但云端落后（本机有更新的手动修改）→ 直接回传云端，多端收敛到"最后一次手动修改版"
+  if (sameAsLocal && !sameAsCloud) {
+    try { uploadToGist(); } catch (_) {}
+  }
+  if (!sameAsLocal) {
     // 云端可能是旧数据，合并后补齐固定任务/迁移（与 finalizeMerge 一致）
     mergeDefaultReminders(merged);
     ensureSummaryKeywords(merged);
@@ -6702,6 +6708,10 @@ async function autoPullFromCloud() {
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
+    // 合并结果与云端不一致（本地贡献了更晚的手动修改）→ 自动回传，避免下次刷新/其他设备再冲突
+    if (!sameAsCloud) {
+      try { uploadToGist(); } catch (_) {}
+    }
     if (anyInputFocused()) {
       // 正在输入（如手打评语），只合并数据不刷新页面，避免打断打字；
       // 数据已保存，输入框失焦或下次刷新时自然显示
@@ -6776,30 +6786,37 @@ function mergeSmart(local, cloud) {
       const cVer  = +cc.taskVer || 0;
       const lRV   = +lc.reviewVer || 0;
       const cRV   = +cc.reviewVer || 0;
-      // 任务取舍：手动编辑次数多的一方优先（"最后一次手动改动为主"）；
-      // 次数相同再按"是否默认模板"，最后才按保存时间
+      // 任务取舍（铁律：以"最后一次手动修改"为准 —— 用时间戳判定"最后"，编辑次数仅作兜底）
+      // 1) 默认模板版本永远不赢手动改过的版本
+      // 2) 两边都手动改过：保存时间戳新的一方赢（时间 = 最后一次修改）
+      // 3) 只有一边有时间戳：有时间戳的一方赢
+      // 4) 都缺时间戳：按手动编辑次数，再平手取本地
       const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
       const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
       let takeLocal;
-      if (lVer !== cVer) takeLocal = lVer > cVer;
-      else if (lPristine && !cPristine) takeLocal = false;
-      else if (!lPristine && cPristine) takeLocal = true;
-      // 本地手动版本没有时间戳（历史数据）时不被云端覆盖：手动修改过的就是最终版
-      else takeLocal = (lTask === 0) ? true : lTask >= cTask;
-      // 任务取较新（或非默认版本），复盘取较新（分别合并，避免互相覆盖）
+      if (lPristine !== cPristine) takeLocal = cPristine;           // 手动版赢默认模板
+      else if (lTask && cTask && lTask !== cTask) takeLocal = lTask > cTask; // 最后修改者赢
+      else if ((lTask === 0) !== (cTask === 0)) takeLocal = lTask > 0;       // 有时间戳者赢
+      else if (lVer !== cVer) takeLocal = lVer > cVer;              // 次数兜底
+      else takeLocal = true;                                        // 完全一致取本地
+      // 任务与复盘分别取舍（避免互相覆盖）
       const mergedChild = {
         ...cc,
         tasks: takeLocal ? lc.tasks : cc.tasks,
-        taskSavedAt: Math.max(lTask, cTask) || lc.taskSavedAt || cc.taskSavedAt,
+        taskSavedAt: (takeLocal ? lTask : cTask) || Math.max(lTask, cTask) || null,
         taskVer: Math.max(lVer, cVer),
         fixedClasses: lc.fixedClasses || cc.fixedClasses,
         arrival: lc.arrival || cc.arrival,
         sleep: lc.sleep || cc.sleep
       };
-      mergedChild.review = (lRV !== cRV)
-        ? (lRV > cRV ? (lc.review || cc.review) : (cc.review || lc.review))
-        : (lRev >= cRev ? (lc.review || cc.review) : (cc.review || lc.review));
-      mergedChild.reviewSavedAt = Math.max(lRev, cRev) || lc.reviewSavedAt || cc.reviewSavedAt;
+      // 复盘取舍：同理，以 reviewSavedAt（最后修改时间）为主，次数兜底
+      let takeLocalRev;
+      if (lRev && cRev && lRev !== cRev) takeLocalRev = lRev > cRev;
+      else if ((lRev === 0) !== (cRev === 0)) takeLocalRev = lRev > 0;
+      else if (lRV !== cRV) takeLocalRev = lRV > cRV;
+      else takeLocalRev = true;
+      mergedChild.review = takeLocalRev ? (lc.review || cc.review) : (cc.review || lc.review);
+      mergedChild.reviewSavedAt = (takeLocalRev ? lRev : cRev) || Math.max(lRev, cRev) || null;
       mergedChild.reviewVer = Math.max(lRV, cRV);
       mergedDate[cid] = mergedChild;
     });
