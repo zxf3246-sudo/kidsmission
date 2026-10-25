@@ -12666,6 +12666,16 @@
             "status": "done"
           },
           {
+            "id": "t1792939375777krca",
+            "name": "学而思作业",
+            "duration": 30,
+            "type": "study",
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
+          },
+          {
             "id": "t1792854899832u65n",
             "name": "自由玩耍",
             "duration": null,
@@ -12694,9 +12704,9 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1792913453170,
+        "taskSavedAt": 1792939381402,
         "reviewSavedAt": null,
-        "taskVer": 53,
+        "taskVer": 59,
         "reviewVer": 0
       },
       "qiannuo": {
