@@ -12969,9 +12969,10 @@
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792988599047qvo6",
@@ -13022,8 +13023,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793016989295,
-        "taskVer": 25,
+        "taskSavedAt": 1793018287863,
+        "taskVer": 27,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
