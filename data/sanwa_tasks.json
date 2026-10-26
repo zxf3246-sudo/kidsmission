@@ -12997,11 +12997,12 @@
           {
             "id": "t1793018704642sz4m",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 60,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792988599046tpj9",
@@ -13032,8 +13033,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793018705604,
-        "taskVer": 39,
+        "taskSavedAt": 1793018718831,
+        "taskVer": 44,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
