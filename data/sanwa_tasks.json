@@ -13294,7 +13294,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t17930235251844w0b",
@@ -13305,12 +13306,22 @@
             "errLinked": false
           },
           {
-            "id": "t17930235251846w9p",
-            "name": "一页计算题",
-            "duration": 15,
+            "id": "t1793023573675rf5b",
+            "name": "LA作业改正",
+            "duration": null,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
+            "id": "t1793023584677r4sn",
+            "name": "学而思作业改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t17930235251843zfs",
@@ -13339,8 +13350,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793023585819,
+        "taskVer": 5,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13927,6 +13938,9 @@
     "2026-10-27": {
       "yilin": {
         "Missy笔记背诵和10MCQ": true
+      },
+      "yanxi": {
+        "一页计算题": true
       }
     }
   }
