@@ -12932,8 +12932,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793004181923,
-        "taskVer": 8,
+        "taskSavedAt": 1793004184120,
+        "taskVer": 9,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -12968,31 +12968,17 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1792988599046npva",
-            "name": "WW1单词5个",
+            "name": "WW练习题",
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792988599046hcul",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17929885990460qtn",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1792988599047qvo6",
@@ -13041,8 +13027,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793004272215,
+        "taskVer": 7,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13588,6 +13574,13 @@
         "语文词语": true,
         "科学知识点": true,
         "数学练习": true
+      },
+      "yanxi": {
+        "WW1单词5个": true,
+        "WW1单词练字": true,
+        "WW2练习": true,
+        "语文阅读理解": true,
+        "一页计算题": true
       }
     }
   }
