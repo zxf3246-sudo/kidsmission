@@ -12901,23 +12901,30 @@
             "duration": 30,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046wzel",
             "name": "自由活动",
-            "duration": null,
+            "duration": 20,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046dkc9",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:45"
           }
         ],
         "review": {
@@ -12936,8 +12943,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793004184120,
-        "taskVer": 9,
+        "taskSavedAt": 1793023111524,
+        "taskVer": 20,
         "reviewSavedAt": 1793019657119,
         "reviewVer": 18
       },
