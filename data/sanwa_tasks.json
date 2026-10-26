@@ -12921,21 +12921,25 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 6,
+          "score": 88,
+          "summary": "回来以后主动完成任务，今天给她加课，之前老师布置了很多试卷和题目，做的都是马马虎虎的，这不会那不会，也不知道学习了什么。今天马上要上课了，直接跑过来说试卷找不到，这已经不是第一次找不到作业了，至少在倪老师的补习班也是忘带作业，扣分提出批评。",
+          "reward": "找不到试卷-2分",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "粗心",
+            "自我反思"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1793004184120,
         "taskVer": 9,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793019657119,
+        "reviewVer": 18
       },
       "yanxi": {
         "fixedClasses": [
