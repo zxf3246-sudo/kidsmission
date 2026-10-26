@@ -13316,6 +13316,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1793023626179ke7t",
+            "name": "英语小测复习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t17930235251843zfs",
             "name": "自由玩耍",
             "duration": null,
@@ -13342,8 +13351,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793023604505,
-        "taskVer": 8,
+        "taskSavedAt": 1793023628739,
+        "taskVer": 11,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
