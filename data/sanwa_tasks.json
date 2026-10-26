@@ -13125,10 +13125,14 @@
         "review": {
           "points": 0,
           "score": null,
-          "summary": "",
+          "summary": "总是在做任务的时候，不是画画就是看来看去，本来作业没做完让他们下楼玩，回来就要继续补作业，结果又吃水果又磨磨唧唧的，做下就分心一下，一堆的废话，一堆的问题，再次警告。",
           "reward": "乱涂乱画-1分",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "心不在焉",
+            "低效率"
+          ],
           "savings": 0,
           "stars": 0
         },
@@ -13136,8 +13140,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793017040181,
         "taskVer": 14,
-        "reviewSavedAt": 1793018827020,
-        "reviewVer": 2
+        "reviewSavedAt": 1793019236596,
+        "reviewVer": 12
       }
     }
   },
