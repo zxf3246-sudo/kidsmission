@@ -12977,10 +12977,10 @@
           {
             "id": "t1792988599047qvo6",
             "name": "语文小测复习",
-            "duration": 15,
+            "duration": 20,
             "type": "study",
-            "status": "empty",
-            "done": false,
+            "status": "done",
+            "done": true,
             "courseTask": "quizReview",
             "manualTouched": true
           },
@@ -13023,8 +13023,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793018347230,
-        "taskVer": 28,
+        "taskSavedAt": 1793018459593,
+        "taskVer": 36,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
