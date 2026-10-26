@@ -12995,6 +12995,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1793018704642sz4m",
+            "name": "学而思作业",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1792988599046tpj9",
             "name": "自由玩耍",
             "duration": null,
@@ -13023,8 +13032,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793018463628,
-        "taskVer": 37,
+        "taskSavedAt": 1793018705604,
+        "taskVer": 39,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
