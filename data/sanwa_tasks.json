@@ -12887,11 +12887,13 @@
         "tasks": [
           {
             "id": "t1792988599046z9wc",
-            "name": "Missy笔记背诵和10MCQ",
+            "name": "Missy数学作业",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1792988599046i178",
@@ -12954,8 +12956,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793004156053,
-        "taskVer": 1,
+        "taskSavedAt": 1793004173533,
+        "taskVer": 4,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13605,7 +13607,8 @@
     },
     "2026-10-26": {
       "yilin": {
-        "学校作业": true
+        "学校作业": true,
+        "Missy笔记背诵和10MCQ": true
       }
     }
   }
