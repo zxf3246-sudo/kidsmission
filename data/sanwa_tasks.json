@@ -13026,21 +13026,25 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": 7,
+          "score": 89,
+          "summary": "今天这个脾气在做不出来题的时候又显现了一下，然后趁我不在，跟李芊诺在群里乱发语音，这个已经警告过他们了。如果下次再犯就是扣分扣钱，今天主动提出下楼玩，玩完回来补作业就开始发困，发现昨天讲的数学知识点今天又有点忘了，所以要求他把这个知识点的Misson过掉才可以睡觉。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "状态不好",
+            "勤奋",
+            "发脾气"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1793018718831,
         "taskVer": 44,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793019844887,
+        "reviewVer": 13
       },
       "qiannuo": {
         "fixedClasses": [],
@@ -13127,8 +13131,8 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 87,
           "summary": "总是在做任务的时候，不是画画就是看来看去，本来作业没做完让他们下楼玩，回来就要继续补作业，结果又吃水果又磨磨唧唧的，做下就分心一下，一堆的废话，一堆的问题，再次警告。",
           "reward": "乱涂乱画-1分",
           "other": "",
@@ -13138,14 +13142,14 @@
             "低效率"
           ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1793017040181,
         "taskVer": 14,
-        "reviewSavedAt": 1793019236596,
-        "reviewVer": 12
+        "reviewSavedAt": 1793019870450,
+        "reviewVer": 26
       }
     }
   },
