@@ -12896,30 +12896,6 @@
             "status": "done"
           },
           {
-            "id": "t1792988599046i178",
-            "name": "语文词语",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792988599046jv62",
-            "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1792988599046jpba",
-            "name": "数学练习",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1792988599046jxpl",
             "name": "听播客",
             "duration": 30,
@@ -12956,8 +12932,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793004173533,
-        "taskVer": 4,
+        "taskSavedAt": 1793004181923,
+        "taskVer": 8,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13608,7 +13584,10 @@
     "2026-10-26": {
       "yilin": {
         "学校作业": true,
-        "Missy笔记背诵和10MCQ": true
+        "Missy笔记背诵和10MCQ": true,
+        "语文词语": true,
+        "科学知识点": true,
+        "数学练习": true
       }
     }
   }
