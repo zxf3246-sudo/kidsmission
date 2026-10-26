@@ -12879,6 +12879,12 @@
       "yilin": {
         "fixedClasses": [
           {
+            "name": "数学Missy",
+            "time": "17:00-19:00",
+            "duration": 120,
+            "manualTouched": true
+          },
+          {
             "name": "英语missy",
             "time": "19:00-21:00",
             "duration": 120
@@ -12943,8 +12949,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793023111524,
-        "taskVer": 20,
+        "taskSavedAt": 1793023227888,
+        "taskVer": 22,
         "reviewSavedAt": 1793019657119,
         "reviewVer": 18
       },
