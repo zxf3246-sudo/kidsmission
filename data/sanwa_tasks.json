@@ -13078,9 +13078,9 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "status": "empty",
+            "status": "done",
             "manualTouched": true
           },
           {
@@ -13088,24 +13088,30 @@
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046qgm1",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046ak4d",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793017026876zkmw",
@@ -13120,18 +13126,23 @@
           {
             "id": "t17929885990467wn2",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t179298859904624iz",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done",
+            "time": "21:38"
           }
         ],
         "review": {
@@ -13150,8 +13161,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793017040181,
-        "taskVer": 14,
+        "taskSavedAt": 1793023160173,
+        "taskVer": 28,
         "reviewSavedAt": 1793020093405,
         "reviewVer": 29
       }
