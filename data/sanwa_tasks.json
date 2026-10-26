@@ -13126,7 +13126,7 @@
           "points": 0,
           "score": null,
           "summary": "",
-          "reward": "",
+          "reward": "乱涂乱画-1分",
           "other": "",
           "keywords": [],
           "savings": 0,
@@ -13136,8 +13136,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793017040181,
         "taskVer": 14,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793018827020,
+        "reviewVer": 2
       }
     }
   },
