@@ -12970,10 +12970,12 @@
           {
             "id": "t179298859904687zp",
             "name": "1 Mission",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046l5go",
@@ -13008,18 +13010,23 @@
           {
             "id": "t1792988599046tpj9",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 60,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1792988599046v4ty",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:15"
           }
         ],
         "review": {
@@ -13038,8 +13045,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793018718831,
-        "taskVer": 44,
+        "taskSavedAt": 1793023135917,
+        "taskVer": 61,
         "reviewSavedAt": 1793019888759,
         "reviewVer": 16
       },
