@@ -13290,20 +13290,12 @@
           },
           {
             "id": "t17930235251841g5m",
-            "name": "WW1单词5个",
+            "name": "WW1单词5题",
             "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false,
             "manualTouched": true
-          },
-          {
-            "id": "t17930235251844w0b",
-            "name": "英语语法",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
           },
           {
             "id": "t1793023573675rf5b",
@@ -13350,8 +13342,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793023585819,
-        "taskVer": 5,
+        "taskSavedAt": 1793023604505,
+        "taskVer": 8,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13940,7 +13932,9 @@
         "Missy笔记背诵和10MCQ": true
       },
       "yanxi": {
-        "一页计算题": true
+        "一页计算题": true,
+        "英语语法": true,
+        "WW1单词5个": true
       }
     }
   }
