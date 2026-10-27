@@ -13227,6 +13227,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1793100150681828g",
+            "name": "1大题科学",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1793023525184afws",
             "name": "自由活动",
             "duration": null,
@@ -13255,8 +13264,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793100136409,
-        "taskVer": 16,
+        "taskSavedAt": 1793100151869,
+        "taskVer": 18,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
