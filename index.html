@@ -67,8 +67,11 @@
     position: relative; overflow: hidden;
   }
   .header-art {
-    margin-top: 14px; height: 132px; border-radius: 14px;
-    background: url('share-bg-header.jpg') center top / cover no-repeat;
+    margin-top: 14px; width: 100%;
+    /* contain + 固定宽高比：任何手机宽度都完整显示整幅插画，绝不裁掉任何一张脸 */
+    aspect-ratio: 430 / 175;
+    background: url('share-bg-header.jpg') center / contain no-repeat, #fdf2f8;
+    border-radius: 14px;
     border: 1px solid rgba(255,255,255,.9);
     box-shadow: 0 4px 14px rgba(244,114,182,.18);
   }
