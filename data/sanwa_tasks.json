@@ -13240,10 +13240,12 @@
           {
             "id": "t1793023525184afws",
             "name": "自由活动",
-            "duration": null,
+            "duration": 45,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793023525184qyqp",
@@ -13266,8 +13268,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793103252379,
-        "taskVer": 31,
+        "taskSavedAt": 1793103563650,
+        "taskVer": 36,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
