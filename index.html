@@ -130,37 +130,77 @@
   body.view-review .child-actions { display: none !important; }
   body.view-review .shared-learning { display: none !important; }
 
-  /* ====== 月报视图 ====== */
-  #monthReport { display: none; }
-  body.view-month #monthReport { display: block; }
-  body.view-month .children-grid,
-  body.view-month .shared-learning { display: none !important; }
-  .mr-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-  .mr-nav .mr-title { font-size: 18px; font-weight: 800; color: #4338ca; min-width: 160px; text-align: center; }
-  .mr-nav button { border: 1px solid #c7d2fe; background: #fff; color: #4f46e5; border-radius: 10px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; }
-  .mr-nav button:hover { background: #4f46e5; color: #fff; }
-  .mr-card { background: #fff; border-radius: 16px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(99,102,241,.08); border: 1px solid #eef0ff; }
-  .mr-summary { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-  .mr-pill { flex: 1; min-width: 120px; background: linear-gradient(135deg,#eef2ff,#fdf4ff); border: 1px solid #e0e7ff; border-radius: 14px; padding: 12px 14px; text-align: center; }
-  .mr-pill .v { font-size: 20px; font-weight: 800; color: #4338ca; }
-  .mr-pill .k { font-size: 12px; color: #6b7280; margin-top: 2px; }
-  .mr-kids { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
-  @media (max-width: 720px) { .mr-kids { grid-template-columns: 1fr; } }
-  .mr-kid { background: #fff; border-radius: 16px; padding: 16px 18px; border-top: 4px solid var(--t); box-shadow: 0 2px 10px rgba(0,0,0,.05); }
-  .mr-kid h4 { margin: 0 0 10px; font-size: 15px; color: var(--t); }
-  .mr-kid .row { display: flex; justify-content: space-between; font-size: 13px; color: #374151; padding: 4px 0; }
-  .mr-kid .row b { color: #111827; }
-  .mr-bar { height: 8px; background: #f1f5f9; border-radius: 6px; overflow: hidden; margin: 6px 0 10px; }
-  .mr-bar i { display: block; height: 100%; background: var(--t); border-radius: 6px; }
-  .mr-chart-wrap { background: #fff; border-radius: 16px; padding: 18px 20px; border: 1px solid #eef0ff; }
-  .mr-chart-wrap h4 { margin: 0 0 14px; font-size: 15px; color: #4338ca; }
-  .mr-chart { display: flex; align-items: flex-end; gap: 3px; }
-  .mr-col { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
-  .mr-col .mr-stack { display: flex; flex-direction: column-reverse; justify-content: flex-start; height: 110px; width: 100%; max-width: 26px; }
-  .mr-col .mr-stack i { display: block; width: 100%; border-radius: 2px; }
-  .mr-col > span { font-size: 10px; color: #9ca3af; margin-top: 4px; }
-  .mr-legend { display: flex; gap: 16px; justify-content: center; margin-top: 12px; font-size: 12px; color: #6b7280; }
-  .mr-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+  /* ====== 周报视图 ====== */
+  .week-report { display: none; }
+  body.view-week .children-grid,
+  body.view-week .shared-learning { display: none !important; }
+  body.view-week .week-report { display: block; }
+  .week-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 16px;
+  }
+  .week-title {
+    font-size: 18px; font-weight: 900; color: #1e293b;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .week-title .range { font-size: 13px; font-weight: 500; color: #64748b; margin-left: 4px; }
+  .week-nav { display: inline-flex; gap: 8px; }
+  .week-nav-btn {
+    background: #fff; border: 1px solid var(--c-border); color: #475569;
+    padding: 7px 13px; border-radius: 10px; cursor: pointer; font-size: 13px;
+    font-weight: 600; font-family: inherit; transition: all .2s;
+    box-shadow: var(--shadow-sm);
+  }
+  .week-nav-btn:hover { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+  .week-nav-btn.today-btn { background: #6366f1; color: #fff; border-color: #6366f1; }
+  .week-nav-btn.today-btn:hover { background: #4f46e5; }
+  .week-card {
+    background: var(--c-card); border-radius: 18px; padding: 20px;
+    border: 1px solid var(--c-border); box-shadow: var(--shadow-md); margin-bottom: 18px;
+  }
+  .week-card-title {
+    font-size: 15px; font-weight: 800; color: #334155; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .week-chart {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 6px; height: 170px; padding-top: 6px;
+  }
+  .week-col { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+  .week-bars { display: flex; align-items: flex-end; justify-content: center; gap: 3px; height: 138px; width: 100%; }
+  .week-bar { width: 7px; border-radius: 4px 4px 0 0; min-height: 2px; transition: height .3s; }
+  .week-day-label { margin-top: 8px; font-size: 11px; color: #94a3b8; font-weight: 600; white-space: nowrap; }
+  .week-day-label.today { color: #6366f1; font-weight: 900; }
+  .week-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+  .week-legend span { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #64748b; }
+  .week-legend i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+  .week-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .week-kid-card {
+    background: var(--c-card); border-radius: 16px; padding: 16px;
+    border: 1px solid var(--c-border); box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--kid-color, #6366f1);
+  }
+  .week-kid-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .week-kid-name { font-size: 15px; font-weight: 900; color: #1e293b; display: flex; align-items: center; gap: 6px; }
+  .week-kid-rate { font-size: 20px; font-weight: 900; color: var(--kid-color, #6366f1); }
+  .week-progress { height: 7px; border-radius: 4px; background: #f1f5f9; overflow: hidden; margin-bottom: 12px; }
+  .week-progress i { display: block; height: 100%; border-radius: 4px; background: var(--kid-color, #6366f1); }
+  .week-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+  .week-metric { font-size: 12px; color: #64748b; }
+  .week-metric b { display: block; font-size: 14px; color: #1e293b; font-weight: 800; margin-top: 1px; }
+  .week-kw { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .week-kw span {
+    font-size: 11px; padding: 3px 8px; border-radius: 20px;
+    background: #f1f5f9; color: #475569; font-weight: 600;
+  }
+  .week-kw span.neg { background: #fef2f2; color: #dc2626; }
+  .week-empty { color: #94a3b8; font-size: 13px; padding: 10px 0; }
+  @media (max-width: 960px) {
+    .week-card-grid { grid-template-columns: 1fr; }
+    .week-chart { height: 140px; }
+    .week-bars { height: 108px; }
+    .week-head { flex-direction: column; align-items: flex-start; }
+  }
 
   /* ====== 共同学习区 ====== */
   .shared-learning {
@@ -1798,7 +1838,7 @@
       </div>
     </div></section>
 
-<div id="monthReport"></div>
+<section class="week-report" id="weekReport"></section>
 
 <div class="save-indicator" id="saveIndicator">✓ 已保存</div>
 
@@ -3015,137 +3055,13 @@ function isDirty(childId, part) {
 
 function setView(v) {
   currentView = v;
-  document.body.classList.remove('view-all','view-task','view-review','view-month');
+  document.body.classList.remove('view-all','view-task','view-review','view-week');
   document.body.classList.add('view-' + v);
   document.querySelectorAll('.view-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.view === v);
   });
-  if (v === 'month') { renderMonthReport(); return; }
+  if (v === 'week') renderWeekReport();
   renderChildren(document.getElementById('datePicker').value);
-}
-
-// ============ 月报 ============
-let mrCursor = null; // {y, m(0-based)} 当前查看的月份
-function shiftMonth(delta) {
-  if (!mrCursor) { const n = new Date(); mrCursor = { y: n.getFullYear(), m: n.getMonth() }; }
-  let m = mrCursor.m + delta, y = mrCursor.y;
-  while (m < 0) { m += 12; y--; }
-  while (m > 11) { m -= 12; y++; }
-  mrCursor = { y, m };
-  renderMonthReport();
-}
-function gotoThisMonth() {
-  const n = new Date();
-  mrCursor = { y: n.getFullYear(), m: n.getMonth() };
-  renderMonthReport();
-}
-function renderMonthReport() {
-  const box = document.getElementById('monthReport');
-  if (!box) return;
-  if (!mrCursor) { const n = new Date(); mrCursor = { y: n.getFullYear(), m: n.getMonth() }; }
-  const y = mrCursor.y, m = mrCursor.m;
-  const prefix = y + '-' + String(m + 1).padStart(2, '0');
-  const days = Object.keys(state.dates || {}).filter(d => d.startsWith(prefix)).sort();
-  const themeMap = { yilin: '#6366f1', yanxi: '#d97706', qiannuo: '#ec4899' };
-
-  const agg = {};
-  CHILDREN.forEach(c => { agg[c.id] = { done:0, total:0, studyMin:0, points:0, scoreSum:0, scoreCnt:0, reviewDays:0 }; });
-  const daily = [];
-  let monthPoints = 0, monthScoreSum = 0, monthScoreCnt = 0;
-
-  days.forEach(ds => {
-    const d = state.dates[ds] || {};
-    const dp = {};
-    CHILDREN.forEach(c => {
-      const cd = d[c.id];
-      if (!cd) { dp[c.id] = 0; return; }
-      const a = agg[c.id];
-      const tasks = cd.tasks || [];
-      a.total += tasks.length;
-      a.done += tasks.filter(t => t.done).length;
-      a.studyMin += tasks.filter(t => t.done && t.type === 'study').reduce((s, t) => s + (+t.duration || 0), 0);
-      const rv = cd.review;
-      const p = rv ? (+rv.points || 0) : 0;
-      dp[c.id] = p;
-      if (rv) {
-        a.points += p; monthPoints += p;
-        if (rv.score !== null && rv.score !== undefined && !isNaN(rv.score)) {
-          a.scoreSum += +rv.score; a.scoreCnt++; monthScoreSum += +rv.score; monthScoreCnt++;
-        }
-        if (p !== 0 || (rv.score !== null && rv.score !== undefined) || (rv.summary && String(rv.summary).trim())) a.reviewDays++;
-      }
-    });
-    daily.push({ ds: ds, day: +ds.slice(8), pts: dp });
-  });
-
-  let maxDaily = 1;
-  daily.forEach(d => {
-    const s = CHILDREN.reduce((sum, c) => sum + Math.max(0, d.pts[c.id] || 0), 0);
-    if (s > maxDaily) maxDaily = s;
-  });
-
-  const fmtDur = min => {
-    const h = Math.floor(min / 60), mm = min % 60;
-    return h ? (h + '小时' + (mm ? mm + '分' : '')) : (mm + '分');
-  };
-  const avgAll = monthScoreCnt ? Math.round(monthScoreSum / monthScoreCnt * 10) / 10 : null;
-
-  let html = '<div class="mr-nav">'
-    + '<button onclick="shiftMonth(-1)">‹ 上一月</button>'
-    + '<div class="mr-title">📊 ' + y + '年' + (m + 1) + '月 月报</div>'
-    + '<button onclick="shiftMonth(1)">下一月 ›</button>'
-    + '<button onclick="gotoThisMonth()">回到本月</button>'
-    + '</div>';
-
-  if (!days.length) {
-    html += '<div class="mr-card" style="text-align:center;color:#9ca3af;padding:40px 20px;">本月暂无记录，切换到其他月份看看～</div>';
-    box.innerHTML = html;
-    return;
-  }
-
-  html += '<div class="mr-summary">'
-    + '<div class="mr-pill"><div class="v">' + days.length + '</div><div class="k">记录天数</div></div>'
-    + '<div class="mr-pill"><div class="v">' + (monthPoints > 0 ? '+' : '') + monthPoints + '</div><div class="k">三娃积分合计</div></div>'
-    + '<div class="mr-pill"><div class="v">' + (avgAll === null ? '—' : avgAll) + '</div><div class="k">三娃平均评分</div></div>'
-    + '</div>';
-
-  html += '<div class="mr-kids">';
-  CHILDREN.forEach(c => {
-    const a = agg[c.id];
-    const t = themeMap[c.id] || '#6366f1';
-    const rate = a.total ? Math.round(a.done / a.total * 100) : 0;
-    const avg = a.scoreCnt ? Math.round(a.scoreSum / a.scoreCnt * 10) / 10 : null;
-    html += '<div class="mr-kid" style="--t:' + t + '">'
-      + '<h4>' + c.name + '</h4>'
-      + '<div class="row"><span>任务完成率</span><b>' + rate + '%（' + a.done + '/' + a.total + '）</b></div>'
-      + '<div class="mr-bar"><i style="width:' + rate + '%"></i></div>'
-      + '<div class="row"><span>学习时长（已完成）</span><b>' + fmtDur(a.studyMin) + '</b></div>'
-      + '<div class="row"><span>复盘积分</span><b>' + (a.points > 0 ? '+' : '') + a.points + '</b></div>'
-      + '<div class="row"><span>平均评分</span><b>' + (avg === null ? '—' : avg) + '（' + a.scoreCnt + '天）</b></div>'
-      + '<div class="row"><span>复盘天数</span><b>' + a.reviewDays + '</b></div>'
-      + '</div>';
-  });
-  html += '</div>';
-
-  html += '<div class="mr-chart-wrap"><h4>每日积分趋势（三娃叠加）</h4><div class="mr-chart">';
-  daily.forEach(d => {
-    const totalActual = CHILDREN.reduce((s, c) => s + (d.pts[c.id] || 0), 0);
-    let segs = '';
-    CHILDREN.forEach(c => {
-      const p = Math.max(0, d.pts[c.id] || 0);
-      if (!p) return;
-      const h = Math.max(2, Math.round(p / maxDaily * 110));
-      segs += '<i style="height:' + h + 'px;background:' + (themeMap[c.id] || '#6366f1') + '"></i>';
-    });
-    html += '<div class="mr-col" title="' + d.ds + '：合计 ' + (totalActual > 0 ? '+' : '') + totalActual + ' 分">'
-      + '<div class="mr-stack">' + segs + '</div>'
-      + '<span>' + d.day + '</span></div>';
-  });
-  html += '</div><div class="mr-legend">'
-    + CHILDREN.map(c => '<span><i style="background:' + (themeMap[c.id] || '#6366f1') + '"></i>' + c.name + '</span>').join('')
-    + '</div></div>';
-
-  box.innerHTML = html;
 }
 // 进入某个孩子的单人页面
 function focusChild(childId) {
@@ -3264,12 +3180,12 @@ function syncYilinSundayClasses(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     const before = cd.fixedClasses.length;
-    // 1) 移除周日科学课（19:30-21:30）——用户手动改过的课程不强制移除
+    // 1) 移除周日科学课（19:30-21:30）；用户手动改过/加回的保留
     cd.fixedClasses = cd.fixedClasses.filter(c =>
       !(c.name && c.name === '科学' && c.time === '19:30-21:30' && !c.manualTouched));
-    // 2) 确保周日有画画课 15:00-18:00——用户手动删过则不再补回
+    // 2) 确保周日有画画课 15:00-18:00（用户手动删除过的则不补回）
     if (!cd.fixedClasses.some(c => c.name && c.name === '画画课' && c.time === '15:00-18:00') &&
-        !isTaskManuallyRemoved(obj, ds, 'yilin', '画画课')) {
+        !isClassManuallyRemoved(obj, ds, 'yilin', '画画课')) {
       cd.fixedClasses.push({ name: '画画课', time: '15:00-18:00', duration: 180 });
     }
     if (cd.fixedClasses.length !== before) changed++;
@@ -3290,7 +3206,7 @@ function syncQiannuoWedLaTime(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].qiannuo;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name === '语文LA' && !c.manualTouched) {
+      if (c && c.name === '语文LA' && !c.manualTouched && !isClassManuallyRemoved(obj, ds, 'qiannuo', '语文LA')) {
         if (c.time !== '17:00-18:00') { c.time = '17:00-18:00'; changed++; }
         if (c.duration !== 60) { c.duration = 60; changed++; }
       }
@@ -3315,7 +3231,7 @@ function syncYanxiWedLaTime(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
-      if (c && c.name && c.name === '语文LA' && !c.manualTouched) {
+      if (c && c.name && c.name === '语文LA' && !c.manualTouched && !isClassManuallyRemoved(obj, ds, 'yanxi', '语文LA')) {
         if (c.time !== target) { c.time = target; changed++; }
       }
     });
@@ -3445,7 +3361,7 @@ function addQiannuoThursBilingual(obj) {
 }
 
 // 清除"智能推荐引擎"此前自动注入的任务（如亲子瑜伽、冥想等），避免残留
-// 幂等：仅移除带 autoEnriched 标记的任务，不影响用户手动添加的内容
+// 幂等：仅移除带 autoEnriched 标记的任务，不影响用户手动添加/修改的内容
 function removeAutoEnrichedTasks(obj) {
   if (!obj || !obj.dates) return 0;
   let changed = 0;
@@ -3453,6 +3369,7 @@ function removeAutoEnrichedTasks(obj) {
     Object.values(kids || {}).forEach(cd => {
       if (!cd || !Array.isArray(cd.tasks)) return;
       const before = cd.tasks.length;
+      // 用户手动改过（manualTouched）的任务即使带 autoEnriched 标记也保留
       cd.tasks = cd.tasks.filter(t => !t.autoEnriched || t.manualTouched);
       if (cd.tasks.length !== before) changed++;
     });
@@ -3593,7 +3510,8 @@ function removeYilinMissyListening(obj, todayStr) {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.tasks)) return;
     const before = cd.tasks.length;
-    cd.tasks = cd.tasks.filter(t => !(t && t.name === 'Missy听力'));
+    // 用户手动加回/改过的"Missy听力"（manualTouched）保留
+    cd.tasks = cd.tasks.filter(t => !(t && t.name === 'Missy听力') || t.manualTouched);
     removed += before - cd.tasks.length;
   });
   if (removed > 0) {
@@ -3666,6 +3584,26 @@ function clearTaskRemoved(obj, dateStr, childId, name) {
   const n = (name || '').trim();
   if (!obj || !n || !obj.manualRemovedTasks) return;
   const m = obj.manualRemovedTasks[dateStr] && obj.manualRemovedTasks[dateStr][childId];
+  if (m && m[n]) delete m[n];
+}
+
+// 固定课程的手动删除记录（结构同 manualRemovedTasks），用于阻止"自动补课"逻辑把删掉的课加回来
+function markClassRemoved(obj, dateStr, childId, name) {
+  const n = (name || '').trim();
+  if (!obj || !n) return;
+  if (!obj.manualRemovedClasses) obj.manualRemovedClasses = {};
+  if (!obj.manualRemovedClasses[dateStr]) obj.manualRemovedClasses[dateStr] = {};
+  if (!obj.manualRemovedClasses[dateStr][childId]) obj.manualRemovedClasses[dateStr][childId] = {};
+  obj.manualRemovedClasses[dateStr][childId][n] = true;
+}
+function isClassManuallyRemoved(obj, dateStr, childId, name) {
+  const m = obj && obj.manualRemovedClasses && obj.manualRemovedClasses[dateStr] && obj.manualRemovedClasses[dateStr][childId];
+  return !!(m && m[(name || '').trim()]);
+}
+function clearClassRemoved(obj, dateStr, childId, name) {
+  const n = (name || '').trim();
+  if (!obj || !n || !obj.manualRemovedClasses) return;
+  const m = obj.manualRemovedClasses[dateStr] && obj.manualRemovedClasses[dateStr][childId];
   if (m && m[n]) delete m[n];
 }
 
@@ -4034,6 +3972,7 @@ function render() {
     }
   })();
   // 从今天起移除李怡霖"Missy听力"（历史日期保留原记录）
+  // 若用户手动改过/加回该任务（manualTouched），则尊重用户，不再强制移除
   (() => {
     const cd = state.dates[dateStr] && state.dates[dateStr].yilin;
     if (!cd || !Array.isArray(cd.tasks)) return;
@@ -4045,6 +3984,7 @@ function render() {
     }
   })();
   // 强制李彦希"语文LA"时间：周一 15:30-16:30、周三 14:30-15:30（用户要求）
+  // 用户手动改过该课程时间的（manualTouched），以用户最后一次改动为准
   (() => {
     const cd = state.dates[dateStr] && state.dates[dateStr].yanxi;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
@@ -4063,7 +4003,7 @@ function render() {
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     if (new Date(dateStr+'T00:00:00').getDay() !== 3) return;
     cd.fixedClasses.forEach(c => {
-      if (c.name === '语文LA' && !c.manualTouched) {
+      if (c && c.name === '语文LA' && !c.manualTouched) {
         if (c.time !== '17:00-18:00') c.time = '17:00-18:00';
         if (c.duration !== 60) c.duration = 60;
       }
@@ -4081,6 +4021,140 @@ function render() {
   document.getElementById('weekdayPill').textContent = WEEKDAYS[dow];
   renderSharedLearning();
   renderChildren(dateStr);
+  if (currentView === 'week') renderWeekReport();
+}
+
+// ====== 周报视图 ======
+let weekAnchor = null;      // 当前周报的周一日期
+let weekBaseDate = null;    // 用于判断日期选择器是否变化
+
+// 复盘里的消极关键词（周报中标红）
+const NEGATIVE_KEYWORDS = ['拖拖拉拉','发脾气','消极','不在状态','反复出错','粗心','批评','找事儿','吵架','挨揍','哭哭啼啼','考试成绩差','老师批评','磨蹭','分心'];
+
+function weekShift(step) {
+  if (step === 0) {
+    weekAnchor = mondayOf(localDateStr(new Date()));
+  } else {
+    const d = new Date((weekAnchor || mondayOf(localDateStr(new Date()))) + 'T00:00:00');
+    d.setDate(d.getDate() + step * 7);
+    weekAnchor = localDateStr(d);
+  }
+  weekBaseDate = document.getElementById('datePicker').value;
+  renderWeekReport();
+}
+
+function fmtMonthDay(ds) {
+  const d = new Date(ds + 'T00:00:00');
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+}
+
+function renderWeekReport() {
+  const el = document.getElementById('weekReport');
+  if (!el) return;
+  const base = document.getElementById('datePicker').value;
+  if (!weekAnchor || weekBaseDate !== base) {
+    weekAnchor = mondayOf(base);
+    weekBaseDate = base;
+  }
+  const start = new Date(weekAnchor + 'T00:00:00');
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    days.push(localDateStr(d));
+  }
+  const today = localDateStr(new Date());
+
+  // 图表最大值（三娃七天里的最高积分）
+  let maxPts = 1;
+  days.forEach(ds => {
+    CHILDREN.forEach(c => {
+      const cd = state.dates[ds] && state.dates[ds][c.id];
+      const p = cd && cd.review ? (+cd.review.points || 0) : 0;
+      if (p > maxPts) maxPts = p;
+    });
+  });
+
+  let chart = '';
+  days.forEach((ds, i) => {
+    const isToday = ds === today;
+    let bars = '';
+    CHILDREN.forEach(c => {
+      const cd = state.dates[ds] && state.dates[ds][c.id];
+      const p = cd && cd.review ? (+cd.review.points || 0) : 0;
+      const h = p > 0 ? Math.max(3, Math.round(p / maxPts * 130)) : 2;
+      const color = CHILD_COLORS[c.id].main;
+      bars += `<div class="week-bar" title="${c.name} ${fmtMonthDay(ds)}：${p} 分"
+        style="height:${h}px;background:${p > 0 ? color : '#e2e8f0'}"></div>`;
+    });
+    chart += `<div class="week-col">
+      <div class="week-bars">${bars}</div>
+      <div class="week-day-label${isToday ? ' today' : ''}">${WEEKDAYS[(i + 1) % 7]}${isToday ? '·今' : ''}</div>
+    </div>`;
+  });
+
+  let cards = '';
+  CHILDREN.forEach(c => {
+    let total = 0, done = 0, studyPlan = 0, studyDone = 0, points = 0, scoreSum = 0, scoreCnt = 0;
+    const kwCount = {};
+    days.forEach(ds => {
+      const cd = state.dates[ds] && state.dates[ds][c.id];
+      if (!cd) return;
+      (cd.tasks || []).forEach(t => {
+        total++;
+        if (t.done) done++;
+        if (t.type !== 'rest') {
+          studyPlan += (+t.duration || 0);
+          if (t.done) studyDone += (+t.duration || 0);
+        }
+      });
+      const rev = cd.review || {};
+      points += (+rev.points || 0);
+      if (typeof rev.score === 'number' && rev.score > 0) { scoreSum += rev.score; scoreCnt++; }
+      (rev.keywords || []).forEach(k => { kwCount[k] = (kwCount[k] || 0) + 1; });
+    });
+    const rate = total ? Math.round(done / total * 100) : 0;
+    const avgScore = scoreCnt ? (scoreSum / scoreCnt).toFixed(1) : '—';
+    const kws = Object.keys(kwCount)
+      .sort((a, b) => kwCount[b] - kwCount[a])
+      .slice(0, 6)
+      .map(k => `<span class="${NEGATIVE_KEYWORDS.includes(k) ? 'neg' : ''}">${escapeHtml(k)}</span>`)
+      .join('');
+    cards += `<div class="week-kid-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
+      <div class="week-kid-head">
+        <div class="week-kid-name">${c.emoji} ${c.name}</div>
+        <div class="week-kid-rate">${rate}%</div>
+      </div>
+      <div class="week-progress"><i style="width:${rate}%"></i></div>
+      <div class="week-metrics">
+        <div class="week-metric">完成任务<b>${done} / ${total}</b></div>
+        <div class="week-metric">学习时长<b>${studyDone} / ${studyPlan} 分</b></div>
+        <div class="week-metric">本周积分<b>${points > 0 ? '+' : ''}${points}</b></div>
+        <div class="week-metric">平均评分<b>${avgScore}</b></div>
+      </div>
+      <div class="week-kw">${kws || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
+    </div>`;
+  });
+
+  const legend = CHILDREN.map(c =>
+    `<span><i style="background:${CHILD_COLORS[c.id].main}"></i>${c.name}</span>`).join('');
+
+  el.innerHTML = `
+    <div class="week-head">
+      <div class="week-title">📊 周报 <span class="range">${fmtMonthDay(days[0])} ~ ${fmtMonthDay(days[6])}</span></div>
+      <div class="week-nav">
+        <button class="week-nav-btn" onclick="weekShift(-1)">← 上一周</button>
+        <button class="week-nav-btn today-btn" onclick="weekShift(0)">本周</button>
+        <button class="week-nav-btn" onclick="weekShift(1)">下一周 →</button>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-card-title">📈 每日复盘积分趋势</div>
+      <div class="week-chart">${chart}</div>
+      <div class="week-legend">${legend}</div>
+    </div>
+    <div class="week-card-grid">${cards}</div>
+  `;
 }
 
 function renderSharedLearning() {
@@ -4547,9 +4621,9 @@ function cycleTaskStatus(childId, idx) {
   const cur = task.status || (task.done ? 'done' : 'empty');
   const next = cur === 'empty' ? 'done' : cur === 'done' ? 'undone' : 'empty';
   task.status = next;
+  task.manualTouched = true;
   // 同步旧 done 字段，保持其他逻辑兼容
   task.done = (next === 'done');
-  task.manualTouched = true;
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
 }
@@ -4618,6 +4692,9 @@ function resetChild(childId) {
   // 明确重置为默认时，清除该日该孩子的"手动删除/改名"记录
   if (state.manualRemovedTasks && state.manualRemovedTasks[dateStr]) {
     delete state.manualRemovedTasks[dateStr][childId];
+  }
+  if (state.manualRemovedClasses && state.manualRemovedClasses[dateStr]) {
+    delete state.manualRemovedClasses[dateStr][childId];
   }
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
@@ -4789,6 +4866,8 @@ function addFixedClass(childId) {
   state.dates[dateStr][childId].fixedClasses.push({
     name, time: timeStr, duration: calcDuration(timeStr), manualTouched: true
   });
+  // 手动加回同名课程时，清除此前的"手动删除"记录，避免被自动逻辑再次移除
+  clearClassRemoved(state, dateStr, childId, name);
   state.dates[dateStr][childId].fixedClasses.sort((a,b) => {
     const aStart = (a.time||'').split('-')[0]; const bStart = (b.time||'').split('-')[0];
     return timeToMinutes(aStart) - timeToMinutes(bStart);
@@ -4801,8 +4880,12 @@ function editFixedClass(childId, idx, val) {
   const dateStr = document.getElementById('datePicker').value;
   const n = val.trim();
   if (!n) { renderChildren(dateStr); return; }
-  state.dates[dateStr][childId].fixedClasses[idx].name = n;
-  state.dates[dateStr][childId].fixedClasses[idx].manualTouched = true;
+  const cls = state.dates[dateStr][childId].fixedClasses[idx];
+  const oldName = cls && cls.name;
+  cls.name = n;
+  cls.manualTouched = true;
+  if (oldName && oldName !== n) markClassRemoved(state, dateStr, childId, oldName);
+  clearClassRemoved(state, dateStr, childId, n);
   const changed = syncCourseHomework(childId, dateStr);
   markDirty(childId, 'task');
   save();
@@ -4812,8 +4895,8 @@ function delFixedClass(childId, idx) {
   const dateStr = document.getElementById('datePicker').value;
   const removed = state.dates[dateStr][childId].fixedClasses[idx];
   state.dates[dateStr][childId].fixedClasses.splice(idx,1);
-  // 记录被删除的课程名：自动补课程逻辑不再补回（最后一次手动操作为准）
-  if (removed && removed.name) markTaskRemoved(state, dateStr, childId, removed.name);
+  // 记录手动删除的课程名，自动迁移逻辑不会再把它补回来
+  if (removed && removed.name) markClassRemoved(state, dateStr, childId, removed.name);
   syncCourseHomework(childId, dateStr);
   markDirty(childId, 'task');
   save(); renderChildren(dateStr);
@@ -6677,15 +6760,9 @@ async function autoPullFromCloud() {
 
   const localState = JSON.parse(localStorage.getItem('sanwa_tasks') || '{"dates":{}}');
 
-  // 合并策略：以"最后一次手动修改"为准（时间戳优先，详见 mergeSmart）
+  // 合并策略：云端更新过的日期优先
   const merged = mergeSmart(localState, cloudState);
-  const sameAsLocal = JSON.stringify(localState) === JSON.stringify(merged);
-  const sameAsCloud = JSON.stringify(merged) === JSON.stringify(cloudState);
-  // 本地已是最新结果但云端落后（本机有更新的手动修改）→ 直接回传云端，多端收敛到"最后一次手动修改版"
-  if (sameAsLocal && !sameAsCloud) {
-    try { uploadToGist(); } catch (_) {}
-  }
-  if (!sameAsLocal) {
+  if (JSON.stringify(localState) !== JSON.stringify(merged)) {
     // 云端可能是旧数据，合并后补齐固定任务/迁移（与 finalizeMerge 一致）
     mergeDefaultReminders(merged);
     ensureSummaryKeywords(merged);
@@ -6708,10 +6785,6 @@ async function autoPullFromCloud() {
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
-    // 合并结果与云端不一致（本地贡献了更晚的手动修改）→ 自动回传，避免下次刷新/其他设备再冲突
-    if (!sameAsCloud) {
-      try { uploadToGist(); } catch (_) {}
-    }
     if (anyInputFocused()) {
       // 正在输入（如手打评语），只合并数据不刷新页面，避免打断打字；
       // 数据已保存，输入框失焦或下次刷新时自然显示
@@ -6732,6 +6805,11 @@ function isDefaultTaskSet(childId, dateStr, tasks) {
   const names = tasks.filter(t => t && t.type !== 'rest').map(t => t.name).filter(n => !dyn.has(n));
   if (names.length !== def.length) return false;
   return names.every((n, i) => n === def[i]);
+}
+
+// 判断任务列表里是否有任一任务被用户手动改动过（manualTouched）
+function hasManualTouched(tasks) {
+  return Array.isArray(tasks) && tasks.some(t => t && t.manualTouched);
 }
 
 // 为历史数据补齐"手动编辑次数"：任务不是默认模板、或复盘有内容 → 记为 1 次手动编辑
@@ -6786,37 +6864,35 @@ function mergeSmart(local, cloud) {
       const cVer  = +cc.taskVer || 0;
       const lRV   = +lc.reviewVer || 0;
       const cRV   = +cc.reviewVer || 0;
-      // 任务取舍（铁律：以"最后一次手动修改"为准 —— 用时间戳判定"最后"，编辑次数仅作兜底）
-      // 1) 默认模板版本永远不赢手动改过的版本
-      // 2) 两边都手动改过：保存时间戳新的一方赢（时间 = 最后一次修改）
-      // 3) 只有一边有时间戳：有时间戳的一方赢
-      // 4) 都缺时间戳：按手动编辑次数，再平手取本地
+      // 任务取舍：手动编辑次数多的一方优先（"最后一次手动改动为主"）；
+      // 次数相同再按"是否默认模板"，最后才按保存时间
       const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
       const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
       let takeLocal;
-      if (lPristine !== cPristine) takeLocal = cPristine;           // 手动版赢默认模板
-      else if (lTask && cTask && lTask !== cTask) takeLocal = lTask > cTask; // 最后修改者赢
-      else if ((lTask === 0) !== (cTask === 0)) takeLocal = lTask > 0;       // 有时间戳者赢
-      else if (lVer !== cVer) takeLocal = lVer > cVer;              // 次数兜底
-      else takeLocal = true;                                        // 完全一致取本地
-      // 任务与复盘分别取舍（避免互相覆盖）
+      if (lVer !== cVer) takeLocal = lVer > cVer;
+      else if (lPristine && !cPristine) takeLocal = false;
+      else if (!lPristine && cPristine) takeLocal = true;
+      else {
+        // 编辑次数相同：优先保留带"手动改动"痕迹的一方（manualTouched）
+        const lMan = hasManualTouched(lc.tasks);
+        const cMan = hasManualTouched(cc.tasks);
+        if (lMan !== cMan) takeLocal = lMan;
+        else takeLocal = lTask >= cTask;
+      }
+      // 任务取较新（或非默认版本），复盘取较新（分别合并，避免互相覆盖）
       const mergedChild = {
         ...cc,
         tasks: takeLocal ? lc.tasks : cc.tasks,
-        taskSavedAt: (takeLocal ? lTask : cTask) || Math.max(lTask, cTask) || null,
+        taskSavedAt: Math.max(lTask, cTask) || lc.taskSavedAt || cc.taskSavedAt,
         taskVer: Math.max(lVer, cVer),
         fixedClasses: lc.fixedClasses || cc.fixedClasses,
         arrival: lc.arrival || cc.arrival,
         sleep: lc.sleep || cc.sleep
       };
-      // 复盘取舍：同理，以 reviewSavedAt（最后修改时间）为主，次数兜底
-      let takeLocalRev;
-      if (lRev && cRev && lRev !== cRev) takeLocalRev = lRev > cRev;
-      else if ((lRev === 0) !== (cRev === 0)) takeLocalRev = lRev > 0;
-      else if (lRV !== cRV) takeLocalRev = lRV > cRV;
-      else takeLocalRev = true;
-      mergedChild.review = takeLocalRev ? (lc.review || cc.review) : (cc.review || lc.review);
-      mergedChild.reviewSavedAt = (takeLocalRev ? lRev : cRev) || Math.max(lRev, cRev) || null;
+      mergedChild.review = (lRV !== cRV)
+        ? (lRV > cRV ? (lc.review || cc.review) : (cc.review || lc.review))
+        : (lRev >= cRev ? (lc.review || cc.review) : (cc.review || lc.review));
+      mergedChild.reviewSavedAt = Math.max(lRev, cRev) || lc.reviewSavedAt || cc.reviewSavedAt;
       mergedChild.reviewVer = Math.max(lRV, cRV);
       mergedDate[cid] = mergedChild;
     });
@@ -6853,6 +6929,23 @@ function mergeSmart(local, cloud) {
     });
   });
   if (Object.keys(rm).length > 0) result.manualRemovedTasks = rm;
+  // "手动删除的固定课程"记录同样取并集，避免另一端自动迁移把课程补回来
+  const rmc = {};
+  [local.manualRemovedClasses || {}, cloud.manualRemovedClasses || {}].forEach(src => {
+    Object.keys(src).forEach(ds => {
+      const kids = src[ds] || {};
+      Object.keys(kids).forEach(cid => {
+        const names = kids[cid] || {};
+        Object.keys(names).forEach(n => {
+          if (!names[n]) return;
+          if (!rmc[ds]) rmc[ds] = {};
+          if (!rmc[ds][cid]) rmc[ds][cid] = {};
+          rmc[ds][cid][n] = true;
+        });
+      });
+    });
+  });
+  if (Object.keys(rmc).length > 0) result.manualRemovedClasses = rmc;
   return result;
 }
 
@@ -6871,8 +6964,8 @@ uploadToGist = async function() {
   <div class="view-switch" id="viewSwitch">
     <button class="view-btn active" data-view="task" onclick="setView('task')">任务</button>
     <button class="view-btn" data-view="review" onclick="setView('review')">复盘</button>
-    <button class="view-btn" data-view="month" onclick="setView('month')">月报</button>
     <button class="view-btn" data-view="all" onclick="setView('all')">全部</button>
+    <button class="view-btn" data-view="week" onclick="setView('week')">📊 周报</button>
   </div>
   <div class="footer-row footer-row-export">
     <button class="btn-hero" onclick="exportTasksText()">📄 导出文字任务</button>
