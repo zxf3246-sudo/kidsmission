@@ -200,6 +200,13 @@
     word-break: break-word;
   }
   .month-note { font-size: 12px; color: #94a3b8; margin: -4px 0 14px; }
+  .month-kid-sum {
+    background: linear-gradient(180deg, #fdfdff, #f8fafc);
+    border: 1px solid #eef2f7; border-left: 4px solid var(--kid-color, #6366f1);
+    border-radius: 12px; padding: 12px 15px; margin-bottom: 14px;
+    font-size: 13px; line-height: 1.95; color: #334155; text-align: justify;
+  }
+  .month-kid-sum b { color: var(--kid-color, #6366f1); font-weight: 900; }
   @media (max-width: 960px) {
     .month-stats-grid { grid-template-columns: 1fr; }
     .month-head { flex-direction: column; align-items: flex-start; }
@@ -4108,28 +4115,6 @@ function classifyOtherFacets(s) {
   return OTHER_FACETS.filter(f => countTerms(s, f.terms) > 0).map(f => f.key);
 }
 
-// 句子的信息权重：含表现关键词、长度适中、带数字事实的句子优先
-function sentenceWeight(s) {
-  let w = 0;
-  NEGATIVE_KEYWORDS.concat(POSITIVE_KEYWORDS).forEach(k => { if (s.includes(k)) w += 2; });
-  if (/\d/.test(s)) w += 1;
-  const L = cnLen(s);
-  if (L >= 18 && L <= 85) w += 1;
-  else if (L > 110) w -= 1;
-  return w;
-}
-
-// 引用时截断过长句子，尽量在标点处断开
-function trimQuote(s) {
-  const t = String(s || '').replace(/\s+/g, ' ').trim();
-  if (cnLen(t) <= 62) return t;
-  const cand = ['，', '、', '；', '。', '：'];
-  for (let i = 55; i < Math.min(t.length, 70); i++) {
-    if (cand.includes(t[i])) return t.slice(0, i + 1) + '…';
-  }
-  return t.slice(0, 60) + '…';
-}
-
 function monthStartOf(dateStr) { return String(dateStr).slice(0, 7) + '-01'; }
 
 function daysOfMonth(monthStart) {
@@ -4212,181 +4197,374 @@ function subjectTaskStats(childId, days, sub) {
   return { count, doneCount, plan, doneMin, topNames, rate: count ? Math.round(doneCount / count * 100) : 0 };
 }
 
-// 组装 250~300 字的段落：先放必选句，再按优先级塞可选引用/补充句，最后收尾建议
-function composeParagraph(core, fillers, advice, min, max) {
-  const mandatory = core.filter(x => x && x.text && !x.optional).map(x => x.text);
-  const optional = core.filter(x => x && x.text && x.optional).map(x => x.text);
-  const adv = (advice && advice.length) ? advice[0].text : '';
-  const fillerTexts = fillers.map(x => (typeof x === 'string' ? x : (x && x.text) || '')).filter(Boolean);
-  const out = mandatory.slice();
-  const total = () => cnLen(out.join('') + adv);
-  const addIfFits = (text) => {
-    if (!text) return false;
-    if (total() + cnLen(text) > max) return false;
-    out.push(text);
-    return true;
-  };
-  optional.forEach(t => addIfFits(t));
-  fillerTexts.forEach(t => { if (total() < min) addIfFits(t); });
-  // 细碎的补充句：把字数精确补到 250 以上（单句 20 字左右，避免一下超出 300）
-  for (const t of SHORT_FILLERS) {
-    if (total() >= min) break;
-    addIfFits(t);
-  }
-  if (adv) out.push(adv);
-  let text = out.join('');
-  if (cnLen(text) > max) text = text.slice(0, max);
-  return text;
-}
+// ====== 月报正文生成：只提炼结论，不复述原句、不播报次数 ======
 
-// 用于精确补足字数的短句（均为不涉及具体事实的中性表述）
-const SHORT_FILLERS = [
-  '整体看，相关反馈在整月里分布并不均匀。',
-  '其中既有阶段性的进步，也有反复出现的老问题。',
-  '这些内容可以作为下个月安排练习时的参考。',
-  '后续仍需要结合具体作业和测验结果来验证。',
-  '记录越具体，月底回看时越容易判断问题所在。',
-  '把每天的小变化记下来，比一次性的评价更有价值。'
+// 学习问题归到五类根因上（用于判断"到底卡在哪"）
+const ISSUE_CATS = [
+  { key: 'accuracy', name: '准确率',
+    terms: ['准确率低', '准确率', '反复出错', '粗心', '算错', '做错', '写错', '拼错', '漏写', '漏字', '看错', '错题', '马虎'],
+    desc: '{S}上的失误多是低级错误，会做的题因为看错、算错、写错而丢分。',
+    judge: '这类问题最容易被"粗心"两个字带过去，本质是检查的习惯没建立起来，做完就交，不回头核。' },
+  { key: 'focus', name: '专注度',
+    terms: ['分心', '心不在焉', '不专注', '注意力', '坐不住', '走神', '开小差', '东摸西摸', '磨蹭', '拖拉', '拖拖拉拉', '慢吞吞'],
+    desc: '{S}最容易在开头和中间断掉，坐不住、要人提醒才继续，一被打断就要重新进入状态。',
+    judge: '表面看是速度慢，实质是能集中的时间太短，一离开大人的视线就容易停下来。' },
+  { key: 'understanding', name: '理解深度',
+    terms: ['不理解', '没懂', '不懂', '不会', '思路', '概念', '想不明白', '搞不清', '背答案', '套公式', '换个问法'],
+    desc: '{S}的卡点在理解上，题目稍微换个问法就露馅，说明记住的是结论而不是方法。',
+    judge: '这种情况加量解决不了，题做得越多，错误的印象反而越牢。' },
+  { key: 'quantity', name: '完成度',
+    terms: ['没完成', '未完成', '做不完', '没做完', '太多', '来不及', '时间不够', '拖到', '补做', '欠着'],
+    desc: '{S}安排的量和可用时间对不上，当天做不完就往后拖，越拖越难补。',
+    judge: '不是不愿意做，而是任务被压在最疲劳的时段，或者一开始就没有拆成能做完的小块。' },
+  { key: 'attitude', name: '学习态度',
+    terms: ['消极', '不愿意', '抗拒', '发脾气', '哭', '敷衍', '找事儿', '吵架', '顶嘴', '不在状态'],
+    desc: '{S}一开口就先有情绪，抵触的往往不是内容本身，而是"又要做"这件事。',
+    judge: '情绪先于任务出现，说明这件事在他心里的负担，已经超过了他当下能承受的程度。' }
 ];
 
-// 各科目的具体建议（避免五个板块都用同一套话）
-const SUBJECT_ACTIONS = {
-  chinese: '先从字词积累和朗读入手，每天固定15分钟做听写或默写，错字单独记在本子上反复过；写作先列提纲再动笔，减少边想边写造成的混乱。',
-  math: '先回到计算准确率，每天用10分钟做口算热身，再挑一两道错题讲清思路，确认是真懂还是背答案，避免同类题反复出错。',
-  english: '把单词、听力和语法拆成固定小块，每天各花10到15分钟，做完立刻核对答案，重点看错在哪里，而不是只追求完成数量。',
-  science: '先梳理课本里的核心概念，用口头复述或画图的方式确认理解，再配合少量题目检验，避免只靠刷题记住结论。'
+// "其他"四类的典型表现与判断
+const OTHER_DESC = {
+  habit: '具体多是些琐碎小事：东西用完不放回、到点不进入状态、第二天要用的东西临出门才想起。',
+  mood: '状态好的日子推进得很顺，状态一掉下来，连平时熟练的事也要拖上很久。',
+  sport: '真正动起来的时间不多，但凡是安排了户外或运动的那几天，情绪和配合度通常更好。',
+  moral: '与人相处时分寸总体在线，冲突多发生在情绪最差的时候，不是一贯的态度问题。'
+};
+const OTHER_JUDGE = {
+  habit: '生活习惯很少是"不会"，而是没有被固定成流程，每天都要靠提醒推着走。',
+  mood: '情绪是这段时间最大的变量，它先影响状态，再影响效率，最后才落到结果上。',
+  sport: '运动量不足会直接反映在状态和情绪上，这一块看着最不重要，其实影响面最广。',
+  moral: '品行本身没有大问题，要练的是情绪上来时怎么把话说住、把手收住。'
 };
 
-// 生成某个孩子某科目/其他方面的月度反馈总结
-function buildSubjectReport(childId, days, sub) {
-  const isOther = sub.key === 'other';
-  const itemList = [];        // { ds, text, weight, facets }
-  let reviewDays = 0;
-  let allTaskCount = 0;
-  const facetCount = { habit: 0, mood: 0, sport: 0, moral: 0 };
+// 各科目下个月的具体做法
+const SUBJECT_ACTIONS = {
+  chinese: '下个月重点放在字词和书写的稳定度：每天固定十五分钟听写或默写，错字单独记下来反复过，写作文先列提纲再动笔。',
+  math: '下个月先把计算准确率提上来：每天十分钟口算热身，错的题当场讲一遍思路，确认是真懂还是背着答案做的。',
+  english: '下个月把单词、听力和语法拆成固定小块，每天各十到十五分钟，做完马上核对，重点看错在哪里，而不是赶完成量。',
+  science: '下个月先梳理课本里的核心概念，用口头复述或画图确认真的理解，再配少量题目检验，别只靠刷题记结论。'
+};
 
+// 该科长期没有记录时的风险提醒
+const SUBJECT_IDLE = {
+  chinese: '华文这种科目差距平时不明显，一到默写和作文就集中暴露，临时补很难追上。',
+  math: '数学的基础一旦有漏洞，后面每一步都带着错，越往后越难单独补回来。',
+  english: '英语的单词和听力最怕断，停上一两周，语感就会明显退回去。',
+  science: '科学靠考前突击很难补，平时有没有观察、有没有追问"为什么"，差别会在期末集中显现。'
+};
+
+// 长期没记录时，该科值得盯的两个观察点
+const SUBJECT_WATCH = {
+  chinese: '可以留意的有两点：默写错的是同几个字，还是每次都不一样；作文是没东西写，还是有话写不出来。',
+  math: '可以留意的有两点：错的是计算还是应用题；错题当场讲得通，隔天再做还会不会错。',
+  english: '可以留意的有两点：单词是记不住还是记不准；听力是听不清，还是听懂了反应不过来。',
+  science: '可以留意的有两点：是概念记不住，还是记住了却联系不到题目上。'
+};
+
+// 五类问题各自往下会带来什么后果（每类三种说法）
+const ISSUE_LINK = {
+  accuracy: [
+    '这类错误一多，分数和真实水平就对不上，孩子自己也容易认定"我就是粗心"，反而不肯认真检查。',
+    '丢分点都落在会做的地方，说明练的量够了，缺的是做完之后回头核一遍这一步。',
+    '同样的题，一次做对和检查一遍再做对，差的不是智力，是习惯。'
+  ],
+  focus: [
+    '专注一断，后面的时间基本是无效的，看起来坐了两小时，真正有效的不足一半。',
+    '这类问题靠延长学习时间解决不了，只会把同样的低效拖得更久。',
+    '被打断之后重新进入状态要花很久，一天断几次，整晚的节奏就散了。'
+  ],
+  understanding: [
+    '这说明记住的是结论而不是方法，题目稍作变化就接不上，往后只会越学越吃力。',
+    '这一层没打通，加练只是在重复错误，越练越没信心。',
+    '能背出答案不等于会做，真正的检验是让他把过程讲一遍，讲得通才算过。'
+  ],
+  quantity: [
+    '任务一旦滚起来，最先被放弃的往往是最难的那一科，差距就拉在那里。',
+    '安排超出可用时间，孩子感受到的是永远做不完，做得再好也没有成就感。',
+    '量的问题看着像时间管理，实质是没有把大任务拆成能当场做完的小块。'
+  ],
+  attitude: [
+    '情绪一上来，讲道理基本无效，先处理情绪再谈任务，顺序反了就变成对抗。',
+    '抵触背后往往是挫败感，催得越紧，越容易把学习和不愉快绑在一起。',
+    '这类对抗多半出现在开始的前五分钟，真正难的是一开始怎么进场。'
+  ]
+};
+
+// 兜底用的中性分析句（内容够时会自动用不上；按 seed 轮换起点，避免每段都一样）
+const GENERAL_PAD = [
+  '这个判断下个月同样适用，可以拿来对照。',
+  '把观察点固定下来，月底回看时才不至于只剩印象。',
+  '连续一两个月的记录，比一次考试的分数更能说明问题。',
+  '眼下能做的不是加量，而是把同一个要求坚持到成为习惯。',
+  '问题在低年级还能靠小聪明掩盖，往后就掩盖不住了。',
+  '评价这一科，过程比结果更值得记，结果只是过程的一次抽样。'
+];
+
+// 反复出现的具体描述（不报次数，只说明它已成模式）
+function recurringTermsOf(items) {
+  const out = [];
+  NEGATIVE_KEYWORDS.forEach(k => {
+    if (out.length < 2 && items.some(it => it.text.indexOf(k) !== -1)) out.push(k);
+  });
+  return out;
+}
+
+function repeatLine(rec, seed, isOther) {
+  const quoted = '"' + rec.join('""') + '"';
+  if (isOther) {
+    return pickBySeed([
+      `复盘里反复出现的是${quoted}这类描述，说明它已经成了固定模式，不是偶尔一天的事。`,
+      `类似${quoted}这样的描述反复出现，已经不是偶尔一天的事。`,
+      `${quoted}这类说法被反复写进复盘，说明问题已经稳定存在，不是一天两天。`
+    ], seed);
+  }
+  return pickBySeed([
+    `复盘里反复出现的是${quoted}这类描述，说明它已经成了固定模式。`,
+    `类似${quoted}这样的描述反复出现，不是偶然一次。`,
+    `${quoted}这类说法被反复写进复盘，说明问题已经稳定存在。`
+  ], seed);
+}
+
+function matchesAny(text, terms) {
+  const t = String(text || '').toLowerCase();
+  return terms.some(w => t.indexOf(String(w).toLowerCase()) !== -1);
+}
+
+function seedOf(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = (h * 33 + str.charCodeAt(i)) % 999983;
+  return h;
+}
+function pickBySeed(pool, seed) { return pool[seed % pool.length]; }
+
+// 收集某科目（或"其他"）在当月复盘里出现的句子
+function collectSubjectItems(childId, days, sub) {
+  const isOther = sub.key === 'other';
+  const items = [];
+  const facetHits = { habit: 0, mood: 0, sport: 0, moral: 0 };
   days.forEach(ds => {
     const cd = state.dates[ds] && state.dates[ds][childId];
     if (!cd) return;
-    allTaskCount += (cd.tasks || []).length;
     const rev = cd.review || {};
-    const summary = (rev.summary || '').trim();
-    const otherTxt = (rev.other || '').trim();
-    if (summary || otherTxt || (rev.keywords || []).length) reviewDays++;
-    const sents = splitSentences(summary).concat(splitSentences(otherTxt));
-    sents.forEach(s => {
+    splitSentences(rev.summary).concat(splitSentences(rev.other)).forEach(s => {
       if (isOther) {
-        const facets = classifyOtherFacets(s);
-        if (!facets.length) return;
-        facets.forEach(f => { facetCount[f] = (facetCount[f] || 0) + 1; });
-        if (!itemList.some(x => x.text === s)) itemList.push({ ds, text: s, facets });
-      } else {
-        if (classifySubjectSentence(s) !== sub.key) return;
-        if (!itemList.some(x => x.text === s)) itemList.push({ ds, text: s });
+        const fs = classifyOtherFacets(s);
+        if (!fs.length) return;
+        fs.forEach(f => { facetHits[f] = (facetHits[f] || 0) + 1; });
+      } else if (classifySubjectSentence(s) !== sub.key) {
+        return;
       }
+      if (!items.some(x => x.text === s)) items.push({ ds, text: s });
     });
   });
+  return { items, facetHits, isOther };
+}
 
-  itemList.forEach(it => { it.weight = sentenceWeight(it.text); });
-  itemList.sort((a, b) => b.weight - a.weight || (a.ds < b.ds ? 1 : -1));
-  const itemDays = new Set(itemList.map(x => x.ds)).size;
+function issueScoresOf(items) {
+  const sc = {};
+  ISSUE_CATS.forEach(c => { sc[c.key] = 0; });
+  items.forEach(it => ISSUE_CATS.forEach(c => { if (matchesAny(it.text, c.terms)) sc[c.key]++; }));
+  return sc;
+}
 
-  // 代表性原句：最多 4 句，同一天不超过 2 句
-  const quotes = [];
-  const perDay = {};
-  const seen = new Set();
-  itemList.forEach(it => {
-    if (quotes.length >= 4) return;
-    if ((perDay[it.ds] || 0) >= 2) return;
-    const sig = it.text.slice(0, 12);
-    if (seen.has(sig)) return;
-    seen.add(sig);
-    perDay[it.ds] = (perDay[it.ds] || 0) + 1;
-    quotes.push(trimQuote(it.text));
+function positiveWordsOf(items) {
+  const out = [];
+  POSITIVE_KEYWORDS.forEach(w => { if (items.some(it => it.text.indexOf(w) !== -1)) out.push(w); });
+  return out.slice(0, 2);
+}
+
+// 按优先级拼段：先放核心结论句，再用分析句补到字数下限，最后接建议句
+function assembleReport(segs, min, max, tail, seed) {
+  const tailText = tail || '';
+  const tailLen = cnLen(tailText);
+  const budget = max - tailLen;
+  const out = [];
+  let len = 0;
+  segs.forEach(s => {
+    if (!s) return;
+    const L = cnLen(s);
+    if (len + L > budget) return;
+    out.push(s);
+    len += L;
   });
+  const off = (seed || 0) % GENERAL_PAD.length;
+  for (let n = 0; n < GENERAL_PAD.length && len < min - tailLen; n++) {
+    const t = GENERAL_PAD[(off + n) % GENERAL_PAD.length];
+    const L = cnLen(t);
+    if (len + L > budget) continue;
+    out.push(t);
+    len += L;
+  }
+  return out.join('') + tailText;
+}
 
-  // 关键词统计：只用确实有该科目反馈的那些天，避免把其他方面的问题套进这一科
-  const kwCount = {};
-  const kwDays = itemList.length ? Array.from(new Set(itemList.map(x => x.ds))) : [];
-  kwDays.forEach(ds => {
-    const cd = state.dates[ds] && state.dates[ds][childId];
-    const rev = (cd && cd.review) || {};
-    (rev.keywords || []).forEach(k => { kwCount[k] = (kwCount[k] || 0) + 1; });
+// 生成某个孩子某科目/其他方面的月度总结（只给结论，不引用原句、不报次数）
+function buildSubjectReport(childId, days, sub) {
+  const seed = seedOf(String(childId) + sub.key + (monthAnchor || ''));
+  const { items, facetHits } = collectSubjectItems(childId, days, sub);
+
+  // ===== 其他（生活习惯 / 精神状态 / 体育活动 / 道德品质） =====
+  if (sub.key === 'other') {
+    const facets = OTHER_FACETS.filter(f => facetHits[f.key])
+      .sort((a, b) => facetHits[b.key] - facetHits[a.key]);
+    if (!facets.length) {
+      const segs = [
+        pickBySeed([
+          '学习之外的表现，这个月基本没有进入复盘的视野。',
+          '除了学习，这个月几乎没有写下关于生活习惯和状态的内容。',
+          '关于日常状态的记录，这个月几乎是空白的。'
+        ], seed),
+        '这多半不是没有问题，而是记录时习惯只盯着作业和成绩。',
+        '生活习惯、情绪、运动这些事看着琐碎，却常常是学习状态起伏的真正原因：睡不好、动得少，坐下来自然坐不住。',
+        '同样一份任务，状态好的时候半小时做完，状态差的时候拖两小时还在原地。',
+        '只记学习、不记状态，等于把最上游的原因丢掉了。'
+      ];
+      return assembleReport(segs, 250, 300, '下个月试着每天补一两句，写清发生了什么、当时怎么处理，比只记分数有用得多。', seed);
+    }
+    const top = facets[0];
+    const second = facets[1];
+    const rec = recurringTermsOf(items);
+    const segs = [
+      pickBySeed([
+        `${top.name}是这一个月最突出的一块。`,
+        `这一个月最需要说的是${top.name}。`,
+        `学习之外，${top.name}占了最多的篇幅。`
+      ], seed),
+      OTHER_DESC[top.key],
+      OTHER_JUDGE[top.key],
+      second ? `${second.name}也一直跟着出现，两者常互为因果：状态不好时生活习惯先乱，生活习惯一乱，状态更难稳住。` : '',
+      pickBySeed([
+        '这些不会因为提醒一次就改变，通常要在同一个点上连续盯两三周才看得出松动。',
+        '真正难的不是发现，而是每天都在同一件事上保持一致的要求。',
+        '这一类问题大多不是能力问题，是流程还没有固定下来。'
+      ], seed),
+      rec.length ? repeatLine(rec, seed, true) : ''
+    ];
+    const otherTail = {
+      habit: '下个月把起床、吃饭、作业、睡觉四个时间点固定下来，让流程替大人去提醒，比每天催更有效。',
+      mood: '下个月先接住情绪再谈任务，状态差的当天减量而不是加码，先把对抗的循环打断。',
+      sport: '下个月把运动当成固定安排而不是奖励，每周留出两三次，先看状态会不会跟着好转。',
+      moral: '下个月不必天天讲道理，抓住具体那一次说透，讲清对方的感受和下次的做法就够了。'
+    };
+    return assembleReport(segs, 250, 300, otherTail[top.key] || '下个月先把标准说清楚、把时间固定下来，比事后批评有效。', seed);
+  }
+
+  // ===== 四大科目 =====
+  const ts = subjectTaskStats(childId, days, sub);
+  const topNames = (ts.topNames || []).slice(0, 2);
+  const action = SUBJECT_ACTIONS[sub.key] || '下个月把练习拆小，固定时段完成，并在当天写下结果。';
+  const sc = issueScoresOf(items);
+  const ranked = ISSUE_CATS.slice().sort((a, b) => sc[b.key] - sc[a.key]);
+  const top = ranked[0];
+  const second = ranked[1];
+  const posWords = positiveWordsOf(items);
+
+  // 这一科几乎没被记录
+  if (!items.length) {
+    const segs = [
+      pickBySeed([
+        `${sub.name}这个月几乎没有进入复盘的重点。`,
+        `${sub.name}是这一个月最少被提起的一科。`,
+        `复盘里关于${sub.name}的记录很少，几乎是空白。`
+      ], seed),
+      '这通常说明它暂时没成为负担，但不等于掌握得扎实。',
+      SUBJECT_IDLE[sub.key] || '',
+      topNames.length
+        ? `任务上，${topNames.join('和')}一直在做，只是做完的结果没有写下来。`
+        : `任务清单里也没有单独给${sub.name}留固定安排，多是混在别的学习里一带而过。`,
+      SUBJECT_WATCH[sub.key] || '',
+      '现在手上只有任务完成记录，成绩和具体问题都还是一片模糊。',
+      '没有记录，就判断不出问题是在理解、熟练度还是状态上。'
+    ];
+    return assembleReport(segs, 250, 300, '下个月不必加量，只要每周留一次完整练习并写下结果，一两个月就能看出真实水平。', seed);
+  }
+
+  // 有集中问题
+  if (sc[top.key] >= 2) {
+    const rec = recurringTermsOf(items);
+    const segs = [
+      pickBySeed([
+        `这个月的${sub.name}绕不开一个问题：${top.name}。`,
+        `${sub.name}这个月的问题很集中，几乎都落在${top.name}上。`,
+        `${sub.name}这一科的症结很明确，就是${top.name}。`
+      ], seed),
+      top.desc.replace('{S}', sub.name),
+      pickBySeed(ISSUE_LINK[top.key], seed),
+      top.judge,
+      topNames.length ? `出问题的环节也集中，基本都在${topNames.join('和')}上，不是偶发。` : '',
+      posWords.length ? `也有做得顺的时候，${posWords.join('、')}这类反馈出现过，说明能力不缺，缺的是稳定复现。` : '',
+      rec.length ? repeatLine(rec, seed, false) : '',
+      second && sc[second.key] > 0 ? `${second.name}也零星出现，还没成为主要矛盾，但已经在占时间。` : ''
+    ];
+    return assembleReport(segs, 250, 300, action, seed);
+  }
+
+  // 有记录，但没有集中问题
+  const flat = sc[top.key] > 0;
+  const rec2 = recurringTermsOf(items);
+  const segs = [
+    pickBySeed([
+      `${sub.name}这个月整体平稳，没有集中爆发的短板。`,
+      `${sub.name}这一科这个月没有出大问题，属于按部就班的状态。`,
+      `${sub.name}是目前几科里最不需要操心的，但也谈不上出色。`
+    ], seed),
+    flat ? `${top.name}是唯一被反复点到的地方，不起眼，但一直存在。`
+         : '复盘里多是"完成""还行"这类描述，没有留下明显的问题信号。',
+    flat ? top.judge
+         : '平稳不等于扎实，成绩上不去，往往就藏在这种"看起来都会"的印象里。',
+    pickBySeed([
+      '目前的短板都不足以拖垮整体，真正决定上限的是能不能把已经会的东西稳定做对。',
+      '这一科现在缺的不是投入，而是把已有的水平稳定住。'
+    ], seed),
+    topNames.length ? `任务主要落在${topNames.join('和')}上，这部分按约定做完，这一科就不会出问题。` : '',
+    posWords.length ? `${posWords.join('、')}这类反馈出现过，是下个月值得保持的做法。` : '',
+    rec2.length ? `需要留意的是"${rec2.join('""')}"这类描述，量不大，但说明问题还在原地。`
+                : '只是这类反馈太零星，很难判断是偶发，还是已经变成了习惯。',
+    flat ? '' : '真正要防的是突然掉队：平时看不出差距，一到期中期末才集中暴露。'
+  ];
+  return assembleReport(segs, 250, 300, action, seed);
+}
+
+// 每个孩子的全月总评：跨科目提炼主线
+function buildKidSummary(childId, days, stats) {
+  const per = MONTH_SUBJECTS.map(sub => {
+    const { items } = collectSubjectItems(childId, days, sub);
+    const sc = issueScoresOf(items);
+    let total = 0;
+    Object.keys(sc).forEach(k => { total += sc[k]; });
+    return { sub, items, sc, total };
   });
-  const kws = Object.keys(kwCount).sort((a, b) => kwCount[b] - kwCount[a]).slice(0, 5);
-  const negTop = kws.filter(k => NEGATIVE_KEYWORDS.includes(k));
-  const posTop = kws.filter(k => POSITIVE_KEYWORDS.includes(k));
+  const sumSc = {};
+  ISSUE_CATS.forEach(c => { sumSc[c.key] = 0; });
+  per.forEach(p => ISSUE_CATS.forEach(c => { sumSc[c.key] += p.sc[c.key]; }));
+  const thread = ISSUE_CATS.slice().sort((a, b) => sumSc[b.key] - sumSc[a.key])[0];
+  const threadTotal = sumSc[thread.key];
 
-  const ts = isOther ? null : subjectTaskStats(childId, days, sub);
-  const core = [];
-
-  if (!isOther) {
-    if (itemList.length) {
-      core.push({ text: `${sub.name}方面，本月有${itemDays}天的复盘留下了直接反馈（本月有内容的复盘共${reviewDays}天）。` });
-    } else {
-      core.push({ text: `${sub.name}方面，本月复盘中没有留下可直接引用的具体反馈，本月有内容的复盘共${reviewDays}天。` });
-    }
-    if (ts && ts.count) {
-      core.push({ text: `任务清单里与${sub.name}相关的任务累计${ts.count}项，完成${ts.doneCount}项，完成率${ts.rate}%，计划学习时间约${ts.plan}分钟。`, optional: true });
-    } else {
-      core.push({ text: `任务清单里没有单独标注${sub.name}的条目（本月任务共${allTaskCount}项），相关练习多混在整体学习安排中。`, optional: true });
-    }
-  } else {
-    const parts = OTHER_FACETS.filter(f => facetCount[f.key]).map(f => `${f.name}${facetCount[f.key]}次`);
-    if (itemList.length) {
-      core.push({ text: `其他方面，本月复盘共有${itemList.length}条学习之外的反馈${parts.length ? '，其中' + parts.join('、') : ''}。` });
-    } else {
-      core.push({ text: `其他方面，本月复盘里没有集中出现生活习惯、精神状态、体育活动和道德品质的内容，本月有内容的复盘共${reviewDays}天。` });
-    }
+  if (!threadTotal) {
+    return stats.rate >= 80
+      ? '这个月的复盘以任务完成情况为主，几科都没有出现集中的问题描述，整体推进得比较顺，属于少见的一个平稳月。'
+      : '这个月的复盘以任务完成情况为主，几科都没有出现集中的问题描述，但完成度并不算高，差距多半藏在过程和状态里，只是没被写下来。';
   }
 
-  quotes.forEach((q, i) => {
-    const lead = i === 0 ? (isOther ? '原文中写到' : '复盘里提到') : (i === 1 ? '另外' : '还有');
-    const tail = /[。！？]$/.test(q) ? '' : '。';
-    core.push({ text: `${lead}：“${q}”${tail}`, optional: true });
-  });
+  const sorted = per.slice().sort((a, b) => b.total - a.total);
+  const weakest = sorted[0];
+  const strongest = sorted[sorted.length - 1];
+  const spreadSubs = per.filter(p => p.sc[thread.key] > 0).map(p => p.sub.name);
+  const cause = thread.key === 'understanding'
+    ? '更像是基础没真正打通，换个问法就露馅，而不是态度或时间的问题'
+    : '更像是习惯和节奏的问题，而不是某个知识点没学会';
 
-  if (kws.length) {
-    let tone;
-    if (negTop.length > posTop.length) tone = `需要重点关注的是${negTop.slice(0, 3).join('、')}`;
-    else if (posTop.length) tone = `正向反馈集中在${posTop.slice(0, 3).join('、')}`;
-    else tone = '正负反馈并存';
-    core.push({ text: `本月围绕${sub.name}反复出现的关键词是${kws.slice(0, 4).join('、')}，${tone}。`, optional: true });
-  }
-
-  const advice = [];
-  if (!isOther) {
-    const action = SUBJECT_ACTIONS[sub.key] || '把练习内容拆小，固定时段完成，并在当天复盘里写清结果。';
-    const pre = negTop.length
-      ? `建议下个月把${negTop.slice(0, 2).join('、')}作为重点，`
-      : '建议下个月保持现有节奏，';
-    advice.push({ text: pre + action });
-  } else {
-    const facets = OTHER_FACETS.filter(f => facetCount[f.key])
-      .sort((a, b) => facetCount[b.key] - facetCount[a.key])
-      .map(f => f.name);
-    if (facets.length) {
-      advice.push({ text: `建议下个月围绕${facets.slice(0, 2).join('、')}继续跟进，先固定吃饭、作业和睡觉的时间，再记录每天状态起伏的具体触发点，遇到问题当天就说清，而不是攒到一起批评。` });
-    } else {
-      advice.push({ text: `建议下个月继续记录学习之外的表现，尤其是运动、家务和与人相处时的具体事例，写清发生了什么、孩子怎么处理，让这部分反馈更有参照价值。` });
-    }
-  }
-
-  const fillers = [];
-  if (ts && ts.topNames && ts.topNames.length) {
-    fillers.push({ text: `从任务记录看，${ts.topNames.join('、')}是本月出现次数最多的${sub.name}任务，完成情况与复盘里的描述基本一致。` });
-  }
-  if (reviewDays && itemDays) {
-    fillers.push({ text: `本月共记录${reviewDays}天有效复盘，${sub.name}相关反馈覆盖其中${itemDays}天，占比约${Math.round(itemDays / reviewDays * 100)}%，属于阶段性、非每天出现的内容。` });
-  }
-  if (kws.length) {
-    fillers.push({ text: `这些关键词在整月里重复出现，说明相关问题不是偶发，而是需要持续盯住的行为习惯或学习环节。` });
-  }
-  fillers.push({ text: `这份总结由每日复盘原文自动归纳，只反映文字里明确写到的内容，具体情况仍需结合作业、试卷和老师的反馈一起判断。` });
-  fillers.push({ text: `如果觉得某一部分仍然单薄，可以在下个月的复盘里专门留一两句话，写清练了什么、卡在哪里、是否弄懂，坚持记录就能看出清楚的进步轨迹。` });
-  fillers.push({ text: `建议保持每天写复盘的节奏，把当天最突出的一件事写具体，比笼统地评价"表现不错"或"状态不好"更有参考价值。` });
-
-  return composeParagraph(core, fillers, advice, 250, 300);
+  let text = `这个月的主线是${thread.name}。`;
+  text += spreadSubs.length >= 2
+    ? `它在${spreadSubs.join('、')}上都能看到，说明${cause}。`
+    : `问题基本集中在${weakest.sub.name}，其他几科没有跟着一起掉，说明${cause}。`;
+  text += `${weakest.sub.name}是眼下最需要盯的一科`;
+  if (strongest.sub.name !== weakest.sub.name) text += `，${strongest.sub.name}相对能稳住`;
+  text += '。';
+  text += (positiveWordsOf(weakest.items).length || positiveWordsOf(strongest.items).length)
+    ? '好的时候能看出方法和能力都在，缺的是把同样的状态稳定复现出来。'
+    : '眼下看不出明显的优势科目，先把最弱的一科拉回正常水平，比同时补几科更现实。';
+  return text;
 }
 
 function renderMonthReport() {
@@ -4417,8 +4595,10 @@ function renderMonthReport() {
   }
 
   let stats = '';
+  const statsMap = {};
   CHILDREN.forEach(c => {
     const s = monthStatsFor(c.id, days);
+    statsMap[c.id] = s;
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
       .slice(0, 6)
@@ -4443,6 +4623,7 @@ function renderMonthReport() {
 
   let reports = '';
   CHILDREN.forEach(c => {
+    const summary = buildKidSummary(c.id, days, statsMap[c.id]);
     let blocks = '';
     MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207', desc: '生活习惯 / 精神状态 / 体育活动 / 道德品质' }]).forEach(sub => {
       const text = buildSubjectReport(c.id, days, sub);
@@ -4456,15 +4637,16 @@ function renderMonthReport() {
     });
     reports += `<div class="month-kid-block" style="--kid-color:${CHILD_COLORS[c.id].main}">
       <div class="month-kid-title">${c.emoji} ${c.name} · 本月复盘总结</div>
+      <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}"><b>本月总评：</b>${escapeHtml(summary)}</div>
       ${blocks}
     </div>`;
   });
 
   el.innerHTML = header + `
-    <div class="month-note">统计口径：${monthLabel}已过去的 ${days.length} 天；文字总结依据每日复盘原文自动归纳。</div>
+    <div class="month-note">统计口径：${monthLabel}已过去的 ${days.length} 天；文字部分由当月复盘原文提炼，只写结论，不复述原句、不做次数播报。</div>
     <div class="month-stats-grid">${stats}</div>
     <div class="month-card">
-      <div class="month-kid-title" style="--kid-color:#334155;border-bottom-color:#e2e8f0">📝 分科目反馈总结</div>
+      <div class="month-kid-title" style="--kid-color:#334155;border-bottom-color:#e2e8f0">📝 分项总结</div>
       ${reports}
     </div>`;
 }
