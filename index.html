@@ -60,36 +60,37 @@
     background-repeat: no-repeat;
   }
   header {
-    background: linear-gradient(135deg, rgba(49,46,129,.62) 0%, rgba(76,29,149,.55) 50%, rgba(131,24,67,.58) 100%),
-                url('share-bg-d.jpg') center/cover no-repeat;
-    color: #fff; padding: 26px 28px; border-radius: 20px; margin-bottom: 18px;
-    box-shadow: 0 12px 32px rgba(99, 102, 241, .28);
+    /* 100% 原色显示，不叠任何蒙版 */
+    background: url('share-bg-header.jpg') center 34% / cover no-repeat, #fdf2f8;
+    color: #4c1d95; padding: 26px 28px; border-radius: 20px; margin-bottom: 18px;
+    box-shadow: 0 12px 32px rgba(244, 114, 182, .22);
     position: relative; overflow: hidden;
   }
   header::before { content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%;
-    background: rgba(255,255,255,.08); top: -120px; right: -80px; }
+    background: rgba(255,255,255,.18); top: -120px; right: -80px; }
   header h1 { font-size: 26px; font-weight: 900; margin-bottom: 6px;
+    color: #4c1d95; text-shadow: 0 1px 0 rgba(255,255,255,.9), 0 0 12px rgba(255,255,255,.8);
     display: flex; align-items: center; gap: 10px; letter-spacing: .5px; position: relative; }
-  header h1 .logo { width: 38px; height: 38px; background: rgba(255,255,255,.2);
+  header h1 .logo { width: 38px; height: 38px; background: rgba(255,255,255,.75);
     border-radius: 10px; display: inline-flex; align-items: center;
     justify-content: center; font-size: 20px; backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,.25); }
-  header .sub { font-size: 13px; opacity: .92; position: relative; }
+    border: 1px solid rgba(255,255,255,.9); }
+  header .sub { font-size: 13px; color: #6b4a75; position: relative; }
   .date-bar {
     display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-    margin-top: 16px; background: rgba(255,255,255,.16);
+    margin-top: 16px; background: rgba(255,255,255,.68);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     padding: 12px 16px; border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.18); position: relative;
+    border: 1px solid rgba(255,255,255,.95); position: relative;
   }
   .date-bar input[type="date"] {
     padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.25);
     background: rgba(255,255,255,.95); font-size: 14px; font-weight: 500;
     color: var(--c-text); cursor: pointer; font-family: inherit;
   }
-  .weekday-pill { background: rgba(255,255,255,.22); padding: 6px 14px;
-    border-radius: 16px; font-size: 13px; font-weight: 500;
-    border: 1px solid rgba(255,255,255,.2); }
+  .weekday-pill { background: rgba(255,255,255,.9); padding: 6px 14px;
+    border-radius: 16px; font-size: 13px; font-weight: 700; color: #7c3aed;
+    border: 1px solid rgba(249,168,212,.7); }
   .btn-today {
     background: rgba(255,255,255,.25); color: #fff;
     border: 1px solid rgba(255,255,255,.35);
@@ -99,10 +100,10 @@
   }
   .btn-today:hover { background: rgba(255,255,255,.4); transform: translateY(-1px); }
   .live-clock {
-    background: rgba(0,0,0,.18); color: #fff;
+    background: rgba(124,58,237,.9); color: #fff;
     padding: 7px 14px; border-radius: 10px;
     font-size: 13px; font-weight: 700; font-family: 'Courier New', monospace;
-    border: 1px solid rgba(255,255,255,.15); letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,.5); letter-spacing: 1px;
   }
   .spacer { flex: 1; }
   .btn-hero {
