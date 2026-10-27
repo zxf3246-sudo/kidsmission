@@ -186,6 +186,14 @@
   }
   .month-kw span.neg { background: #fef2f2; color: #dc2626; }
   .month-kid-block { margin-bottom: 26px; }
+  /* 有专属背景图的孩子：整块用图铺底，内部卡片用近白底保证文字可读 */
+  .month-kid-block.has-bg {
+    background-image: var(--kid-bg); background-size: cover; background-position: center;
+    border-radius: 18px; padding: 16px 16px 4px; box-shadow: 0 6px 20px rgba(15,23,42,.08);
+  }
+  .month-kid-block.has-bg .month-subject,
+  .month-kid-block.has-bg .month-kid-sum { background: rgba(255,255,255,.92); border-color: rgba(255,255,255,.75); }
+  .month-kid-block.has-bg .month-kid-title { text-shadow: 0 1px 2px rgba(255,255,255,.95), 0 0 10px rgba(255,255,255,.85); }
   .month-kid-title {
     display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 900;
     color: var(--kid-color, #1e293b); margin-bottom: 12px;
@@ -4643,7 +4651,8 @@ function renderMonthReport() {
         <p>${escapeHtml(text)}</p>
       </div>`;
     });
-    reports += `<div class="month-kid-block" style="--kid-color:${CHILD_COLORS[c.id].main}">
+    const kidBg = CHILD_BG_SRC[c.id];
+    reports += `<div class="month-kid-block${kidBg ? ' has-bg' : ''}" style="--kid-color:${CHILD_COLORS[c.id].main};${kidBg ? `--kid-bg:url('${kidBg}');` : ''}">
       <div class="month-kid-title">${c.emoji} ${c.name} · 本月复盘总结</div>
       <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}"><b>本月总评：</b>${escapeHtml(summary)}</div>
       ${blocks}
