@@ -13175,13 +13175,7 @@
     },
     "2026-10-27": {
       "yilin": {
-        "fixedClasses": [
-          {
-            "name": "科学",
-            "time": "20:40-22:40",
-            "duration": 120
-          }
-        ],
+        "fixedClasses": [],
         "tasks": [
           {
             "id": "t179302352518462gb",
@@ -13253,8 +13247,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793081917814,
-        "taskVer": 8,
+        "taskSavedAt": 1793082297063,
+        "taskVer": 10,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13927,7 +13921,8 @@
     },
     "2026-10-27": {
       "yilin": {
-        "Missy笔记背诵和10MCQ": true
+        "Missy笔记背诵和10MCQ": true,
+        "科学": true
       },
       "yanxi": {
         "一页计算题": true,
