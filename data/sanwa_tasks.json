@@ -13380,22 +13380,6 @@
         ],
         "tasks": [
           {
-            "id": "t1793023525184h55e",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793023525184ut0j",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17930235251847m2x",
             "name": "数学计算练习",
             "duration": 20,
@@ -13482,8 +13466,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793100577384,
+        "taskVer": 3,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
@@ -14307,6 +14291,10 @@
         "WW1单词5个": true,
         "WW1单词5题": true,
         "学校英语": true
+      },
+      "qiannuo": {
+        "WWK单词3个": true,
+        "600字新字5个": true
       }
     }
   }
