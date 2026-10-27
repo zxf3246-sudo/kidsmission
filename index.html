@@ -196,6 +196,7 @@
   }
   .month-kw span.neg { background: #fef2f2; color: #dc2626; }
   .month-kid-block { margin-bottom: 26px; }
+  .month-kid-block .month-stat-card { margin-bottom: 12px; }
   /* 有专属背景图的孩子：整块用图铺底，内部卡片用近白底保证文字可读 */
   .month-kid-block.has-bg {
     background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--kid-bg);
@@ -4728,19 +4729,21 @@ function renderMonthReport() {
     return;
   }
 
-  let stats = '';
   const statsMap = {};
+  CHILDREN.forEach(c => { statsMap[c.id] = monthStatsFor(c.id, days); });
+
+  let reports = '';
   CHILDREN.forEach(c => {
-    const s = monthStatsFor(c.id, days);
-    statsMap[c.id] = s;
+    const s = statsMap[c.id];
+    const summary = buildKidSummary(c.id, days, s);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
       .slice(0, 6)
       .map(k => `<span class="${NEGATIVE_KEYWORDS.includes(k) ? 'neg' : ''}">${escapeHtml(k)}</span>`)
       .join('');
-    stats += `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
+    const statHtml = `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
       <div class="month-stat-head">
-        <div class="month-stat-name">${c.emoji} ${c.name}</div>
+        <div class="month-stat-name">数据概览</div>
         <div class="month-stat-rate">${s.rate}%</div>
       </div>
       <div class="month-progress"><i style="width:${s.rate}%"></i></div>
@@ -4753,11 +4756,6 @@ function renderMonthReport() {
       </div>
       <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
     </div>`;
-  });
-
-  let reports = '';
-  CHILDREN.forEach(c => {
-    const summary = buildKidSummary(c.id, days, statsMap[c.id]);
     let blocks = '';
     MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207', desc: '生活习惯 / 精神状态 / 体育活动 / 道德品质' }]).forEach(sub => {
       const text = buildSubjectReport(c.id, days, sub);
@@ -4771,7 +4769,8 @@ function renderMonthReport() {
     });
     const kidBg = CHILD_BG_SRC[c.id];
     reports += `<div class="month-kid-block${kidBg ? ' has-bg' : ''}" style="--kid-color:${CHILD_COLORS[c.id].main};${kidBg ? `--kid-bg:url('${kidBg}');` : ''}">
-      <div class="month-kid-title">${c.emoji} ${c.name} · 本月复盘总结</div>
+      <div class="month-kid-title">${c.emoji} ${c.name} · 本月总结</div>
+      ${statHtml}
       <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}"><b>本月总评：</b>${escapeHtml(summary)}</div>
       ${blocks}
     </div>`;
@@ -4779,11 +4778,7 @@ function renderMonthReport() {
 
   el.innerHTML = header + `
     <div class="month-note">统计口径：${monthLabel}已过去的 ${days.length} 天；文字部分由当月复盘原文提炼，只写结论，不复述原句、不做次数播报。</div>
-    <div class="month-stats-grid">${stats}</div>
-    <div class="month-card">
-      <div class="month-kid-title" style="--kid-color:#334155;border-bottom-color:#e2e8f0">📝 分项总结</div>
-      ${reports}
-    </div>`;
+    ${reports}`;
 }
 
 function renderSharedLearning() {
