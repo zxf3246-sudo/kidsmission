@@ -54,13 +54,14 @@
   body::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-color: var(--c-bg);
-    background-image: url('share-bg-b.jpg');
+    background-image: url('share-bg-d.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
   header {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    background: linear-gradient(135deg, rgba(49,46,129,.62) 0%, rgba(76,29,149,.55) 50%, rgba(131,24,67,.58) 100%),
+                url('share-bg-d.jpg') center/cover no-repeat;
     color: #fff; padding: 26px 28px; border-radius: 20px; margin-bottom: 18px;
     box-shadow: 0 12px 32px rgba(99, 102, 241, .28);
     position: relative; overflow: hidden;
