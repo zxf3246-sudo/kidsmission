@@ -13283,33 +13283,40 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17930235251848gwu",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17930235251844vjs",
             "name": "四五快读新字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t17930235251841g5m",
-            "name": "WW1单词5题",
+            "name": "学校英语作业",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793023626179ke7t",
@@ -13358,8 +13365,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793092914798,
-        "taskVer": 13,
+        "taskSavedAt": 1793100532231,
+        "taskVer": 21,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -14297,7 +14304,9 @@
       "yanxi": {
         "一页计算题": true,
         "英语语法": true,
-        "WW1单词5个": true
+        "WW1单词5个": true,
+        "WW1单词5题": true,
+        "学校英语": true
       }
     }
   }
