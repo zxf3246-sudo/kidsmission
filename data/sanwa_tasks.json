@@ -12631,21 +12631,24 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
-          "reward": "",
+          "points": 6,
+          "score": 88,
+          "summary": "今天也是采用了回来先放松的这么一个流程，因为他又上了篮球课，所以回来真正进入写作业的时候已经比较晚了。那么作业上我相对给他削减了一些，只做了一些必要的和最近考试相关的内容。那么发现这个mission上面相同的一个题，我还是要反复地教他。虽然昨天最后是搞明白了，但是今天重做又忘了，所以今天又带他做的十道Mission到最后效果还是比较好的。但是我认为他有一个不爱往里钻研的一个情况，所以说这个还得后续再继续巩固。另外，晚上的时候有一点不耐烦，微微有点要发脾气的样子，后来情绪又平复下去了。",
+          "reward": "发脾气-1分",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "发脾气",
+            "普普通通"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1793107686338,
         "taskVer": 41,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793110813739,
+        "reviewVer": 20
       },
       "qiannuo": {
         "fixedClasses": [
