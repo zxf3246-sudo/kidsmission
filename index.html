@@ -807,8 +807,24 @@
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px;
   }
   .review-points {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;
   }
+  /* 积分明细：基础 / 获得 / 扣除 / 兑奖（后三项带理由） */
+  .points-detail { grid-column: 1 / -1; background: #fff; border: 1px solid #e2e8f0;
+    border-radius: 10px; padding: 8px 9px; display: grid; gap: 6px; }
+  .points-row { display: grid; grid-template-columns: 62px 68px 1fr; gap: 6px; align-items: center; }
+  .points-row .pr-label { font-size: 11px; color: #475569; font-weight: 700; text-align: right; }
+  .points-row input { font-family: inherit; font-size: 12px; padding: 4px 6px; border: 1px solid #e2e8f0;
+    border-radius: 7px; background: #f8fafc; color: #1e293b; min-width: 0; }
+  .points-row input.pr-num { text-align: center; font-weight: 700; }
+  .points-row input.pr-num.earn { color: #15803d; }
+  .points-row input.pr-num.deduct { color: #dc2626; }
+  .points-row input.pr-num.redeem { color: #7c3aed; }
+  .points-row input.pr-reason { background: #fff; }
+  .points-total { display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 11px; color: #64748b; border-top: 1px dashed #e2e8f0; padding-top: 6px; }
+  .points-total b { font-size: 14px; color: #15803d; }
+  .points-total b.warn { color: #dc2626; }
   .stat-cell {
     background: #fff; padding: 5px 7px; border-radius: 8px;
     border: 1px solid #e2e8f0; text-align: center;
@@ -2680,6 +2696,39 @@ function calcCumulativeSavings(childId, dateStr) {
   return total;
 }
 
+// 今日积分拆分（基础/获得/扣除/兑奖）与旧数据迁移
+// 今日积分 = 基础 + 获得 − 扣除 − 兑奖（写回 review.points，供累计/导出/月报统一使用）
+function recalcReviewPoints(r) {
+  if (!r) return 0;
+  r.points = (+r.basePoints || 0) + (+r.earnPoints || 0) - (+r.deductPoints || 0) - (+r.redeemPoints || 0);
+  return r.points;
+}
+
+// 迁移旧数据：把原有「今日积分」归入基础积分（只在首次执行时生效）
+function migratePointsSplit(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const kids = obj.dates[ds] || {};
+    Object.keys(kids).forEach(cid => {
+      const r = kids[cid] && kids[cid].review;
+      if (!r) return;
+      if (r.basePoints === undefined) {
+        r.basePoints = +r.points || 0;
+        r.earnPoints = 0; r.deductPoints = 0; r.redeemPoints = 0;
+        if (r.earnReason === undefined) r.earnReason = '';
+        if (r.deductReason === undefined) r.deductReason = '';
+        if (r.redeemReason === undefined) r.redeemReason = '';
+        changed++;
+      }
+    });
+  });
+  if (changed > 0) {
+    console.log('[migratePointsSplit] 🔁 今日积分已拆分为基础/获得/扣除/兑奖：', changed, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 复盘字段更新
 function updateReview(childId, field, value, rerender) {
   const dateStr = document.getElementById('datePicker').value;
@@ -2688,6 +2737,11 @@ function updateReview(childId, field, value, rerender) {
   if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, photo:null };
   if (field === 'points') {
     cd.review.points = value === '' ? 0 : (+value || 0);
+  } else if (field === 'basePoints' || field === 'earnPoints' || field === 'deductPoints' || field === 'redeemPoints') {
+    cd.review[field] = value === '' ? 0 : (+value || 0);
+    recalcReviewPoints(cd.review);
+  } else if (field === 'earnReason' || field === 'deductReason' || field === 'redeemReason') {
+    cd.review[field] = value;
   } else if (field === 'savings') {
     cd.review.savings = value === '' ? 0 : (+value || 0);
   } else if (field === 'score') {
@@ -3902,6 +3956,7 @@ function loadState() {
       syncYilinTueThuLa(obj);
       syncYanxiTueClass(obj);
       syncTalToXueersi(obj);
+      migratePointsSplit(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -4849,6 +4904,13 @@ function renderChildren(dateStr) {
       ? `<div class="stat-value empty">—</div><div class="stat-sub">未评</div>`
       : `<div class="stat-value ${scoreVal<60?'warn':''}">${scoreVal}</div><div class="stat-sub">/ 100</div>`;
     const pointsVal = review.points || 0;
+    const baseVal = +review.basePoints || 0;
+    const earnVal = +review.earnPoints || 0;
+    const deductVal = +review.deductPoints || 0;
+    const redeemVal = +review.redeemPoints || 0;
+    const earnReason = review.earnReason || '';
+    const deductReason = review.deductReason || '';
+    const redeemReason = review.redeemReason || '';
     const savingsVal = review.savings || 0;
     const cumulativePoints = calcCumulativePoints(c.id, dateStr);
     const cumulativeSavings = calcCumulativeSavings(c.id, dateStr);
@@ -4943,14 +5005,6 @@ function renderChildren(dateStr) {
           </div>
         </div>
         <div class="review-points">
-          <div class="stat-cell pt-today">
-            <div class="stat-label">今日积分</div>
-            <input type="number" class="stat-input" id="rv-points-${c.id}"
-              value="${pointsVal}" placeholder="0"
-              oninput="updateReview('${c.id}','points',this.value,false)"
-              onblur="updateReview('${c.id}','points',this.value,true)">
-            <div class="stat-sub">正负均可</div>
-          </div>
           <div class="stat-cell pt-cum">
             <div class="stat-label">累计积分</div>
             <div class="stat-value ${cumulativePoints<0?'warn':(cumulativePoints===0?'empty':'')}">${cumulativePoints>0?'+':''}${cumulativePoints}</div>
@@ -4968,6 +5022,40 @@ function renderChildren(dateStr) {
             <div class="stat-label">累计存款</div>
             <div class="stat-value ${cumulativeSavings<0?'warn':(cumulativeSavings===0?'empty':'')}">S$${cumulativeSavings}</div>
             <div class="stat-sub">含今日</div>
+          </div>
+          <div class="points-detail">
+            <div class="points-row">
+              <span class="pr-label">基础积分</span>
+              <input type="number" class="pr-num" id="rv-base-${c.id}" value="${baseVal}" placeholder="0"
+                oninput="updateReview('${c.id}','basePoints',this.value,false)"
+                onblur="updateReview('${c.id}','basePoints',this.value,true)">
+              <span></span>
+            </div>
+            <div class="points-row">
+              <span class="pr-label">获得积分</span>
+              <input type="number" class="pr-num earn" id="rv-earn-${c.id}" value="${earnVal}" placeholder="0"
+                oninput="updateReview('${c.id}','earnPoints',this.value,false)"
+                onblur="updateReview('${c.id}','earnPoints',this.value,true)">
+              <input type="text" class="pr-reason" id="rv-earn-r-${c.id}" value="${escapeAttr(earnReason)}" placeholder="理由（如：主动完成作业）"
+                onblur="updateReview('${c.id}','earnReason',this.value)">
+            </div>
+            <div class="points-row">
+              <span class="pr-label">扣除积分</span>
+              <input type="number" class="pr-num deduct" id="rv-deduct-${c.id}" value="${deductVal}" placeholder="0"
+                oninput="updateReview('${c.id}','deductPoints',this.value,false)"
+                onblur="updateReview('${c.id}','deductPoints',this.value,true)">
+              <input type="text" class="pr-reason" id="rv-deduct-r-${c.id}" value="${escapeAttr(deductReason)}" placeholder="理由（如：拖延未完成任务）"
+                onblur="updateReview('${c.id}','deductReason',this.value)">
+            </div>
+            <div class="points-row">
+              <span class="pr-label">积分兑奖</span>
+              <input type="number" class="pr-num redeem" id="rv-redeem-${c.id}" value="${redeemVal}" placeholder="0"
+                oninput="updateReview('${c.id}','redeemPoints',this.value,false)"
+                onblur="updateReview('${c.id}','redeemPoints',this.value,true)">
+              <input type="text" class="pr-reason" id="rv-redeem-r-${c.id}" value="${escapeAttr(redeemReason)}" placeholder="理由（如：兑换玩具）"
+                onblur="updateReview('${c.id}','redeemReason',this.value)">
+            </div>
+            <div class="points-total"><span>今日积分合计（基础＋获得－扣除－兑奖）</span><b class="${pointsVal<0?'warn':''}">${pointsVal>0?'+':''}${pointsVal}</b></div>
           </div>
         </div>
         <div class="review-field">
@@ -7332,6 +7420,7 @@ async function pullFromGist() {
     syncYilinTueThuLa(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
+    migratePointsSplit(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
@@ -7463,6 +7552,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncYilinTueThuLa(state);
   syncYanxiTueClass(state);
   syncTalToXueersi(state);
+  migratePointsSplit(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -7590,6 +7680,7 @@ async function autoPullFromCloud() {
     syncYilinTueThuLa(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
+    migratePointsSplit(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
