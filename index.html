@@ -1212,7 +1212,7 @@
       <span class="class-duration">180分钟</span>
       <button class="btn-del" onclick="delFixedClass('yilin',0)">×</button></div><div class="class-item">
       <span class="class-time">15:00-17:00</span>
-      <span class="class-name" onblur="editFixedClass('yilin',1,this.textContent)">线上TAL</span>
+      <span class="class-name" onblur="editFixedClass('yilin',1,this.textContent)">学而思</span>
       <span class="class-tag day">白天</span>
       <span class="class-duration">120分钟</span>
       <button class="btn-del" onclick="delFixedClass('yilin',1)">×</button></div><div class="class-item">
@@ -2091,7 +2091,7 @@ const WEEKLY_CLASSES = {
     4: [{name:'语文LA',        time:'15:30-16:30', duration:60},
         {name:'科学',          time:'19:30-21:30', duration:120}],
     5: [],
-    6: [{name:'线上TAL',       time:'15:00-17:00', duration:120},
+    6: [{name:'学而思',         time:'15:00-17:00', duration:120},
         {name:'英语missy',     time:'19:45-21:45', duration:120}],
     0: [{name:'全科补习',      time:'09:00-13:30', duration:270},
         {name:'画画课',        time:'15:00-18:00', duration:180}]
@@ -2101,7 +2101,7 @@ const WEEKLY_CLASSES = {
     2: [{name:'篮球',          time:'15:30-17:00', duration:90}],
     3: [{name:'语文LA',        time:'14:30-15:30', duration:60}],
     4: [{name:'编程',          time:'17:45-19:45', duration:120}],
-    5: [{name:'TAL',           time:'14:45-16:45', duration:120}],
+    5: [{name:'学而思',         time:'14:45-16:45', duration:120}],
     6: [{name:'篮球',          time:'13:30-15:30', duration:120}],
     0: []
   },
@@ -3361,6 +3361,29 @@ function syncYanxiTueClass(obj) {
   }
 }
 
+// 固定课程改名：李怡霖周六「线上TAL」→「学而思」，李彦希周五「TAL」→「学而思」
+// 幂等：用户手动改过的不动
+function syncTalToXueersi(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    const dow = new Date(ds + 'T00:00:00').getDay();
+    const rule = dow === 6 ? { id: 'yilin', from: '线上TAL' }
+               : dow === 5 ? { id: 'yanxi', from: 'TAL' }
+               : null;
+    if (!rule) return;
+    const cd = obj.dates[ds] && obj.dates[ds][rule.id];
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name === rule.from && !c.manualTouched) { c.name = '学而思'; changed++; }
+    });
+  });
+  if (changed > 0) {
+    console.log('[syncTalToXueersi] ✏️ 固定课程已改名：李怡霖周六 线上TAL→学而思、李彦希周五 TAL→学而思，共', changed, '项');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 function renameYanxiWW1(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3877,6 +3900,7 @@ function loadState() {
       syncQiannuoWedLaTime(obj);
       syncYilinTueThuLa(obj);
       syncYanxiTueClass(obj);
+      syncTalToXueersi(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -7312,6 +7336,7 @@ async function pullFromGist() {
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
     syncYanxiTueClass(merged);
+    syncTalToXueersi(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
@@ -7442,6 +7467,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncQiannuoWedLaTime(state);
   syncYilinTueThuLa(state);
   syncYanxiTueClass(state);
+  syncTalToXueersi(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -7568,6 +7594,7 @@ async function autoPullFromCloud() {
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
     syncYanxiTueClass(merged);
+    syncTalToXueersi(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
