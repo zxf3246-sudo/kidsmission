@@ -290,7 +290,7 @@
     background: var(--theme, #6366f1);
   }
   .child-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-  .child-card[data-child="yilin"]   { --theme: var(--child-yilin); }
+  .child-card[data-child="yilin"]   { --theme: var(--child-yilin); background-image: url('share-bg-yilin.jpg'); }
   .child-card[data-child="yanxi"]   { --theme: var(--child-yanxi); }
   .child-card[data-child="qiannuo"] { --theme: var(--child-qiannuo); }
 
@@ -5447,6 +5447,13 @@ function imgRoundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
+// 在矩形内以 cover 方式绘制图片（等比铺满、居中裁切，不变形）
+function drawCoverImage(ctx, img, x, y, w, h) {
+  const s = Math.max(w / img.width, h / img.height);
+  const dw = img.width * s, dh = img.height * s;
+  ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
+}
+
 function imgWrap(ctx, text, maxW) {
   if (!text) return [''];
   const chars = String(text).split('');
@@ -5754,6 +5761,9 @@ async function exportTasks() {
   downloadCanvas(out, `三娃任务_${dateStr}.png`);
 }
 
+// 各孩子专属背景图（未配置的孩子沿用默认白色卡片）
+const CHILD_BG_SRC = { yilin: 'share-bg-yilin.jpg' };
+
 // 加载头像图片（SVG data URL）为可绘制 Image，供复盘图头部使用
 function loadAvatarImage(src) {
   return new Promise((resolve) => {
@@ -5775,10 +5785,12 @@ async function exportReview() {
   // 预加载各孩子头像（SVG data URL）+ 复盘照片，供头部可爱风格绘制与照片展示
   const avatars = {};
   const photos = {};
+  const childBgs = {};
   await Promise.all(CHILDREN.map(async c => {
     avatars[c.id] = c.avatarImg ? await loadAvatarImage(c.avatarImg) : null;
     const rv = data[c.id] && data[c.id].review;
     photos[c.id] = (rv && rv.photo) ? await loadAvatarImage(rv.photo) : null;
+    childBgs[c.id] = CHILD_BG_SRC[c.id] ? await loadAvatarImage(CHILD_BG_SRC[c.id]) : null;
   }));
   const { canvas: tmp, ctx } = newTmpCanvas();
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
@@ -5878,8 +5890,15 @@ async function exportReview() {
     if (cd.reviewSavedAt) cH += 30;
     cH += 28; // 底部
 
-    // 卡片底
-    imgRoundRect(ctx, x0, y, CW, cH, 20); ctx.fillStyle = '#fff'; ctx.fill();
+    // 卡片底（配置了专属背景图的孩子用图，其余保持白底）
+    imgRoundRect(ctx, x0, y, CW, cH, 20);
+    if (childBgs[c.id]) {
+      ctx.save(); ctx.clip();
+      drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = '#fff'; ctx.fill();
+    }
     imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = col.main; ctx.fill();
     // 装饰圆
     ctx.save(); ctx.globalAlpha = .5;
@@ -6097,6 +6116,12 @@ async function exportTasksFinal() {
   let y = IMG.PAD;
   ctx.textBaseline = 'top';
 
+  // 预加载孩子专属背景图
+  const childBgs = {};
+  await Promise.all(CHILDREN.map(async c => {
+    childBgs[c.id] = CHILD_BG_SRC[c.id] ? await loadAvatarImage(CHILD_BG_SRC[c.id]) : null;
+  }));
+
   // 背景：新插图铺底（等比铺满后居中裁切，避免拉伸变形）+ 深色蒙版（保证白色文字可读）
   const bgImg = await loadAvatarImage('share-bg-b.jpg');
   if (bgImg) {
@@ -6153,8 +6178,15 @@ async function exportTasksFinal() {
     if (cd.taskSavedAt) cH += 30;
     cH += 28;
 
-    // 卡片底
-    imgRoundRect(ctx, x0, y, CW, cH, 20); ctx.fillStyle = '#fff'; ctx.fill();
+    // 卡片底（配置了专属背景图的孩子用图，其余保持白底）
+    imgRoundRect(ctx, x0, y, CW, cH, 20);
+    if (childBgs[c.id]) {
+      ctx.save(); ctx.clip();
+      drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = '#fff'; ctx.fill();
+    }
     imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = col.main; ctx.fill();
     ctx.save(); ctx.globalAlpha = .5;
     ctx.beginPath(); ctx.arc(x0+CW-20, y+20, 70, 0, Math.PI*2); ctx.fillStyle = col.soft; ctx.fill();
