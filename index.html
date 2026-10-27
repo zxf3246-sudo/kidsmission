@@ -13,15 +13,15 @@
 <meta property="og:description" content="三个孩子每天的在家时间、固定课程、学习任务和复盘总结">
 <meta property="og:site_name" content="三娃任务">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-2.jpg?v=2">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="600">
+<meta property="og:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-3.jpg?v=1">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1080">
 <meta property="og:url" content="https://zxf3246-sudo.github.io/kidsmission/">
 <!-- Twitter Card (备用) -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="三娃每日任务分配">
 <meta name="twitter:description" content="三个孩子每天的在家时间、固定课程、学习任务和复盘总结">
-<meta name="twitter:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-2.jpg?v=2">
+<meta name="twitter:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-3.jpg?v=1">
 <!-- 微信专用 -->
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,14 +44,18 @@
     --shadow-lg: 0 12px 32px rgba(15, 23, 42, .08), 0 4px 8px rgba(15, 23, 42, .04);
   }
   html, body { height: 100%; }
+  html { background: var(--c-bg); }
   body {
     font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background:
-      radial-gradient(1200px 600px at 10% -10%, #ede9fe 0%, transparent 50%),
-      radial-gradient(1000px 500px at 100% 0%, #dbeafe 0%, transparent 50%),
-      var(--c-bg);
     color: var(--c-text); line-height: 1.55;
     padding: 20px; font-size: 14px; min-height: 100vh;
+  }
+  /* 整页背景插图（固定铺底，浅白纱确保文字可读） */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15)),
+      url('share-bg-a.jpg') center/cover no-repeat;
   }
   header {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
@@ -6089,9 +6093,15 @@ async function exportTasksFinal() {
   let y = IMG.PAD;
   ctx.textBaseline = 'top';
 
-  // 深色背景
+  // 背景：新插图铺底 + 深色蒙版（保证白色文字可读）
+  const bgImg = await loadAvatarImage('share-bg-a.jpg');
+  if (bgImg) {
+    ctx.globalAlpha = .3;
+    ctx.drawImage(bgImg, 0, 0, W, 6000);
+    ctx.globalAlpha = 1;
+  }
   const bg = ctx.createLinearGradient(0, 0, W, 6000);
-  bg.addColorStop(0, '#1e293b'); bg.addColorStop(1, '#312e81');
+  bg.addColorStop(0, 'rgba(30,41,59,.82)'); bg.addColorStop(1, 'rgba(49,46,129,.82)');
   ctx.fillStyle = bg; ctx.fillRect(0, 0, W, 6000);
 
   // 标题栏（橙→粉→紫渐变）
