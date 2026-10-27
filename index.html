@@ -1084,19 +1084,6 @@
     background: #fff; border: 1px solid #c4b5fd;
     padding: 4px; border-radius: 12px;
   }
-  /* footer 里的视图切换按钮（不再包在 view-switch 里，单独给浅底样式） */
-  .footer-bar .view-btn {
-    background: #fff; color: #6d28d9; border: 1px solid #c4b5fd;
-    padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700;
-    height: 36px; min-width: 76px; cursor: pointer; font-family: inherit;
-    display: inline-flex; align-items: center; justify-content: center;
-    box-shadow: 0 1px 3px rgba(124,58,237,.12); transition: all .2s;
-  }
-  .footer-bar .view-btn:hover { background: #f5f3ff; }
-  .footer-bar .view-btn.active {
-    background: #7c3aed; color: #fff; border-color: #7c3aed;
-    box-shadow: 0 3px 10px rgba(124,58,237,.3);
-  }
   .footer-row-tabs { gap: 8px; }
   .footer-row-tabs .btn-hero { flex: 1 1 0; min-width: 0; }
   .footer-row {
@@ -1145,12 +1132,19 @@
   .footer-bar .btn-cloud.cloud-config:hover { background: #fde68a; }
   .footer-bar .cloud-sync-status { color: #6d28d9; }
   .footer-bar .view-btn {
-    background: transparent; color: #6d28d9; border: none;
+    background: #fff; color: #6d28d9; border: 1px solid #c4b5fd;
+    padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700;
+    height: 36px; min-width: 76px; cursor: pointer; font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 3px rgba(124,58,237,.12); transition: all .2s;
   }
   .footer-bar .view-btn.active {
-    background: #7c3aed; color: #fff; box-shadow: 0 2px 6px rgba(124,58,237,.3);
+    background: #7c3aed; color: #fff; border-color: #7c3aed;
+    box-shadow: 0 3px 10px rgba(124,58,237,.3);
   }
-  .footer-bar .view-btn:hover:not(.active) { color: #5b21b6; }
+  .footer-bar .view-btn:hover:not(.active) { background: #f5f3ff; color: #5b21b6; }
+  .footer-bar .btn-cloud.cloud-refresh { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+  .footer-bar .btn-cloud.cloud-refresh:hover { background: #e2e8f0; }
 </style>
 </head>
 <body class="view-task">
