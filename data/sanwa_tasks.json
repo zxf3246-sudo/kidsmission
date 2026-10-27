@@ -13228,12 +13228,13 @@
           },
           {
             "id": "t1793100150681828g",
-            "name": "1大题科学",
-            "duration": null,
+            "name": "2道题科学",
+            "duration": 40,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793023525184afws",
@@ -13264,8 +13265,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793100151869,
-        "taskVer": 18,
+        "taskSavedAt": 1793103092583,
+        "taskVer": 24,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -14283,7 +14284,8 @@
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
         "科学": true,
-        "数学练习": true
+        "数学练习": true,
+        "1大题科学": true
       },
       "yanxi": {
         "一页计算题": true,
