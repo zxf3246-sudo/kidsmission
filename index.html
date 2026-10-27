@@ -5917,8 +5917,8 @@ async function exportReview() {
     if (childBgs[c.id]) {
       ctx.save(); ctx.clip();
       drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
-      // 导出图里图片按 65% 显色：叠 35% 白纱
-      ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(x0, y, CW, cH);
+      // 导出图里图片按 35% 显色：叠 65% 白纱
+      ctx.fillStyle = 'rgba(255,255,255,.65)'; ctx.fillRect(x0, y, CW, cH);
       ctx.restore();
     } else {
       ctx.fillStyle = '#fff'; ctx.fill();
@@ -6207,8 +6207,8 @@ async function exportTasksFinal() {
     if (childBgs[c.id]) {
       ctx.save(); ctx.clip();
       drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
-      // 导出图里图片按 65% 显色：叠 35% 白纱
-      ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(x0, y, CW, cH);
+      // 导出图里图片按 35% 显色：叠 65% 白纱
+      ctx.fillStyle = 'rgba(255,255,255,.65)'; ctx.fillRect(x0, y, CW, cH);
       ctx.restore();
     } else {
       ctx.fillStyle = '#fff'; ctx.fill();
