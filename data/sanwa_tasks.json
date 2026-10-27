@@ -13343,10 +13343,12 @@
           {
             "id": "t17930235251843zfs",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 40,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793023525184m7lw",
@@ -13369,8 +13371,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793103544664,
-        "taskVer": 31,
+        "taskSavedAt": 1793103550362,
+        "taskVer": 36,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
