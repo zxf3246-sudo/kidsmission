@@ -13,7 +13,7 @@
 <meta property="og:description" content="三个孩子每天的在家时间、固定课程、学习任务和复盘总结">
 <meta property="og:site_name" content="三娃任务">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-3.jpg?v=1">
+<meta property="og:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-4.jpg?v=2">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1080">
 <meta property="og:url" content="https://zxf3246-sudo.github.io/kidsmission/">
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="三娃每日任务分配">
 <meta name="twitter:description" content="三个孩子每天的在家时间、固定课程、学习任务和复盘总结">
-<meta name="twitter:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-3.jpg?v=1">
+<meta name="twitter:image" content="https://zxf3246-sudo.github.io/kidsmission/share-cover-4.jpg?v=2">
 <!-- 微信专用 -->
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,7 +54,7 @@
   body::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-color: var(--c-bg);
-    background-image: url('share-bg-a.jpg');
+    background-image: url('share-bg-b.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -6095,11 +6095,13 @@ async function exportTasksFinal() {
   let y = IMG.PAD;
   ctx.textBaseline = 'top';
 
-  // 背景：新插图铺底 + 深色蒙版（保证白色文字可读）
-  const bgImg = await loadAvatarImage('share-bg-a.jpg');
+  // 背景：新插图铺底（等比铺满后居中裁切，避免拉伸变形）+ 深色蒙版（保证白色文字可读）
+  const bgImg = await loadAvatarImage('share-bg-b.jpg');
   if (bgImg) {
+    const s = Math.max(W / bgImg.width, 6000 / bgImg.height);
+    const dw = bgImg.width * s, dh = bgImg.height * s;
     ctx.globalAlpha = .3;
-    ctx.drawImage(bgImg, 0, 0, W, 6000);
+    ctx.drawImage(bgImg, (W - dw) / 2, (6000 - dh) / 2, dw, dh);
     ctx.globalAlpha = 1;
   }
   const bg = ctx.createLinearGradient(0, 0, W, 6000);
