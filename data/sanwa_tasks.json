@@ -13218,10 +13218,11 @@
           {
             "id": "t1793023525184nc0h",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793023525184afws",
@@ -13252,8 +13253,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793023537962,
-        "taskVer": 2,
+        "taskSavedAt": 1793081917814,
+        "taskVer": 8,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
