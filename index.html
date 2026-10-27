@@ -1145,6 +1145,21 @@
   .footer-bar .view-btn:hover:not(.active) { background: #f5f3ff; color: #5b21b6; }
   .footer-bar .btn-cloud.cloud-refresh { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
   .footer-bar .btn-cloud.cloud-refresh:hover { background: #e2e8f0; }
+
+  /* 隐藏入口：长按 / 双击标题弹出的数据备份菜单 */
+  .data-menu-mask { position: fixed; inset: 0; background: rgba(15,23,42,.45); display: none;
+    align-items: center; justify-content: center; z-index: 3000; padding: 24px; }
+  .data-menu-mask.show { display: flex; }
+  .data-menu { background: #fff; border-radius: 16px; padding: 18px; width: 100%; max-width: 300px;
+    box-shadow: 0 20px 48px rgba(15,23,42,.28); }
+  .data-menu h3 { font-size: 15px; color: #1e293b; margin-bottom: 4px; }
+  .data-menu p { font-size: 12px; color: #94a3b8; margin-bottom: 10px; }
+  .data-menu button { display: block; width: 100%; margin-top: 8px; padding: 10px; border-radius: 10px;
+    border: 1px solid #e8ecf3; background: #f8fafc; font-size: 13.5px; font-weight: 600;
+    color: #334155; cursor: pointer; font-family: inherit; }
+  .data-menu button.primary { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+  .data-menu button.ghost { background: #fff; color: #64748b; }
+  header h1 { -webkit-touch-callout: none; user-select: none; }
 </style>
 </head>
 <body class="view-task">
@@ -7697,4 +7712,29 @@ uploadToGist = async function() {
 
 
 
+<div class="data-menu-mask" id="dataMenuMask" onclick="if(event.target===this)closeDataMenu()">
+  <div class="data-menu">
+    <h3>数据备份</h3>
+    <p>长按或双击标题打开 · 仅在本机读写</p>
+    <button class="primary" onclick="closeDataMenu();exportDataJSON()">💾 导出数据（JSON）</button>
+    <button onclick="closeDataMenu();importDataJSON()">📂 导入数据（JSON）</button>
+    <button class="ghost" onclick="closeDataMenu()">取消</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const h1 = document.querySelector('header h1');
+  if (!h1) return;
+  let timer = null;
+  const openMenu = function(){ const m = document.getElementById('dataMenuMask'); if (m) m.classList.add('show'); };
+  h1.addEventListener('touchstart', function(){ clearTimeout(timer); timer = setTimeout(openMenu, 650); }, { passive: true });
+  ['touchend','touchmove','touchcancel'].forEach(function(ev){
+    h1.addEventListener(ev, function(){ clearTimeout(timer); }, { passive: true });
+  });
+  h1.addEventListener('dblclick', openMenu);
+  h1.addEventListener('contextmenu', function(e){ e.preventDefault(); openMenu(); });
+})();
+function closeDataMenu(){ const m = document.getElementById('dataMenuMask'); if (m) m.classList.remove('show'); }
+</script>
 </body></html>
