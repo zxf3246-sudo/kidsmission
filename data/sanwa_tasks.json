@@ -13311,6 +13311,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1793092913106ir4h",
+            "name": "学而思错题改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t17930235251843zfs",
             "name": "自由玩耍",
             "duration": null,
@@ -13339,8 +13348,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793023628739,
-        "taskVer": 11,
+        "taskSavedAt": 1793092914798,
+        "taskVer": 13,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
