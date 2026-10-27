@@ -60,11 +60,17 @@
     background-repeat: no-repeat;
   }
   header {
-    /* 100% 原色显示，不叠任何蒙版 */
-    background: url('share-bg-header.jpg') center 34% / cover no-repeat, #fdf2f8;
+    /* 横幅底色取自插画本身的粉调；插画单独放在下方 header-art 里，避免文字压住人物 */
+    background: linear-gradient(160deg, #fdf2f8 0%, #fce7f3 100%);
     color: #4c1d95; padding: 26px 28px; border-radius: 20px; margin-bottom: 18px;
     box-shadow: 0 12px 32px rgba(244, 114, 182, .22);
     position: relative; overflow: hidden;
+  }
+  .header-art {
+    margin-top: 14px; height: 132px; border-radius: 14px;
+    background: url('share-bg-header.jpg') center top / cover no-repeat;
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 4px 14px rgba(244,114,182,.18);
   }
   header::before { content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%;
     background: rgba(255,255,255,.18); top: -120px; right: -80px; }
@@ -1136,6 +1142,7 @@
     <span class="live-clock" id="liveClock" title="系统当前时间">12:27:58</span>
     <span class="weekday-pill" id="weekdayPill">周六</span>
   </div>
+  <div class="header-art"></div>
 </header>
 
 <div class="shared-learning" style="display:none">
