@@ -13182,24 +13182,30 @@
             "name": "学校作业",
             "duration": 30,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793023525184e3z8",
             "name": "语文词语",
             "duration": 25,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17930235251842210",
             "name": "科学知识点",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17930235251843xu7",
@@ -13248,8 +13254,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793082700797,
-        "taskVer": 11,
+        "taskSavedAt": 1793092220104,
+        "taskVer": 15,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
