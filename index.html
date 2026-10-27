@@ -1084,6 +1084,21 @@
     background: #fff; border: 1px solid #c4b5fd;
     padding: 4px; border-radius: 12px;
   }
+  /* footer 里的视图切换按钮（不再包在 view-switch 里，单独给浅底样式） */
+  .footer-bar .view-btn {
+    background: #fff; color: #6d28d9; border: 1px solid #c4b5fd;
+    padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700;
+    height: 36px; min-width: 76px; cursor: pointer; font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 3px rgba(124,58,237,.12); transition: all .2s;
+  }
+  .footer-bar .view-btn:hover { background: #f5f3ff; }
+  .footer-bar .view-btn.active {
+    background: #7c3aed; color: #fff; border-color: #7c3aed;
+    box-shadow: 0 3px 10px rgba(124,58,237,.3);
+  }
+  .footer-row-tabs { gap: 8px; }
+  .footer-row-tabs .btn-hero { flex: 1 1 0; min-width: 0; }
   .footer-row {
     display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
     justify-content: center; width: 100%;
@@ -6127,6 +6142,139 @@ async function exportReview() {
   showImagePreview(out, `三娃复盘_${dateStr}.png`);
 }
 
+// 导出月报（家长用）：浅色长图，含三个孩子的月度统计 / 本月总评 / 分板块总结
+async function exportMonth() {
+  try { await autoPullFromCloud(); } catch(e) {}
+  const base = document.getElementById('datePicker').value;
+  // 月份锚点：与 renderMonthReport 相同的判定（优先沿用当前正在查看的月份）
+  const anchor = (monthAnchor && monthBaseDate === base) ? monthAnchor : monthStartOf(base);
+  const allDays = daysOfMonth(anchor);
+  const today = localDateStr(new Date());
+  const days = allDays.filter(ds => ds <= today);
+  const monthLabel = anchor.slice(0, 4) + '年' + (+anchor.slice(5, 7)) + '月';
+  if (!days.length) { alert('该月还没有数据'); return; }
+
+  // 当月统计（只统计到今天）
+  const statsMap = {};
+  let hasAny = false;
+  CHILDREN.forEach(c => {
+    const s = monthStatsFor(c.id, days);
+    statsMap[c.id] = s;
+    if (s.total > 0 || s.reviewDays > 0 || s.points !== 0) hasAny = true;
+  });
+  if (!hasAny) { alert('该月还没有数据'); return; }
+
+  // 预加载孩子专属背景图
+  const childBgs = {};
+  await Promise.all(CHILDREN.map(async c => {
+    childBgs[c.id] = CHILD_BG_SRC[c.id] ? await loadAvatarImage(CHILD_BG_SRC[c.id]) : null;
+  }));
+
+  const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
+  const innerX = x0 + 24, innerW = CW - 48;
+  const subjects = MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207' }]);
+
+  // ===== 第一遍：用离屏 ctx 量文字，先算出整幅精确高度（避免超大临时画布） =====
+  const mctx = document.createElement('canvas').getContext('2d');
+  const prevAnchor = monthAnchor;
+  monthAnchor = anchor; // 分项总结的随机种子与当前月份一致
+  const measured = CHILDREN.map(c => {
+    const s = statsMap[c.id];
+    setFont(mctx, 14, false);
+    const sumLines = imgWrap(mctx, '本月总评：' + buildKidSummary(c.id, days, s), innerW);
+    const blocks = subjects.map(sub => {
+      setFont(mctx, 13, false);
+      return { sub: sub, lines: imgWrap(mctx, buildSubjectReport(c.id, days, sub), innerW) };
+    });
+    let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
+    cH += sumLines.length * 26 + 14;
+    blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
+    cH += 24; // 下内边距
+    return { c: c, s: s, cH: cH, sumLines: sumLines, blocks: blocks };
+  });
+  monthAnchor = prevAnchor;
+
+  let total = IMG.PAD + 46 + 44;
+  measured.forEach(m => { total += m.cH + 24; });
+  total += 20 + 16 + IMG.PAD;
+  const H = Math.ceil(total);
+
+  // ===== 第二遍：按精确高度建画布并绘制 =====
+  const dpr = getDPR();
+  const tmp = document.createElement('canvas');
+  tmp.width = W * dpr; tmp.height = H * dpr;
+  const ctx = tmp.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx._dpr = dpr;
+  ctx.textBaseline = 'top';
+
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#f8fafc'); bg.addColorStop(1, '#eef2f7');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  let y = IMG.PAD;
+  setFont(ctx, 34, true); ctx.fillStyle = '#4c1d95';
+  ctx.fillText('📊 月报 ' + monthLabel, x0, y);
+  y += 46;
+  setFont(ctx, 16, false); ctx.fillStyle = '#64748b';
+  ctx.fillText(fmtMonthDay(allDays[0]) + ' ~ ' + fmtMonthDay(allDays[allDays.length - 1]) + ' · 已统计 ' + days.length + ' 天', x0, y);
+  y += 44;
+
+  measured.forEach(m => {
+    const c = m.c, s = m.s, cH = m.cH, col = CHILD_COLORS[c.id];
+    imgRoundRect(ctx, x0, y, CW, cH, 20);
+    if (childBgs[c.id]) {
+      ctx.save(); ctx.clip();
+      drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      // 图片按 35% 显色：叠 65% 白纱（与导出复盘图一致）
+      ctx.fillStyle = 'rgba(255,255,255,.65)'; ctx.fillRect(x0, y, CW, cH);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = '#fff'; ctx.fill();
+    }
+    imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = col.main; ctx.fill();
+
+    let cy = y + 24;
+    setFont(ctx, 26, true); ctx.fillStyle = col.dark;
+    ctx.fillText(c.emoji + ' ' + c.name, innerX, cy);
+    setFont(ctx, 18, true); ctx.fillStyle = col.main;
+    ctx.textAlign = 'right';
+    ctx.fillText(s.rate + '%', x0 + CW - 24, cy + 5);
+    ctx.textAlign = 'left';
+    cy += 36;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
+    ctx.fillText('完成任务 ' + s.done + '/' + s.total + ' · 学习 ' + s.studyDone + '/' + s.studyPlan + ' 分 · 积分 ' + s.points + ' · 评分 ' + s.avgScore + ' · 复盘 ' + s.reviewDays + ' 天', innerX, cy);
+    cy += 32;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#334155';
+    m.sumLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+    cy += m.sumLines.length * 26 + 14;
+
+    m.blocks.forEach(b => {
+      setFont(ctx, 14, true); ctx.fillStyle = b.sub.color;
+      ctx.fillText(b.sub.icon + ' ' + b.sub.name, innerX, cy);
+      cy += 22;
+      setFont(ctx, 13, false); ctx.fillStyle = '#334155';
+      b.lines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 24));
+      cy += b.lines.length * 24 + 12;
+    });
+
+    y += cH + 24;
+  });
+
+  // 页脚：生成时间
+  const now = new Date();
+  const pad2 = n => String(n).padStart(2, '0');
+  const stamp = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate())
+    + ' ' + pad2(now.getHours()) + ':' + pad2(now.getMinutes());
+  y += 20;
+  setFont(ctx, 13, false); ctx.fillStyle = '#94a3b8';
+  ctx.fillText('生成时间 ' + stamp + ' · 三娃任务', x0, y);
+
+  downloadCanvas(tmp, '三娃月报_' + monthLabel + '.png');
+}
+
 // 导出最终任务完成图：深色风格，展示课程和任务完成情况（和复盘图设计一致）
 async function exportTasksFinal() {
   try { await autoPullFromCloud(); } catch(e) {}
@@ -7529,26 +7677,24 @@ uploadToGist = async function() {
 <input type="file" id="importFileInput" accept=".json,application/json" style="display:none">
 
 <footer class="footer-bar">
-  <div class="view-switch" id="viewSwitch">
+  <div class="footer-row footer-row-tabs">
     <button class="view-btn active" data-view="task" onclick="setView('task')">任务</button>
+    <button class="btn-hero" onclick="exportTasksText()">📄 文字任务</button>
+    <button class="btn-hero" onclick="exportTasksFinal()">✅ 导出任务</button>
+  </div>
+  <div class="footer-row footer-row-tabs">
     <button class="view-btn" data-view="review" onclick="setView('review')">复盘</button>
-    <button class="view-btn" data-view="all" onclick="setView('all')">全部</button>
+    <button class="btn-hero" onclick="exportReview()">📊 导出复盘</button>
+  </div>
+  <div class="footer-row footer-row-tabs">
     <button class="view-btn" data-view="month" onclick="setView('month')">📊 月报</button>
-  </div>
-  <div class="footer-row footer-row-export">
-    <button class="btn-hero" onclick="exportTasksText()">📄 导出文字任务</button>
-    <button class="btn-hero" onclick="exportTasksFinal()">✅ 导出任务完成图</button>
-    <button class="btn-hero" onclick="exportReview()">📊 导出复盘图</button>
-    <button class="btn-hero btn-refresh" onclick="refreshPage()" title="重新加载页面（获取最新版本）">🔄 刷新</button>
-  </div>
-  <div class="footer-row footer-row-data">
-    <button class="btn-hero" onclick="exportDataJSON()" title="导出全部数据为 JSON 备份文件">💾 导出数据</button>
-    <button class="btn-hero" onclick="importDataJSON()" title="从 JSON 备份文件恢复数据">📂 导入数据</button>
+    <button class="btn-hero" onclick="exportMonth()">📈 导出月报</button>
   </div>
   <div class="footer-row footer-row-cloud">
     <span class="cloud-sync-status disconnected" id="cloudStatus" title="云端同步状态">
       <span class="dot"></span><span id="cloudStatusText">未连接</span>
     </span>
+    <button class="btn-cloud cloud-refresh" onclick="refreshPage()" title="重新加载页面（获取最新版本）">🔄 刷新</button>
     <button class="btn-cloud cloud-config" onclick="openCloudModal()" title="云端同步配置">☁ 配置</button>
     <button class="btn-cloud cloud-upload" onclick="uploadToGist()" title="上传到云端">↑ 上传</button>
     <button class="btn-cloud cloud-pull" onclick="pullFromGist()" title="从云端拉取">↓ 拉取</button>
