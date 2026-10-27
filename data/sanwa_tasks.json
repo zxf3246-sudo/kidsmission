@@ -13220,11 +13220,12 @@
           {
             "id": "t1793023525184nc0h",
             "name": "听播客",
-            "duration": 60,
+            "duration": 40,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793100150681828g",
@@ -13265,8 +13266,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793103092583,
-        "taskVer": 24,
+        "taskSavedAt": 1793103252379,
+        "taskVer": 31,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -13322,20 +13323,22 @@
           {
             "id": "t1793023626179ke7t",
             "name": "英语小测复习",
-            "duration": null,
+            "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793092913106ir4h",
             "name": "学而思错题改正",
-            "duration": null,
+            "duration": 25,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t17930235251843zfs",
@@ -13366,8 +13369,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793100532231,
-        "taskVer": 21,
+        "taskSavedAt": 1793103544664,
+        "taskVer": 31,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
