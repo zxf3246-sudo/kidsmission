@@ -546,14 +546,14 @@
   .hint { font-size: 11px; color: var(--c-muted); margin-top: 6px; }
 
   /* ====== 任务项（简化，无分组无标签）====== */
-  .task-list { flex: 1; }
+  .task-list { flex: 1; padding: 8px; background: #f3f5fa; border-radius: 12px; }
   .task-item {
     display: flex; align-items: center; gap: 5px; padding: 3px 6px;
-    background: #f8fafc; border-radius: 6px; margin-bottom: 2px; font-size: 12px;
+    background: #e8edf6; border-radius: 6px; margin-bottom: 2px; font-size: 12px;
     transition: all .2s;
     min-width: 0; overflow: hidden;
   }
-  .task-item:hover { background: #f1f5f9; transform: translateX(2px); }
+  .task-item:hover { background: #dbe2ee; transform: translateX(2px); }
   .task-item.done { opacity: .5; }
   .task-item.done .name { text-decoration: line-through; }
   .task-item.undone { opacity: .65; }
