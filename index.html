@@ -299,7 +299,7 @@
   }
   .child-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
   .child-card[data-child="yilin"]   { --theme: var(--child-yilin); background-image: url('share-bg-yilin.jpg'); }
-  .child-card[data-child="yanxi"]   { --theme: var(--child-yanxi); }
+  .child-card[data-child="yanxi"]   { --theme: var(--child-yanxi); background-image: url('share-bg-yanxi.jpg'); }
   .child-card[data-child="qiannuo"] { --theme: var(--child-qiannuo); }
 
   .child-head {
@@ -5771,7 +5771,7 @@ async function exportTasks() {
 }
 
 // 各孩子专属背景图（未配置的孩子沿用默认白色卡片）
-const CHILD_BG_SRC = { yilin: 'share-bg-yilin.jpg' };
+const CHILD_BG_SRC = { yilin: 'share-bg-yilin.jpg', yanxi: 'share-bg-yanxi.jpg' };
 
 // 加载头像图片（SVG data URL）为可绘制 Image，供复盘图头部使用
 function loadAvatarImage(src) {
