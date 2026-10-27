@@ -12735,21 +12735,21 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 88,
           "summary": "",
-          "reward": "",
+          "reward": "字丑-1 不认真-1",
           "other": "",
           "keywords": [],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1793110475412,
         "taskVer": 25,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793110503643,
+        "reviewVer": 10
       }
     },
     "2026-10-24": {
