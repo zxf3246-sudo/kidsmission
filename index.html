@@ -198,7 +198,8 @@
   .month-kid-block { margin-bottom: 26px; }
   /* 有专属背景图的孩子：整块用图铺底，内部卡片用近白底保证文字可读 */
   .month-kid-block.has-bg {
-    background-image: var(--kid-bg); background-size: cover; background-position: center;
+    background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--kid-bg);
+    background-size: cover; background-position: center;
     border-radius: 18px; padding: 16px 16px 4px; box-shadow: 0 6px 20px rgba(15,23,42,.08);
   }
   .month-kid-block.has-bg .month-subject,
@@ -308,9 +309,10 @@
     background: var(--theme, #6366f1);
   }
   .child-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-  .child-card[data-child="yilin"]   { --theme: var(--child-yilin); background-image: url('share-bg-yilin.jpg'); }
-  .child-card[data-child="yanxi"]   { --theme: var(--child-yanxi); background-image: url('share-bg-yanxi.jpg'); }
-  .child-card[data-child="qiannuo"] { --theme: var(--child-qiannuo); background-image: url('share-bg-qiannuo.jpg'); }
+  /* 专属背景图按 88% 显色：叠 12% 白纱，文字更清晰 */
+  .child-card[data-child="yilin"]   { --theme: var(--child-yilin); background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url('share-bg-yilin.jpg'); }
+  .child-card[data-child="yanxi"]   { --theme: var(--child-yanxi); background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url('share-bg-yanxi.jpg'); }
+  .child-card[data-child="qiannuo"] { --theme: var(--child-qiannuo); background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url('share-bg-qiannuo.jpg'); }
 
   .child-head {
     display: flex; justify-content: space-between; align-items: flex-start;
@@ -5915,6 +5917,8 @@ async function exportReview() {
     if (childBgs[c.id]) {
       ctx.save(); ctx.clip();
       drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      // 导出图里图片按 65% 显色：叠 35% 白纱
+      ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(x0, y, CW, cH);
       ctx.restore();
     } else {
       ctx.fillStyle = '#fff'; ctx.fill();
@@ -6203,6 +6207,8 @@ async function exportTasksFinal() {
     if (childBgs[c.id]) {
       ctx.save(); ctx.clip();
       drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      // 导出图里图片按 65% 显色：叠 35% 白纱
+      ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(x0, y, CW, cH);
       ctx.restore();
     } else {
       ctx.fillStyle = '#fff'; ctx.fill();
