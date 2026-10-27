@@ -130,76 +130,80 @@
   body.view-review .child-actions { display: none !important; }
   body.view-review .shared-learning { display: none !important; }
 
-  /* ====== 周报视图 ====== */
-  .week-report { display: none; }
-  body.view-week .children-grid,
-  body.view-week .shared-learning { display: none !important; }
-  body.view-week .week-report { display: block; }
-  .week-head {
+  /* ====== 月报视图 ====== */
+  .month-report { display: none; }
+  body.view-month .children-grid,
+  body.view-month .shared-learning { display: none !important; }
+  body.view-month .month-report { display: block; }
+  .month-head {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
     gap: 12px; margin-bottom: 16px;
   }
-  .week-title {
+  .month-title {
     font-size: 18px; font-weight: 900; color: #1e293b;
     display: flex; align-items: center; gap: 8px;
   }
-  .week-title .range { font-size: 13px; font-weight: 500; color: #64748b; margin-left: 4px; }
-  .week-nav { display: inline-flex; gap: 8px; }
-  .week-nav-btn {
+  .month-title .range { font-size: 13px; font-weight: 500; color: #64748b; margin-left: 4px; }
+  .month-nav { display: inline-flex; gap: 8px; }
+  .month-nav-btn {
     background: #fff; border: 1px solid var(--c-border); color: #475569;
     padding: 7px 13px; border-radius: 10px; cursor: pointer; font-size: 13px;
     font-weight: 600; font-family: inherit; transition: all .2s;
     box-shadow: var(--shadow-sm);
   }
-  .week-nav-btn:hover { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
-  .week-nav-btn.today-btn { background: #6366f1; color: #fff; border-color: #6366f1; }
-  .week-nav-btn.today-btn:hover { background: #4f46e5; }
-  .week-card {
+  .month-nav-btn:hover { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+  .month-nav-btn.today-btn { background: #6366f1; color: #fff; border-color: #6366f1; }
+  .month-nav-btn.today-btn:hover { background: #4f46e5; }
+  .month-card {
     background: var(--c-card); border-radius: 18px; padding: 20px;
     border: 1px solid var(--c-border); box-shadow: var(--shadow-md); margin-bottom: 18px;
   }
-  .week-card-title {
-    font-size: 15px; font-weight: 800; color: #334155; margin-bottom: 14px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .week-chart {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 6px; height: 170px; padding-top: 6px;
-  }
-  .week-col { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
-  .week-bars { display: flex; align-items: flex-end; justify-content: center; gap: 3px; height: 138px; width: 100%; }
-  .week-bar { width: 7px; border-radius: 4px 4px 0 0; min-height: 2px; transition: height .3s; }
-  .week-day-label { margin-top: 8px; font-size: 11px; color: #94a3b8; font-weight: 600; white-space: nowrap; }
-  .week-day-label.today { color: #6366f1; font-weight: 900; }
-  .week-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
-  .week-legend span { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #64748b; }
-  .week-legend i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
-  .week-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .week-kid-card {
+  .month-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
+  .month-stat-card {
     background: var(--c-card); border-radius: 16px; padding: 16px;
     border: 1px solid var(--c-border); box-shadow: var(--shadow-sm);
     border-top: 4px solid var(--kid-color, #6366f1);
   }
-  .week-kid-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-  .week-kid-name { font-size: 15px; font-weight: 900; color: #1e293b; display: flex; align-items: center; gap: 6px; }
-  .week-kid-rate { font-size: 20px; font-weight: 900; color: var(--kid-color, #6366f1); }
-  .week-progress { height: 7px; border-radius: 4px; background: #f1f5f9; overflow: hidden; margin-bottom: 12px; }
-  .week-progress i { display: block; height: 100%; border-radius: 4px; background: var(--kid-color, #6366f1); }
-  .week-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
-  .week-metric { font-size: 12px; color: #64748b; }
-  .week-metric b { display: block; font-size: 14px; color: #1e293b; font-weight: 800; margin-top: 1px; }
-  .week-kw { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
-  .week-kw span {
+  .month-stat-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .month-stat-name { font-size: 15px; font-weight: 900; color: #1e293b; }
+  .month-stat-rate { font-size: 20px; font-weight: 900; color: var(--kid-color, #6366f1); }
+  .month-progress { height: 7px; border-radius: 4px; background: #f1f5f9; overflow: hidden; margin-bottom: 12px; }
+  .month-progress i { display: block; height: 100%; border-radius: 4px; background: var(--kid-color, #6366f1); }
+  .month-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+  .month-metric { font-size: 12px; color: #64748b; }
+  .month-metric b { display: block; font-size: 14px; color: #1e293b; font-weight: 800; margin-top: 1px; }
+  .month-kw { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .month-kw span {
     font-size: 11px; padding: 3px 8px; border-radius: 20px;
     background: #f1f5f9; color: #475569; font-weight: 600;
   }
-  .week-kw span.neg { background: #fef2f2; color: #dc2626; }
-  .week-empty { color: #94a3b8; font-size: 13px; padding: 10px 0; }
+  .month-kw span.neg { background: #fef2f2; color: #dc2626; }
+  .month-kid-block { margin-bottom: 26px; }
+  .month-kid-title {
+    display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 900;
+    color: var(--kid-color, #1e293b); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--kid-color, #e2e8f0);
+  }
+  .month-subject {
+    background: #fbfcfe; border: 1px solid #eef2f7; border-left: 4px solid var(--subj-color, #6366f1);
+    border-radius: 12px; padding: 13px 15px; margin-bottom: 12px;
+  }
+  .month-subject-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 8px; flex-wrap: wrap;
+  }
+  .month-subject-name { font-size: 14px; font-weight: 900; color: var(--subj-color, #334155); }
+  .month-subject-desc { font-size: 11px; font-weight: 600; color: #94a3b8; }
+  .month-subject-len { font-size: 11px; color: #94a3b8; font-weight: 600; }
+  .month-subject p {
+    font-size: 13px; line-height: 1.95; color: #334155; text-align: justify;
+    word-break: break-word;
+  }
+  .month-note { font-size: 12px; color: #94a3b8; margin: -4px 0 14px; }
   @media (max-width: 960px) {
-    .week-card-grid { grid-template-columns: 1fr; }
-    .week-chart { height: 140px; }
-    .week-bars { height: 108px; }
-    .week-head { flex-direction: column; align-items: flex-start; }
+    .month-stats-grid { grid-template-columns: 1fr; }
+    .month-head { flex-direction: column; align-items: flex-start; }
+    .month-subject p { font-size: 13px; line-height: 1.9; }
   }
 
   /* ====== 共同学习区 ====== */
@@ -1838,7 +1842,7 @@
       </div>
     </div></section>
 
-<section class="week-report" id="weekReport"></section>
+<section class="month-report" id="monthReport"></section>
 
 <div class="save-indicator" id="saveIndicator">✓ 已保存</div>
 
@@ -3055,12 +3059,12 @@ function isDirty(childId, part) {
 
 function setView(v) {
   currentView = v;
-  document.body.classList.remove('view-all','view-task','view-review','view-week');
+  document.body.classList.remove('view-all','view-task','view-review','view-month');
   document.body.classList.add('view-' + v);
   document.querySelectorAll('.view-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.view === v);
   });
-  if (v === 'week') renderWeekReport();
+  if (v === 'month') renderMonthReport();
   renderChildren(document.getElementById('datePicker').value);
 }
 // 进入某个孩子的单人页面
@@ -4021,26 +4025,123 @@ function render() {
   document.getElementById('weekdayPill').textContent = WEEKDAYS[dow];
   renderSharedLearning();
   renderChildren(dateStr);
-  if (currentView === 'week') renderWeekReport();
+  if (currentView === 'month') renderMonthReport();
 }
 
-// ====== 周报视图 ======
-let weekAnchor = null;      // 当前周报的周一日期
-let weekBaseDate = null;    // 用于判断日期选择器是否变化
+// ====== 月报视图 ======
+let monthAnchor = null;      // 当前月报所在月的 1 号（YYYY-MM-01）
+let monthBaseDate = null;    // 用于判断日期选择器是否变化
 
-// 复盘里的消极关键词（周报中标红）
-const NEGATIVE_KEYWORDS = ['拖拖拉拉','发脾气','消极','不在状态','反复出错','粗心','批评','找事儿','吵架','挨揍','哭哭啼啼','考试成绩差','老师批评','磨蹭','分心'];
+// 复盘里的消极 / 积极关键词（用于标红与语气判断）
+const NEGATIVE_KEYWORDS = ['拖拖拉拉','发脾气','消极','不在状态','反复出错','粗心','批评','找事儿','吵架','挨揍','哭哭啼啼','考试成绩差','老师批评','磨蹭','分心','低效率','准确率低','自制力差','生活习惯不好','心不在焉'];
+const POSITIVE_KEYWORDS = ['高效率','听话','积极','准确率高','完美','真棒','考试成绩好','老师表扬','有进步','自我反思','主动','专注'];
 
-function weekShift(step) {
-  if (step === 0) {
-    weekAnchor = mondayOf(localDateStr(new Date()));
-  } else {
-    const d = new Date((weekAnchor || mondayOf(localDateStr(new Date()))) + 'T00:00:00');
-    d.setDate(d.getDate() + step * 7);
-    weekAnchor = localDateStr(d);
+// 四大学习科目：terms 用于从复盘文本识别，taskTerms 用于匹配任务名（统一小写）
+const MONTH_SUBJECTS = [
+  {
+    key: 'chinese', name: '华文', icon: '📖', color: '#16a34a',
+    terms: ['华文','语文','作文','听写','默写','600字','生字','新字','写字','练字','拼音','学校词','华语','书法','阅读理解','阅读作文','词复习'],
+    taskTerms: ['华文','语文','600字','生字','新字','写字','练字','拼音','书法','阅读理解','作文','词复习','学校词','la作业']
+  },
+  {
+    key: 'math', name: '数学', icon: '🔢', color: '#2563eb',
+    terms: ['数学','计算','口算','应用题','乘法','口诀','koobits','mission','奥数','思维题','算式','一页','两页','2页'],
+    taskTerms: ['数学','计算','口算','应用题','乘法','口诀','koobits','mission','奥数','思维','一页','两页','2页']
+  },
+  {
+    key: 'english', name: '英语', icon: '🔤', color: '#db2777',
+    terms: ['英语','missy','ww','wwk','单词','语法','音标','口语','听力','paper','英文','phonics','spelling','vocab'],
+    taskTerms: ['英语','missy','ww','wwk','单词','语法','音标','口语','听力','paper','英文','phonics','spelling','vocab']
+  },
+  {
+    key: 'science', name: '科学', icon: '🔬', color: '#0891b2',
+    terms: ['科学'], taskTerms: ['科学']
   }
-  weekBaseDate = document.getElementById('datePicker').value;
-  renderWeekReport();
+];
+
+// "其他"包含的四类表现
+const OTHER_FACETS = [
+  { key:'habit', name:'生活习惯', terms:['生活习惯','吃饭','睡觉','作息','起床','刷牙','收拾','整理','房间','忘带','找不到','丢','乱动','乱放','玩具','东西'] },
+  { key:'mood',  name:'精神状态', terms:['情绪','心情','状态','精神','开心','不开心','哭','发脾气','消极','积极','焦虑','压力','自信','兴趣','态度','疲惫','困','心不在焉','分心','磨蹭','拖拉','拖拖拉拉','自律','自制力','专注','安静','粗心'] },
+  { key:'sport', name:'体育活动', terms:['运动','体育','游泳','跑步','球','骑车','跳绳','户外','公园','下楼','散步','爬山','玩'] },
+  { key:'moral', name:'道德品质', terms:['礼貌','懂事','听话','帮助','分享','感恩','诚实','撒谎','吵架','争执','打人','顶嘴','尊重','责任','家务','孝顺','关心','照顾'] }
+];
+
+// 中文字符数（去掉空白）
+function cnLen(s) { return String(s || '').replace(/\s/g, '').length; }
+
+// 按句末标点切句（不用后行断言，兼容微信内置浏览器）
+function splitSentences(text) {
+  return String(text || '')
+    .replace(/\r/g, '')
+    .replace(/([。！？；!?;])/g, '$1\n')
+    .split('\n')
+    .map(s => s.trim())
+    .filter(s => cnLen(s) >= 6);
+}
+
+// 统计词表在文本中出现的次数
+function countTerms(text, terms) {
+  const t = String(text || '').toLowerCase();
+  let n = 0;
+  terms.forEach(w => {
+    const lw = w.toLowerCase();
+    if (!lw) return;
+    let from = 0, idx;
+    while ((idx = t.indexOf(lw, from)) !== -1) { n++; from = idx + lw.length; }
+  });
+  return n;
+}
+
+// 判断一句话主要属于哪个科目（取命中词最多者）
+function classifySubjectSentence(s) {
+  let best = null;
+  MONTH_SUBJECTS.forEach(sub => {
+    const n = countTerms(s, sub.terms);
+    if (n > 0 && (!best || n > best.n)) best = { key: sub.key, n };
+  });
+  return best ? best.key : null;
+}
+
+// 判断一句话涉及"其他"里的哪几类表现
+function classifyOtherFacets(s) {
+  return OTHER_FACETS.filter(f => countTerms(s, f.terms) > 0).map(f => f.key);
+}
+
+// 句子的信息权重：含表现关键词、长度适中、带数字事实的句子优先
+function sentenceWeight(s) {
+  let w = 0;
+  NEGATIVE_KEYWORDS.concat(POSITIVE_KEYWORDS).forEach(k => { if (s.includes(k)) w += 2; });
+  if (/\d/.test(s)) w += 1;
+  const L = cnLen(s);
+  if (L >= 18 && L <= 85) w += 1;
+  else if (L > 110) w -= 1;
+  return w;
+}
+
+// 引用时截断过长句子，尽量在标点处断开
+function trimQuote(s) {
+  const t = String(s || '').replace(/\s+/g, ' ').trim();
+  if (cnLen(t) <= 62) return t;
+  const cand = ['，', '、', '；', '。', '：'];
+  for (let i = 55; i < Math.min(t.length, 70); i++) {
+    if (cand.includes(t[i])) return t.slice(0, i + 1) + '…';
+  }
+  return t.slice(0, 60) + '…';
+}
+
+function monthStartOf(dateStr) { return String(dateStr).slice(0, 7) + '-01'; }
+
+function daysOfMonth(monthStart) {
+  const d = new Date(monthStart + 'T00:00:00');
+  const y = d.getFullYear(), m = d.getMonth();
+  const out = [];
+  const cur = new Date(y, m, 1);
+  while (cur.getMonth() === m) {
+    out.push(localDateStr(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+  return out;
 }
 
 function fmtMonthDay(ds) {
@@ -4048,113 +4149,324 @@ function fmtMonthDay(ds) {
   return (d.getMonth() + 1) + '月' + d.getDate() + '日';
 }
 
-function renderWeekReport() {
-  const el = document.getElementById('weekReport');
+function monthShift(step) {
+  if (step === 0) {
+    monthAnchor = monthStartOf(localDateStr(new Date()));
+  } else {
+    const d = new Date((monthAnchor || monthStartOf(localDateStr(new Date()))) + 'T00:00:00');
+    d.setMonth(d.getMonth() + step, 1);
+    monthAnchor = localDateStr(d);
+  }
+  monthBaseDate = document.getElementById('datePicker').value;
+  renderMonthReport();
+}
+
+// 月度基础统计（只统计到"今天"，避免未来日期拉低完成率）
+function monthStatsFor(childId, days) {
+  let total = 0, done = 0, studyPlan = 0, studyDone = 0, points = 0, scoreSum = 0, scoreCnt = 0, reviewDays = 0;
+  const kwCount = {};
+  days.forEach(ds => {
+    const cd = state.dates[ds] && state.dates[ds][childId];
+    if (!cd) return;
+    (cd.tasks || []).forEach(t => {
+      total++;
+      if (t.done) done++;
+      if (t.type !== 'rest') {
+        studyPlan += (+t.duration || 0);
+        if (t.done) studyDone += (+t.duration || 0);
+      }
+    });
+    const rev = cd.review || {};
+    points += (+rev.points || 0);
+    if (typeof rev.score === 'number' && rev.score > 0) { scoreSum += rev.score; scoreCnt++; }
+    const hasText = (rev.summary || '').trim() || (rev.other || '').trim() || (rev.keywords || []).length;
+    if (hasText) reviewDays++;
+    (rev.keywords || []).forEach(k => { kwCount[k] = (kwCount[k] || 0) + 1; });
+  });
+  return {
+    total, done, studyPlan, studyDone, points,
+    avgScore: scoreCnt ? (scoreSum / scoreCnt).toFixed(1) : '—',
+    reviewDays, kwCount,
+    rate: total ? Math.round(done / total * 100) : 0
+  };
+}
+
+// 某科目相关的任务统计
+function subjectTaskStats(childId, days, sub) {
+  let count = 0, doneCount = 0, plan = 0, doneMin = 0;
+  const nameCount = {};
+  days.forEach(ds => {
+    const cd = state.dates[ds] && state.dates[ds][childId];
+    if (!cd) return;
+    (cd.tasks || []).forEach(t => {
+      const nm = String(t.name || '').toLowerCase();
+      if (!nm || !sub.taskTerms.some(w => nm.includes(w))) return;
+      count++;
+      if (t.done) doneCount++;
+      plan += (+t.duration || 0);
+      if (t.done) doneMin += (+t.duration || 0);
+      nameCount[t.name] = (nameCount[t.name] || 0) + 1;
+    });
+  });
+  const topNames = Object.keys(nameCount).sort((a, b) => nameCount[b] - nameCount[a]).slice(0, 3);
+  return { count, doneCount, plan, doneMin, topNames, rate: count ? Math.round(doneCount / count * 100) : 0 };
+}
+
+// 组装 250~300 字的段落：先放必选句，再按优先级塞可选引用/补充句，最后收尾建议
+function composeParagraph(core, fillers, advice, min, max) {
+  const mandatory = core.filter(x => x && x.text && !x.optional).map(x => x.text);
+  const optional = core.filter(x => x && x.text && x.optional).map(x => x.text);
+  const adv = (advice && advice.length) ? advice[0].text : '';
+  const fillerTexts = fillers.map(x => (typeof x === 'string' ? x : (x && x.text) || '')).filter(Boolean);
+  const out = mandatory.slice();
+  const total = () => cnLen(out.join('') + adv);
+  const addIfFits = (text) => {
+    if (!text) return false;
+    if (total() + cnLen(text) > max) return false;
+    out.push(text);
+    return true;
+  };
+  optional.forEach(t => addIfFits(t));
+  fillerTexts.forEach(t => { if (total() < min) addIfFits(t); });
+  // 细碎的补充句：把字数精确补到 250 以上（单句 20 字左右，避免一下超出 300）
+  for (const t of SHORT_FILLERS) {
+    if (total() >= min) break;
+    addIfFits(t);
+  }
+  if (adv) out.push(adv);
+  let text = out.join('');
+  if (cnLen(text) > max) text = text.slice(0, max);
+  return text;
+}
+
+// 用于精确补足字数的短句（均为不涉及具体事实的中性表述）
+const SHORT_FILLERS = [
+  '整体看，相关反馈在整月里分布并不均匀。',
+  '其中既有阶段性的进步，也有反复出现的老问题。',
+  '这些内容可以作为下个月安排练习时的参考。',
+  '后续仍需要结合具体作业和测验结果来验证。',
+  '记录越具体，月底回看时越容易判断问题所在。',
+  '把每天的小变化记下来，比一次性的评价更有价值。'
+];
+
+// 各科目的具体建议（避免五个板块都用同一套话）
+const SUBJECT_ACTIONS = {
+  chinese: '先从字词积累和朗读入手，每天固定15分钟做听写或默写，错字单独记在本子上反复过；写作先列提纲再动笔，减少边想边写造成的混乱。',
+  math: '先回到计算准确率，每天用10分钟做口算热身，再挑一两道错题讲清思路，确认是真懂还是背答案，避免同类题反复出错。',
+  english: '把单词、听力和语法拆成固定小块，每天各花10到15分钟，做完立刻核对答案，重点看错在哪里，而不是只追求完成数量。',
+  science: '先梳理课本里的核心概念，用口头复述或画图的方式确认理解，再配合少量题目检验，避免只靠刷题记住结论。'
+};
+
+// 生成某个孩子某科目/其他方面的月度反馈总结
+function buildSubjectReport(childId, days, sub) {
+  const isOther = sub.key === 'other';
+  const itemList = [];        // { ds, text, weight, facets }
+  let reviewDays = 0;
+  let allTaskCount = 0;
+  const facetCount = { habit: 0, mood: 0, sport: 0, moral: 0 };
+
+  days.forEach(ds => {
+    const cd = state.dates[ds] && state.dates[ds][childId];
+    if (!cd) return;
+    allTaskCount += (cd.tasks || []).length;
+    const rev = cd.review || {};
+    const summary = (rev.summary || '').trim();
+    const otherTxt = (rev.other || '').trim();
+    if (summary || otherTxt || (rev.keywords || []).length) reviewDays++;
+    const sents = splitSentences(summary).concat(splitSentences(otherTxt));
+    sents.forEach(s => {
+      if (isOther) {
+        const facets = classifyOtherFacets(s);
+        if (!facets.length) return;
+        facets.forEach(f => { facetCount[f] = (facetCount[f] || 0) + 1; });
+        if (!itemList.some(x => x.text === s)) itemList.push({ ds, text: s, facets });
+      } else {
+        if (classifySubjectSentence(s) !== sub.key) return;
+        if (!itemList.some(x => x.text === s)) itemList.push({ ds, text: s });
+      }
+    });
+  });
+
+  itemList.forEach(it => { it.weight = sentenceWeight(it.text); });
+  itemList.sort((a, b) => b.weight - a.weight || (a.ds < b.ds ? 1 : -1));
+  const itemDays = new Set(itemList.map(x => x.ds)).size;
+
+  // 代表性原句：最多 4 句，同一天不超过 2 句
+  const quotes = [];
+  const perDay = {};
+  const seen = new Set();
+  itemList.forEach(it => {
+    if (quotes.length >= 4) return;
+    if ((perDay[it.ds] || 0) >= 2) return;
+    const sig = it.text.slice(0, 12);
+    if (seen.has(sig)) return;
+    seen.add(sig);
+    perDay[it.ds] = (perDay[it.ds] || 0) + 1;
+    quotes.push(trimQuote(it.text));
+  });
+
+  // 关键词统计：只用确实有该科目反馈的那些天，避免把其他方面的问题套进这一科
+  const kwCount = {};
+  const kwDays = itemList.length ? Array.from(new Set(itemList.map(x => x.ds))) : [];
+  kwDays.forEach(ds => {
+    const cd = state.dates[ds] && state.dates[ds][childId];
+    const rev = (cd && cd.review) || {};
+    (rev.keywords || []).forEach(k => { kwCount[k] = (kwCount[k] || 0) + 1; });
+  });
+  const kws = Object.keys(kwCount).sort((a, b) => kwCount[b] - kwCount[a]).slice(0, 5);
+  const negTop = kws.filter(k => NEGATIVE_KEYWORDS.includes(k));
+  const posTop = kws.filter(k => POSITIVE_KEYWORDS.includes(k));
+
+  const ts = isOther ? null : subjectTaskStats(childId, days, sub);
+  const core = [];
+
+  if (!isOther) {
+    if (itemList.length) {
+      core.push({ text: `${sub.name}方面，本月有${itemDays}天的复盘留下了直接反馈（本月有内容的复盘共${reviewDays}天）。` });
+    } else {
+      core.push({ text: `${sub.name}方面，本月复盘中没有留下可直接引用的具体反馈，本月有内容的复盘共${reviewDays}天。` });
+    }
+    if (ts && ts.count) {
+      core.push({ text: `任务清单里与${sub.name}相关的任务累计${ts.count}项，完成${ts.doneCount}项，完成率${ts.rate}%，计划学习时间约${ts.plan}分钟。`, optional: true });
+    } else {
+      core.push({ text: `任务清单里没有单独标注${sub.name}的条目（本月任务共${allTaskCount}项），相关练习多混在整体学习安排中。`, optional: true });
+    }
+  } else {
+    const parts = OTHER_FACETS.filter(f => facetCount[f.key]).map(f => `${f.name}${facetCount[f.key]}次`);
+    if (itemList.length) {
+      core.push({ text: `其他方面，本月复盘共有${itemList.length}条学习之外的反馈${parts.length ? '，其中' + parts.join('、') : ''}。` });
+    } else {
+      core.push({ text: `其他方面，本月复盘里没有集中出现生活习惯、精神状态、体育活动和道德品质的内容，本月有内容的复盘共${reviewDays}天。` });
+    }
+  }
+
+  quotes.forEach((q, i) => {
+    const lead = i === 0 ? (isOther ? '原文中写到' : '复盘里提到') : (i === 1 ? '另外' : '还有');
+    const tail = /[。！？]$/.test(q) ? '' : '。';
+    core.push({ text: `${lead}：“${q}”${tail}`, optional: true });
+  });
+
+  if (kws.length) {
+    let tone;
+    if (negTop.length > posTop.length) tone = `需要重点关注的是${negTop.slice(0, 3).join('、')}`;
+    else if (posTop.length) tone = `正向反馈集中在${posTop.slice(0, 3).join('、')}`;
+    else tone = '正负反馈并存';
+    core.push({ text: `本月围绕${sub.name}反复出现的关键词是${kws.slice(0, 4).join('、')}，${tone}。`, optional: true });
+  }
+
+  const advice = [];
+  if (!isOther) {
+    const action = SUBJECT_ACTIONS[sub.key] || '把练习内容拆小，固定时段完成，并在当天复盘里写清结果。';
+    const pre = negTop.length
+      ? `建议下个月把${negTop.slice(0, 2).join('、')}作为重点，`
+      : '建议下个月保持现有节奏，';
+    advice.push({ text: pre + action });
+  } else {
+    const facets = OTHER_FACETS.filter(f => facetCount[f.key])
+      .sort((a, b) => facetCount[b.key] - facetCount[a.key])
+      .map(f => f.name);
+    if (facets.length) {
+      advice.push({ text: `建议下个月围绕${facets.slice(0, 2).join('、')}继续跟进，先固定吃饭、作业和睡觉的时间，再记录每天状态起伏的具体触发点，遇到问题当天就说清，而不是攒到一起批评。` });
+    } else {
+      advice.push({ text: `建议下个月继续记录学习之外的表现，尤其是运动、家务和与人相处时的具体事例，写清发生了什么、孩子怎么处理，让这部分反馈更有参照价值。` });
+    }
+  }
+
+  const fillers = [];
+  if (ts && ts.topNames && ts.topNames.length) {
+    fillers.push({ text: `从任务记录看，${ts.topNames.join('、')}是本月出现次数最多的${sub.name}任务，完成情况与复盘里的描述基本一致。` });
+  }
+  if (reviewDays && itemDays) {
+    fillers.push({ text: `本月共记录${reviewDays}天有效复盘，${sub.name}相关反馈覆盖其中${itemDays}天，占比约${Math.round(itemDays / reviewDays * 100)}%，属于阶段性、非每天出现的内容。` });
+  }
+  if (kws.length) {
+    fillers.push({ text: `这些关键词在整月里重复出现，说明相关问题不是偶发，而是需要持续盯住的行为习惯或学习环节。` });
+  }
+  fillers.push({ text: `这份总结由每日复盘原文自动归纳，只反映文字里明确写到的内容，具体情况仍需结合作业、试卷和老师的反馈一起判断。` });
+  fillers.push({ text: `如果觉得某一部分仍然单薄，可以在下个月的复盘里专门留一两句话，写清练了什么、卡在哪里、是否弄懂，坚持记录就能看出清楚的进步轨迹。` });
+  fillers.push({ text: `建议保持每天写复盘的节奏，把当天最突出的一件事写具体，比笼统地评价"表现不错"或"状态不好"更有参考价值。` });
+
+  return composeParagraph(core, fillers, advice, 250, 300);
+}
+
+function renderMonthReport() {
+  const el = document.getElementById('monthReport');
   if (!el) return;
   const base = document.getElementById('datePicker').value;
-  if (!weekAnchor || weekBaseDate !== base) {
-    weekAnchor = mondayOf(base);
-    weekBaseDate = base;
+  if (!monthAnchor || monthBaseDate !== base) {
+    monthAnchor = monthStartOf(base);
+    monthBaseDate = base;
   }
-  const start = new Date(weekAnchor + 'T00:00:00');
-  const days = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(start);
-    d.setDate(start.getDate() + i);
-    days.push(localDateStr(d));
-  }
+  const allDays = daysOfMonth(monthAnchor);
   const today = localDateStr(new Date());
-
-  // 图表最大值（三娃七天里的最高积分）
-  let maxPts = 1;
-  days.forEach(ds => {
-    CHILDREN.forEach(c => {
-      const cd = state.dates[ds] && state.dates[ds][c.id];
-      const p = cd && cd.review ? (+cd.review.points || 0) : 0;
-      if (p > maxPts) maxPts = p;
-    });
-  });
-
-  let chart = '';
-  days.forEach((ds, i) => {
-    const isToday = ds === today;
-    let bars = '';
-    CHILDREN.forEach(c => {
-      const cd = state.dates[ds] && state.dates[ds][c.id];
-      const p = cd && cd.review ? (+cd.review.points || 0) : 0;
-      const h = p > 0 ? Math.max(3, Math.round(p / maxPts * 130)) : 2;
-      const color = CHILD_COLORS[c.id].main;
-      bars += `<div class="week-bar" title="${c.name} ${fmtMonthDay(ds)}：${p} 分"
-        style="height:${h}px;background:${p > 0 ? color : '#e2e8f0'}"></div>`;
-    });
-    chart += `<div class="week-col">
-      <div class="week-bars">${bars}</div>
-      <div class="week-day-label${isToday ? ' today' : ''}">${WEEKDAYS[(i + 1) % 7]}${isToday ? '·今' : ''}</div>
+  const days = allDays.filter(ds => ds <= today);
+  const monthLabel = monthAnchor.slice(0, 4) + '年' + (+monthAnchor.slice(5, 7)) + '月';
+  const rangeLabel = fmtMonthDay(allDays[0]) + ' ~ ' + fmtMonthDay(allDays[allDays.length - 1]);
+  const header = `
+    <div class="month-head">
+      <div class="month-title">📊 月报 <span class="range">${monthLabel} · ${rangeLabel}</span></div>
+      <div class="month-nav">
+        <button class="month-nav-btn" onclick="monthShift(-1)">← 上一月</button>
+        <button class="month-nav-btn today-btn" onclick="monthShift(0)">本月</button>
+        <button class="month-nav-btn" onclick="monthShift(1)">下一月 →</button>
+      </div>
     </div>`;
-  });
+  if (!days.length) {
+    el.innerHTML = header + `<div class="month-card" style="text-align:center;color:#94a3b8;font-size:13px">该月还没有数据</div>`;
+    return;
+  }
 
-  let cards = '';
+  let stats = '';
   CHILDREN.forEach(c => {
-    let total = 0, done = 0, studyPlan = 0, studyDone = 0, points = 0, scoreSum = 0, scoreCnt = 0;
-    const kwCount = {};
-    days.forEach(ds => {
-      const cd = state.dates[ds] && state.dates[ds][c.id];
-      if (!cd) return;
-      (cd.tasks || []).forEach(t => {
-        total++;
-        if (t.done) done++;
-        if (t.type !== 'rest') {
-          studyPlan += (+t.duration || 0);
-          if (t.done) studyDone += (+t.duration || 0);
-        }
-      });
-      const rev = cd.review || {};
-      points += (+rev.points || 0);
-      if (typeof rev.score === 'number' && rev.score > 0) { scoreSum += rev.score; scoreCnt++; }
-      (rev.keywords || []).forEach(k => { kwCount[k] = (kwCount[k] || 0) + 1; });
-    });
-    const rate = total ? Math.round(done / total * 100) : 0;
-    const avgScore = scoreCnt ? (scoreSum / scoreCnt).toFixed(1) : '—';
-    const kws = Object.keys(kwCount)
-      .sort((a, b) => kwCount[b] - kwCount[a])
+    const s = monthStatsFor(c.id, days);
+    const kwHtml = Object.keys(s.kwCount)
+      .sort((a, b) => s.kwCount[b] - s.kwCount[a])
       .slice(0, 6)
       .map(k => `<span class="${NEGATIVE_KEYWORDS.includes(k) ? 'neg' : ''}">${escapeHtml(k)}</span>`)
       .join('');
-    cards += `<div class="week-kid-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
-      <div class="week-kid-head">
-        <div class="week-kid-name">${c.emoji} ${c.name}</div>
-        <div class="week-kid-rate">${rate}%</div>
+    stats += `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
+      <div class="month-stat-head">
+        <div class="month-stat-name">${c.emoji} ${c.name}</div>
+        <div class="month-stat-rate">${s.rate}%</div>
       </div>
-      <div class="week-progress"><i style="width:${rate}%"></i></div>
-      <div class="week-metrics">
-        <div class="week-metric">完成任务<b>${done} / ${total}</b></div>
-        <div class="week-metric">学习时长<b>${studyDone} / ${studyPlan} 分</b></div>
-        <div class="week-metric">本周积分<b>${points > 0 ? '+' : ''}${points}</b></div>
-        <div class="week-metric">平均评分<b>${avgScore}</b></div>
+      <div class="month-progress"><i style="width:${s.rate}%"></i></div>
+      <div class="month-metrics">
+        <div class="month-metric">完成任务<b>${s.done} / ${s.total}</b></div>
+        <div class="month-metric">学习时长<b>${s.studyDone} / ${s.studyPlan} 分</b></div>
+        <div class="month-metric">本月积分<b>${s.points > 0 ? '+' : ''}${s.points}</b></div>
+        <div class="month-metric">平均评分<b>${s.avgScore}</b></div>
+        <div class="month-metric">复盘天数<b>${s.reviewDays} 天</b></div>
       </div>
-      <div class="week-kw">${kws || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
+      <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
     </div>`;
   });
 
-  const legend = CHILDREN.map(c =>
-    `<span><i style="background:${CHILD_COLORS[c.id].main}"></i>${c.name}</span>`).join('');
+  let reports = '';
+  CHILDREN.forEach(c => {
+    let blocks = '';
+    MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207', desc: '生活习惯 / 精神状态 / 体育活动 / 道德品质' }]).forEach(sub => {
+      const text = buildSubjectReport(c.id, days, sub);
+      blocks += `<div class="month-subject" style="--subj-color:${sub.color}">
+        <div class="month-subject-head">
+          <div class="month-subject-name">${sub.icon} ${sub.name}${sub.desc ? '<span class="month-subject-desc">（' + sub.desc + '）</span>' : ''}</div>
+          <span class="month-subject-len">${cnLen(text)} 字</span>
+        </div>
+        <p>${escapeHtml(text)}</p>
+      </div>`;
+    });
+    reports += `<div class="month-kid-block" style="--kid-color:${CHILD_COLORS[c.id].main}">
+      <div class="month-kid-title">${c.emoji} ${c.name} · 本月复盘总结</div>
+      ${blocks}
+    </div>`;
+  });
 
-  el.innerHTML = `
-    <div class="week-head">
-      <div class="week-title">📊 周报 <span class="range">${fmtMonthDay(days[0])} ~ ${fmtMonthDay(days[6])}</span></div>
-      <div class="week-nav">
-        <button class="week-nav-btn" onclick="weekShift(-1)">← 上一周</button>
-        <button class="week-nav-btn today-btn" onclick="weekShift(0)">本周</button>
-        <button class="week-nav-btn" onclick="weekShift(1)">下一周 →</button>
-      </div>
-    </div>
-    <div class="week-card">
-      <div class="week-card-title">📈 每日复盘积分趋势</div>
-      <div class="week-chart">${chart}</div>
-      <div class="week-legend">${legend}</div>
-    </div>
-    <div class="week-card-grid">${cards}</div>
-  `;
+  el.innerHTML = header + `
+    <div class="month-note">统计口径：${monthLabel}已过去的 ${days.length} 天；文字总结依据每日复盘原文自动归纳。</div>
+    <div class="month-stats-grid">${stats}</div>
+    <div class="month-card">
+      <div class="month-kid-title" style="--kid-color:#334155;border-bottom-color:#e2e8f0">📝 分科目反馈总结</div>
+      ${reports}
+    </div>`;
 }
 
 function renderSharedLearning() {
@@ -6965,7 +7277,7 @@ uploadToGist = async function() {
     <button class="view-btn active" data-view="task" onclick="setView('task')">任务</button>
     <button class="view-btn" data-view="review" onclick="setView('review')">复盘</button>
     <button class="view-btn" data-view="all" onclick="setView('all')">全部</button>
-    <button class="view-btn" data-view="week" onclick="setView('week')">📊 周报</button>
+    <button class="view-btn" data-view="month" onclick="setView('month')">📊 月报</button>
   </div>
   <div class="footer-row footer-row-export">
     <button class="btn-hero" onclick="exportTasksText()">📄 导出文字任务</button>
