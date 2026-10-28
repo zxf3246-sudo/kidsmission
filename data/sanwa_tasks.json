@@ -14929,10 +14929,10 @@
           "score": null,
           "summary": "",
           "reward": "",
-          "other": "",
+          "other": "-5新币兑换捏捏球",
           "keywords": [],
-          "savings": 0,
-          "stars": 0,
+          "savings": -5,
+          "stars": 4,
           "basePoints": 0,
           "earnPoints": 0,
           "deductPoints": 0,
@@ -14945,8 +14945,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793193027634,
         "taskVer": 58,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793193382518,
+        "reviewVer": 10
       },
       "qiannuo": {
         "fixedClasses": [
