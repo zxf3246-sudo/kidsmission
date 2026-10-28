@@ -136,14 +136,6 @@
             "manualTouched": true
           },
           {
-            "id": "t1793121763742ujyc",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793121763743muht",
             "name": "小测复习",
             "duration": 15,
@@ -151,6 +143,24 @@
             "status": "",
             "done": false,
             "courseTask": "quizReview"
+          },
+          {
+            "id": "t1793175065575mffk",
+            "name": "学校英语改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
+            "id": "t1793175074209fsc9",
+            "name": "数学练习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793121763742nghe",
@@ -188,8 +198,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793172533778,
-        "taskVer": 7,
+        "taskSavedAt": 1793175077710,
+        "taskVer": 11,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -15550,7 +15560,8 @@
       },
       "yanxi": {
         "WW1单词5个": true,
-        "一页计算题": true
+        "一页计算题": true,
+        "语文阅读理解": true
       }
     }
   },
