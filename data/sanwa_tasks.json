@@ -107,16 +107,20 @@
             "name": "Koobits",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17931217637425tbs",
             "name": "1 Mission",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793121763742kymz",
@@ -198,8 +202,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793175077710,
-        "taskVer": 11,
+        "taskSavedAt": 1793175089893,
+        "taskVer": 14,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
