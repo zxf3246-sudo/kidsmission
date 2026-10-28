@@ -4280,7 +4280,11 @@ const MONTH_SUBJECTS = [
   }
 ];
 
-// "其他"包含的四类表现
+// 每个孩子的月报科目：科学目前只有李怡霖在读
+function monthSubjectsFor(cid) {
+  return MONTH_SUBJECTS.filter(s => s.key !== 'science' || cid === 'yilin');
+}
+
 const OTHER_FACETS = [
   { key:'habit', name:'生活习惯', terms:['生活习惯','吃饭','睡觉','作息','起床','刷牙','收拾','整理','房间','忘带','找不到','丢','乱动','乱放','玩具','东西'] },
   { key:'mood',  name:'精神状态', terms:['情绪','心情','状态','精神','开心','不开心','哭','发脾气','消极','积极','焦虑','压力','自信','兴趣','态度','疲惫','困','心不在焉','分心','磨蹭','拖拉','拖拖拉拉','自律','自制力','专注','安静','粗心'] },
@@ -4861,7 +4865,7 @@ function buildSubjectReport(childId, days, sub) {
 
 // 每个孩子的全月总评：跨科目提炼主线
 function buildKidSummary(childId, days, stats) {
-  const per = MONTH_SUBJECTS.map(sub => {
+  const per = monthSubjectsFor(childId).map(sub => {
     const { items } = collectSubjectItems(childId, days, sub);
     const sc = issueScoresOf(items);
     let total = 0;
@@ -4995,7 +4999,7 @@ function renderMonthReport() {
       ${examHtml}
     </div>`;
     let blocks = '';
-    MONTH_SUBJECTS.forEach(sub => {
+    monthSubjectsFor(c.id).forEach(sub => {
       const text = buildSubjectReport(c.id, days, sub);
       blocks += `<div class="month-subject" style="--subj-color:${sub.color}">
         <div class="month-subject-head">
@@ -6529,7 +6533,6 @@ async function exportMonth() {
 
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
   const innerX = x0 + 24, innerW = CW - 48;
-  const subjects = MONTH_SUBJECTS;
 
   // ===== 第一遍：用离屏 ctx 量文字，先算出整幅精确高度（避免超大临时画布） =====
   const mctx = document.createElement('canvas').getContext('2d');
@@ -6541,7 +6544,7 @@ async function exportMonth() {
     const sumLines = imgWrap(mctx, '本月总评：' + buildKidSummary(c.id, days, s), innerW);
     setFont(mctx, 14, false);
     const stratLines = imgWrap(mctx, '策略改进：' + buildStrategy(c.id, days), innerW);
-    const blocks = subjects.map(sub => {
+    const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
       return { sub: sub, lines: imgWrap(mctx, buildSubjectReport(c.id, days, sub), innerW) };
     });
