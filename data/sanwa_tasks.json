@@ -14774,31 +14774,39 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone",
+            "manualTouched": true
           },
           {
             "id": "t1793121763742qz40",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793121763742rm8s",
             "name": "自由活动",
-            "duration": null,
+            "duration": 9,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t17931217637420lcu",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           }
         ],
         "review": {
@@ -14820,8 +14828,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793192000415,
-        "taskVer": 16,
+        "taskSavedAt": 1793193090361,
+        "taskVer": 37,
         "reviewSavedAt": 1793124166753,
         "reviewVer": 31
       },
