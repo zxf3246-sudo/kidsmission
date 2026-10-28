@@ -14815,7 +14815,9 @@
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话"
+          ],
           "savings": 0,
           "stars": 4,
           "basePoints": 7,
@@ -14830,8 +14832,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793193090361,
         "taskVer": 37,
-        "reviewSavedAt": 1793193227757,
-        "reviewVer": 54
+        "reviewSavedAt": 1793193498935,
+        "reviewVer": 58
       },
       "yanxi": {
         "fixedClasses": [
