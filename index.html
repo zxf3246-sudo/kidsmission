@@ -4384,11 +4384,13 @@ function monthShift(step) {
 
 // 月度基础统计（只统计到"今天"，避免未来日期拉低完成率）
 function monthStatsFor(childId, days) {
-  let total = 0, done = 0, studyPlan = 0, studyDone = 0, points = 0, scoreSum = 0, scoreCnt = 0, reviewDays = 0;
+  let total = 0, done = 0, studyPlan = 0, studyDone = 0, classMin = 0, points = 0, scoreSum = 0, scoreCnt = 0, reviewDays = 0;
   const kwCount = {};
   days.forEach(ds => {
     const cd = state.dates[ds] && state.dates[ds][childId];
     if (!cd) return;
+    // 上课时长 = 当天固定课程总时长（计入日均学习时长）
+    classMin += (cd.fixedClasses || []).reduce((s,x)=>s+(+x.duration||0),0);
     (cd.tasks || []).forEach(t => {
       total++;
       if (t.done) done++;
@@ -4408,7 +4410,7 @@ function monthStatsFor(childId, days) {
   return {
     total, done, studyPlan, studyDone, points,
     avgScore: scoreCnt ? (scoreSum / scoreCnt).toFixed(1) : '—',
-    avgStudyMin: days.length ? Math.round(studyDone / days.length) : 0,
+    avgStudyMin: days.length ? Math.round((studyDone + classMin) / days.length) : 0,
     reviewDays, kwCount,
     rate: total ? Math.round(done / total * 100) : 0
   };
