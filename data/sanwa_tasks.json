@@ -15027,28 +15027,28 @@
           }
         ],
         "review": {
-          "points": 0,
+          "points": -9,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
           "savings": 0,
-          "stars": 0,
-          "basePoints": 0,
+          "stars": 4,
+          "basePoints": 7,
           "earnPoints": 0,
-          "deductPoints": 0,
-          "redeemPoints": 0,
+          "deductPoints": 1,
+          "redeemPoints": 15,
           "earnReason": "",
-          "deductReason": "",
-          "redeemReason": ""
+          "deductReason": "计算题不认真",
+          "redeemReason": "小马宝莉卡一包"
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1793192944402,
         "taskVer": 24,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793193152232,
+        "reviewVer": 20
       }
     },
     "2026-10-29": {
