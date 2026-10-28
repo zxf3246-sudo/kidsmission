@@ -14837,7 +14837,7 @@
           {
             "id": "t1793121763742tl47",
             "name": "Koobits",
-            "duration": 20,
+            "duration": 5,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -14867,7 +14867,7 @@
           {
             "id": "t1793121763742xdqg",
             "name": "WW1单词练习",
-            "duration": 15,
+            "duration": 30,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -14887,7 +14887,7 @@
           {
             "id": "t1793175065575mffk",
             "name": "学校作业改正",
-            "duration": 40,
+            "duration": 60,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -14897,18 +14897,23 @@
           {
             "id": "t1793121763742nghe",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 40,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793121763742os6s",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:15"
           }
         ],
         "review": {
@@ -14930,8 +14935,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793192021724,
-        "taskVer": 31,
+        "taskSavedAt": 1793193027634,
+        "taskVer": 58,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
