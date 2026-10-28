@@ -14810,28 +14810,28 @@
           }
         ],
         "review": {
-          "points": -1,
-          "score": null,
+          "points": -13,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
           "savings": 0,
-          "stars": 0,
+          "stars": 4,
           "basePoints": 7,
-          "earnPoints": 2,
+          "earnPoints": 0,
           "deductPoints": 0,
-          "redeemPoints": 10,
+          "redeemPoints": 20,
           "earnReason": "",
           "deductReason": "",
-          "redeemReason": ""
+          "redeemReason": "小马宝莉卡"
         },
         "arrival": "14:30",
         "sleep": "21:00",
         "taskSavedAt": 1793193090361,
         "taskVer": 37,
-        "reviewSavedAt": 1793124166753,
-        "reviewVer": 31
+        "reviewSavedAt": 1793193227757,
+        "reviewVer": 54
       },
       "yanxi": {
         "fixedClasses": [
