@@ -14928,17 +14928,20 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 6,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "-5新币兑换捏捏球",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "自我反思"
+          ],
           "savings": -5,
           "stars": 4,
-          "basePoints": 0,
+          "basePoints": 7,
           "earnPoints": 0,
-          "deductPoints": 0,
+          "deductPoints": 1,
           "redeemPoints": 0,
           "earnReason": "",
           "deductReason": "",
@@ -14948,8 +14951,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793193027634,
         "taskVer": 58,
-        "reviewSavedAt": 1793193382518,
-        "reviewVer": 10
+        "reviewSavedAt": 1793197411132,
+        "reviewVer": 34
       },
       "qiannuo": {
         "fixedClasses": [
