@@ -4985,6 +4985,16 @@ function updateMonthLen(el) {
   const head = el.closest('.month-subject-head');
   if (head) { const s = head.querySelector('.month-subject-len'); if (s) s.textContent = cnLen(el.innerText) + ' 字'; }
 }
+// 边打字边存：800ms 无输入即落库，防止未失焦就关掉页面丢失
+let monthEditTimer = null;
+function onMonthEditInput(el) {
+  updateMonthLen(el);
+  clearTimeout(monthEditTimer);
+  monthEditTimer = setTimeout(() => {
+    const cid = el.dataset.cid, key = el.dataset.key;
+    if (cid && key && el.innerText.trim() !== '') saveMonthText(cid, key, el.innerText);
+  }, 800);
+}
 
 function renderMonthReport() {
   const el = document.getElementById('monthReport');
@@ -5056,7 +5066,8 @@ function renderMonthReport() {
           </span>
         </div>
         <div class="month-editable${edited ? ' is-edited' : ''}" contenteditable="true"
-          oninput="updateMonthLen(this)"
+          data-cid="${c.id}" data-key="${blockKey}"
+          oninput="onMonthEditInput(this)"
           onblur="saveMonthText('${c.id}','${blockKey}',this.innerText,this.closest('.month-subject').querySelector('.month-subject-len'))">${escapeHtml(text)}</div>
       </div>`;
     });
@@ -5072,11 +5083,15 @@ function renderMonthReport() {
       <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}">
         <div class="month-sum-head"><b>本月总评：</b>${sumEdited ? `<button class="month-reset" onclick="resetMonthText('${c.id}','sum')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
         <div class="month-editable${sumEdited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="sum"
+          oninput="onMonthEditInput(this)"
           onblur="saveMonthText('${c.id}','sum',this.innerText)">${escapeHtml(sumText)}</div>
       </div>
       <div class="month-kid-sum month-strategy" style="--kid-color:#0f766e">
         <div class="month-sum-head"><b>策略改进：</b>${stratEdited ? `<button class="month-reset" onclick="resetMonthText('${c.id}','strategy')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
         <div class="month-editable${stratEdited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="strategy"
+          oninput="onMonthEditInput(this)"
           onblur="saveMonthText('${c.id}','strategy',this.innerText)">${escapeHtml(stratText)}</div>
       </div>
     </div>`;
