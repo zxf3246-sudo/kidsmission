@@ -4455,11 +4455,20 @@ function examAvgPct(list, type) {
   return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10;
 }
 
+// 大测平均 = 每场先按 得分/满分 算百分比 → 对应 AL 等级 → 再对 AL 求平均
+function examAvgAl(list, type) {
+  const als = list.filter(x => x.type === type).map(x => alOf(examPct(x))).filter(v => v !== null);
+  if (!als.length) return null;
+  return Math.round(als.reduce((a, b) => a + b, 0) / als.length * 10) / 10;
+}
+
 function examAvg(list, type) {
+  if (type === 'big') {
+    const al = examAvgAl(list, type);
+    return al === null ? '—' : 'AL ' + al.toFixed(1);
+  }
   const pct = examAvgPct(list, type);
-  if (pct === null) return '—';
-  const al = alOf(pct);
-  return pct.toFixed(1) + '%' + (type === 'big' && al ? '（AL ' + al + '）' : '');
+  return pct === null ? '—' : pct.toFixed(1) + '%';
 }
 
 function buildExamPanel(cid) {
