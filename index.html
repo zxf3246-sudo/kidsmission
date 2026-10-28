@@ -4418,7 +4418,8 @@ function monthStatsFor(childId, days) {
 }
 
 // ============ 月报·考试成绩（大测 / 小测，手动录入） ============
-const EXAM_TYPES = { big: '大测', small: '小测' };
+// 月报只展示大测（小测栏目已按要求移除，历史小测数据仍保留在本地）
+const EXAM_TYPES = { big: '大测' };
 
 function fmtStudyAvg(min) {
   const m = Math.max(0, Math.round(+min || 0));
