@@ -197,6 +197,21 @@
   .month-kw span.neg { background: #fef2f2; color: #dc2626; }
   .month-kid-block { margin-bottom: 26px; }
   .month-kid-block .month-stat-card { margin-bottom: 12px; }
+  /* 月报·考试成绩（大测 / 小测） */
+  .month-exam { margin-top: 10px; border-top: 1px dashed #dbe3ee; padding-top: 10px; }
+  .month-exam-title { font-size: 12px; font-weight: 900; color: #334155; margin-bottom: 8px; }
+  .exam-group { margin-bottom: 8px; }
+  .exam-group-head { display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #64748b; font-weight: 700; margin-bottom: 5px; }
+  .exam-group-head b { color: #0f766e; font-weight: 900; }
+  .exam-row { display: grid; grid-template-columns: 1fr 72px 26px; gap: 6px; margin-bottom: 5px; }
+  .exam-row input { font-family: inherit; font-size: 12px; padding: 4px 7px; border: 1px solid #e2e8f0;
+    border-radius: 7px; background: #fff; color: #1e293b; min-width: 0; }
+  .exam-row input.exam-score { text-align: center; font-weight: 700; color: #0f766e; }
+  .exam-del { border: none; background: #fee2e2; color: #dc2626; border-radius: 7px;
+    font-size: 14px; line-height: 1; cursor: pointer; padding: 0; }
+  .exam-add { width: 100%; border: 1px dashed #cbd5e1; background: #f8fafc; color: #64748b;
+    border-radius: 8px; padding: 5px 0; font-size: 11px; font-family: inherit; cursor: pointer; }
   /* 有专属背景图的孩子：整块用图铺底，内部卡片用近白底保证文字可读 */
   .month-kid-block.has-bg {
     background-image: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--kid-bg);
@@ -4352,7 +4367,8 @@ function monthStatsFor(childId, days) {
       }
     });
     const rev = cd.review || {};
-    points += (+rev.points || 0);
+    // 本月积分 = 基础 + 获得 − 扣除（不含兑奖）
+    points += (+rev.basePoints || 0) + (+rev.earnPoints || 0) - (+rev.deductPoints || 0);
     if (typeof rev.score === 'number' && rev.score > 0) { scoreSum += rev.score; scoreCnt++; }
     const hasText = (rev.summary || '').trim() || (rev.other || '').trim() || (rev.keywords || []).length;
     if (hasText) reviewDays++;
@@ -4361,9 +4377,80 @@ function monthStatsFor(childId, days) {
   return {
     total, done, studyPlan, studyDone, points,
     avgScore: scoreCnt ? (scoreSum / scoreCnt).toFixed(1) : '—',
+    avgStudyMin: days.length ? Math.round(studyDone / days.length) : 0,
     reviewDays, kwCount,
     rate: total ? Math.round(done / total * 100) : 0
   };
+}
+
+// ============ 月报·考试成绩（大测 / 小测，手动录入） ============
+const EXAM_TYPES = { big: '大测', small: '小测' };
+
+function fmtStudyAvg(min) {
+  const m = Math.max(0, Math.round(+min || 0));
+  return m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? ' ' + (m % 60) + 'm' : ''}` : `${m}m`;
+}
+
+function examMonthKey() { return (monthAnchor || '').slice(0, 7); }
+
+function getExamList(cid) {
+  state.exams = state.exams || {};
+  state.exams[cid] = state.exams[cid] || {};
+  const mk = examMonthKey();
+  state.exams[cid][mk] = state.exams[cid][mk] || [];
+  return state.exams[cid][mk];
+}
+
+function examAvg(list, type) {
+  const scored = list.filter(x => x.type === type && x.score !== '' && x.score !== null && !isNaN(+x.score) && x.score !== undefined);
+  if (!scored.length) return '—';
+  return (scored.reduce((a, b) => a + (+b.score || 0), 0) / scored.length).toFixed(1);
+}
+
+function buildExamPanel(cid) {
+  const list = getExamList(cid);
+  const groups = Object.keys(EXAM_TYPES).map(tp => {
+    const rows = list.filter(x => x.type === tp);
+    const rowHtml = rows.map(x => `<div class="exam-row">
+        <input class="exam-name" value="${escapeAttr(x.name || '')}" placeholder="${EXAM_TYPES[tp]}名称"
+          onblur="saveExamField('${cid}','${x.id}','name',this.value)">
+        <input class="exam-score" type="number" value="${x.score === '' || x.score === undefined ? '' : x.score}" placeholder="分数"
+          onblur="saveExamField('${cid}','${x.id}','score',this.value)">
+        <button class="exam-del" onclick="removeExamRow('${cid}','${x.id}')" title="删除">×</button>
+      </div>`).join('');
+    return `<div class="exam-group">
+        <div class="exam-group-head"><span>${EXAM_TYPES[tp]}</span><b>平均 ${examAvg(list, tp)}</b></div>
+        ${rowHtml}
+        <button class="exam-add" onclick="addExamRow('${cid}','${tp}')">＋ 添加${EXAM_TYPES[tp]}</button>
+      </div>`;
+  }).join('');
+  return `<div class="month-exam">
+      <div class="month-exam-title">📝 考试成绩</div>
+      ${groups}
+    </div>`;
+}
+
+function addExamRow(cid, type) {
+  const list = getExamList(cid);
+  list.push({ id: 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), name: '', score: '', type });
+  save(); renderMonthReport();
+}
+
+function saveExamField(cid, eid, field, val) {
+  const list = getExamList(cid);
+  const it = list.find(x => x.id === eid);
+  if (!it) return;
+  if (field === 'score') it.score = val === '' ? '' : (+val || 0);
+  else it.name = val;
+  save(); renderMonthReport();
+}
+
+function removeExamRow(cid, eid) {
+  state.exams = state.exams || {};
+  const mk = examMonthKey();
+  const list = (state.exams[cid] && state.exams[cid][mk]) || [];
+  state.exams[cid][mk] = list.filter(x => x.id !== eid);
+  save(); renderMonthReport();
 }
 
 // 某科目相关的任务统计
@@ -4796,6 +4883,7 @@ function renderMonthReport() {
       .slice(0, 6)
       .map(k => `<span class="${NEGATIVE_KEYWORDS.includes(k) ? 'neg' : ''}">${escapeHtml(k)}</span>`)
       .join('');
+    const examHtml = buildExamPanel(c.id);
     const statHtml = `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
       <div class="month-stat-head">
         <div class="month-stat-name">数据概览</div>
@@ -4803,13 +4891,12 @@ function renderMonthReport() {
       </div>
       <div class="month-progress"><i style="width:${s.rate}%"></i></div>
       <div class="month-metrics">
-        <div class="month-metric">完成任务<b>${s.done} / ${s.total}</b></div>
-        <div class="month-metric">学习时长<b>${s.studyDone} / ${s.studyPlan} 分</b></div>
         <div class="month-metric">本月积分<b>${s.points > 0 ? '+' : ''}${s.points}</b></div>
+        <div class="month-metric">日均学习<b>${fmtStudyAvg(s.avgStudyMin)}</b></div>
         <div class="month-metric">平均评分<b>${s.avgScore}</b></div>
-        <div class="month-metric">复盘天数<b>${s.reviewDays} 天</b></div>
       </div>
       <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
+      ${examHtml}
     </div>`;
     let blocks = '';
     MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207', desc: '生活习惯 / 精神状态 / 体育活动 / 道德品质' }]).forEach(sub => {
@@ -7736,6 +7823,22 @@ function fillManualVersions(obj) {
   });
 }
 
+function mergeExams(a, b) {
+  const out = {};
+  const kids = new Set([...Object.keys(a || {}), ...Object.keys(b || {})]);
+  kids.forEach(cid => {
+    out[cid] = {};
+    const months = new Set([...Object.keys((a || {})[cid] || {}), ...Object.keys((b || {})[cid] || {})]);
+    months.forEach(mk => {
+      const map = new Map();
+      (((b || {})[cid] || {})[mk] || []).forEach(x => map.set(x.id, x));
+      (((a || {})[cid] || {})[mk] || []).forEach(x => map.set(x.id, x)); // 本地优先
+      out[cid][mk] = Array.from(map.values());
+    });
+  });
+  return out;
+}
+
 function mergeSmart(local, cloud) {
   // 合并前先给两端的历史数据补齐手动编辑计数，保证"改过的"优先于"默认的"
   fillManualVersions(local);
@@ -7743,6 +7846,8 @@ function mergeSmart(local, cloud) {
   const localDates = Object.keys(local.dates || {});
   const cloudDates = Object.keys(cloud.dates || {});
   const result = { ...local, dates: { ...(local.dates || {}) } };
+  // 考试成绩：按 id 合并（本地优先），避免云端缺这个键时丢数据
+  result.exams = mergeExams(local.exams, cloud.exams);
   const ALL = ['yilin','yanxi','qiannuo'];
   
   cloudDates.forEach(d => {
