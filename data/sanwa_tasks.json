@@ -139,11 +139,12 @@
           {
             "id": "t1793175065575mffk",
             "name": "学校作业改正",
-            "duration": null,
+            "duration": 40,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793121763742nghe",
@@ -181,8 +182,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793186154581,
-        "taskVer": 26,
+        "taskSavedAt": 1793192021724,
+        "taskVer": 31,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
