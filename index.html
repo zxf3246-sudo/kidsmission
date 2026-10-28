@@ -2733,9 +2733,15 @@ function calcCumulativeSavings(childId, dateStr) {
 
 // 今日积分拆分（基础/获得/扣除/兑奖）与旧数据迁移
 // 今日积分 = 基础 + 获得 − 扣除 − 兑奖（写回 review.points，供累计/导出/月报统一使用）
+// 每日固定基础积分：默认 7 分/天，复盘界面不再显示（无需手动填写）
+function basePointsOf(r) {
+  if (!r) return 7;
+  return (r.basePoints === undefined || r.basePoints === null) ? 7 : (+r.basePoints || 0);
+}
+
 function recalcReviewPoints(r) {
   if (!r) return 0;
-  r.points = (+r.basePoints || 0) + (+r.earnPoints || 0) - (+r.deductPoints || 0) - (+r.redeemPoints || 0);
+  r.points = basePointsOf(r) + (+r.earnPoints || 0) - (+r.deductPoints || 0) - (+r.redeemPoints || 0);
   return r.points;
 }
 
@@ -2769,7 +2775,7 @@ function updateReview(childId, field, value, rerender) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
-  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, photo:null };
+  if (!cd.review) cd.review = { points:7, basePoints:7, savings:0, score:null, summary:'', reward:'', other:'', stars:0, photo:null };
   if (field === 'points') {
     cd.review.points = value === '' ? 0 : (+value || 0);
   } else if (field === 'basePoints' || field === 'earnPoints' || field === 'deductPoints' || field === 'redeemPoints') {
@@ -2804,7 +2810,7 @@ function toggleReviewKeyword(childId, kw) {
   const dateStr = document.getElementById('datePicker').value;
   const cd = state.dates[dateStr] && state.dates[dateStr][childId];
   if (!cd) return;
-  if (!cd.review) cd.review = { points:0, savings:0, score:null, summary:'', reward:'', other:'', stars:0, keywords: [] };
+  if (!cd.review) cd.review = { points:7, basePoints:7, savings:0, score:null, summary:'', reward:'', other:'', stars:0, keywords: [] };
   if (!Array.isArray(cd.review.keywords)) cd.review.keywords = [];
   const i = cd.review.keywords.indexOf(kw);
   if (i >= 0) cd.review.keywords.splice(i, 1);
@@ -4025,7 +4031,7 @@ function ensureDateOn(s, dateStr) {
       s.dates[dateStr][c.id] = {
         fixedClasses: JSON.parse(JSON.stringify(WEEKLY_CLASSES[c.id][dow] || [])),
         tasks: defaultTasksFor(c.id, dateStr),
-        review: { points: 0, score: null, summary: '', reward: '', other: '', keywords: [] },
+        review: { points: 7, basePoints: 7, score: null, summary: '', reward: '', other: '', keywords: [] },
         arrival: override.arrival || c.arrival,
         sleep: override.sleep || c.sleep,
         taskSavedAt: null,
@@ -4061,7 +4067,7 @@ function ensureDateOn(s, dateStr) {
         });
       }
       if (!child.review || typeof child.review !== 'object') {
-        child.review = { points: 0, savings: 0, score: null, summary: '', reward: '', other: '', stars: 0 };
+        child.review = { points: 7, basePoints: 7, savings: 0, score: null, summary: '', reward: '', other: '', stars: 0 };
       } else {
         if (typeof child.review.points !== 'number') child.review.points = +child.review.points || 0;
         if (typeof child.review.savings !== 'number') child.review.savings = +child.review.savings || 0;
@@ -4392,8 +4398,8 @@ function monthStatsFor(childId, days) {
       }
     });
     const rev = cd.review || {};
-    // 本月积分 = 基础 + 获得 − 扣除（不含兑奖）
-    points += (+rev.basePoints || 0) + (+rev.earnPoints || 0) - (+rev.deductPoints || 0);
+    // 本月积分 = 基础（默认7）+ 获得 − 扣除（不含兑奖）
+    points += (cd.review ? basePointsOf(rev) : 0) + (+rev.earnPoints || 0) - (+rev.deductPoints || 0);
     if (typeof rev.score === 'number' && rev.score > 0) { scoreSum += rev.score; scoreCnt++; }
     const hasText = (rev.summary || '').trim() || (rev.other || '').trim() || (rev.keywords || []).length;
     if (hasText) reviewDays++;
@@ -5170,7 +5176,6 @@ function renderChildren(dateStr) {
       ? `<div class="stat-value empty">—</div><div class="stat-sub">未评</div>`
       : `<div class="stat-value ${scoreVal<60?'warn':''}">${scoreVal}</div><div class="stat-sub">/ 100</div>`;
     const pointsVal = review.points || 0;
-    const baseVal = +review.basePoints || 0;
     const earnVal = +review.earnPoints || 0;
     const deductVal = +review.deductPoints || 0;
     const redeemVal = +review.redeemPoints || 0;
@@ -5291,13 +5296,6 @@ function renderChildren(dateStr) {
           </div>
           <div class="points-detail">
             <div class="points-row">
-              <span class="pr-label">基础积分</span>
-              <input type="number" class="pr-num" id="rv-base-${c.id}" value="${baseVal}" placeholder="0"
-                oninput="updateReview('${c.id}','basePoints',this.value,false)"
-                onblur="updateReview('${c.id}','basePoints',this.value,true)">
-              <span></span>
-            </div>
-            <div class="points-row">
               <span class="pr-label">获得积分</span>
               <input type="number" class="pr-num earn" id="rv-earn-${c.id}" value="${earnVal}" placeholder="0"
                 oninput="updateReview('${c.id}','earnPoints',this.value,false)"
@@ -5321,7 +5319,7 @@ function renderChildren(dateStr) {
               <input type="text" class="pr-reason" id="rv-redeem-r-${c.id}" value="${escapeAttr(redeemReason)}" placeholder="理由（如：兑换玩具）"
                 onblur="updateReview('${c.id}','redeemReason',this.value)">
             </div>
-            <div class="points-total"><span>今日积分合计（基础＋获得－扣除－兑奖）</span><b class="${pointsVal<0?'warn':''}">${pointsVal>0?'+':''}${pointsVal}</b></div>
+            <div class="points-total"><span>今日积分合计（基础 7 ＋获得－扣除－兑奖）</span><b class="${pointsVal<0?'warn':''}">${pointsVal>0?'+':''}${pointsVal}</b></div>
           </div>
         </div>
         <div class="review-field">
@@ -6472,7 +6470,7 @@ async function exportReview() {
 
     // 四项指标一行：本周均分 / 每日积分 / 今日存款 / 累计存款
     // 每日积分 = 基础积分 + 获得积分 − 扣除积分（不含兑奖）
-    const dayPts = (+r.basePoints || 0) + (+r.earnPoints || 0) - (+r.deductPoints || 0);
+    const dayPts = basePointsOf(r) + (+r.earnPoints || 0) - (+r.deductPoints || 0);
     const gap6 = 8;
     const bw6 = (CW - 56 - gap6 * 3) / 4;
     const boxes6 = [
