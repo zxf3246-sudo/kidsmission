@@ -14816,7 +14816,8 @@
           "reward": "",
           "other": "",
           "keywords": [
-            "听话"
+            "听话",
+            "勤奋"
           ],
           "savings": 0,
           "stars": 4,
@@ -14832,8 +14833,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793193090361,
         "taskVer": 37,
-        "reviewSavedAt": 1793197323055,
-        "reviewVer": 61
+        "reviewSavedAt": 1793197335468,
+        "reviewVer": 63
       },
       "yanxi": {
         "fixedClasses": [
