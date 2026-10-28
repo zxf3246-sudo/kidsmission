@@ -128,18 +128,20 @@
             "name": "WW1单词练习",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793121763743muht",
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
+            "status": "done",
+            "done": true,
+            "courseTask": "quizReview",
+            "manualTouched": true
           },
           {
             "id": "t1793175065575mffk",
@@ -186,8 +188,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793179336667,
-        "taskVer": 22,
+        "taskSavedAt": 1793186154581,
+        "taskVer": 26,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
