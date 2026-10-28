@@ -252,7 +252,7 @@
           },
           {
             "id": "t1793175166867k118",
-            "name": "学而思运动",
+            "name": "学而思作业",
             "duration": null,
             "type": "study",
             "done": false,
@@ -295,8 +295,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793175168075,
-        "taskVer": 4,
+        "taskSavedAt": 1793186171384,
+        "taskVer": 6,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
@@ -15550,7 +15550,8 @@
       },
       "qiannuo": {
         "英语阅读练习": true,
-        "语文LA作业": true
+        "语文LA作业": true,
+        "学而思运动": true
       }
     }
   },
