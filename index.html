@@ -249,6 +249,7 @@
     font-size: 13px; line-height: 1.95; color: #334155; text-align: justify;
   }
   .month-kid-sum b { color: var(--kid-color, #6366f1); font-weight: 900; }
+  .month-strategy { margin-top: 10px; }
   @media (max-width: 960px) {
     .month-stats-grid { grid-template-columns: 1fr; }
     .month-head { flex-direction: column; align-items: flex-start; }
@@ -4729,7 +4730,6 @@ function buildSubjectReport(childId, days, sub) {
   // ===== 四大科目 =====
   const ts = subjectTaskStats(childId, days, sub);
   const topNames = (ts.topNames || []).slice(0, 2);
-  const action = SUBJECT_ACTIONS[sub.key] || '下个月把练习拆小，固定时段完成，并在当天写下结果。';
   const sc = issueScoresOf(items);
   const ranked = ISSUE_CATS.slice().sort((a, b) => sc[b.key] - sc[a.key]);
   const top = ranked[0];
@@ -4753,7 +4753,7 @@ function buildSubjectReport(childId, days, sub) {
       '现在手上只有任务完成记录，成绩和具体问题都还是一片模糊。',
       '没有记录，就判断不出问题是在理解、熟练度还是状态上。'
     ];
-    return assembleReport(segs, 250, 300, '下个月不必加量，只要每周留一次完整练习并写下结果，一两个月就能看出真实水平。', seed);
+    return assembleReport(segs, 145, 160, '', seed);
   }
 
   // 有集中问题
@@ -4773,7 +4773,7 @@ function buildSubjectReport(childId, days, sub) {
       rec.length ? repeatLine(rec, seed, false) : '',
       second && sc[second.key] > 0 ? `${second.name}也零星出现，还没成为主要矛盾，但已经在占时间。` : ''
     ];
-    return assembleReport(segs, 250, 300, action, seed);
+    return assembleReport(segs, 145, 160, '', seed);
   }
 
   // 有记录，但没有集中问题
@@ -4794,12 +4794,12 @@ function buildSubjectReport(childId, days, sub) {
       '这一科现在缺的不是投入，而是把已有的水平稳定住。'
     ], seed),
     topNames.length ? `任务主要落在${topNames.join('和')}上，这部分按约定做完，这一科就不会出问题。` : '',
-    posWords.length ? `${posWords.join('、')}这类反馈出现过，是下个月值得保持的做法。` : '',
+    posWords.length ? `${posWords.join('、')}这类反馈出现过，是这一科目前最稳的部分。` : '',
     rec2.length ? `需要留意的是"${rec2.join('""')}"这类描述，量不大，但说明问题还在原地。`
                 : '只是这类反馈太零星，很难判断是偶发，还是已经变成了习惯。',
     flat ? '' : '真正要防的是突然掉队：平时看不出差距，一到期中期末才集中暴露。'
   ];
-  return assembleReport(segs, 250, 300, action, seed);
+  return assembleReport(segs, 145, 160, '', seed);
 }
 
 // 每个孩子的全月总评：跨科目提炼主线
@@ -4844,6 +4844,44 @@ function buildKidSummary(childId, days, stats) {
   return text;
 }
 
+// 策略改进：只摘录家长在复盘里写下的后续规划/打算，不做推测
+const PLAN_CUES = ['下个月', '下月', '明天', '以后', '接下来', '下周', '之后', '打算', '计划', '准备', '争取',
+  '要坚持', '要加', '要改', '要加强', '要减少', '要固定', '要盯', '需要改', '改进', '调整', '重点是', '目标是', '希望'];
+
+function buildStrategy(childId, days) {
+  const picked = [];
+  days.forEach(ds => {
+    const cd = state.dates[ds] && state.dates[ds][childId];
+    if (!cd || !cd.review) return;
+    const r = cd.review;
+    [r.summary, r.other, r.reward, r.earnReason, r.deductReason, r.redeemReason]
+      .filter(t => t && String(t).trim())
+      .forEach(t => {
+        String(t).split(/[。！？\n；;]+/).forEach(s => {
+          s = s.trim().replace(/^[，,、\s]+/, '');
+          if (cnLen(s) < 6) return;
+          if (PLAN_CUES.some(cue => s.includes(cue))) picked.push(s);
+        });
+      });
+  });
+  const seen = new Set();
+  const uniq = [];
+  picked.forEach(s => {
+    const key = s.replace(/\s/g, '').slice(0, 12);
+    if (seen.has(key)) return;
+    seen.add(key); uniq.push(s);
+  });
+  if (!uniq.length) {
+    return '这个月的复盘里还没有写下明确的后续打算。以后遇到问题，顺手补一句准备怎么调整，下个月就能看出这些想法有没有落地。';
+  }
+  let text = '';
+  for (const s of uniq) {
+    if (text && cnLen(text + s) > 200) break;
+    text += (text ? '；' : '') + s;
+  }
+  return text + '。';
+}
+
 function renderMonthReport() {
   const el = document.getElementById('monthReport');
   if (!el) return;
@@ -4878,6 +4916,7 @@ function renderMonthReport() {
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
     const summary = buildKidSummary(c.id, days, s);
+    const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
       .slice(0, 6)
@@ -4899,7 +4938,7 @@ function renderMonthReport() {
       ${examHtml}
     </div>`;
     let blocks = '';
-    MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207', desc: '生活习惯 / 精神状态 / 体育活动 / 道德品质' }]).forEach(sub => {
+    MONTH_SUBJECTS.forEach(sub => {
       const text = buildSubjectReport(c.id, days, sub);
       blocks += `<div class="month-subject" style="--subj-color:${sub.color}">
         <div class="month-subject-head">
@@ -4913,8 +4952,9 @@ function renderMonthReport() {
     reports += `<div class="month-kid-block${kidBg ? ' has-bg' : ''}" style="--kid-color:${CHILD_COLORS[c.id].main};${kidBg ? `--kid-bg:url('${kidBg}');` : ''}">
       <div class="month-kid-title">${c.emoji} ${c.name} · 本月总结</div>
       ${statHtml}
-      <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}"><b>本月总评：</b>${escapeHtml(summary)}</div>
       ${blocks}
+      <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}"><b>本月总评：</b>${escapeHtml(summary)}</div>
+      <div class="month-kid-sum month-strategy" style="--kid-color:#0f766e"><b>策略改进：</b>${escapeHtml(strategy)}</div>
     </div>`;
   });
 
@@ -6432,7 +6472,7 @@ async function exportMonth() {
 
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
   const innerX = x0 + 24, innerW = CW - 48;
-  const subjects = MONTH_SUBJECTS.concat([{ key: 'other', name: '其他', icon: '🌱', color: '#a16207' }]);
+  const subjects = MONTH_SUBJECTS;
 
   // ===== 第一遍：用离屏 ctx 量文字，先算出整幅精确高度（避免超大临时画布） =====
   const mctx = document.createElement('canvas').getContext('2d');
@@ -6442,15 +6482,18 @@ async function exportMonth() {
     const s = statsMap[c.id];
     setFont(mctx, 14, false);
     const sumLines = imgWrap(mctx, '本月总评：' + buildKidSummary(c.id, days, s), innerW);
+    setFont(mctx, 14, false);
+    const stratLines = imgWrap(mctx, '策略改进：' + buildStrategy(c.id, days), innerW);
     const blocks = subjects.map(sub => {
       setFont(mctx, 13, false);
       return { sub: sub, lines: imgWrap(mctx, buildSubjectReport(c.id, days, sub), innerW) };
     });
     let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
-    cH += sumLines.length * 26 + 14;
     blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
+    cH += sumLines.length * 26 + 14;
+    cH += stratLines.length * 26 + 8;
     cH += 24; // 下内边距
-    return { c: c, s: s, cH: cH, sumLines: sumLines, blocks: blocks };
+    return { c: c, s: s, cH: cH, sumLines: sumLines, stratLines: stratLines, blocks: blocks };
   });
   monthAnchor = prevAnchor;
 
@@ -6504,12 +6547,8 @@ async function exportMonth() {
     cy += 36;
 
     setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
-    ctx.fillText('完成任务 ' + s.done + '/' + s.total + ' · 学习 ' + s.studyDone + '/' + s.studyPlan + ' 分 · 积分 ' + s.points + ' · 评分 ' + s.avgScore + ' · 复盘 ' + s.reviewDays + ' 天', innerX, cy);
+    ctx.fillText('本月积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin) + ' · 平均评分 ' + s.avgScore + ' · 完成率 ' + s.rate + '%', innerX, cy);
     cy += 32;
-
-    setFont(ctx, 14, false); ctx.fillStyle = '#334155';
-    m.sumLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
-    cy += m.sumLines.length * 26 + 14;
 
     m.blocks.forEach(b => {
       setFont(ctx, 14, true); ctx.fillStyle = b.sub.color;
@@ -6519,6 +6558,14 @@ async function exportMonth() {
       b.lines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 24));
       cy += b.lines.length * 24 + 12;
     });
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#334155';
+    m.sumLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+    cy += m.sumLines.length * 26 + 14;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#0f766e';
+    m.stratLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+    cy += m.stratLines.length * 26;
 
     y += cH + 24;
   });
