@@ -3999,6 +3999,7 @@ function loadState() {
       syncTalToXueersi(obj);
       migratePointsSplit(obj);
       migrateExamFull(obj);
+      repairExamFull(obj);
       renameQiannuoFixedTasks(obj);
       swapReviewDates(obj);
       removeAutoEnrichedTasks(obj);
@@ -4482,10 +4483,10 @@ function buildExamPanel(cid) {
       return `<div class="exam-row">
         <input class="exam-name" value="${escapeAttr(x.name || '')}" placeholder="${EXAM_TYPES[tp]}名称"
           onblur="saveExamField('${cid}','${x.id}','name',this.value)">
-        <input class="exam-score" type="number" value="${x.score === '' || x.score === undefined ? '' : x.score}" placeholder="得分"
+        <input class="exam-score" type="number" value="${x.score === '' || x.score === undefined ? '' : x.score}" placeholder="得分" onfocus="this.select()"
           onblur="saveExamField('${cid}','${x.id}','score',this.value)">
         <span class="exam-slash">/</span>
-        <input class="exam-full" type="number" value="${x.full === '' || x.full === undefined ? '' : x.full}" placeholder="满分"
+        <input class="exam-full" type="number" value="${x.full === '' || x.full === undefined ? '' : x.full}" placeholder="满分" onfocus="this.select()"
           onblur="saveExamField('${cid}','${x.id}','full',this.value)">
         <span class="exam-result">${pct === null ? '—' : pct.toFixed(1) + '%'}${al ? `<span class="al${alCls}">AL ${al}</span>` : ''}</span>
         <button class="exam-del" onclick="removeExamRow('${cid}','${x.id}')" title="删除">×</button>
@@ -4532,6 +4533,29 @@ function migrateExamFull(obj) {
   });
   if (changed) {
     console.log('[migrateExamFull] 📝 旧成绩补齐满分：', changed, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
+// 修复误输入：满分默认 100 未清空，用户在开头补输数字会被拼成 50100（应为 50）
+function repairExamFull(obj) {
+  if (!obj || !obj.exams) return;
+  let changed = 0;
+  Object.keys(obj.exams).forEach(cid => {
+    const months = obj.exams[cid] || {};
+    Object.keys(months).forEach(mk => {
+      (months[mk] || []).forEach(x => {
+        if (!x || typeof x.full !== 'number' || x.full <= 1000) return;
+        const s = String(Math.round(x.full));
+        let fixed = null;
+        if (s.length > 4 && s.slice(-3) === '100') fixed = Math.round((x.full - 100) / 1000);
+        else if (s.length > 4 && s.slice(0, 3) === '100') fixed = x.full % 1000;
+        if (fixed && fixed > 0 && fixed !== x.full) { x.full = fixed; changed++; }
+      });
+    });
+  });
+  if (changed) {
+    console.log('[repairExamFull] 🔧 修正满分误输入：', changed, '条');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
@@ -7703,6 +7727,7 @@ async function pullFromGist() {
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
     migrateExamFull(merged);
+    repairExamFull(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
@@ -7836,6 +7861,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncTalToXueersi(state);
   migratePointsSplit(state);
   migrateExamFull(state);
+  repairExamFull(state);
   renameQiannuoFixedTasks(state);
   swapReviewDates(state);
   save();
@@ -7965,6 +7991,7 @@ async function autoPullFromCloud() {
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
     migrateExamFull(merged);
+    repairExamFull(merged);
     renameQiannuoFixedTasks(merged);
     swapReviewDates(merged);
     removeAutoEnrichedTasks(merged);
