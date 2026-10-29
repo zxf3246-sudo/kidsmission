@@ -15153,13 +15153,16 @@
         ],
         "review": {
           "points": 0,
-          "score": null,
-          "summary": "",
+          "score": 88,
+          "summary": "今天回来正常的把任务都完成了，然后上了李老师的科学课。她现在反映说感觉李老师讲的挺好的，经过长时间的补课多多少少比之前有一些进步。她自己期望李老师的课可以继续上下去。我也跟老师沟通过了，说接下来让他把重点稍微放到那个解题的标准性上面，争取让她在考试中以多得到分数为一个最终目标。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "认真"
+          ],
           "savings": 0,
-          "stars": 0,
+          "stars": 4,
           "basePoints": 0,
           "earnPoints": 0,
           "deductPoints": 0,
@@ -15172,8 +15175,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793285174325,
         "taskVer": 32,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793285400553,
+        "reviewVer": 9
       },
       "yanxi": {
         "fixedClasses": [
