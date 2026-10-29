@@ -15250,28 +15250,32 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": -1,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "反复出错",
+            "准确率低"
+          ],
           "savings": 0,
-          "stars": 0,
+          "stars": 4,
           "basePoints": 0,
           "earnPoints": 0,
-          "deductPoints": 0,
+          "deductPoints": 1,
           "redeemPoints": 0,
           "earnReason": "",
-          "deductReason": "",
+          "deductReason": "睡觉又拉开窗帘",
           "redeemReason": ""
         },
         "arrival": "14:00",
         "sleep": "21:00",
         "taskSavedAt": 1793285253166,
         "taskVer": 45,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793285456277,
+        "reviewVer": 14
       },
       "qiannuo": {
         "fixedClasses": [],
