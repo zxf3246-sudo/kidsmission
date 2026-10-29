@@ -15273,22 +15273,6 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17931221163685qmv",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793122116368o4sn",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793122116368z3k3",
             "name": "数学计算练习",
             "duration": 20,
@@ -15381,8 +15365,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793262225295,
+        "taskVer": 3,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
@@ -16218,6 +16202,10 @@
       },
       "yanxi": {
         "英语语法": true
+      },
+      "qiannuo": {
+        "WWK单词3个": true,
+        "600字新字5个": true
       }
     }
   },
