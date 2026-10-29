@@ -15324,13 +15324,13 @@
             "errLinked": false
           },
           {
-            "id": "t1793122116368zufc",
-            "name": "语文LA作业",
+            "id": "t1793262809530b5tn",
+            "name": "学而思作业改正",
             "duration": null,
             "type": "study",
-            "status": "",
             "done": false,
-            "courseTask": "la"
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793122116368np2k",
@@ -15368,8 +15368,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793262225295,
-        "taskVer": 3,
+        "taskSavedAt": 1793262812438,
+        "taskVer": 6,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
@@ -16210,7 +16210,8 @@
       },
       "qiannuo": {
         "WWK单词3个": true,
-        "600字新字5个": true
+        "600字新字5个": true,
+        "语文LA作业": true
       }
     }
   },
