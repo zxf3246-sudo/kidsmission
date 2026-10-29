@@ -1327,70 +1327,70 @@
         ],
         "tasks": [
           {
-            "id": "t1793285141890dtee",
+            "id": "t17932854836552gl1",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890alt8",
+            "id": "t17932854836552ywd",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17932851418906fe2",
+            "id": "t1793285483655hcs2",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890sxfz",
+            "id": "t1793285483655wy5d",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890gpzx",
+            "id": "t1793285483655flvs",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179328514189005ey",
+            "id": "t1793285483655kkqc",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890f813",
+            "id": "t17932854836555rog",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17932851418907dze",
+            "id": "t1793285483655wkow",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17932851418902284",
+            "id": "t1793285483655yya8",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890ya4x",
+            "id": "t1793285483655npme",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -3358,49 +3358,49 @@
         ],
         "tasks": [
           {
-            "id": "t1793285141890w675",
+            "id": "t1793285483655rwqj",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890lzzl",
+            "id": "t1793285483655omz1",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890l2bc",
+            "id": "t1793285483655f4j0",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890v1k1",
+            "id": "t1793285483655w2s9",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890tjik",
+            "id": "t17932854836552m71",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890t33o",
+            "id": "t1793285483655ij2y",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890t2qq",
+            "id": "t179328548365510jq",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -3697,56 +3697,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t1793285141890mdqq",
+            "id": "t1793285483655wu7d",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890armu",
+            "id": "t17932854836552ky8",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890a7xt",
+            "id": "t179328548365599bd",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890j2mu",
+            "id": "t1793285483655nk8g",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890g8c1",
+            "id": "t1793285483655yhz5",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793285141890vlik",
+            "id": "t17932854836556u91",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890e1ea",
+            "id": "t1793285483655n2ku",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793285141890cxsz",
+            "id": "t1793285483655ptgn",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -15250,9 +15250,9 @@
           }
         ],
         "review": {
-          "points": -1,
+          "points": 4,
           "score": 88,
-          "summary": "",
+          "summary": "今天去上了那个机器人的课，而且今天机器人课小组测试他拿了第一名，老师还表扬了他。但是学校发回来的练习就是错的有点多，跟昨天一样，还是一些漏字母呀，然后一些不规范的问题，语文有一些个别的字以前错过的，然后没有注意到。而且我发现他这个语文字的问题不大，大的是拼音的问题，因为他最近一次小测的拼音就是尤其是音调错了很多，所以接下来重点是要放在拼音的纠正上。",
           "reward": "",
           "other": "",
           "keywords": [
@@ -15263,10 +15263,10 @@
           "savings": 0,
           "stars": 4,
           "basePoints": 0,
-          "earnPoints": 0,
+          "earnPoints": 5,
           "deductPoints": 1,
           "redeemPoints": 0,
-          "earnReason": "",
+          "earnReason": "机器人课小组第一名",
           "deductReason": "睡觉又拉开窗帘",
           "redeemReason": ""
         },
@@ -15274,8 +15274,8 @@
         "sleep": "21:00",
         "taskSavedAt": 1793285253166,
         "taskVer": 45,
-        "reviewSavedAt": 1793285456277,
-        "reviewVer": 14
+        "reviewSavedAt": 1793285574404,
+        "reviewVer": 20
       },
       "qiannuo": {
         "fixedClasses": [],
