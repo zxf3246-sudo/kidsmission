@@ -15170,8 +15170,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793285161398,
-        "taskVer": 31,
+        "taskSavedAt": 1793285174325,
+        "taskVer": 32,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -15217,27 +15217,33 @@
           {
             "id": "t179326277499679z4",
             "name": "学校作业改正",
-            "duration": null,
+            "duration": 30,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793122116368p2ds",
-            "name": "自由玩耍",
-            "duration": null,
+            "name": "自由玩耍阅读",
+            "duration": 90,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t17931221163688m6p",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:50"
           }
         ],
         "review": {
@@ -15259,8 +15265,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793262779820,
-        "taskVer": 13,
+        "taskSavedAt": 1793285220084,
+        "taskVer": 36,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16190,7 +16196,8 @@
       "yanxi": {
         "英语语法": true,
         "WW1单词5个": true,
-        "一页计算题": true
+        "一页计算题": true,
+        "自由玩耍": true
       },
       "qiannuo": {
         "WWK单词3个": true,
