@@ -15220,20 +15220,13 @@
             "errLinked": false
           },
           {
-            "id": "t1793122116368lfwl",
-            "name": "英语语法",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793122116368z9g3",
             "name": "一页计算题",
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793122116368p2ds",
@@ -15271,8 +15264,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793262203992,
-        "taskVer": 3,
+        "taskSavedAt": 1793262214942,
+        "taskVer": 6,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16222,6 +16215,9 @@
         "语文词语": true,
         "数学练习": true,
         "科学知识点": true
+      },
+      "yanxi": {
+        "英语语法": true
       }
     }
   },
