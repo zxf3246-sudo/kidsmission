@@ -15278,64 +15278,81 @@
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793122116368g5lj",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793122116368p0wa",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793122116368xs2f",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t179312211636889r4",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t17931221163683nxe",
-            "name": "学校双语作业",
-            "duration": 15,
+            "name": "思维训练题",
+            "duration": 40,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793122116368np2k",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 90,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793122116368w2vd",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done",
+            "time": "21:48"
           }
         ],
         "review": {
@@ -15357,8 +15374,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793262812438,
-        "taskVer": 6,
+        "taskSavedAt": 1793285286115,
+        "taskVer": 29,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
@@ -16202,7 +16219,8 @@
       "qiannuo": {
         "WWK单词3个": true,
         "600字新字5个": true,
-        "语文LA作业": true
+        "语文LA作业": true,
+        "学校双语作业": true
       }
     }
   },
