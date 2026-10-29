@@ -15214,17 +15214,17 @@
             "manualTouched": true
           },
           {
-            "id": "t1793122116368z9g3",
-            "name": "一页计算题",
-            "duration": 15,
+            "id": "t1793262455903l2u9",
+            "name": "LA作业改正",
+            "duration": null,
             "type": "study",
             "done": false,
             "errLinked": false,
             "manualTouched": true
           },
           {
-            "id": "t1793262455903l2u9",
-            "name": "LA作业改正",
+            "id": "t179326277499679z4",
+            "name": "学校作业改正",
             "duration": null,
             "type": "study",
             "done": false,
@@ -15267,8 +15267,8 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793262464785,
-        "taskVer": 10,
+        "taskSavedAt": 1793262779820,
+        "taskVer": 13,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16205,7 +16205,8 @@
       },
       "yanxi": {
         "英语语法": true,
-        "WW1单词5个": true
+        "WW1单词5个": true,
+        "一页计算题": true
       },
       "qiannuo": {
         "WWK单词3个": true,
