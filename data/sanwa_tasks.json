@@ -15107,21 +15107,14 @@
             "manualTouched": true
           },
           {
-            "id": "t1793122116368vp6z",
-            "name": "科学知识点",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793122116368o4um",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "status": "",
             "done": false,
-            "courseTask": "la"
+            "courseTask": "la",
+            "manualTouched": true
           },
           {
             "id": "t1793122116368w5kd",
@@ -15176,8 +15169,8 @@
         },
         "arrival": "14:30",
         "sleep": "21:00",
-        "taskSavedAt": 1793259858852,
-        "taskVer": 5,
+        "taskSavedAt": 1793259894755,
+        "taskVer": 14,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16223,7 +16216,8 @@
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
         "语文词语": true,
-        "数学练习": true
+        "数学练习": true,
+        "科学知识点": true
       }
     }
   },
