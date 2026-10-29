@@ -15363,28 +15363,31 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
+          "points": 1,
+          "score": 88,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "听话"
+          ],
           "savings": 0,
-          "stars": 0,
+          "stars": 4,
           "basePoints": 0,
-          "earnPoints": 0,
-          "deductPoints": 0,
+          "earnPoints": 2,
+          "deductPoints": 1,
           "redeemPoints": 0,
-          "earnReason": "",
-          "deductReason": "",
+          "earnReason": "学校数学小测两个全对",
+          "deductReason": "睡觉拉开窗帘",
           "redeemReason": ""
         },
         "arrival": "16:30",
         "sleep": "21:00",
         "taskSavedAt": 1793285286115,
         "taskVer": 29,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793285634890,
+        "reviewVer": 18
       }
     },
     "2026-10-30": {
