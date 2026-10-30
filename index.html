@@ -4856,7 +4856,9 @@ const TERM_ALTS = {
   '缺的是': ['差的是', '少的是'],
   '眼下': ['现在', '目前'],
   '整体': ['全局', '总体'],
-  '这类问题': ['这种毛病', '这些情况']
+  '这类问题': ['这种毛病', '这些情况'],
+  '平稳': ['稳当', '平顺'],
+  '短板': ['弱项', '短处']
 };
 function softenTerms(text, counts) {
   let out = String(text || '');
@@ -4884,9 +4886,10 @@ function makeCrossDeduper() {
     if (!text) return text;
     const parts = String(text).match(/[^。！？；]+[。！？；]?/g) || [String(text)];
     let outStr = '';
-    parts.forEach(raw => {
+    parts.forEach((raw, i) => {
       const key = raw.replace(/华文|数学|英语|科学/g, '').replace(/[\s，。、：；""！？!?（）()]/g, '');
-      if (key.length >= 10 && seen.has(key)) return;
+      // 每段第一句一定保留，避免开头被跨段去重删掉后显得没头没尾
+      if (i > 0 && key.length >= 10 && seen.has(key)) return;
       if (key.length >= 10) seen.add(key);
       outStr += raw;
     });
@@ -4999,7 +5002,9 @@ function buildSubjectReport(childId, days, sub, used) {
       pickFresh([
         `${sub.name}这个月几乎没在复盘里露过面。`,
         `翻遍这个月的记录，${sub.name}只留在任务清单上。`,
-        `${sub.name}是这一个月最少被提起的一科。`
+        `${sub.name}是这一个月最少被提起的一科。`,
+        `${sub.name}这一科，这个月连一句像样的反馈都没留下。`,
+        `要说最安静的科目，非${sub.name}莫属。`
       ], seed, used),
       pickFresh([
         '暂时没成为负担，不代表底子是牢的。',
@@ -5036,7 +5041,9 @@ function buildSubjectReport(childId, days, sub, used) {
       pickFresh([
         `这个月的${sub.name}绕不开一个问题：${top.name}。`,
         `${sub.name}这个月的问题很集中，几乎都落在${top.name}上。`,
-        `${sub.name}这一科的症结很明确，就是${top.name}。`
+        `${sub.name}这一科的症结很明确，就是${top.name}。`,
+        `${sub.name}这个月不太顺，问题几乎都出在${top.name}。`,
+        `提到${sub.name}，说得最多的就是${top.name}。`
       ], seed, used),
       pickFresh(descPool, seed, used).replace('{S}', sub.name),
       pickFresh(ISSUE_LINK[top.key], seed, used),
@@ -5072,7 +5079,9 @@ function buildSubjectReport(childId, days, sub, used) {
     pickFresh([
       `${sub.name}这个月整体平稳，没有集中爆发的短板。`,
       `${sub.name}这一科这个月没有出大问题，属于按部就班的状态。`,
-      `${sub.name}是目前几科里最不需要操心的，但也谈不上出色。`
+      `${sub.name}是目前几科里最不需要操心的，但也谈不上出色。`,
+      `${sub.name}这一科走得四平八稳，没出什么岔子。`,
+      `这个月${sub.name}没什么可说的，照常推进，也没掉链子。`
     ], seed, used),
     flat
       ? pickFresh([
@@ -5315,10 +5324,11 @@ function renderMonthReport() {
   let reports = '';
   // 整份月报共用"已用句"集合：三个孩子的段落之间也不会出现同样的说法
   const usedCopy = new Set();
+  const pageDeduper = makeCrossDeduper();
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
     const termCounts = {};
-    const clean = makeCrossDeduper();
+    const clean = pageDeduper;
     const summary = clean(softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts));
     const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
@@ -6899,10 +6909,11 @@ async function exportMonth() {
   const prevAnchor = monthAnchor;
   monthAnchor = anchor; // 分项总结的随机种子与当前月份一致
   const usedExport = new Set();
+  const exportDeduper = makeCrossDeduper();
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
     const termCounts = {};
-    const clean = makeCrossDeduper();
+    const clean = exportDeduper;
     setFont(mctx, 14, false);
     const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts))), innerW);
     setFont(mctx, 14, false);
