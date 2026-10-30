@@ -15477,28 +15477,30 @@
           }
         ],
         "review": {
-          "points": 0,
-          "score": null,
-          "summary": "",
+          "points": -20,
+          "score": 89,
+          "summary": "目前考完试成绩也出了，这几天是处在一个相对放松的状态，先稍微喘口气，然后我已经陆续在安排他们假期的行程和补课班。集体的补课班主要是给她找一种做题的感觉，然后小组和1对1就是针对她个人问题来逐一解决了。今天正常完成任务，没什么大的毛病。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "普普通通"
+          ],
           "basePoints": 0,
           "earnPoints": 0,
           "deductPoints": 0,
-          "redeemPoints": 0,
+          "redeemPoints": 20,
           "earnReason": "",
           "deductReason": "",
-          "redeemReason": "",
+          "redeemReason": "小马宝莉卡",
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "14:30",
         "sleep": "22:00",
         "taskSavedAt": 1793369760942,
         "taskVer": 45,
-        "reviewSavedAt": null,
-        "reviewVer": 0
+        "reviewSavedAt": 1793370005457,
+        "reviewVer": 17
       },
       "yanxi": {
         "fixedClasses": [
