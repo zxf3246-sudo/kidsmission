@@ -15553,6 +15553,15 @@
             "manualTouched": true
           },
           {
+            "id": "t1793359764457eh9u",
+            "name": "LA作业改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t17931229498145z9u",
             "name": "自由玩耍",
             "duration": null,
@@ -15588,8 +15597,8 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": 1793359751423,
-        "taskVer": 11,
+        "taskSavedAt": 1793359765896,
+        "taskVer": 13,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
