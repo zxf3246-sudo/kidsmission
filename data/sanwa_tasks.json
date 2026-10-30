@@ -15439,26 +15439,30 @@
             "name": "科学练习",
             "duration": 15,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
             "manualTouched": true,
-            "status": "empty"
+            "status": "done"
           },
           {
             "id": "t1793122949813g230",
             "name": "听播客",
-            "duration": 30,
+            "duration": 60,
             "type": "study",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793122949813sxvs",
             "name": "自由活动",
-            "duration": null,
+            "duration": 120,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793122949813bx59",
@@ -15488,8 +15492,8 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1793359383897,
-        "taskVer": 26,
+        "taskSavedAt": 1793360553991,
+        "taskVer": 39,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
