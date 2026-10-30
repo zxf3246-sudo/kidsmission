@@ -15671,7 +15671,7 @@
           {
             "id": "t1793359694243ta4t",
             "name": "语文1A一课生字",
-            "duration": null,
+            "duration": 15,
             "type": "study",
             "done": true,
             "errLinked": false,
@@ -15681,10 +15681,12 @@
           {
             "id": "t17931229498141ndg",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 120,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793122949814mdzm",
@@ -15714,8 +15716,8 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1793360516510,
-        "taskVer": 24,
+        "taskSavedAt": 1793360530263,
+        "taskVer": 33,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
