@@ -5218,42 +5218,97 @@ function buildKidSummary(childId, days, stats, used) {
   return text;
 }
 
-// 策略改进：只摘录家长在复盘里写下的后续规划/打算，不做推测
+// 策略改进：不引用原话，从日常评语里提炼家长明说或暗示的后续安排，归纳成几条
 const PLAN_CUES = ['下个月', '下月', '明天', '以后', '接下来', '下周', '之后', '打算', '计划', '准备', '争取',
   '要坚持', '要加', '要改', '要加强', '要减少', '要固定', '要盯', '需要改', '改进', '调整', '重点是', '目标是', '希望'];
 
+const PLAN_KINDS = [
+  { key: 'check', terms: ['检查', '自查', '复核', '复查', '验算', '核对', '回头看', '回头核'],
+    say: s => (s ? s + '做完先自己核对一遍' : '做完先自己核对一遍') },
+  { key: 'explain', terms: ['讲一遍', '讲过程', '讲思路', '过程讲', '讲清楚', '复述', '口述', '说出思路'],
+    say: s => (s ? s + '做错的题要讲清过程' : '做错的题要讲清过程') },
+  { key: 'practice', terms: ['加练', '多做', '多练', '刷题', '加量', '练习量', '多写', '多读', '多听', '补一补'],
+    say: s => (s ? s + '每天加一点练习量' : '每天加一点练习量') },
+  { key: 'flow', terms: ['固定', '作息', '时间点', '按时', '定时', '流程', '规律'],
+    say: () => '作息和作业时间点固定下来' },
+  { key: 'reduce', terms: ['减少', '少做', '控制', '缩短', '减量', '不熬夜', '少玩', '限时', '别拖'],
+    say: () => '练习量往下收，先把错题弄明白' },
+  { key: 'ready', terms: ['预习', '考前', '复习', '梳理', '过一遍', '提前看', '提前学'],
+    say: () => '考试内容提前过一遍' },
+  { key: 'method', terms: ['方法', '换个方式', '分步骤', '拆开', '画图', '举例', '讲解'],
+    say: s => (s ? s + '换一种讲法，别只加量' : '换一种讲法，别只加量') },
+  { key: 'emotion', terms: ['情绪', '状态', '鼓励', '表扬', '压力', '焦虑', '谈心', '沟通', '陪伴'],
+    say: () => '状态差的日子先接情绪，任务减量' },
+  { key: 'reward', terms: ['奖励', '积分', '兑换', '奖品', '激励'],
+    say: () => '把积分和奖励的规则说清楚' },
+  { key: 'sport', terms: ['运动', '跑步', '户外', '锻炼', '体育', '跳绳'],
+    say: () => '把运动排成固定安排' }
+];
+
 function buildStrategy(childId, days) {
-  const picked = [];
+  const sents = [];
   days.forEach(ds => {
     const cd = state.dates[ds] && state.dates[ds][childId];
     if (!cd || !cd.review) return;
     const r = cd.review;
     [r.summary, r.other, r.reward, r.earnReason, r.deductReason, r.redeemReason]
       .filter(t => t && String(t).trim())
-      .forEach(t => {
-        String(t).split(/[。！？\n；;]+/).forEach(s => {
-          s = s.trim().replace(/^[，,、\s]+/, '');
-          if (cnLen(s) < 6) return;
-          if (PLAN_CUES.some(cue => s.includes(cue))) picked.push(s);
-        });
-      });
+      .forEach(t => splitSentences(t).forEach(s => {
+        s = s.replace(/^[，,、\s]+/, '');
+        if (cnLen(s) >= 6) sents.push(s);
+      }));
   });
-  const seen = new Set();
-  const uniq = [];
-  picked.forEach(s => {
-    const key = s.replace(/\s/g, '').slice(0, 12);
-    if (seen.has(key)) return;
-    seen.add(key); uniq.push(s);
+
+  const ACTION_RE = /要|得|需要|必须|不能|别再|开始|每天|坚持|尽量|提醒|要求|让他|让她|打算|安排/;
+  const kinds = {};
+  sents.forEach(s => {
+    const explicit = PLAN_CUES.some(c => s.includes(c));
+    if (!explicit && !ACTION_RE.test(s)) return;
+    const subKey = classifySubjectSentence(s);
+    PLAN_KINDS.forEach(k => {
+      if (!k.terms.some(t => s.includes(t))) return;
+      const rec = kinds[k.key] || (kinds[k.key] = { kind: k, n: 0, explicit: 0, subs: {} });
+      rec.n++;
+      if (explicit) rec.explicit++;
+      if (subKey) rec.subs[subKey] = (rec.subs[subKey] || 0) + 1;
+    });
   });
-  if (!uniq.length) {
-    return '这个月的复盘里还没有写下明确的后续打算。以后遇到问题，顺手补一句准备怎么调整，下个月就能看出这些想法有没有落地。';
+
+  const ranked = Object.keys(kinds).map(k => kinds[k])
+    .sort((a, b) => (b.explicit - a.explicit) || (b.n - a.n));
+  if (!ranked.length) {
+    return sents.some(s => PLAN_CUES.some(c => s.includes(c)))
+      ? '评语里提到过要调整，但具体怎么做还没写清。下个月把动作写具体一点，这里就能自动归纳出来。'
+      : '这个月还没在评语里写下下一步的安排。以后随手补一句"下次打算怎么改"，这里会自动归纳。';
   }
-  let text = '';
-  for (const s of uniq) {
-    if (text && cnLen(text + s) > 200) break;
-    text += (text ? '；' : '') + s;
+
+  const usedSubs = {};
+  const items = [];
+  ranked.slice(0, 3).forEach(rec => {
+    const sk = Object.keys(rec.subs).sort((a, b) => rec.subs[b] - rec.subs[a])[0];
+    let subName = '';
+    if (sk && rec.subs[sk] >= 2 && !usedSubs[sk]) {
+      subName = (MONTH_SUBJECTS.find(m => m.key === sk) || {}).name || '';
+      usedSubs[sk] = 1;
+    }
+    items.push(rec.kind.say(subName));
+  });
+
+  const seed = seedOf(String(childId) + 'plan' + (monthAnchor || ''));
+  const prefix = pickBySeed(['下个月的重点：', '整理下来，接下来抓这几件：', '从评语看，下一步的安排是：'], seed);
+  const close = pickBySeed([
+    '一次只改一两处，落到每天的任务里，两周后再看效果。',
+    '先挑最容易做到的一件开始，别一次全上。',
+    '关键是落进每天的任务，别只在月底想一想。'
+  ], seed + 1);
+  let out = prefix + items.join('；') + '。';
+  if (cnLen(out) < 50) out = out.replace(/。$/, '，') + close;
+  while (cnLen(out) > 100 && items.length > 1) {
+    items.pop();
+    out = prefix + items.join('；') + '。';
+    if (cnLen(out) < 50) out = out.replace(/。$/, '，') + close;
   }
-  return text + '。';
+  return out;
 }
 
 // 月报文字手动修改：state.monthEdits["孩子|年-月|区块"] = 文本
