@@ -15537,9 +15537,9 @@
             "name": "WW单词练习",
             "duration": 15,
             "type": "study",
-            "done": true,
+            "done": false,
             "errLinked": false,
-            "status": "done",
+            "status": "empty",
             "manualTouched": true
           },
           {
@@ -15555,11 +15555,12 @@
           {
             "id": "t1793359764457eh9u",
             "name": "LA作业改正",
-            "duration": null,
+            "duration": 10,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t17931229498145z9u",
@@ -15597,8 +15598,8 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": 1793359765896,
-        "taskVer": 13,
+        "taskSavedAt": 1793359776534,
+        "taskVer": 20,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
