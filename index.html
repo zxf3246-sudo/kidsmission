@@ -4783,7 +4783,7 @@ function pickBySeed(pool, seed) { return pool[seed % pool.length]; }
 // 同一份月报内去重：同一条模板句（或开头 10 个字相同）只出现一次
 function pickFresh(pool, seed, used) {
   if (!used) return pickBySeed(pool, seed);
-  const norm = s => s.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10);
+  const norm = s => s.replace(/华文|数学|英语|科学/g, '').replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10);
   const n = pool.length;
   for (let i = 0; i < n; i++) {
     const s = pool[(seed + i) % n];
@@ -4851,11 +4851,11 @@ function overlapLen(a, b) {
 
 // 同一个孩子的月报里，同一术语最多出现一次，第二次起换成同义词
 const TERM_ALTS = {
-  '说明': ['看得出', '可见', '说到底'],
-  '真正': ['其实', '更关键的是'],
+  '说明': ['由此可见', '看得出', '说到底'],
+  '真正': ['实际', '其实'],
   '缺的是': ['差的是', '少的是'],
   '眼下': ['现在', '目前'],
-  '整体': ['大体', '总体'],
+  '整体': ['全局', '总体'],
   '这类问题': ['这种毛病', '这些情况']
 };
 function softenTerms(text, counts) {
@@ -4963,7 +4963,11 @@ function buildSubjectReport(childId, days, sub, used) {
 
   // ===== 四大科目 =====
   const ts = subjectTaskStats(childId, days, sub);
-  const topNames = (ts.topNames || []).slice(0, 2);
+  // 任务名去重："科学知识点"和"科学知识点1个"这种只留更完整的一条
+  const rawNames = (ts.topNames || []).slice();
+  const topNames = rawNames
+    .filter(n => !rawNames.some(m => m !== n && m.length > n.length && m.indexOf(n) !== -1))
+    .slice(0, 2);
   const sc = issueScoresOf(items);
   const ranked = ISSUE_CATS.slice().sort((a, b) => sc[b.key] - sc[a.key]);
   const top = ranked[0];
