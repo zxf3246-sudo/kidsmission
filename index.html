@@ -4857,7 +4857,6 @@ const TERM_ALTS = {
   '眼下': ['现在', '目前'],
   '整体': ['全局', '总体'],
   '这类问题': ['这种毛病', '这些情况'],
-  '平稳': ['稳当', '平顺'],
   '短板': ['弱项', '短处']
 };
 function softenTerms(text, counts) {
@@ -4895,6 +4894,13 @@ function makeCrossDeduper() {
     });
     return outStr;
   };
+}
+
+function joinNames(arr) {
+  const a = (arr || []).filter(Boolean);
+  if (a.length <= 1) return a[0] || '';
+  if (a.length === 2) return a[0] + '和' + a[1];
+  return a.slice(0, -1).join('、') + '和' + a[a.length - 1];
 }
 
 // 按优先级拼段：先放核心结论句，再用分析句补到字数下限，最后接建议句
@@ -5014,8 +5020,8 @@ function buildSubjectReport(childId, days, sub, used) {
       SUBJECT_IDLE[sub.key] || '',
       topNames.length
         ? pickFresh([
-            `任务上，${topNames.join('和')}一直在做，只是做完的结果没有写下来。`,
-            `${topNames.join('和')}是这一科每周都在跑的内容，写成文字的反馈一次也没有。`
+            `任务上，${joinNames(topNames)}一直在做，只是做完的结果没有写下来。`,
+            `${joinNames(topNames)}是这一科每周都在跑的内容，写成文字的反馈一次也没有。`
           ], seed, used)
         : pickFresh([
             `任务清单里也没有单独给${sub.name}留固定安排，多是混在别的学习里一带而过。`,
@@ -5050,8 +5056,8 @@ function buildSubjectReport(childId, days, sub, used) {
       pickFresh(judgePool, seed, used),
       topNames.length
         ? pickFresh([
-            `出问题的环节也集中，基本都在${topNames.join('和')}上，不是偶发。`,
-            `再看任务，${topNames.join('和')}出错的比例明显比别的高。`
+            `出问题的环节也集中，基本都在${joinNames(topNames)}上，不是偶发。`,
+            `再看任务，${joinNames(topNames)}出错的比例明显比别的高。`
           ], seed, used)
         : '',
       posWords.length
@@ -5108,8 +5114,8 @@ function buildSubjectReport(childId, days, sub, used) {
     ], seed, used),
     topNames.length
       ? pickFresh([
-          `任务主要落在${topNames.join('和')}上，这部分按约定做完，这一科就不会出问题。`,
-          `${topNames.join('和')}是常驻项目，量不大，贵在天天不断。`
+          `任务主要落在${joinNames(topNames)}上，这部分按约定做完，这一科就不会出问题。`,
+          `${joinNames(topNames)}是常驻项目，量不大，贵在天天不断。`
         ], seed, used)
       : '',
     posWords.length
