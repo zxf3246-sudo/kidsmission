@@ -4830,6 +4830,53 @@ function positiveWordsOf(items) {
   return out.slice(0, 2);
 }
 
+// 两句话之间最长的重复片段（去掉标点后比较），用来避免段落内部自我重复
+function overlapLen(a, b) {
+  const A = String(a).replace(/[\s，。、：；""！？!?（）()]/g, '');
+  const B = String(b).replace(/[\s，。、：；""！？!?（）()]/g, '');
+  if (!A || !B) return 0;
+  let best = 0, prev = new Array(B.length + 1).fill(0);
+  for (let i = 1; i <= A.length; i++) {
+    const cur = new Array(B.length + 1).fill(0);
+    for (let j = 1; j <= B.length; j++) {
+      if (A[i - 1] === B[j - 1]) {
+        cur[j] = prev[j - 1] + 1;
+        if (cur[j] > best) best = cur[j];
+      }
+    }
+    prev = cur;
+  }
+  return best;
+}
+
+// 同一个孩子的月报里，同一术语最多出现一次，第二次起换成同义词
+const TERM_ALTS = {
+  '说明': ['看得出', '可见', '说到底'],
+  '真正': ['其实', '更关键的是'],
+  '缺的是': ['差的是', '少的是'],
+  '眼下': ['现在', '目前'],
+  '整体': ['大体', '总体'],
+  '这类问题': ['这种毛病', '这些情况']
+};
+function softenTerms(text, counts) {
+  let out = String(text || '');
+  Object.keys(TERM_ALTS).forEach(term => {
+    let from = 0, idx;
+    while ((idx = out.indexOf(term, from)) !== -1) {
+      counts[term] = (counts[term] || 0) + 1;
+      if (counts[term] > 1) {
+        const alts = TERM_ALTS[term];
+        const alt = alts[(counts[term] - 2) % alts.length];
+        out = out.slice(0, idx) + alt + out.slice(idx + term.length);
+        from = idx + alt.length;
+      } else {
+        from = idx + term.length;
+      }
+    }
+  });
+  return out;
+}
+
 // 按优先级拼段：先放核心结论句，再用分析句补到字数下限，最后接建议句
 function assembleReport(segs, min, max, tail, seed, used) {
   const tailText = tail || '';
@@ -4841,6 +4888,8 @@ function assembleReport(segs, min, max, tail, seed, used) {
     if (!s) return;
     const L = cnLen(s);
     if (len + L > budget) return;
+    // 与前面已放入的句子重复太长（≥8 字）就跳过，避免同一段里说两遍同一件事
+    if (out.some(o => overlapLen(o, s) >= 8)) return;
     out.push(s);
     len += L;
   });
@@ -4849,6 +4898,7 @@ function assembleReport(segs, min, max, tail, seed, used) {
     const t = GENERAL_PAD[(off + n) % GENERAL_PAD.length];
     const L = cnLen(t);
     if (len + L > budget) continue;
+    if (out.some(o => overlapLen(o, t) >= 8)) continue;
     if (used) {
       if (used.has(t.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10))) continue;
       used.add(t.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10));
@@ -5246,7 +5296,8 @@ function renderMonthReport() {
   const usedCopy = new Set();
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
-    const summary = buildKidSummary(c.id, days, s, usedCopy);
+    const termCounts = {};
+    const summary = softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts);
     const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
@@ -5270,7 +5321,7 @@ function renderMonthReport() {
     </div>`;
     let blocks = '';
     monthSubjectsFor(c.id).forEach(sub => {
-      const auto = buildSubjectReport(c.id, days, sub, usedCopy);
+      const auto = softenTerms(buildSubjectReport(c.id, days, sub, usedCopy), termCounts);
       const blockKey = 'subj:' + sub.key;
       const edited = isMonthEdited(c.id, blockKey);
       const text = monthText(c.id, blockKey, auto);
@@ -6828,13 +6879,14 @@ async function exportMonth() {
   const usedExport = new Set();
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
+    const termCounts = {};
     setFont(mctx, 14, false);
-    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', buildKidSummary(c.id, days, s, usedExport)), innerW);
+    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts)), innerW);
     setFont(mctx, 14, false);
     const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days)), innerW);
     const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
-      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, buildSubjectReport(c.id, days, sub, usedExport)), innerW) };
+      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts)), innerW) };
     });
     let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
     blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
