@@ -15666,6 +15666,15 @@
             "status": "done"
           },
           {
+            "id": "t1793359694243ta4t",
+            "name": "语文1A一课生字",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t17931229498141ndg",
             "name": "自由玩耍",
             "duration": null,
@@ -15701,8 +15710,8 @@
         },
         "arrival": "16:30",
         "sleep": "22:00",
-        "taskSavedAt": 1793359456346,
-        "taskVer": 16,
+        "taskSavedAt": 1793359697317,
+        "taskVer": 18,
         "reviewSavedAt": null,
         "reviewVer": 0
       }
