@@ -4709,14 +4709,18 @@ const ISSUE_LINK = {
   ]
 };
 
-// 兜底用的中性分析句（内容够时会自动用不上；按 seed 轮换起点，避免每段都一样）
+// 兜底用的分析句（内容够时会自动用不上；尽量说人话，少用套话）
 const GENERAL_PAD = [
-  '这个判断在别的日子同样适用，可以拿来对照。',
-  '把观察点固定下来，月底回看时才不至于只剩印象。',
-  '连续一两个月的记录，比一次考试的分数更能说明问题。',
-  '眼下能做的不是加量，而是把同一个要求坚持到成为习惯。',
-  '眼下看不出差距，不代表问题已经解决。',
-  '评价这一科，过程比结果更值得记，结果只是过程的一次抽样。'
+  '剩下的日子大同小异，没什么可展开的。',
+  '单看都是小事，连起来才知道时间是怎么漏掉的。',
+  '这类情况不用天天纠正，说透一次比反复提醒管用。',
+  '记录留下的信息不多，判断只能停在表层。',
+  '与其月底回想，不如当天顺手写两句，省得靠印象补。',
+  '细看会发现，问题总在同一段时间里冒出来。',
+  '这些没人盯的角落，攒到月底就成了明显的差距。',
+  '变化不会一夜之间发生，往往是某天突然顺了，又慢慢回到原样。',
+  '从大人的角度看是拖延，从孩子的角度看，多半是不知道从哪下手。',
+  '同样的要求说了一整个月，能不能留下，要看有没有变成固定的顺序。'
 ];
 
 // 反复出现的具体描述（不报次数，只说明它已成模式）
@@ -4728,20 +4732,20 @@ function recurringTermsOf(items) {
   return out;
 }
 
-function repeatLine(rec, seed, isOther) {
+function repeatLine(rec, seed, isOther, used) {
   const quoted = '"' + rec.join('""') + '"';
   if (isOther) {
-    return pickBySeed([
+    return pickFresh([
       `复盘里反复出现的是${quoted}这类描述，说明它已经成了固定模式，不是偶尔一天的事。`,
       `类似${quoted}这样的描述反复出现，已经不是偶尔一天的事。`,
       `${quoted}这类说法被反复写进复盘，说明问题已经稳定存在，不是一天两天。`
-    ], seed);
+    ], seed, used);
   }
-  return pickBySeed([
+  return pickFresh([
     `复盘里反复出现的是${quoted}这类描述，说明它已经成了固定模式。`,
     `类似${quoted}这样的描述反复出现，不是偶然一次。`,
     `${quoted}这类说法被反复写进复盘，说明问题已经稳定存在。`
-  ], seed);
+  ], seed, used);
 }
 
 function matchesAny(text, terms) {
@@ -4755,6 +4759,20 @@ function seedOf(str) {
   return h;
 }
 function pickBySeed(pool, seed) { return pool[seed % pool.length]; }
+
+// 同一份月报内去重：同一条模板句（或开头 10 个字相同）只出现一次
+function pickFresh(pool, seed, used) {
+  if (!used) return pickBySeed(pool, seed);
+  const norm = s => s.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10);
+  const n = pool.length;
+  for (let i = 0; i < n; i++) {
+    const s = pool[(seed + i) % n];
+    if (!used.has(norm(s))) { used.add(norm(s)); return s; }
+  }
+  const s = pool[seed % n];
+  used.add(norm(s));
+  return s;
+}
 
 // 收集某科目（或"其他"）在当月复盘里出现的句子
 function collectSubjectItems(childId, days, sub) {
@@ -4793,7 +4811,7 @@ function positiveWordsOf(items) {
 }
 
 // 按优先级拼段：先放核心结论句，再用分析句补到字数下限，最后接建议句
-function assembleReport(segs, min, max, tail, seed) {
+function assembleReport(segs, min, max, tail, seed, used) {
   const tailText = tail || '';
   const tailLen = cnLen(tailText);
   const budget = max - tailLen;
@@ -4811,6 +4829,10 @@ function assembleReport(segs, min, max, tail, seed) {
     const t = GENERAL_PAD[(off + n) % GENERAL_PAD.length];
     const L = cnLen(t);
     if (len + L > budget) continue;
+    if (used) {
+      if (used.has(t.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10))) continue;
+      used.add(t.replace(/[\s，。、：；""！？!?（）()]/g, '').slice(0, 10));
+    }
     out.push(t);
     len += L;
   }
@@ -4818,9 +4840,10 @@ function assembleReport(segs, min, max, tail, seed) {
 }
 
 // 生成某个孩子某科目/其他方面的月度总结（只给结论，不引用原句、不报次数）
-function buildSubjectReport(childId, days, sub) {
+function buildSubjectReport(childId, days, sub, used) {
   const seed = seedOf(String(childId) + sub.key + (monthAnchor || ''));
   const { items, facetHits } = collectSubjectItems(childId, days, sub);
+  const notedDays = new Set(items.map(it => it.ds)).size;
 
   // ===== 其他（生活习惯 / 精神状态 / 体育活动 / 道德品质） =====
   if (sub.key === 'other') {
@@ -4880,71 +4903,139 @@ function buildSubjectReport(childId, days, sub) {
   // 这一科几乎没被记录
   if (!items.length) {
     const segs = [
-      pickBySeed([
-        `${sub.name}这个月几乎没有进入复盘的重点。`,
-        `${sub.name}是这一个月最少被提起的一科。`,
-        `复盘里关于${sub.name}的记录很少，几乎是空白。`
-      ], seed),
-      '这通常说明它暂时没成为负担，但不等于掌握得扎实。',
+      pickFresh([
+        `${sub.name}这个月几乎没在复盘里露过面。`,
+        `翻遍这个月的记录，${sub.name}只留在任务清单上。`,
+        `${sub.name}是这一个月最少被提起的一科。`
+      ], seed, used),
+      pickFresh([
+        '暂时没成为负担，不代表底子是牢的。',
+        '没出事，多半是还没到检验的时候。',
+        '不吵不闹的一科，最容易被忽略过去。'
+      ], seed, used),
       SUBJECT_IDLE[sub.key] || '',
       topNames.length
-        ? `任务上，${topNames.join('和')}一直在做，只是做完的结果没有写下来。`
-        : `任务清单里也没有单独给${sub.name}留固定安排，多是混在别的学习里一带而过。`,
+        ? pickFresh([
+            `任务上，${topNames.join('和')}一直在做，只是做完的结果没有写下来。`,
+            `${topNames.join('和')}是这一科每周都在跑的内容，写成文字的反馈一次也没有。`
+          ], seed, used)
+        : pickFresh([
+            `任务清单里也没有单独给${sub.name}留固定安排，多是混在别的学习里一带而过。`,
+            `${sub.name}既没有固定安排，也没人专门记，基本跟着别的科目走。`
+          ], seed, used),
       SUBJECT_WATCH[sub.key] || '',
-      '现在手上只有任务完成记录，成绩和具体问题都还是一片模糊。',
-      '没有记录，就判断不出问题是在理解、熟练度还是状态上。'
+      pickFresh([
+        '现在手上只有任务完成记录，成绩和具体问题都还是一片模糊。',
+        '除了"做完了"，这一科没有留下任何可判断的线索。'
+      ], seed, used),
+      pickFresh([
+        '没有记录，就判断不出问题是在理解、熟练度还是状态上。',
+        '真出问题时，连从哪天开始变的都说不清。'
+      ], seed, used)
     ];
-    return assembleReport(segs, 145, 160, '', seed);
+    return assembleReport(segs, 145, 160, '', seed, used);
   }
 
   // 有集中问题
   if (sc[top.key] >= 2) {
     const rec = recurringTermsOf(items);
     const segs = [
-      pickBySeed([
+      pickFresh([
         `这个月的${sub.name}绕不开一个问题：${top.name}。`,
         `${sub.name}这个月的问题很集中，几乎都落在${top.name}上。`,
         `${sub.name}这一科的症结很明确，就是${top.name}。`
-      ], seed),
+      ], seed, used),
       top.desc.replace('{S}', sub.name),
-      pickBySeed(ISSUE_LINK[top.key], seed),
+      pickFresh(ISSUE_LINK[top.key], seed, used),
       top.judge,
-      topNames.length ? `出问题的环节也集中，基本都在${topNames.join('和')}上，不是偶发。` : '',
-      posWords.length ? `也有做得顺的时候，${posWords.join('、')}这类反馈出现过，说明能力不缺，缺的是稳定复现。` : '',
-      rec.length ? repeatLine(rec, seed, false) : '',
-      second && sc[second.key] > 0 ? `${second.name}也零星出现，还没成为主要矛盾，但已经在占时间。` : ''
+      topNames.length
+        ? pickFresh([
+            `出问题的环节也集中，基本都在${topNames.join('和')}上，不是偶发。`,
+            `再看任务，${topNames.join('和')}出错的比例明显比别的高。`
+          ], seed, used)
+        : '',
+      posWords.length
+        ? pickFresh([
+            `也有做得顺的时候，${posWords.join('、')}这类反馈出现过，说明能力不缺，缺的是稳定复现。`,
+            `松的时候能看出底子在，${posWords.join('、')}就是证据；紧的时候又塌回去。`,
+            `好状态不是没有，${posWords.join('、')}那几次就对得很顺，可惜撑不住。`
+          ], seed, used)
+        : '',
+      rec.length ? repeatLine(rec, seed, false, used) : '',
+      second && sc[second.key] > 0
+        ? pickFresh([
+            `${second.name}也零星出现，还没成为主要矛盾，但已经在占时间。`,
+            `另外${second.name}被提过几次，分量不重，先记着就行。`
+          ], seed, used)
+        : ''
     ];
-    return assembleReport(segs, 145, 160, '', seed);
+    return assembleReport(segs, 145, 160, '', seed, used);
   }
 
   // 有记录，但没有集中问题
   const flat = sc[top.key] > 0;
   const rec2 = recurringTermsOf(items);
   const segs = [
-    pickBySeed([
+    pickFresh([
       `${sub.name}这个月整体平稳，没有集中爆发的短板。`,
       `${sub.name}这一科这个月没有出大问题，属于按部就班的状态。`,
       `${sub.name}是目前几科里最不需要操心的，但也谈不上出色。`
-    ], seed),
-    flat ? `${top.name}是唯一被反复点到的地方，不起眼，但一直存在。`
-         : '复盘里多是"完成""还行"这类描述，没有留下明显的问题信号。',
-    flat ? top.judge
-         : '平稳不等于扎实，成绩上不去，往往就藏在这种"看起来都会"的印象里。',
-    pickBySeed([
+    ], seed, used),
+    flat
+      ? pickFresh([
+          `${top.name}是唯一被反复点到的地方，不起眼，但一直存在。`,
+          `要说毛病，也就是${top.name}，说过几次，没闹大。`
+        ], seed, used)
+      : pickFresh([
+          '复盘里多是"完成""还行"这类描述，没有留下明显的问题信号。',
+          '写得最多的是"做完了"，至于做得怎么样，没人细究。',
+          notedDays <= 6 ? `整月只有 ${notedDays} 天写到这一科，样本太少。`
+                         : '每天都有记录，但内容大同小异，看不出起伏。'
+        ], seed, used),
+    flat
+      ? top.judge
+      : pickFresh([
+          '平稳不等于扎实，成绩上不去，往往就藏在这种"看起来都会"的印象里。',
+          '表象是稳的，真拉出来考一次，未必兜得住。',
+          '不慌不忙的样子，有时候只是还没遇到难的题。'
+        ], seed, used),
+    pickFresh([
       '目前的短板都不足以拖垮整体，真正决定上限的是能不能把已经会的东西稳定做对。',
-      '这一科现在缺的不是投入，而是把已有的水平稳定住。'
-    ], seed),
-    topNames.length ? `任务主要落在${topNames.join('和')}上，这部分按约定做完，这一科就不会出问题。` : '',
-    posWords.length ? `${posWords.join('、')}这类反馈出现过，是这一科目前最稳的部分。` : '',
-    rec2.length ? `需要留意的是"${rec2.join('""')}"这类描述，量不大，但说明问题还在原地。`
-                : '只是这类反馈太零星，很难判断是偶发，还是已经变成了习惯。',
-    flat ? '' : '真正要防的是突然掉队：平时看不出差距，一到期中期末才集中暴露。'
+      '这一科现在缺的不是投入，而是把已有的水平稳定住。',
+      '再往上走，靠的不是多做题，而是少犯老错。'
+    ], seed, used),
+    topNames.length
+      ? pickFresh([
+          `任务主要落在${topNames.join('和')}上，这部分按约定做完，这一科就不会出问题。`,
+          `${topNames.join('和')}是常驻项目，量不大，贵在天天不断。`
+        ], seed, used)
+      : '',
+    posWords.length
+      ? pickFresh([
+          `${posWords.join('、')}这类反馈出现过，是这一科目前最稳的部分。`,
+          `能拿得出手的，是${posWords.join('、')}那几次。`
+        ], seed, used)
+      : '',
+    rec2.length
+      ? pickFresh([
+          `需要留意的是"${rec2.join('""')}"这类描述，量不大，但说明问题还在原地。`,
+          `"${rec2.join('""')}"这几个词出现过不止一次，问题没走远。`
+        ], seed, used)
+      : pickFresh([
+          '只是这类反馈太零星，很难判断是偶发，还是已经变成了习惯。',
+          '零星的记录拼不出全貌，只能先存疑。'
+        ], seed, used),
+    flat ? '' : pickFresh([
+      '真正要防的是突然掉队：平时看不出差距，一到期中期末才集中暴露。',
+      '别等到考试才发现问题，平稳的日子最容易让人放松。'
+    ], seed, used)
   ];
-  return assembleReport(segs, 145, 160, '', seed);
+  return assembleReport(segs, 145, 160, '', seed, used);
 }
 
 // 每个孩子的全月总评：跨科目提炼主线
-function buildKidSummary(childId, days, stats) {
+function buildKidSummary(childId, days, stats, used) {
+  const seed = seedOf(String(childId) + 'sum' + (monthAnchor || ''));
   const per = monthSubjectsFor(childId).map(sub => {
     const { items } = collectSubjectItems(childId, days, sub);
     const sc = issueScoresOf(items);
@@ -4960,8 +5051,16 @@ function buildKidSummary(childId, days, stats) {
 
   if (!threadTotal) {
     return stats.rate >= 80
-      ? '这个月的复盘以任务完成情况为主，几科都没有出现集中的问题描述，整体推进得比较顺，属于少见的一个平稳月。'
-      : '这个月的复盘以任务完成情况为主，几科都没有出现集中的问题描述，但完成度并不算高，差距多半藏在过程和状态里，只是没被写下来。';
+      ? pickFresh([
+          '这个月复盘写得不多，几科都没冒出集中的毛病，事情推得比预期顺，算难得的一个安稳月。',
+          '整月翻下来没找到反复出现的坎，任务基本按计划走完了，这种顺当反而不常见。',
+          '记录里挑不出大问题，该做的都做了，日子过得平稳。'
+        ], seed, used)
+      : pickFresh([
+          '这个月的复盘大多只写了做没做完，没有写到具体卡在哪，完成度又不算高，差距多半藏在过程里。',
+          '记录停在"完成"这一层，做得好不好没人细说；完成度不高的那几天，原因也都没留下来。',
+          '复盘的篇幅都给了任务清单，过程和状态几乎没写，可完成率摆在那里，问题不是不存在，是没被记下来。'
+        ], seed, used);
   }
 
   const sorted = per.slice().sort((a, b) => b.total - a.total);
@@ -4972,16 +5071,42 @@ function buildKidSummary(childId, days, stats) {
     ? '更像是基础没真正打通，换个问法就露馅，而不是态度或时间的问题'
     : '更像是习惯和节奏的问题，而不是某个知识点没学会';
 
-  let text = `这个月的主线是${thread.name}。`;
+  let text = pickFresh([
+    `这个月的主线是${thread.name}。`,
+    `要说贯穿整月的，还是${thread.name}。`,
+    `几科放在一起看，反复冒头的是${thread.name}。`
+  ], seed, used);
   text += spreadSubs.length >= 2
-    ? `它在${spreadSubs.join('、')}上都能看到，说明${cause}。`
-    : `问题基本集中在${weakest.sub.name}，其他几科没有跟着一起掉，说明${cause}。`;
-  text += `${weakest.sub.name}是眼下最需要盯的一科`;
-  if (strongest.sub.name !== weakest.sub.name) text += `，${strongest.sub.name}相对能稳住`;
+    ? pickFresh([
+        `它在${spreadSubs.join('、')}上都能看到，说明${cause}。`,
+        `从${spreadSubs.join('、')}的记录里都能对上号，${cause}。`
+      ], seed, used)
+    : pickFresh([
+        `问题基本集中在${weakest.sub.name}，其他几科没有跟着一起掉，说明${cause}。`,
+        `几乎全压在${weakest.sub.name}上，别的科目没被带偏，${cause}。`
+      ], seed, used);
+  text += pickFresh([
+    `${weakest.sub.name}是眼下最需要盯的一科`,
+    `${weakest.sub.name}得先摆到最前面`,
+    `先动${weakest.sub.name}，其他先放一放`
+  ], seed, used);
+  if (strongest.sub.name !== weakest.sub.name) {
+    text += pickFresh([
+      `，${strongest.sub.name}相对能稳住`,
+      `，${strongest.sub.name}反倒不用太费心`
+    ], seed, used);
+  }
   text += '。';
   text += (positiveWordsOf(weakest.items).length || positiveWordsOf(strongest.items).length)
-    ? '好的时候能看出方法和能力都在，缺的是把同样的状态稳定复现出来。'
-    : '眼下看不出明显的优势科目，先把最弱的一科拉回正常水平，比同时补几科更现实。';
+    ? pickFresh([
+        '好的时候能看出方法和能力都在，缺的是把同样的状态稳定复现出来。',
+        '状态上来时思路是对的，难的是一直维持住。',
+        '不是不会，是时好时坏，好的那天值得记下来照着做。'
+      ], seed, used)
+    : pickFresh([
+        '眼下看不出明显的优势科目，先把最弱的一科拉回正常水平，比同时补几科更现实。',
+        '没有哪一科特别突出，与其四处补，不如先守住最弱的那一科。'
+      ], seed, used);
   return text;
 }
 
@@ -5097,7 +5222,9 @@ function renderMonthReport() {
   let reports = '';
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
-    const summary = buildKidSummary(c.id, days, s);
+    // 同一个孩子的月报内共用一个"已用句"集合，避免几段出现同样的说法
+    const used = new Set();
+    const summary = buildKidSummary(c.id, days, s, used);
     const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
@@ -5121,7 +5248,7 @@ function renderMonthReport() {
     </div>`;
     let blocks = '';
     monthSubjectsFor(c.id).forEach(sub => {
-      const auto = buildSubjectReport(c.id, days, sub);
+      const auto = buildSubjectReport(c.id, days, sub, used);
       const blockKey = 'subj:' + sub.key;
       const edited = isMonthEdited(c.id, blockKey);
       const text = monthText(c.id, blockKey, auto);
@@ -6678,13 +6805,14 @@ async function exportMonth() {
   monthAnchor = anchor; // 分项总结的随机种子与当前月份一致
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
+    const used = new Set();
     setFont(mctx, 14, false);
-    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', buildKidSummary(c.id, days, s)), innerW);
+    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', buildKidSummary(c.id, days, s, used)), innerW);
     setFont(mctx, 14, false);
     const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days)), innerW);
     const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
-      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, buildSubjectReport(c.id, days, sub)), innerW) };
+      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, buildSubjectReport(c.id, days, sub, used)), innerW) };
     });
     let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
     blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
