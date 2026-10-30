@@ -4852,7 +4852,7 @@ function overlapLen(a, b) {
 // 同一个孩子的月报里，同一术语最多出现一次，第二次起换成同义词
 const TERM_ALTS = {
   '说明': ['由此可见', '看得出', '说到底'],
-  '真正': ['实际', '其实'],
+  '真正': ['实际'],
   '缺的是': ['差的是', '少的是'],
   '眼下': ['现在', '目前'],
   '整体': ['全局', '总体'],
@@ -4875,6 +4875,23 @@ function softenTerms(text, counts) {
     }
   });
   return out;
+}
+
+// 跨段落去重：同一个孩子的几段之间，重复的整句直接省掉
+function makeCrossDeduper() {
+  const seen = new Set();
+  return function clean(text) {
+    if (!text) return text;
+    const parts = String(text).match(/[^。！？；]+[。！？；]?/g) || [String(text)];
+    let outStr = '';
+    parts.forEach(raw => {
+      const key = raw.replace(/华文|数学|英语|科学/g, '').replace(/[\s，。、：；""！？!?（）()]/g, '');
+      if (key.length >= 10 && seen.has(key)) return;
+      if (key.length >= 10) seen.add(key);
+      outStr += raw;
+    });
+    return outStr;
+  };
 }
 
 // 按优先级拼段：先放核心结论句，再用分析句补到字数下限，最后接建议句
@@ -5301,7 +5318,8 @@ function renderMonthReport() {
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
     const termCounts = {};
-    const summary = softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts);
+    const clean = makeCrossDeduper();
+    const summary = clean(softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts));
     const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
@@ -5325,7 +5343,7 @@ function renderMonthReport() {
     </div>`;
     let blocks = '';
     monthSubjectsFor(c.id).forEach(sub => {
-      const auto = softenTerms(buildSubjectReport(c.id, days, sub, usedCopy), termCounts);
+      const auto = clean(softenTerms(buildSubjectReport(c.id, days, sub, usedCopy), termCounts));
       const blockKey = 'subj:' + sub.key;
       const edited = isMonthEdited(c.id, blockKey);
       const text = monthText(c.id, blockKey, auto);
@@ -6884,13 +6902,14 @@ async function exportMonth() {
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
     const termCounts = {};
+    const clean = makeCrossDeduper();
     setFont(mctx, 14, false);
-    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts)), innerW);
+    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts))), innerW);
     setFont(mctx, 14, false);
     const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days)), innerW);
     const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
-      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts)), innerW) };
+      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, clean(softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts))), innerW) };
     });
     let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
     blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
