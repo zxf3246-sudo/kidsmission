@@ -14750,11 +14750,12 @@
           },
           {
             "id": "t17930823050443ysn",
-            "name": "Missy笔记背诵和10MCQ",
+            "name": "Missy口语练习",
             "duration": 20,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793082305044b03z",
@@ -14830,8 +14831,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793376148024,
-        "taskVer": 4,
+        "taskSavedAt": 1793376325999,
+        "taskVer": 6,
         "reviewSavedAt": 1793172653461,
         "reviewVer": 1
       },
@@ -16252,6 +16253,9 @@
       "qiannuo": {
         "WWK单词3个": true,
         "语文练习": true
+      },
+      "yilin": {
+        "Missy笔记背诵和10MCQ": true
       }
     }
   },
