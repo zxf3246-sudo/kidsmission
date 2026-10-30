@@ -14875,7 +14875,8 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t17930823050446lp3",
@@ -14919,8 +14920,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793376234466,
-        "taskVer": 8,
+        "taskSavedAt": 1793376259941,
+        "taskVer": 9,
         "reviewSavedAt": 1793172653461,
         "reviewVer": 1
       },
@@ -14943,14 +14944,6 @@
           }
         ],
         "tasks": [
-          {
-            "id": "t1793082305044bywz",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
           {
             "id": "t17930823050447agc",
             "name": "600字新字5个",
@@ -14993,11 +14986,12 @@
           },
           {
             "id": "t17930823050443vzo",
-            "name": "语文练习",
+            "name": "思维训练题",
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793082305045zfrb",
@@ -15041,8 +15035,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793376297753,
+        "taskVer": 3,
         "reviewSavedAt": 1793172653461,
         "reviewVer": 1
       }
@@ -16254,6 +16248,10 @@
         "WW单词复习": true,
         "数学题目复习": true,
         "数学复习": true
+      },
+      "qiannuo": {
+        "WWK单词3个": true,
+        "语文练习": true
       }
     }
   },
