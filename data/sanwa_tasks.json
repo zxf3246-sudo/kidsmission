@@ -15700,7 +15700,7 @@
         "review": {
           "points": 7,
           "score": 89,
-          "summary": "",
+          "summary": "今天完成任务的笑脸很高，做作业做的很快，然后质量也挺高的。主动去询问还有什么作业能做。周末打算也给她主要讲讲错题。",
           "reward": "",
           "other": "",
           "keywords": [
@@ -15722,8 +15722,8 @@
         "sleep": "22:00",
         "taskSavedAt": 1793369786092,
         "taskVer": 41,
-        "reviewSavedAt": 1793371755051,
-        "reviewVer": 14
+        "reviewSavedAt": 1793371816123,
+        "reviewVer": 16
       }
     }
   },
