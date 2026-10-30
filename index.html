@@ -5224,28 +5224,72 @@ const PLAN_CUES = ['下个月', '下月', '明天', '以后', '接下来', '下�
 
 const PLAN_KINDS = [
   { key: 'check', terms: ['检查', '自查', '复核', '复查', '验算', '核对', '回头看', '回头核'],
-    say: s => (s ? s + '做完先自己核对一遍' : '做完先自己核对一遍') },
+    variants: [
+      s => (s ? s + '做完先自己核对一遍' : '做完先自己核对一遍'),
+      s => (s ? s + '交之前留两分钟自查' : '交之前留两分钟自查'),
+      s => (s ? s + '做完回头验算一遍' : '做完回头验算一遍')
+    ] },
   { key: 'explain', terms: ['讲一遍', '讲过程', '讲思路', '过程讲', '讲清楚', '复述', '口述', '说出思路'],
-    say: s => (s ? s + '做错的题要讲清过程' : '做错的题要讲清过程') },
+    variants: [
+      s => (s ? s + '错题要讲清过程' : '错题要讲清过程'),
+      s => (s ? s + '做错的题要求讲一遍思路' : '做错的题要求讲一遍思路'),
+      s => (s ? s + '把过程说出来才算过' : '把过程说出来才算过')
+    ] },
   { key: 'practice', terms: ['加练', '多做', '多练', '刷题', '加量', '练习量', '多写', '多读', '多听', '补一补'],
-    say: s => (s ? s + '每天加一点练习量' : '每天加一点练习量') },
+    variants: [
+      s => (s ? s + '每天加一点练习量' : '每天加一点练习量'),
+      s => (s ? s + '按天补一点量' : '按天补一点量'),
+      s => (s ? s + '每天固定加练一点' : '每天固定加练一点')
+    ] },
   { key: 'flow', terms: ['固定', '作息', '时间点', '按时', '定时', '流程', '规律'],
-    say: () => '作息和作业时间点固定下来' },
+    variants: [
+      () => '作息和作业时间点固定下来',
+      () => '把起床、作业、睡觉的时间点固定'
+    ] },
   { key: 'reduce', terms: ['减少', '少做', '控制', '缩短', '减量', '不熬夜', '少玩', '限时', '别拖'],
-    say: () => '练习量往下收，先把错题弄明白' },
-  { key: 'ready', terms: ['预习', '考前', '复习', '梳理', '过一遍', '提前看', '提前学'],
-    say: () => '考试内容提前过一遍' },
-  { key: 'method', terms: ['方法', '换个方式', '分步骤', '拆开', '画图', '举例', '讲解'],
-    say: s => (s ? s + '换一种讲法，别只加量' : '换一种讲法，别只加量') },
-  { key: 'emotion', terms: ['情绪', '状态', '鼓励', '表扬', '压力', '焦虑', '谈心', '沟通', '陪伴'],
-    say: () => '状态差的日子先接情绪，任务减量' },
+    variants: [
+      () => '练习量往下收，先把错题弄明白',
+      () => '先减量，把错的地方弄懂'
+    ] },
+  { key: 'ready', terms: ['预习', '考前', '梳理', '过一遍', '提前看', '提前学', '复习计划'],
+    variants: [
+      () => '考试内容提前过一遍',
+      () => '考前留时间把内容梳理一遍'
+    ] },
+  { key: 'method', terms: ['换个方法', '换方法', '换个方式', '分步骤', '拆开', '画图', '举例', '讲解', '讲法'],
+    variants: [
+      s => (s ? s + '换一种讲法，别只加量' : '换一种讲法，别只加量'),
+      s => (s ? s + '拆成小步骤，一步一步过' : '拆成小步骤，一步一步过')
+    ] },
+  { key: 'emotion', terms: ['情绪', '鼓励', '表扬', '压力', '焦虑', '谈心', '沟通', '陪伴', '先接'],
+    variants: [
+      () => '状态差的日子先接情绪，任务减量',
+      () => '情绪上来时先安抚，再谈任务'
+    ] },
   { key: 'reward', terms: ['奖励', '积分', '兑换', '奖品', '激励'],
-    say: () => '把积分和奖励的规则说清楚' },
+    variants: [
+      () => '把积分和奖励的规则说清楚',
+      () => '奖励规则固定下来，别临时改'
+    ] },
   { key: 'sport', terms: ['运动', '跑步', '户外', '锻炼', '体育', '跳绳'],
-    say: () => '把运动排成固定安排' }
+    variants: [
+      () => '把运动排成固定安排',
+      () => '每周留出两三次运动'
+    ] }
 ];
 
-function buildStrategy(childId, days) {
+// 同一条建议在整份月报里只出现一次，第二次起换说法
+function pickPlanVariant(list, seed, used) {
+  const norm = v => (typeof v === 'function' ? v.toString() : String(v)).replace(/华文|数学|英语|科学/g, '');
+  if (!used) return pickBySeed(list, seed);
+  for (let i = 0; i < list.length; i++) {
+    const v = list[(seed + i) % list.length];
+    if (!used.has(norm(v))) { used.add(norm(v)); return v; }
+  }
+  return pickBySeed(list, seed);
+}
+
+function buildStrategy(childId, days, usedPlan) {
   const sents = [];
   days.forEach(ds => {
     const cd = state.dates[ds] && state.dates[ds][childId];
@@ -5282,6 +5326,7 @@ function buildStrategy(childId, days) {
       : '这个月还没在评语里写下下一步的安排。以后随手补一句"下次打算怎么改"，这里会自动归纳。';
   }
 
+  const seed = seedOf(String(childId) + 'plan' + (monthAnchor || ''));
   const usedSubs = {};
   const items = [];
   ranked.slice(0, 3).forEach(rec => {
@@ -5291,22 +5336,22 @@ function buildStrategy(childId, days) {
       subName = (MONTH_SUBJECTS.find(m => m.key === sk) || {}).name || '';
       usedSubs[sk] = 1;
     }
-    items.push(rec.kind.say(subName));
+    const v = pickPlanVariant(rec.kind.variants, seed + rec.n, usedPlan);
+    items.push(typeof v === 'function' ? v(subName) : v);
   });
 
-  const seed = seedOf(String(childId) + 'plan' + (monthAnchor || ''));
-  const prefix = pickBySeed(['下个月的重点：', '整理下来，接下来抓这几件：', '从评语看，下一步的安排是：'], seed);
-  const close = pickBySeed([
+  const prefix = pickPlanVariant(['下个月的重点：', '整理下来，接下来抓这几件：', '从评语看，下一步的安排是：'], seed, usedPlan);
+  const close = pickPlanVariant([
     '一次只改一两处，落到每天的任务里，两周后再看效果。',
     '先挑最容易做到的一件开始，别一次全上。',
     '关键是落进每天的任务，别只在月底想一想。'
-  ], seed + 1);
+  ], seed + 1, usedPlan);
   let out = prefix + items.join('；') + '。';
-  if (cnLen(out) < 50) out = out.replace(/。$/, '，') + close;
+  if (cnLen(out) < 50) out = out + close;
   while (cnLen(out) > 100 && items.length > 1) {
     items.pop();
     out = prefix + items.join('；') + '。';
-    if (cnLen(out) < 50) out = out.replace(/。$/, '，') + close;
+    if (cnLen(out) < 50) out = out + close;
   }
   return out;
 }
@@ -5385,13 +5430,14 @@ function renderMonthReport() {
   let reports = '';
   // 整份月报共用"已用句"集合：三个孩子的段落之间也不会出现同样的说法
   const usedCopy = new Set();
+  const usedPlan = new Set();
   const pageDeduper = makeCrossDeduper();
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
     const termCounts = {};
     const clean = pageDeduper;
     const summary = clean(softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts));
-    const strategy = buildStrategy(c.id, days);
+    const strategy = buildStrategy(c.id, days, usedPlan);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
       .slice(0, 6)
@@ -6970,6 +7016,7 @@ async function exportMonth() {
   const prevAnchor = monthAnchor;
   monthAnchor = anchor; // 分项总结的随机种子与当前月份一致
   const usedExport = new Set();
+  const usedPlanExport = new Set();
   const exportDeduper = makeCrossDeduper();
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
@@ -6978,7 +7025,7 @@ async function exportMonth() {
     setFont(mctx, 14, false);
     const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts))), innerW);
     setFont(mctx, 14, false);
-    const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days)), innerW);
+    const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days, usedPlanExport)), innerW);
     const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
       return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, clean(softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts))), innerW) };
