@@ -15534,7 +15534,7 @@
           },
           {
             "id": "t1793122949814utb3",
-            "name": "WW1单词5个",
+            "name": "WW单词练习",
             "duration": 15,
             "type": "study",
             "done": true,
@@ -15588,8 +15588,8 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": 1793359396627,
-        "taskVer": 9,
+        "taskSavedAt": 1793359751423,
+        "taskVer": 11,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16244,7 +16244,8 @@
       },
       "yanxi": {
         "一页计算题": true,
-        "语文阅读理解": true
+        "语文阅读理解": true,
+        "WW1单词5个": true
       },
       "qiannuo": {
         "600字新字5个": true,
