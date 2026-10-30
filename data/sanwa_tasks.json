@@ -15426,7 +15426,7 @@
           },
           {
             "id": "t1793122949813e7x3",
-            "name": "科学练习",
+            "name": "科学知识点",
             "duration": 15,
             "type": "study",
             "done": true,
@@ -15436,12 +15436,13 @@
           },
           {
             "id": "t1793122949813zgls",
-            "name": "数学练习",
+            "name": "科学练习",
             "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "empty"
           },
           {
             "id": "t1793122949813g230",
@@ -15487,8 +15488,8 @@
         },
         "arrival": "14:30",
         "sleep": "22:00",
-        "taskSavedAt": 1793359335408,
-        "taskVer": 19,
+        "taskSavedAt": 1793359383897,
+        "taskVer": 26,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16226,7 +16227,7 @@
     "2026-10-30": {
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
-        "科学知识点": true
+        "数学练习": true
       },
       "yanxi": {
         "一页计算题": true,
