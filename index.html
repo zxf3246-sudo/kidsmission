@@ -2770,6 +2770,31 @@ function migratePointsSplit(obj) {
   }
 }
 
+// 基础分修正：自 2026-10-28 起每天固定 7 分基础分；
+// 之前被旧版本写成 0（或未写）的记录，补成 7 并重算当天合计。历史日期（含重算过的）保持不变。
+const BASE_POINTS_FROM = '2026-10-28';
+function repairBasePoints(obj) {
+  if (!obj || !obj.dates) return;
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (ds < BASE_POINTS_FROM) return;
+    const kids = obj.dates[ds] || {};
+    Object.keys(kids).forEach(cid => {
+      const r = kids[cid] && kids[cid].review;
+      if (!r) return;
+      if (r.basePoints === undefined || r.basePoints === null || +r.basePoints === 0) {
+        r.basePoints = 7;
+        recalcReviewPoints(r);
+        changed++;
+      }
+    });
+  });
+  if (changed > 0) {
+    console.log('[repairBasePoints] 🔧 补基础分 7 分：', changed, '条');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 复盘字段更新
 function updateReview(childId, field, value, rerender) {
   const dateStr = document.getElementById('datePicker').value;
@@ -3998,6 +4023,7 @@ function loadState() {
       syncYanxiTueClass(obj);
       syncTalToXueersi(obj);
       migratePointsSplit(obj);
+      repairBasePoints(obj);
       migrateExamFull(obj);
       repairExamFull(obj);
       renameQiannuoFixedTasks(obj);
@@ -5211,7 +5237,7 @@ function renderChildren(dateStr) {
     const scoreHtml = scoreVal===null
       ? `<div class="stat-value empty">—</div><div class="stat-sub">未评</div>`
       : `<div class="stat-value ${scoreVal<60?'warn':''}">${scoreVal}</div><div class="stat-sub">/ 100</div>`;
-    const pointsVal = review.points || 0;
+    const pointsVal = basePointsOf(review) + (+review.earnPoints || 0) - (+review.deductPoints || 0) - (+review.redeemPoints || 0);
     const earnVal = +review.earnPoints || 0;
     const deductVal = +review.deductPoints || 0;
     const redeemVal = +review.redeemPoints || 0;
@@ -7727,6 +7753,7 @@ async function pullFromGist() {
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
+    repairBasePoints(merged);
     migrateExamFull(merged);
     repairExamFull(merged);
     renameQiannuoFixedTasks(merged);
@@ -7861,6 +7888,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncYanxiTueClass(state);
   syncTalToXueersi(state);
   migratePointsSplit(state);
+  repairBasePoints(state);
   migrateExamFull(state);
   repairExamFull(state);
   renameQiannuoFixedTasks(state);
@@ -7991,6 +8019,7 @@ async function autoPullFromCloud() {
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
+    repairBasePoints(merged);
     migrateExamFull(merged);
     repairExamFull(merged);
     renameQiannuoFixedTasks(merged);
