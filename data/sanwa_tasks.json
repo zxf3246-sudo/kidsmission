@@ -15699,11 +15699,15 @@
         ],
         "review": {
           "points": 7,
-          "score": null,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "听话",
+            "有进步"
+          ],
           "basePoints": 7,
           "earnPoints": 0,
           "deductPoints": 0,
@@ -15712,14 +15716,14 @@
           "deductReason": "",
           "redeemReason": "",
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "16:30",
         "sleep": "22:00",
         "taskSavedAt": 1793369786092,
         "taskVer": 41,
-        "reviewSavedAt": null,
-        "reviewVer": 1
+        "reviewSavedAt": 1793371755051,
+        "reviewVer": 14
       }
     }
   },
