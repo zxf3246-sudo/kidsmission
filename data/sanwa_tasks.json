@@ -15528,22 +15528,6 @@
             "errLinked": false
           },
           {
-            "id": "t1793122949814472s",
-            "name": "语文阅读理解",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793122949814pszs",
-            "name": "一页计算题",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t17931229498146n0d",
             "name": "学而思作业",
             "duration": null,
@@ -15551,6 +15535,15 @@
             "status": "",
             "done": false,
             "courseTask": "xes"
+          },
+          {
+            "id": "t1793336310058adk1",
+            "name": "LA作业改正",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t17931229498145z9u",
@@ -15588,8 +15581,8 @@
         },
         "arrival": "14:00",
         "sleep": "22:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793336311481,
+        "taskVer": 4,
         "reviewSavedAt": null,
         "reviewVer": 0
       },
@@ -16237,6 +16230,10 @@
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
         "科学知识点": true
+      },
+      "yanxi": {
+        "一页计算题": true,
+        "语文阅读理解": true
       }
     }
   },
