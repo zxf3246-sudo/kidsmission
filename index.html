@@ -4623,23 +4623,43 @@ const ISSUE_CATS = [
   { key: 'accuracy', name: '准确率',
     terms: ['准确率低', '准确率', '反复出错', '粗心', '算错', '做错', '写错', '拼错', '漏写', '漏字', '看错', '错题', '马虎'],
     desc: '{S}上的失误多是低级错误，会做的题因为看错、算错、写错而丢分。',
-    judge: '这类问题最容易被"粗心"两个字带过去，本质是检查的习惯没建立起来，做完就交，不回头核。' },
+    desc2: '{S}丢的分几乎都在会做的题上，看错、抄错、算一步错，整题白做。',
+    desc3: '{S}的错法很单一，不是不会，是手比脑子快，写完就往前赶。',
+    judge: '这类问题最容易被"粗心"两个字带过去，本质是检查的习惯没建立起来，做完就交，不回头核。',
+    judge2: '嘴上说"粗心"，其实缺的是检查这一步；会做却做错，比不会更可惜。',
+    judge3: '不回头核的习惯一旦固定，成绩就总差一口气，练再多也补不回来。' },
   { key: 'focus', name: '专注度',
     terms: ['分心', '心不在焉', '不专注', '注意力', '坐不住', '走神', '开小差', '东摸西摸', '磨蹭', '拖拉', '拖拖拉拉', '慢吞吞'],
     desc: '{S}最容易在开头和中间断掉，坐不住、要人提醒才继续，一被打断就要重新进入状态。',
-    judge: '表面看是速度慢，实质是能集中的时间太短，一离开大人的视线就容易停下来。' },
+    desc2: '{S}的注意力撑不到整段，前几分钟还行，越往后越散，最后变成磨时间。',
+    desc3: '{S}一坐下就走神，摸橡皮、找本子、喝水，半小时过去还在第一题。',
+    judge: '表面看是速度慢，实质是能集中的时间太短，一离开大人的视线就容易停下来。',
+    judge2: '看着像不认真，其实是能持续的时长不够，任务一切块就散了。',
+    judge3: '专注不是靠提醒提上来的，得靠固定的节奏把它撑住。' },
   { key: 'understanding', name: '理解深度',
     terms: ['不理解', '没懂', '不懂', '不会', '思路', '概念', '想不明白', '搞不清', '背答案', '套公式', '换个问法'],
     desc: '{S}的卡点在理解上，题目稍微换个问法就露馅，说明记住的是结论而不是方法。',
-    judge: '这种情况加量解决不了，题做得越多，错误的印象反而越牢。' },
+    desc2: '{S}错的地方集中在思路上，题型一变就不会，只记住了答案的样子。',
+    desc3: '{S}的问题不在练习量，在理解没到位，同一类题换个数字照样卡住。',
+    judge: '这种情况加量解决不了，题做得越多，错误的印象反而越牢。',
+    judge2: '靠多做补不回来，得让他把过程讲一遍，讲不通就是没懂。',
+    judge3: '记住结论的孩子做题快，一考变式就露底，这类漏洞越往后越贵。' },
   { key: 'quantity', name: '完成度',
     terms: ['没完成', '未完成', '做不完', '没做完', '太多', '来不及', '时间不够', '拖到', '补做', '欠着'],
     desc: '{S}安排的量和可用时间对不上，当天做不完就往后拖，越拖越难补。',
-    judge: '不是不愿意做，而是任务被压在最疲劳的时段，或者一开始就没有拆成能做完的小块。' },
+    desc2: '{S}的量排得比时间多，每天都要往后挪一点，欠下的越滚越大。',
+    desc3: '{S}总是排在最累的时段，做一半停一半，第二天再重新开始。',
+    judge: '不是不愿意做，而是任务被压在最疲劳的时段，或者一开始就没有拆成能做完的小块。',
+    judge2: '问题不在孩子不肯做，在安排本身就没留出能做完的余地。',
+    judge3: '一直做不完，慢慢地就不想开始了，这是量的问题，不是态度。' },
   { key: 'attitude', name: '学习态度',
     terms: ['消极', '不愿意', '抗拒', '发脾气', '哭', '敷衍', '找事儿', '吵架', '顶嘴', '不在状态'],
     desc: '{S}一开口就先有情绪，抵触的往往不是内容本身，而是"又要做"这件事。',
-    judge: '情绪先于任务出现，说明这件事在他心里的负担，已经超过了他当下能承受的程度。' }
+    desc2: '{S}一被提起就先皱眉，真正花在对抗上的时间，比做题还多。',
+    desc3: '{S}的开头最难，前五分钟谈不拢，后面基本就是耗着。',
+    judge: '情绪先于任务出现，说明这件事在他心里的负担，已经超过了他当下能承受的程度。',
+    judge2: '抵触不是懒，是这件事在他心里已经和"不愉快"绑在了一起。',
+    judge3: '这个阶段讲道理没用，先把情绪接住，任务才推得动。' }
 ];
 
 // "其他"四类的典型表现与判断
@@ -4899,6 +4919,8 @@ function buildSubjectReport(childId, days, sub, used) {
   const top = ranked[0];
   const second = ranked[1];
   const posWords = positiveWordsOf(items);
+  const descPool = [top.desc, top.desc2, top.desc3].filter(Boolean);
+  const judgePool = [top.judge, top.judge2, top.judge3].filter(Boolean);
 
   // 这一科几乎没被记录
   if (!items.length) {
@@ -4945,9 +4967,9 @@ function buildSubjectReport(childId, days, sub, used) {
         `${sub.name}这个月的问题很集中，几乎都落在${top.name}上。`,
         `${sub.name}这一科的症结很明确，就是${top.name}。`
       ], seed, used),
-      top.desc.replace('{S}', sub.name),
+      pickFresh(descPool, seed, used).replace('{S}', sub.name),
       pickFresh(ISSUE_LINK[top.key], seed, used),
-      top.judge,
+      pickFresh(judgePool, seed, used),
       topNames.length
         ? pickFresh([
             `出问题的环节也集中，基本都在${topNames.join('和')}上，不是偶发。`,
@@ -4993,7 +5015,7 @@ function buildSubjectReport(childId, days, sub, used) {
                          : '每天都有记录，但内容大同小异，看不出起伏。'
         ], seed, used),
     flat
-      ? top.judge
+      ? pickFresh(judgePool, seed, used)
       : pickFresh([
           '平稳不等于扎实，成绩上不去，往往就藏在这种"看起来都会"的印象里。',
           '表象是稳的，真拉出来考一次，未必兜得住。',
@@ -5220,11 +5242,11 @@ function renderMonthReport() {
   CHILDREN.forEach(c => { statsMap[c.id] = monthStatsFor(c.id, days); });
 
   let reports = '';
+  // 整份月报共用"已用句"集合：三个孩子的段落之间也不会出现同样的说法
+  const usedCopy = new Set();
   CHILDREN.forEach(c => {
     const s = statsMap[c.id];
-    // 同一个孩子的月报内共用一个"已用句"集合，避免几段出现同样的说法
-    const used = new Set();
-    const summary = buildKidSummary(c.id, days, s, used);
+    const summary = buildKidSummary(c.id, days, s, usedCopy);
     const strategy = buildStrategy(c.id, days);
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
@@ -5248,7 +5270,7 @@ function renderMonthReport() {
     </div>`;
     let blocks = '';
     monthSubjectsFor(c.id).forEach(sub => {
-      const auto = buildSubjectReport(c.id, days, sub, used);
+      const auto = buildSubjectReport(c.id, days, sub, usedCopy);
       const blockKey = 'subj:' + sub.key;
       const edited = isMonthEdited(c.id, blockKey);
       const text = monthText(c.id, blockKey, auto);
@@ -6803,16 +6825,16 @@ async function exportMonth() {
   const mctx = document.createElement('canvas').getContext('2d');
   const prevAnchor = monthAnchor;
   monthAnchor = anchor; // 分项总结的随机种子与当前月份一致
+  const usedExport = new Set();
   const measured = CHILDREN.map(c => {
     const s = statsMap[c.id];
-    const used = new Set();
     setFont(mctx, 14, false);
-    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', buildKidSummary(c.id, days, s, used)), innerW);
+    const sumLines = imgWrap(mctx, '本月总评：' + monthText(c.id, 'sum', buildKidSummary(c.id, days, s, usedExport)), innerW);
     setFont(mctx, 14, false);
     const stratLines = imgWrap(mctx, '策略改进：' + monthText(c.id, 'strategy', buildStrategy(c.id, days)), innerW);
     const blocks = monthSubjectsFor(c.id).map(sub => {
       setFont(mctx, 13, false);
-      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, buildSubjectReport(c.id, days, sub, used)), innerW) };
+      return { sub: sub, lines: imgWrap(mctx, monthText(c.id, 'subj:' + sub.key, buildSubjectReport(c.id, days, sub, usedExport)), innerW) };
     });
     let cH = 24 + 36 + 32; // 上内边距 + 名字行 + 统计小字行
     blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
