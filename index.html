@@ -5579,6 +5579,9 @@ function weekify(text) {
   return WEEK_WORD_MAP.reduce((s, p) => s.split(p[0]).join(p[1]), String(text || ''));
 }
 
+// 周报「其他总结」用的虚拟板块（复用月报里非学习部分的分析逻辑）
+const WEEK_OTHER_SUB = { key: 'other', name: '其他', icon: '🌱', color: '#b45309' };
+
 // 周报文字手动修改：state.weekEdits["孩子|周一日期|区块"] = 文本
 function weekEditKey(cid, blockKey) {
   return cid + '|' + (weekAnchor || '') + '|' + blockKey;
@@ -5681,6 +5684,7 @@ function renderWeekReport() {
     const termCounts = {};
     const clean = pageDeduper;
     const summary = weekify(clean(softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts)));
+    const otherSummary = weekify(clean(softenTerms(buildSubjectReport(c.id, days, WEEK_OTHER_SUB, usedCopy), termCounts)));
     const strategy = weekify(buildStrategy(c.id, days, usedPlan));
     const kwHtml = Object.keys(s.kwCount)
       .sort((a, b) => s.kwCount[b] - s.kwCount[a])
@@ -5701,41 +5705,29 @@ function renderWeekReport() {
       <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
     </div>`;
 
-    let blocks = '';
-    monthSubjectsFor(c.id).forEach(sub => {
-      const auto = weekify(clean(softenTerms(buildSubjectReport(c.id, days, sub, usedCopy), termCounts)));
-      const blockKey = 'subj:' + sub.key;
-      const edited = isWeekEdited(c.id, blockKey);
-      const text = weekText(c.id, blockKey, auto);
-      blocks += `<div class="month-subject" style="--subj-color:${sub.color}">
-        <div class="month-subject-head">
-          <div class="month-subject-name">${sub.icon} ${sub.name}${sub.desc ? '<span class="month-subject-desc">（' + sub.desc + '）</span>' : ''}</div>
-          <span style="display:flex;align-items:center;gap:6px">
-            <span class="month-subject-len">${cnLen(text)} 字</span>
-            ${edited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','${blockKey}')" title="恢复自动生成">↺ 恢复</button>` : ''}
-          </span>
-        </div>
-        <div class="month-editable${edited ? ' is-edited' : ''}" contenteditable="true"
-          data-cid="${c.id}" data-key="${blockKey}"
-          oninput="onWeekEditInput(this)"
-          onblur="saveWeekText('${c.id}','${blockKey}',this.innerText,this.closest('.month-subject').querySelector('.month-subject-len'))">${escapeHtml(text)}</div>
-      </div>`;
-    });
     const sumEdited = isWeekEdited(c.id, 'sum');
+    const otherEdited = isWeekEdited(c.id, 'other');
     const stratEdited = isWeekEdited(c.id, 'strategy');
     const sumText = weekText(c.id, 'sum', summary);
+    const otherText = weekText(c.id, 'other', otherSummary);
     const stratText = weekText(c.id, 'strategy', strategy);
     const kidBg = CHILD_BG_SRC[c.id];
     reports += `<div class="month-kid-block${kidBg ? ' has-bg' : ''}" style="--kid-color:${CHILD_COLORS[c.id].main};${kidBg ? `--kid-bg:url('${kidBg}');` : ''}">
-      <div class="month-kid-title">${c.emoji} ${c.name} · 本周总结</div>
+      <div class="month-kid-title">${c.emoji} ${c.name} · 本周回顾</div>
       ${statHtml}
-      ${blocks}
       <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}">
-        <div class="month-sum-head"><b>本周总评：</b>${sumEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','sum')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
+        <div class="month-sum-head"><b>📚 学习总结：</b>${sumEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','sum')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
         <div class="month-editable${sumEdited ? ' is-edited' : ''}" contenteditable="true"
           data-cid="${c.id}" data-key="sum"
           oninput="onWeekEditInput(this)"
           onblur="saveWeekText('${c.id}','sum',this.innerText)">${escapeHtml(sumText)}</div>
+      </div>
+      <div class="month-kid-sum" style="--kid-color:#b45309">
+        <div class="month-sum-head"><b>🌱 其他总结：</b>${otherEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','other')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
+        <div class="month-editable${otherEdited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="other"
+          oninput="onWeekEditInput(this)"
+          onblur="saveWeekText('${c.id}','other',this.innerText)">${escapeHtml(otherText)}</div>
       </div>
       <div class="month-kid-sum month-strategy" style="--kid-color:#0f766e">
         <div class="month-sum-head"><b>策略改进：</b>${stratEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','strategy')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
@@ -7424,18 +7416,15 @@ async function exportWeekReport() {
     const termCounts = {};
     const clean = exportDeduper;
     setFont(mctx, 14, false);
-    const sumLines = imgWrap(mctx, '本周总评：' + weekText(c.id, 'sum', weekify(clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts)))), innerW);
+    const sumLines = imgWrap(mctx, '📚 学习总结：' + weekText(c.id, 'sum', weekify(clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts)))), innerW);
+    const otherLines = imgWrap(mctx, '🌱 其他总结：' + weekText(c.id, 'other', weekify(clean(softenTerms(buildSubjectReport(c.id, days, WEEK_OTHER_SUB, usedExport), termCounts)))), innerW);
     const stratLines = imgWrap(mctx, '策略改进：' + weekText(c.id, 'strategy', weekify(buildStrategy(c.id, days, usedPlanExport))), innerW);
-    const blocks = monthSubjectsFor(c.id).map(sub => {
-      setFont(mctx, 13, false);
-      return { sub: sub, lines: imgWrap(mctx, weekText(c.id, 'subj:' + sub.key, weekify(clean(softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts)))), innerW) };
-    });
     let cH = 24 + 36 + 32;
-    blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
     cH += sumLines.length * 26 + 14;
+    cH += otherLines.length * 26 + 14;
     cH += stratLines.length * 26 + 8;
     cH += 24;
-    return { c: c, s: s, cH: cH, sumLines: sumLines, stratLines: stratLines, blocks: blocks };
+    return { c: c, s: s, cH: cH, sumLines: sumLines, otherLines: otherLines, stratLines: stratLines };
   });
   monthAnchor = prevAnchor;
   weekAnchor = prevWeekAnchor;
@@ -7502,18 +7491,13 @@ async function exportWeekReport() {
     ctx.fillText('本周积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin) + ' · 平均评分 ' + s.avgScore + ' · 完成率 ' + s.rate + '%', innerX, cy);
     cy += 32;
 
-    m.blocks.forEach(b => {
-      setFont(ctx, 14, true); ctx.fillStyle = b.sub.color;
-      ctx.fillText(b.sub.icon + ' ' + b.sub.name, innerX, cy);
-      cy += 22;
-      setFont(ctx, 13, false); ctx.fillStyle = '#334155';
-      b.lines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 24));
-      cy += b.lines.length * 24 + 12;
-    });
-
     setFont(ctx, 14, false); ctx.fillStyle = '#334155';
     m.sumLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
     cy += m.sumLines.length * 26 + 14;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#334155';
+    m.otherLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+    cy += m.otherLines.length * 26 + 14;
 
     setFont(ctx, 14, false); ctx.fillStyle = '#0f766e';
     m.stratLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
