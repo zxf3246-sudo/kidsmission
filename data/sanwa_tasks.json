@@ -15032,25 +15032,26 @@
           }
         ],
         "review": {
-          "points": 7,
+          "points": 9,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
           "keywords": [],
           "basePoints": 7,
-          "earnPoints": 0,
+          "earnPoints": 2,
           "deductPoints": 0,
           "redeemPoints": 0,
           "savings": 0,
-          "stars": 0
+          "stars": 0,
+          "earnReason": "计算题两篇全对"
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1793408429334,
         "taskVer": 8,
-        "reviewSavedAt": 1793172653461,
-        "reviewVer": 1
+        "reviewSavedAt": 1793410670182,
+        "reviewVer": 9
       }
     },
     "2026-10-29": {
