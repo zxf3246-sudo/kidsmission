@@ -15869,6 +15869,15 @@
             "errLinked": false
           },
           {
+            "id": "t1793464442698yqz1",
+            "name": "四五快读5字",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1793409065435yq13",
             "name": "自由玩耍",
             "duration": null,
@@ -15898,8 +15907,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793464428565,
-        "taskVer": 3,
+        "taskSavedAt": 1793464444005,
+        "taskVer": 5,
         "reviewSavedAt": null,
         "reviewVer": 1
       },
