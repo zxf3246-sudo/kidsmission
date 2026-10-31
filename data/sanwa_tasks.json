@@ -14956,14 +14956,6 @@
         ],
         "tasks": [
           {
-            "id": "t17930823050447agc",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793082305044qssa",
             "name": "数学计算练习",
             "duration": 20,
@@ -15006,45 +14998,43 @@
           {
             "id": "t17934084167614gi7",
             "name": "数学改正讲解",
-            "duration": null,
+            "duration": 30,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
-          },
-          {
-            "id": "t17934083896437wgh",
-            "name": "小测复习",
-            "duration": null,
-            "type": "study",
-            "done": false,
-            "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793082305045zfrb",
             "name": "语文LA作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "la"
+            "status": "done",
+            "done": true,
+            "courseTask": "la",
+            "manualTouched": true
           },
           {
             "id": "t1793082305044vit7",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793082305044f4m8",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "22:00"
           }
         ],
         "review": {
@@ -15064,8 +15054,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793420128872,
-        "taskVer": 15,
+        "taskSavedAt": 1793456683901,
+        "taskVer": 39,
         "reviewSavedAt": 1793410670182,
         "reviewVer": 9
       }
@@ -16879,7 +16869,9 @@
       "qiannuo": {
         "WWK单词3个": true,
         "语文练习": true,
-        "思维训练题": true
+        "思维训练题": true,
+        "600字新字5个": true,
+        "小测复习": true
       },
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
