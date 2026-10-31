@@ -14814,24 +14814,27 @@
         ],
         "review": {
           "points": 7,
-          "score": null,
-          "summary": "",
+          "score": 89,
+          "summary": "一整天下来表现还可以，值得关注的是虽然这几天有好好完成老师布置的任务，但是英语口语方面老师也建议还是单独把每道问题练好，练标准，不要出现磕磕绊绊的情况更好。然后Missy后期会把数学和英语一半一半分配上课，因为数学提分更快，效果更好。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "普普通通"
+          ],
           "basePoints": 7,
           "earnPoints": 0,
           "deductPoints": 0,
           "redeemPoints": 0,
           "savings": 0,
-          "stars": 0
+          "stars": 4
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1793456599438,
         "taskVer": 47,
-        "reviewSavedAt": 1793172653461,
-        "reviewVer": 1
+        "reviewSavedAt": 1793456867375,
+        "reviewVer": 12
       },
       "yanxi": {
         "fixedClasses": [
