@@ -14996,6 +14996,24 @@
             "courseTask": "la"
           },
           {
+            "id": "t17934083896437wgh",
+            "name": "小测复习",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
+            "id": "t17934084167614gi7",
+            "name": "数学改正讲解",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1793082305044vit7",
             "name": "自由玩耍",
             "duration": null,
@@ -15028,8 +15046,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793376297753,
-        "taskVer": 3,
+        "taskSavedAt": 1793408418702,
+        "taskVer": 6,
         "reviewSavedAt": 1793172653461,
         "reviewVer": 1
       }
