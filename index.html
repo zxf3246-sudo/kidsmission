@@ -269,6 +269,25 @@
   }
   .month-kid-sum b { color: var(--kid-color, #6366f1); font-weight: 900; }
   .month-strategy { margin-top: 10px; }
+  /* ====== 周报视图 ====== */
+  .week-report { display: none; }
+  body.view-week .children-grid,
+  body.view-week .shared-learning { display: none !important; }
+  body.view-week .week-report { display: block; }
+  /* 周报·会议记录（每周一份，手写输入） */
+  .meeting-card { margin-top: 22px; }
+  .meeting-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .meeting-title { font-size: 15px; font-weight: 900; color: #0f766e; }
+  .meeting-len { font-size: 11px; color: #94a3b8; font-weight: 600; }
+  .meeting-hint { font-size: 12px; color: #94a3b8; margin-bottom: 10px; }
+  .meeting-input {
+    width: 100%; min-height: 150px; resize: vertical;
+    border: 1px dashed #cbd5e1; border-radius: 12px; background: #fbfcfe;
+    padding: 12px 14px; font-family: inherit; font-size: 13px; line-height: 1.85;
+    color: #334155; outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  .meeting-input:focus { border-color: #0d9488; background: #fff; box-shadow: 0 0 0 3px rgba(13,148,136,.12); }
+  .meeting-input::placeholder { color: #b6c0cf; }
   @media (max-width: 960px) {
     .month-stats-grid { grid-template-columns: 1fr; }
     .month-head { flex-direction: column; align-items: flex-start; }
@@ -1956,6 +1975,8 @@
 
 <section class="month-report" id="monthReport"></section>
 
+<section class="week-report" id="weekReport"></section>
+
 <div class="save-indicator" id="saveIndicator">✓ 已保存</div>
 
 <div class="modal-overlay" id="taskModal">
@@ -3241,12 +3262,13 @@ function isDirty(childId, part) {
 
 function setView(v) {
   currentView = v;
-  document.body.classList.remove('view-all','view-task','view-review','view-month');
+  document.body.classList.remove('view-all','view-task','view-review','view-month','view-week');
   document.body.classList.add('view-' + v);
   document.querySelectorAll('.view-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.view === v);
   });
   if (v === 'month') renderMonthReport();
+  if (v === 'week') renderWeekReport();
   renderChildren(document.getElementById('datePicker').value);
 }
 // 进入某个孩子的单人页面
@@ -4292,11 +4314,16 @@ function render() {
   renderSharedLearning();
   renderChildren(dateStr);
   if (currentView === 'month') renderMonthReport();
+  if (currentView === 'week') renderWeekReport();
 }
 
 // ====== 月报视图 ======
 let monthAnchor = null;      // 当前月报所在月的 1 号（YYYY-MM-01）
 let monthBaseDate = null;    // 用于判断日期选择器是否变化
+
+// ====== 周报视图 ======
+let weekAnchor = null;       // 当前周报所在周的周一（YYYY-MM-DD）
+let weekBaseDate = null;     // 用于判断日期选择器是否变化
 
 // 复盘里的消极 / 积极关键词（用于标红与语气判断）
 const NEGATIVE_KEYWORDS = ['拖拖拉拉','发脾气','消极','不在状态','反复出错','粗心','批评','找事儿','吵架','挨揍','哭哭啼啼','考试成绩差','老师批评','磨蹭','分心','低效率','准确率低','自制力差','生活习惯不好','心不在焉'];
@@ -5507,6 +5534,235 @@ function renderMonthReport() {
   el.innerHTML = header + `
     <div class="month-note">统计口径：${monthLabel}已过去的 ${days.length} 天；文字可直接点击修改（改过的以你的版本为准），点「↺ 恢复」还原自动生成。</div>
     ${reports}`;
+}
+
+// ====== 周报 ======
+// 周一为一周起点（周日计入上一周）
+function weekStartOf(dateStr) {
+  const d = new Date(String(dateStr) + 'T00:00:00');
+  const dow = d.getDay();
+  d.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow));
+  return localDateStr(d);
+}
+function daysOfWeek(weekStart) {
+  const out = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(String(weekStart) + 'T00:00:00');
+    d.setDate(d.getDate() + i);
+    out.push(localDateStr(d));
+  }
+  return out;
+}
+function fmtWeekDay(ds) {
+  const d = new Date(String(ds) + 'T00:00:00');
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+}
+function weekShift(step) {
+  if (step === 0) {
+    weekAnchor = weekStartOf(localDateStr(new Date()));
+  } else {
+    const d = new Date((weekAnchor || weekStartOf(localDateStr(new Date()))) + 'T00:00:00');
+    d.setDate(d.getDate() + step * 7);
+    weekAnchor = weekStartOf(localDateStr(d));
+  }
+  weekBaseDate = document.getElementById('datePicker').value;
+  renderWeekReport();
+}
+
+// 自动文案沿用月报的写法，只把时间口径从"月"换成"周"
+const WEEK_WORD_MAP = [
+  ['这一个月', '这一周'], ['一个月', '一周'], ['下个月', '下周'], ['上个月', '上周'],
+  ['每个月', '每周'], ['这个月', '这周'], ['本月', '本周'], ['整月', '整周'],
+  ['月初', '周初'], ['月中', '周中'], ['月底', '周末'], ['月里', '周里'], ['安稳月', '安稳周']
+];
+function weekify(text) {
+  return WEEK_WORD_MAP.reduce((s, p) => s.split(p[0]).join(p[1]), String(text || ''));
+}
+
+// 周报文字手动修改：state.weekEdits["孩子|周一日期|区块"] = 文本
+function weekEditKey(cid, blockKey) {
+  return cid + '|' + (weekAnchor || '') + '|' + blockKey;
+}
+function weekText(cid, blockKey, fallback) {
+  const v = (state.weekEdits || {})[weekEditKey(cid, blockKey)];
+  return (typeof v === 'string' && v.trim() !== '') ? v : fallback;
+}
+function isWeekEdited(cid, blockKey) {
+  const v = (state.weekEdits || {})[weekEditKey(cid, blockKey)];
+  return typeof v === 'string' && v.trim() !== '';
+}
+function saveWeekText(cid, blockKey, val, lenEl) {
+  clearTimeout(weekEditTimer);
+  state.weekEdits = state.weekEdits || {};
+  const k = weekEditKey(cid, blockKey);
+  const txt = String(val || '').replace(/\u00a0/g, ' ').trim();
+  if (txt === '') delete state.weekEdits[k];
+  else state.weekEdits[k] = txt;
+  if (lenEl) lenEl.textContent = cnLen(txt) + ' 字';
+  save();
+}
+function resetWeekText(cid, blockKey) {
+  state.weekEdits = state.weekEdits || {};
+  delete state.weekEdits[weekEditKey(cid, blockKey)];
+  save(); renderWeekReport();
+}
+function updateWeekLen(el) {
+  const head = el.closest('.month-subject-head');
+  if (head) { const s = head.querySelector('.month-subject-len'); if (s) s.textContent = cnLen(el.innerText) + ' 字'; }
+}
+let weekEditTimer = null;
+function onWeekEditInput(el) {
+  updateWeekLen(el);
+  clearTimeout(weekEditTimer);
+  weekEditTimer = setTimeout(() => {
+    const cid = el.dataset.cid, key = el.dataset.key;
+    if (cid && key && el.innerText.trim() !== '') saveWeekText(cid, key, el.innerText);
+  }, 800);
+}
+
+// 会议记录：每周一份，state.meetings["周一日期"] = 文本
+function meetingText(ws) {
+  const v = (state.meetings || {})[ws];
+  return typeof v === 'string' ? v : '';
+}
+function saveMeeting(ws, val) {
+  state.meetings = state.meetings || {};
+  const txt = String(val || '').replace(/\u00a0/g, ' ').replace(/\r\n/g, '\n').replace(/[ \t]+\n/g, '\n').trim();
+  if (txt === '') delete state.meetings[ws];
+  else state.meetings[ws] = txt;
+  save();
+}
+let meetingTimer = null;
+function onMeetingInput(el) {
+  const lenEl = document.getElementById('meetingLen');
+  if (lenEl) lenEl.textContent = cnLen(el.value) + ' 字';
+  clearTimeout(meetingTimer);
+  meetingTimer = setTimeout(() => saveMeeting(el.dataset.week, el.value), 800);
+}
+
+function renderWeekReport() {
+  const el = document.getElementById('weekReport');
+  if (!el) return;
+  const base = document.getElementById('datePicker').value;
+  if (!weekAnchor || weekBaseDate !== base) {
+    weekAnchor = weekStartOf(base);
+    weekBaseDate = base;
+  }
+  const allDays = daysOfWeek(weekAnchor);
+  const today = localDateStr(new Date());
+  const days = allDays.filter(ds => ds <= today);
+  const rangeLabel = fmtWeekDay(allDays[0]) + ' ~ ' + fmtWeekDay(allDays[6]);
+  const header = `
+    <div class="month-head">
+      <div class="month-title">🗓 周报 <span class="range">${allDays[0].slice(0, 4)}年 · ${rangeLabel}</span></div>
+      <div class="month-nav">
+        <button class="month-nav-btn" onclick="weekShift(-1)">← 上一周</button>
+        <button class="month-nav-btn today-btn" onclick="weekShift(0)">本周</button>
+        <button class="month-nav-btn" onclick="weekShift(1)">下一周 →</button>
+      </div>
+    </div>`;
+  if (!days.length) {
+    el.innerHTML = header + `<div class="month-card" style="text-align:center;color:#94a3b8;font-size:13px">该周还没有数据</div>`;
+    return;
+  }
+
+  // 用周锚点作为文案随机种子，保证每周措辞不同
+  const prevAnchor = monthAnchor;
+  monthAnchor = weekAnchor;
+  const statsMap = {};
+  CHILDREN.forEach(c => { statsMap[c.id] = monthStatsFor(c.id, days); });
+
+  let reports = '';
+  const usedCopy = new Set();
+  const usedPlan = new Set();
+  const pageDeduper = makeCrossDeduper();
+  CHILDREN.forEach(c => {
+    const s = statsMap[c.id];
+    const termCounts = {};
+    const clean = pageDeduper;
+    const summary = weekify(clean(softenTerms(buildKidSummary(c.id, days, s, usedCopy), termCounts)));
+    const strategy = weekify(buildStrategy(c.id, days, usedPlan));
+    const kwHtml = Object.keys(s.kwCount)
+      .sort((a, b) => s.kwCount[b] - s.kwCount[a])
+      .slice(0, 6)
+      .map(k => `<span class="${NEGATIVE_KEYWORDS.includes(k) ? 'neg' : ''}">${escapeHtml(k)}</span>`)
+      .join('');
+    const statHtml = `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
+      <div class="month-stat-head">
+        <div class="month-stat-name">数据概览</div>
+        <div class="month-stat-rate">${s.rate}%</div>
+      </div>
+      <div class="month-progress"><i style="width:${s.rate}%"></i></div>
+      <div class="month-metrics">
+        <div class="month-metric">本周积分<b>${s.points > 0 ? '+' : ''}${s.points}</b></div>
+        <div class="month-metric">日均学习<b>${fmtStudyAvg(s.avgStudyMin)}</b></div>
+        <div class="month-metric">平均评分<b>${s.avgScore}</b></div>
+      </div>
+      <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
+    </div>`;
+
+    let blocks = '';
+    monthSubjectsFor(c.id).forEach(sub => {
+      const auto = weekify(clean(softenTerms(buildSubjectReport(c.id, days, sub, usedCopy), termCounts)));
+      const blockKey = 'subj:' + sub.key;
+      const edited = isWeekEdited(c.id, blockKey);
+      const text = weekText(c.id, blockKey, auto);
+      blocks += `<div class="month-subject" style="--subj-color:${sub.color}">
+        <div class="month-subject-head">
+          <div class="month-subject-name">${sub.icon} ${sub.name}${sub.desc ? '<span class="month-subject-desc">（' + sub.desc + '）</span>' : ''}</div>
+          <span style="display:flex;align-items:center;gap:6px">
+            <span class="month-subject-len">${cnLen(text)} 字</span>
+            ${edited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','${blockKey}')" title="恢复自动生成">↺ 恢复</button>` : ''}
+          </span>
+        </div>
+        <div class="month-editable${edited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="${blockKey}"
+          oninput="onWeekEditInput(this)"
+          onblur="saveWeekText('${c.id}','${blockKey}',this.innerText,this.closest('.month-subject').querySelector('.month-subject-len'))">${escapeHtml(text)}</div>
+      </div>`;
+    });
+    const sumEdited = isWeekEdited(c.id, 'sum');
+    const stratEdited = isWeekEdited(c.id, 'strategy');
+    const sumText = weekText(c.id, 'sum', summary);
+    const stratText = weekText(c.id, 'strategy', strategy);
+    const kidBg = CHILD_BG_SRC[c.id];
+    reports += `<div class="month-kid-block${kidBg ? ' has-bg' : ''}" style="--kid-color:${CHILD_COLORS[c.id].main};${kidBg ? `--kid-bg:url('${kidBg}');` : ''}">
+      <div class="month-kid-title">${c.emoji} ${c.name} · 本周总结</div>
+      ${statHtml}
+      ${blocks}
+      <div class="month-kid-sum" style="--kid-color:${CHILD_COLORS[c.id].main}">
+        <div class="month-sum-head"><b>本周总评：</b>${sumEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','sum')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
+        <div class="month-editable${sumEdited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="sum"
+          oninput="onWeekEditInput(this)"
+          onblur="saveWeekText('${c.id}','sum',this.innerText)">${escapeHtml(sumText)}</div>
+      </div>
+      <div class="month-kid-sum month-strategy" style="--kid-color:#0f766e">
+        <div class="month-sum-head"><b>策略改进：</b>${stratEdited ? `<button class="month-reset" onclick="resetWeekText('${c.id}','strategy')" title="恢复自动生成">↺ 恢复</button>` : ''}</div>
+        <div class="month-editable${stratEdited ? ' is-edited' : ''}" contenteditable="true"
+          data-cid="${c.id}" data-key="strategy"
+          oninput="onWeekEditInput(this)"
+          onblur="saveWeekText('${c.id}','strategy',this.innerText)">${escapeHtml(stratText)}</div>
+      </div>
+    </div>`;
+  });
+  monthAnchor = prevAnchor;
+
+  const ws = weekAnchor;
+  const meetingHtml = `<div class="month-card meeting-card">
+    <div class="meeting-head">
+      <div class="meeting-title">📝 本周会议记录</div>
+      <span class="meeting-len" id="meetingLen">${cnLen(meetingText(ws))} 字</span>
+    </div>
+    <div class="meeting-hint">每周一份，可直接手写或粘贴；停顿后自动保存，换周不会互相覆盖。</div>
+    <textarea class="meeting-input" data-week="${ws}"
+      placeholder="记录本周家庭会议：参与人、聊了什么、定了哪些安排、下周要跟进的……"
+      oninput="onMeetingInput(this)" onblur="saveMeeting('${ws}',this.value)">${escapeHtml(meetingText(ws))}</textarea>
+  </div>`;
+
+  el.innerHTML = header + `
+    <div class="month-note">统计口径：本周（周一为一周起点）已过去的 ${days.length} 天；文字可直接点击修改（改过的以你的版本为准），点「↺ 恢复」还原自动生成。</div>
+    ${reports}${meetingHtml}`;
 }
 
 function renderSharedLearning() {
@@ -7124,6 +7380,174 @@ async function exportMonth() {
   downloadCanvas(tmp, '三娃月报_' + monthLabel + '.png');
 }
 
+// 导出周报（家长用）：浅色长图，含三个孩子的周统计 / 本周总评 / 分板块总结 / 会议记录
+async function exportWeekReport() {
+  try { await autoPullFromCloud(); } catch(e) {}
+  const base = document.getElementById('datePicker').value;
+  const anchor = (weekAnchor && weekBaseDate === base) ? weekAnchor : weekStartOf(base);
+  const allDays = daysOfWeek(anchor);
+  const today = localDateStr(new Date());
+  const days = allDays.filter(ds => ds <= today);
+  const rangeLabel = fmtWeekDay(allDays[0]) + ' ~ ' + fmtWeekDay(allDays[6]);
+  if (!days.length) { alert('该周还没有数据'); return; }
+
+  const statsMap = {};
+  let hasAny = false;
+  CHILDREN.forEach(c => {
+    const s = monthStatsFor(c.id, days);
+    statsMap[c.id] = s;
+    if (s.total > 0 || s.reviewDays > 0 || s.points !== 0 || s.kwCount && Object.keys(s.kwCount).length) hasAny = true;
+  });
+  if (!hasAny) { alert('该周还没有数据'); return; }
+
+  // 预加载孩子专属背景图
+  const childBgs = {};
+  await Promise.all(CHILDREN.map(async c => {
+    childBgs[c.id] = CHILD_BG_SRC[c.id] ? await loadAvatarImage(CHILD_BG_SRC[c.id]) : null;
+  }));
+
+  const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
+  const innerX = x0 + 24, innerW = CW - 48;
+
+  // ===== 第一遍：量文字，先算精确高度 =====
+  const mctx = document.createElement('canvas').getContext('2d');
+  const prevAnchor = monthAnchor;
+  const prevWeekAnchor = weekAnchor, prevWeekBase = weekBaseDate;
+  monthAnchor = anchor; // 文案随机种子按周区分
+  weekAnchor = anchor;  // 手改文字按导出的这一周取
+  weekBaseDate = base;
+  const usedExport = new Set();
+  const usedPlanExport = new Set();
+  const exportDeduper = makeCrossDeduper();
+  const measured = CHILDREN.map(c => {
+    const s = statsMap[c.id];
+    const termCounts = {};
+    const clean = exportDeduper;
+    setFont(mctx, 14, false);
+    const sumLines = imgWrap(mctx, '本周总评：' + weekText(c.id, 'sum', weekify(clean(softenTerms(buildKidSummary(c.id, days, s, usedExport), termCounts)))), innerW);
+    const stratLines = imgWrap(mctx, '策略改进：' + weekText(c.id, 'strategy', weekify(buildStrategy(c.id, days, usedPlanExport))), innerW);
+    const blocks = monthSubjectsFor(c.id).map(sub => {
+      setFont(mctx, 13, false);
+      return { sub: sub, lines: imgWrap(mctx, weekText(c.id, 'subj:' + sub.key, weekify(clean(softenTerms(buildSubjectReport(c.id, days, sub, usedExport), termCounts)))), innerW) };
+    });
+    let cH = 24 + 36 + 32;
+    blocks.forEach(b => { cH += 22 + b.lines.length * 24 + 12; });
+    cH += sumLines.length * 26 + 14;
+    cH += stratLines.length * 26 + 8;
+    cH += 24;
+    return { c: c, s: s, cH: cH, sumLines: sumLines, stratLines: stratLines, blocks: blocks };
+  });
+  monthAnchor = prevAnchor;
+  weekAnchor = prevWeekAnchor;
+  weekBaseDate = prevWeekBase;
+
+  // 会议记录：按行折行（保留手动换行）
+  const meetLines = [];
+  String(meetingText(anchor)).split(/\r?\n/).forEach(par => {
+    if (!par.trim()) { meetLines.push(''); return; }
+    setFont(mctx, 13, false);
+    imgWrap(mctx, par, innerW).forEach(ln => meetLines.push(ln));
+  });
+  const meetH = 24 + 30 + Math.max(1, meetLines.length) * 22 + 24;
+
+  let total = IMG.PAD + 46 + 44;
+  measured.forEach(m => { total += m.cH + 24; });
+  total += 20 + meetH + 16 + 16 + IMG.PAD;
+  const H = Math.ceil(total);
+
+  // ===== 第二遍：按精确高度绘制 =====
+  const dpr = getDPR();
+  const tmp = document.createElement('canvas');
+  tmp.width = W * dpr; tmp.height = H * dpr;
+  const ctx = tmp.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx._dpr = dpr;
+  ctx.textBaseline = 'top';
+
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#f8fafc'); bg.addColorStop(1, '#eef2f7');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  let y = IMG.PAD;
+  setFont(ctx, 34, true); ctx.fillStyle = '#4c1d95';
+  ctx.fillText('🗓 周报', x0, y);
+  y += 46;
+  setFont(ctx, 16, false); ctx.fillStyle = '#64748b';
+  ctx.fillText(rangeLabel + ' · 已统计 ' + days.length + ' 天', x0, y);
+  y += 44;
+
+  measured.forEach(m => {
+    const c = m.c, s = m.s, cH = m.cH, col = CHILD_COLORS[c.id];
+    imgRoundRect(ctx, x0, y, CW, cH, 20);
+    if (childBgs[c.id]) {
+      ctx.save(); ctx.clip();
+      drawCoverImage(ctx, childBgs[c.id], x0, y, CW, cH);
+      ctx.fillStyle = 'rgba(255,255,255,.65)'; ctx.fillRect(x0, y, CW, cH);
+      ctx.restore();
+    } else {
+      ctx.fillStyle = '#fff'; ctx.fill();
+    }
+    imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = col.main; ctx.fill();
+
+    let cy = y + 24;
+    setFont(ctx, 26, true); ctx.fillStyle = col.dark;
+    ctx.fillText(c.emoji + ' ' + c.name, innerX, cy);
+    setFont(ctx, 18, true); ctx.fillStyle = col.main;
+    ctx.textAlign = 'right';
+    ctx.fillText(s.rate + '%', x0 + CW - 24, cy + 5);
+    ctx.textAlign = 'left';
+    cy += 36;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
+    ctx.fillText('本周积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin) + ' · 平均评分 ' + s.avgScore + ' · 完成率 ' + s.rate + '%', innerX, cy);
+    cy += 32;
+
+    m.blocks.forEach(b => {
+      setFont(ctx, 14, true); ctx.fillStyle = b.sub.color;
+      ctx.fillText(b.sub.icon + ' ' + b.sub.name, innerX, cy);
+      cy += 22;
+      setFont(ctx, 13, false); ctx.fillStyle = '#334155';
+      b.lines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 24));
+      cy += b.lines.length * 24 + 12;
+    });
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#334155';
+    m.sumLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+    cy += m.sumLines.length * 26 + 14;
+
+    setFont(ctx, 14, false); ctx.fillStyle = '#0f766e';
+    m.stratLines.forEach((ln, i) => ctx.fillText(ln, innerX, cy + i * 26));
+
+    y += cH + 24;
+  });
+
+  // 会议记录卡片
+  imgRoundRect(ctx, x0, y, CW, meetH, 20); ctx.fillStyle = '#fff'; ctx.fill();
+  imgRoundRect(ctx, x0, y, CW, 10, 5); ctx.fillStyle = '#0d9488'; ctx.fill();
+  setFont(ctx, 20, true); ctx.fillStyle = '#0f766e';
+  ctx.fillText('📝 本周会议记录', innerX, y + 22);
+  let my = y + 62;
+  if (!meetLines.length) {
+    setFont(ctx, 13, false); ctx.fillStyle = '#b6c0cf';
+    ctx.fillText('（本周还没有写会议记录）', innerX, my);
+  } else {
+    setFont(ctx, 13, false); ctx.fillStyle = '#334155';
+    meetLines.forEach((ln, i) => { if (ln) ctx.fillText(ln, innerX, my + i * 22); });
+  }
+  y += meetH + 16;
+
+  // 页脚：生成时间
+  const now = new Date();
+  const pad2 = n => String(n).padStart(2, '0');
+  const stamp = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate())
+    + ' ' + pad2(now.getHours()) + ':' + pad2(now.getMinutes());
+  y += 20;
+  setFont(ctx, 13, false); ctx.fillStyle = '#94a3b8';
+  ctx.fillText('生成时间 ' + stamp + ' · 三娃任务', x0, y);
+
+  downloadCanvas(tmp, '三娃周报_' + anchor + '.png');
+}
+
 // 导出最终任务完成图：深色风格，展示课程和任务完成情况（和复盘图设计一致）
 async function exportTasksFinal() {
   try { await autoPullFromCloud(); } catch(e) {}
@@ -8448,6 +8872,9 @@ function mergeSmart(local, cloud) {
   result.exams = mergeExams(local.exams, cloud.exams);
   // 月报手改文字：两端合并，本地优先
   result.monthEdits = { ...((cloud.monthEdits) || {}), ...((local.monthEdits) || {}) };
+  // 周报手改文字 / 每周会议记录：同样两端合并，本地优先
+  result.weekEdits = { ...((cloud.weekEdits) || {}), ...((local.weekEdits) || {}) };
+  result.meetings = { ...((cloud.meetings) || {}), ...((local.meetings) || {}) };
   const ALL = ['yilin','yanxi','qiannuo'];
   
   cloudDates.forEach(d => {
@@ -8579,6 +9006,10 @@ uploadToGist = async function() {
   <div class="footer-row footer-row-tabs">
     <button class="view-btn" data-view="month" onclick="setView('month')">📊 月报</button>
     <button class="btn-hero" onclick="exportMonth()">📈 导出月报</button>
+  </div>
+  <div class="footer-row footer-row-tabs">
+    <button class="view-btn" data-view="week" onclick="setView('week')">🗓 周报</button>
+    <button class="btn-hero" onclick="exportWeekReport()">📤 导出周报</button>
   </div>
   <div class="footer-row footer-row-cloud">
     <span class="cloud-sync-status disconnected" id="cloudStatus" title="云端同步状态">
