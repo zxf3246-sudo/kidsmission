@@ -14919,25 +14919,29 @@
         ],
         "review": {
           "points": 12,
-          "score": null,
+          "score": 89,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "拖拖拉拉",
+            "发脾气",
+            "勤奋"
+          ],
           "basePoints": 7,
           "earnPoints": 5,
           "deductPoints": 0,
           "redeemPoints": 0,
           "savings": 0,
-          "stars": 0,
+          "stars": 4,
           "earnReason": "学而思老师表扬"
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1793456642945,
         "taskVer": 51,
-        "reviewSavedAt": 1793410637728,
-        "reviewVer": 6
+        "reviewSavedAt": 1793456914182,
+        "reviewVer": 14
       },
       "qiannuo": {
         "fixedClasses": [
@@ -15041,26 +15045,30 @@
           }
         ],
         "review": {
-          "points": 9,
+          "points": 14,
           "score": null,
           "summary": "",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "听话",
+            "高效率",
+            "老师表扬"
+          ],
           "basePoints": 7,
-          "earnPoints": 2,
+          "earnPoints": 7,
           "deductPoints": 0,
           "redeemPoints": 0,
           "savings": 0,
           "stars": 0,
-          "earnReason": "计算题两篇全对"
+          "earnReason": "计算题两篇全对，书法老师表扬"
         },
         "arrival": "08:00",
         "sleep": "21:30",
         "taskSavedAt": 1793456683901,
         "taskVer": 39,
-        "reviewSavedAt": 1793410670182,
-        "reviewVer": 9
+        "reviewSavedAt": 1793456946744,
+        "reviewVer": 17
       }
     },
     "2026-10-29": {
