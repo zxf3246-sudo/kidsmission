@@ -288,6 +288,31 @@
   }
   .meeting-input:focus { border-color: #0d9488; background: #fff; box-shadow: 0 0 0 3px rgba(13,148,136,.12); }
   .meeting-input::placeholder { color: #b6c0cf; }
+  .meeting-list { display: flex; flex-direction: column; gap: 8px; }
+  .meeting-row { display: flex; align-items: center; gap: 8px; }
+  .meeting-num {
+    flex: 0 0 24px; height: 24px; border-radius: 50%; background: #ccfbf1;
+    color: #0f766e; font-size: 12px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .meeting-line {
+    flex: 1; min-width: 0; padding: 9px 12px; border-radius: 10px;
+    border: 1px dashed #cbd5e1; background: #fbfcfe; font-family: inherit;
+    font-size: 13px; color: #334155; outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  .meeting-line:focus { border-color: #0d9488; background: #fff; box-shadow: 0 0 0 3px rgba(13,148,136,.12); }
+  .meeting-line::placeholder { color: #b6c0cf; }
+  .meeting-del {
+    flex: 0 0 26px; height: 26px; border-radius: 8px; border: none;
+    background: transparent; color: #cbd5e1; cursor: pointer; font-size: 15px; line-height: 1;
+  }
+  .meeting-del:hover { background: #fef2f2; color: #dc2626; }
+  .meeting-add {
+    margin-top: 10px; padding: 7px 14px; border-radius: 10px;
+    border: 1px dashed #0d9488; background: #f0fdfa; color: #0f766e;
+    font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  }
+  .meeting-add:hover { background: #ccfbf1; }
   @media (max-width: 960px) {
     .month-stats-grid { grid-template-columns: 1fr; }
     .month-head { flex-direction: column; align-items: flex-start; }
@@ -5623,24 +5648,82 @@ function onWeekEditInput(el) {
   }, 800);
 }
 
-// 会议记录：每周一份，state.meetings["周一日期"] = 文本
-function meetingText(ws) {
+// 会议记录：每周一份，按序号一条条输入；state.meetings["周一日期"] = 条目数组
+function meetingRows(ws) {
   const v = (state.meetings || {})[ws];
-  return typeof v === 'string' ? v : '';
+  if (Array.isArray(v)) return v.map(t => String(t || '').trim()).filter(Boolean);
+  if (typeof v === 'string') {
+    // 兼容旧版整段文本：按行拆开，去掉已有的「1. / 1、」序号
+    return v.split(/\r?\n/)
+      .map(l => l.replace(/^\s*\d+[.、)．]\s*/g, '').trim())
+      .filter(Boolean);
+  }
+  return [];
 }
-function saveMeeting(ws, val) {
+// 导出用的纯文本：每条前面带序号
+function meetingText(ws) {
+  return meetingRows(ws).map((t, i) => (i + 1) + '. ' + t).join('\n');
+}
+function saveMeetingRows(ws, rows) {
   state.meetings = state.meetings || {};
-  const txt = String(val || '').replace(/\u00a0/g, ' ').replace(/\r\n/g, '\n').replace(/[ \t]+\n/g, '\n').trim();
-  if (txt === '') delete state.meetings[ws];
-  else state.meetings[ws] = txt;
+  const arr = (rows || []).map(t => String(t || '').replace(/\u00a0/g, ' ').trim()).filter(Boolean);
+  if (arr.length) state.meetings[ws] = arr;
+  else delete state.meetings[ws];
   save();
+}
+function meetingValuesFrom(list) {
+  return [...list.querySelectorAll('.meeting-line')].map(inp => inp.value);
+}
+function updateMeetingCount(list) {
+  const lenEl = document.getElementById('meetingLen');
+  if (!lenEl) return;
+  const n = meetingValuesFrom(list).filter(v => v.trim()).length;
+  lenEl.textContent = n + ' 条';
 }
 let meetingTimer = null;
 function onMeetingInput(el) {
-  const lenEl = document.getElementById('meetingLen');
-  if (lenEl) lenEl.textContent = cnLen(el.value) + ' 字';
+  const list = document.getElementById('meetingList');
+  if (!list) return;
+  updateMeetingCount(list);
   clearTimeout(meetingTimer);
-  meetingTimer = setTimeout(() => saveMeeting(el.dataset.week, el.value), 800);
+  meetingTimer = setTimeout(() => saveMeetingRows(list.dataset.week, meetingValuesFrom(list)), 700);
+}
+function renumberMeetingRows(list) {
+  [...list.querySelectorAll('.meeting-num')].forEach((el, i) => { el.textContent = i + 1; });
+}
+function addMeetingRow(focus) {
+  const list = document.getElementById('meetingList');
+  if (!list) return;
+  const inputs = [...list.querySelectorAll('.meeting-line')];
+  const last = inputs[inputs.length - 1];
+  // 最后一行还是空的就复用，避免重复出现两条空行
+  if (last && !last.value.trim()) { if (focus) last.focus(); return; }
+  const row = document.createElement('div');
+  row.className = 'meeting-row';
+  row.innerHTML = `<span class="meeting-num"></span>
+    <input class="meeting-line" type="text" data-week="${list.dataset.week}" placeholder="继续添加一条…"
+      oninput="onMeetingInput(this)" onblur="maybeAddMeetingRow(this)">
+    <button class="meeting-del" type="button" onclick="deleteMeetingRow(this)" title="删除这条">×</button>`;
+  list.appendChild(row);
+  renumberMeetingRows(list);
+  if (focus) row.querySelector('.meeting-line').focus();
+}
+function maybeAddMeetingRow(el) {
+  const list = document.getElementById('meetingList');
+  if (!list) return;
+  const inputs = [...list.querySelectorAll('.meeting-line')];
+  if (inputs[inputs.length - 1] === el && el.value.trim()) addMeetingRow(false);
+  saveMeetingRows(list.dataset.week, meetingValuesFrom(list));
+  updateMeetingCount(list);
+}
+function deleteMeetingRow(btn) {
+  const list = document.getElementById('meetingList');
+  if (!list) return;
+  btn.closest('.meeting-row').remove();
+  if (!list.querySelector('.meeting-row')) addMeetingRow(false);
+  renumberMeetingRows(list);
+  saveMeetingRows(list.dataset.week, meetingValuesFrom(list));
+  updateMeetingCount(list);
 }
 
 // 目标和规划：每周一份，state.goals["周一日期"] = 文本
@@ -5750,15 +5833,23 @@ function renderWeekReport() {
   monthAnchor = prevAnchor;
 
   const ws = weekAnchor;
+  const mEntries = meetingRows(ws);
+  const mRows = mEntries.concat(['']);
+  const meetingRowsHtml = mRows.map((t, i) => `<div class="meeting-row">
+      <span class="meeting-num">${i + 1}</span>
+      <input class="meeting-line" type="text" data-week="${ws}" value="${escapeHtml(t)}"
+        placeholder="${i === 0 ? '例如：下周三晚上一起复盘数学错题' : '继续添加一条…'}"
+        oninput="onMeetingInput(this)" onblur="maybeAddMeetingRow(this)">
+      <button class="meeting-del" type="button" onclick="deleteMeetingRow(this)" title="删除这条">×</button>
+    </div>`).join('');
   const meetingHtml = `<div class="month-card meeting-card">
     <div class="meeting-head">
       <div class="meeting-title">📝 本周会议记录</div>
-      <span class="meeting-len" id="meetingLen">${cnLen(meetingText(ws))} 字</span>
+      <span class="meeting-len" id="meetingLen">${mEntries.length} 条</span>
     </div>
-    <div class="meeting-hint">每周一份，可直接手写或粘贴；停顿后自动保存，换周不会互相覆盖。</div>
-    <textarea class="meeting-input" data-week="${ws}"
-      placeholder="记录本周家庭会议：参与人、聊了什么、定了哪些安排、下周要跟进的……"
-      oninput="onMeetingInput(this)" onblur="saveMeeting('${ws}',this.value)">${escapeHtml(meetingText(ws))}</textarea>
+    <div class="meeting-hint">按序号一条一条写；最后一条写完后会自动出现下一条，停顿后自动保存，换周不会互相覆盖。</div>
+    <div class="meeting-list" id="meetingList" data-week="${ws}">${meetingRowsHtml}</div>
+    <button class="meeting-add" type="button" onclick="addMeetingRow(true)">+ 添加一条</button>
   </div>`;
 
   const goalHtml = `<div class="month-card meeting-card">
