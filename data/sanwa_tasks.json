@@ -14875,11 +14875,12 @@
           {
             "id": "t17930823050446lp3",
             "name": "数学资料复习",
-            "duration": 15,
+            "duration": 40,
             "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
-            "manualTouched": true
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793408370173qgu6",
@@ -14894,18 +14895,23 @@
           {
             "id": "t17930823050444ngt",
             "name": "自由玩耍",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793082305044e3oq",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:52"
           }
         ],
         "review": {
@@ -14925,8 +14931,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793420103470,
-        "taskVer": 28,
+        "taskSavedAt": 1793456642945,
+        "taskVer": 51,
         "reviewSavedAt": 1793410637728,
         "reviewVer": 6
       },
