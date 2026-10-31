@@ -14670,16 +14670,9 @@
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17930823050443vzo",
-            "name": "思维训练题",
-            "duration": 15,
-            "type": "study",
-            "done": false,
+            "done": true,
             "errLinked": false,
+            "status": "done",
             "manualTouched": true
           },
           {
@@ -14743,8 +14736,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:30",
-        "taskSavedAt": 1793413605398,
-        "taskVer": 12,
+        "taskSavedAt": 1793420128872,
+        "taskVer": 15,
         "reviewSavedAt": 1793410670182,
         "reviewVer": 9
       }
@@ -16874,7 +16867,8 @@
       },
       "qiannuo": {
         "WWK单词3个": true,
-        "语文练习": true
+        "语文练习": true,
+        "思维训练题": true
       },
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
