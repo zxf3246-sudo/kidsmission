@@ -184,6 +184,7 @@
   .month-stat-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   .month-stat-name { font-size: 15px; font-weight: 900; color: #1e293b; }
   .month-stat-rate { font-size: 20px; font-weight: 900; color: var(--kid-color, #6366f1); }
+  .month-stat-rate .unit { font-size: 11px; font-weight: 700; margin-left: 2px; opacity: .75; }
   .month-progress { height: 7px; border-radius: 4px; background: #f1f5f9; overflow: hidden; margin-bottom: 12px; }
   .month-progress i { display: block; height: 100%; border-radius: 4px; background: var(--kid-color, #6366f1); }
   .month-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
@@ -5499,13 +5500,11 @@ function renderMonthReport() {
     const statHtml = `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
       <div class="month-stat-head">
         <div class="month-stat-name">数据概览</div>
-        <div class="month-stat-rate">${s.rate}%</div>
+        <div class="month-stat-rate">${s.avgScore}<span class="unit">分</span></div>
       </div>
-      <div class="month-progress"><i style="width:${s.rate}%"></i></div>
       <div class="month-metrics">
         <div class="month-metric">本月积分<b>${s.points > 0 ? '+' : ''}${s.points}</b></div>
         <div class="month-metric">日均学习<b>${fmtStudyAvg(s.avgStudyMin)}</b></div>
-        <div class="month-metric">平均评分<b>${s.avgScore}</b></div>
       </div>
       <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
       ${examHtml}
@@ -5795,13 +5794,11 @@ function renderWeekReport() {
     const statHtml = `<div class="month-stat-card" style="--kid-color:${CHILD_COLORS[c.id].main}">
       <div class="month-stat-head">
         <div class="month-stat-name">数据概览</div>
-        <div class="month-stat-rate">${s.rate}%</div>
+        <div class="month-stat-rate">${s.avgScore}<span class="unit">分</span></div>
       </div>
-      <div class="month-progress"><i style="width:${s.rate}%"></i></div>
       <div class="month-metrics">
         <div class="month-metric">本周积分<b>${s.points > 0 ? '+' : ''}${s.points}</b></div>
         <div class="month-metric">日均学习<b>${fmtStudyAvg(s.avgStudyMin)}</b></div>
-        <div class="month-metric">平均评分<b>${s.avgScore}</b></div>
       </div>
       <div class="month-kw">${kwHtml || '<span style="background:none;color:#cbd5e1">暂无复盘关键词</span>'}</div>
     </div>`;
@@ -7443,12 +7440,12 @@ async function exportMonth() {
     ctx.fillText(c.emoji + ' ' + c.name, innerX, cy);
     setFont(ctx, 18, true); ctx.fillStyle = col.main;
     ctx.textAlign = 'right';
-    ctx.fillText(s.rate + '%', x0 + CW - 24, cy + 5);
+    ctx.fillText(s.avgScore + ' 分', x0 + CW - 24, cy + 5);
     ctx.textAlign = 'left';
     cy += 36;
 
     setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
-    ctx.fillText('本月积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin) + ' · 平均评分 ' + s.avgScore + ' · 完成率 ' + s.rate + '%', innerX, cy);
+    ctx.fillText('本月积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin), innerX, cy);
     cy += 32;
 
     m.blocks.forEach(b => {
@@ -7600,12 +7597,12 @@ async function exportWeekReport() {
     ctx.fillText(c.emoji + ' ' + c.name, innerX, cy);
     setFont(ctx, 18, true); ctx.fillStyle = col.main;
     ctx.textAlign = 'right';
-    ctx.fillText(s.rate + '%', x0 + CW - 24, cy + 5);
+    ctx.fillText(s.avgScore + ' 分', x0 + CW - 24, cy + 5);
     ctx.textAlign = 'left';
     cy += 36;
 
     setFont(ctx, 14, false); ctx.fillStyle = '#64748b';
-    ctx.fillText('本周积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin) + ' · 平均评分 ' + s.avgScore + ' · 完成率 ' + s.rate + '%', innerX, cy);
+    ctx.fillText('本周积分 ' + s.points + ' · 日均学习 ' + fmtStudyAvg(s.avgStudyMin), innerX, cy);
     cy += 32;
 
     setFont(ctx, 14, false); ctx.fillStyle = '#334155';
