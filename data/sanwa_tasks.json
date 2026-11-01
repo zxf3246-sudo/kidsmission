@@ -15786,20 +15786,22 @@
         "review": {
           "points": 7,
           "basePoints": 7,
-          "score": null,
-          "summary": "",
+          "score": 87,
+          "summary": "Missy的作业做完了，学而思的作业也做了。但是开会的时候提到了她再次偷看iPad的问题，然后回房间直接一下午睡了3小时大觉，就说自己累。晚上两个小的正常完成任务，可以看电视，她这边就心痒痒了，也想跟着看，这种情况下我就知道放她自己在房间她也不会安下心学习，所以直接让她一起看了。",
           "reward": "",
-          "other": "",
-          "keywords": [],
+          "other": "偷看视频再次被捉",
+          "keywords": [
+            "态度敷衍"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 3.5
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1793532860460,
         "taskVer": 48,
-        "reviewSavedAt": null,
-        "reviewVer": 1
+        "reviewSavedAt": 1793533222596,
+        "reviewVer": 14
       },
       "yanxi": {
         "fixedClasses": [],
