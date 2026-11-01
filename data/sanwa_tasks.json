@@ -1327,70 +1327,70 @@
         ],
         "tasks": [
           {
-            "id": "t1793542354361gvds",
+            "id": "t17935425281994i20",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361zxvs",
+            "id": "t17935425281990bix",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793542354361wd4c",
+            "id": "t1793542528199ep8x",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17935423543619jnq",
+            "id": "t1793542528199r6hu",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17935423543616u7w",
+            "id": "t1793542528199meq3",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793542354361pqgu",
+            "id": "t1793542528199cd7p",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793542354361u9yy",
+            "id": "t1793542528199gbb4",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179354235436112hj",
+            "id": "t1793542528199koxj",
             "name": "600字5个生字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361imsv",
+            "id": "t1793542528199hjzr",
             "name": "学校英语小测复习",
             "duration": 5,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361gj0n",
+            "id": "t17935425281993lqd",
             "name": "学校语文小测复习",
             "duration": 5,
             "type": "study",
@@ -3358,49 +3358,49 @@
         ],
         "tasks": [
           {
-            "id": "t17935423543613wae",
+            "id": "t1793542528199v1x6",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t179354235436140cg",
+            "id": "t1793542528199nlc3",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361mkt6",
+            "id": "t1793542528199o39f",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361o61c",
+            "id": "t179354252819910ee",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361skqf",
+            "id": "t1793542528199lz7b",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t17935423543613erh",
+            "id": "t17935425281997ykt",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179354235436190vk",
+            "id": "t179354252819988sk",
             "name": "英语阅读练习",
             "duration": 15,
             "type": "study",
@@ -3697,56 +3697,56 @@
         "fixedClasses": [],
         "tasks": [
           {
-            "id": "t17935423543613t4u",
+            "id": "t1793542528199wwem",
             "name": "WWK单词3个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361e1aw",
+            "id": "t1793542528199uo11",
             "name": "600字新字5个",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361a0vg",
+            "id": "t1793542528199cqrk",
             "name": "数学计算练习",
             "duration": 20,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361c2bx",
+            "id": "t1793542528199p4uc",
             "name": "华文练字",
             "duration": 15,
             "type": "study",
             "done": true
           },
           {
-            "id": "t1793542354361re1i",
+            "id": "t179354252819988kl",
             "name": "控笔练习",
             "duration": 10,
             "type": "study",
             "done": true
           },
           {
-            "id": "t17935423543615tyx",
+            "id": "t1793542528199ljnd",
             "name": "字母拼音",
             "duration": 10,
             "type": "study",
             "done": false
           },
           {
-            "id": "t1793542354361gi6o",
+            "id": "t1793542528199lobv",
             "name": "语文练习",
             "duration": 15,
             "type": "study",
             "done": false
           },
           {
-            "id": "t179354235436146jd",
+            "id": "t1793542528199rntd",
             "name": "学校双语作业",
             "duration": 15,
             "type": "study",
@@ -15733,13 +15733,11 @@
         ],
         "tasks": [
           {
-            "id": "t1793533765471xv1u",
-            "name": "Missy作业",
+            "id": "t1793542528200hl0i",
+            "name": "Missy笔记背诵和10MCQ",
             "duration": 20,
             "type": "study",
-            "done": true,
-            "status": "done",
-            "manualTouched": true
+            "done": false
           },
           {
             "id": "t1793409065435enmz",
@@ -16954,7 +16952,12 @@
   "monthEdits": {
     "qiannuo|2026-10|subj:english": "英语是目前几科里最不需要操心的，但也谈不上出色。理解深度是唯一被反复点到的地方，不起眼，但一直存在。这种情况加量解决不了，题做得越多，错误的印象反而越牢。这一科现在缺的不是投入，而是把已有的水平稳定住。任务主要落在WWK单词3个和英语阅读练习上，这部分按约定做完，这一科就不会出问题。眼下看不出差距，不代表问题已经解决。"
   },
-  "weekEdits": {},
+  "weekEdits": {
+    "yilin|2026-10-26|sum": "考试结束周，各个板块情况之前日总结有具体的记录，总结成一句话就是没有完完全全尽力。只是意识流，没有付出对应的高效的行动，当然得不到期望的成果，主要还是态度和学习深度影响了最后的学习效果。",
+    "yilin|2026-10-26|other": "生活习惯还是东西乱七八糟的，然后总是找不到东西，放假以后跟她再全面收拾一次。东西用完不放回、第二天要用的东西临出门才想起。",
+    "yanxi|2026-10-26|sum": "在学术方面没有什么太大的问题，后期看出来其实除了日常反复在练的知识点，稍微有一点点不在经常复习的范围，考到了就会出现问题，如果单从分数来看的话，丢分点跟脑子没什么太大的关联，反而跟粗心有很大的关联。",
+    "yanxi|2026-10-26|other": "精神状态是这一周最突出的一块。状态好的日子推进得很顺，状态一掉下来，连平时熟练的事也要拖上很久。情绪是这段时间最大的变量，它先影响状态，再影响效率，最后才落到结果上。"
+  },
   "meetings": {},
   "goals": {}
 }
