@@ -3018,6 +3018,8 @@ async function saveTasks(childId) {
   save();
   renderChildren(dateStr);
   showToast('✅ 任务已保存（' + fmtTime(cd.taskSavedAt) + '），正在上传云端...');
+  // 立即上传：取消待触发的自动上传，避免重复
+  clearTimeout(_cloudUploadTimer);
   // 直接上传以本地为准（不再先拉取合并，避免刚保存的修改被云端旧数据覆盖）
   try {
     await uploadToGist();
@@ -3036,6 +3038,7 @@ async function saveReview(childId) {
   save();
   renderChildren(dateStr);
   showToast('✅ 复盘已保存（' + fmtTime(cd.reviewSavedAt) + '），正在上传云端...');
+  clearTimeout(_cloudUploadTimer);
   // 直接上传以本地为准（不再先拉取合并，避免刚保存的复盘被云端旧数据覆盖）
   try {
     await uploadToGist();
@@ -3264,6 +3267,8 @@ let dirtyState = {}; // { childId: { task: bool, review: bool } }
 function markDirty(childId, part) {
   if (!dirtyState[childId]) dirtyState[childId] = { task:false, review:false };
   dirtyState[childId][part] = true;
+  // 记录本地手动修改时间：用于合并时判断"本地还有没传上云的新改动"，防止刷新后被云端旧版本覆盖
+  state._localTouchedAt = Date.now();
   // 关键：编辑任务/复盘时即更新时间戳，避免云端旧数据(带着更大 taskSavedAt)覆盖本地刚做的修改
   const ds = document.getElementById('datePicker').value;
   const cd = state.dates[ds] && state.dates[ds][childId];
@@ -3277,6 +3282,22 @@ function markDirty(childId, part) {
       cd.reviewVer = (+cd.reviewVer || 0) + 1;
     }
   }
+  scheduleCloudUpload();
+}
+// 本地是否存在"还没成功上传到云端"的手动改动
+function hasUnsyncedLocalEdits(s) {
+  if (!s || !s._localTouchedAt) return false;
+  return !s._lastUploadAt || s._localTouchedAt > s._lastUploadAt;
+}
+// 编辑后延迟自动上传云端：不再依赖用户手动点"上传"，避免本地改动只留在本机、
+// 刷新时又被云端旧版本合并覆盖
+let _cloudUploadTimer = null;
+function scheduleCloudUpload(delay) {
+  if (typeof uploadToGist !== 'function') return;
+  clearTimeout(_cloudUploadTimer);
+  _cloudUploadTimer = setTimeout(() => {
+    uploadToGist({ silent: true }).catch(() => {});
+  }, delay || 6000);
 }
 function clearDirty(childId, part) {
   if (!dirtyState[childId]) return;
@@ -3394,7 +3415,8 @@ function renameYilinWeeklyTasks(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.tasks)) return;
     cd.tasks.forEach(task => {
-      if (task && task.name && map[task.name]) { task.name = map[task.name]; changed++; }
+      // 用户手动改过名字/时长的任务不再强制改名，避免刷新后又被改回旧名字
+      if (task && task.name && map[task.name] && !task.manualTouched) { task.name = map[task.name]; changed++; }
     });
   });
   if (changed > 0) {
@@ -4191,9 +4213,14 @@ function save() {
     const readBack = localStorage.getItem('sanwa_tasks');
     if (readBack !== payload) {
       console.error('[save] ❌ 回读校验失败！写入:', payload.length, '字节，回读:', (readBack||'').length, '字节');
+      showToast('⚠ 本机保存异常，请点「上传到云端」备份');
+      return;
     }
   } catch (e) {
     console.error('[save] ❌ localStorage 写入异常:', e);
+    // 本机写不进去时必须提醒用户：否则刷新后数据会回退
+    showToast('⚠ 本机存储写入失败，请点「上传到云端」备份');
+    return;
   }
   showToast('✓ 已保存');
 }
@@ -8503,14 +8530,16 @@ function hideSyncProgress() {
 }
 
 // 上传到 GitHub 仓库文件（带自动获取 sha）
-async function uploadToGist() {
+// opts.silent = true 时不显示进度条和成功提示（用于自动后台同步）
+async function uploadToGist(opts) {
+  const silent = !!(opts && opts.silent);
   const cfg = loadCloudConfig();
   if (!cfg.token || !cfg.repo || !cfg.dataFile) {
-    showToast('⚠ 云端配置不完整');
-    openCloudModal();
+    if (!silent) { showToast('⚠ 云端配置不完整'); openCloudModal(); }
     return;
   }
-  showSyncProgress('正在上传到云端...');
+  const startedAt = Date.now();
+  if (!silent) showSyncProgress('正在上传到云端...');
   try {
     // 先获取文件 sha（如果文件已存在）
     let sha = null;
@@ -8570,11 +8599,15 @@ async function uploadToGist() {
     } catch (_) {}
     cfg.lastSync = new Date().toISOString();
     persistCloudConfig(cfg);
+    // 记录"云端已包含到哪一刻的本地修改"：用于判断是否还有未上传的本地改动，
+    // 避免刷新时自动拉取用旧的云端版本覆盖刚手改的数据
+    state._lastUploadAt = startedAt;
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(state)); } catch(_) {}
     hideSyncProgress();
-    showToast('✅ 已成功上传到云端');
+    if (!silent) showToast('✅ 已成功上传到云端');
   } catch (e) {
     hideSyncProgress();
-    showToast('❌ 上传失败：' + e.message);
+    if (!silent) showToast('❌ 上传失败：' + e.message);
     console.error('Repo upload error:', e);
   }
 }
@@ -8905,6 +8938,11 @@ async function autoPullFromCloud() {
     removeAutoEnrichedTasks(merged);
     localStorage.setItem('sanwa_tasks', JSON.stringify(merged));
     state = merged;
+    // 本地还有没传上云的手动改动：合并完立即回传云端，
+    // 保证下次刷新/其它设备拿到的是最新版本，而不是旧云端数据
+    if (hasUnsyncedLocalEdits(merged)) {
+      setTimeout(() => { uploadToGist({ silent: true }).catch(() => {}); }, 300);
+    }
     if (anyInputFocused()) {
       // 正在输入（如手打评语），只合并数据不刷新页面，避免打断打字；
       // 数据已保存，输入框失焦或下次刷新时自然显示
@@ -9010,10 +9048,14 @@ function mergeSmart(local, cloud) {
       const cRV   = +cc.reviewVer || 0;
       // 任务取舍：手动编辑次数多的一方优先（"最后一次手动改动为主"）；
       // 次数相同再按"是否默认模板"，最后才按保存时间
+      // 额外保护：本地还有没上传的手动改动、且保存时间不早于云端时，一律以本地为准，
+      // 避免"刚保存几次，一刷新又被云端旧版本覆盖"
+      const localUnsynced = hasUnsyncedLocalEdits(local);
       const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
       const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
       let takeLocal;
-      if (lVer !== cVer) takeLocal = lVer > cVer;
+      if (localUnsynced && lTask && (!cTask || lTask >= cTask)) takeLocal = true;
+      else if (lVer !== cVer) takeLocal = lVer > cVer;
       else if (lPristine && !cPristine) takeLocal = false;
       else if (!lPristine && cPristine) takeLocal = true;
       else {
