@@ -16155,6 +16155,15 @@
             "manualTouched": true
           },
           {
+            "id": "t179354388311866os",
+            "name": "阅读，学3个新单词。",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t1793409083884ql6g",
             "name": "一页计算题",
             "duration": 15,
@@ -16201,30 +16210,14 @@
         },
         "arrival": "14:00",
         "sleep": "21:00",
-        "taskSavedAt": 1793543826362,
-        "taskVer": 4,
+        "taskSavedAt": 1793543905863,
+        "taskVer": 9,
         "reviewSavedAt": null,
         "reviewVer": 1
       },
       "qiannuo": {
         "fixedClasses": [],
         "tasks": [
-          {
-            "id": "t1793409083884z5ja",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793409083884r7l6",
-            "name": "600字新字5个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
           {
             "id": "t17934090838840ci2",
             "name": "数学计算练习",
@@ -16253,22 +16246,6 @@
             "id": "t1793409083884m6fh",
             "name": "字母拼音",
             "duration": 10,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793409083884dokf",
-            "name": "乘法口诀复习",
-            "duration": 10,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17934090838847pty",
-            "name": "英语阅读练习",
-            "duration": 15,
             "type": "study",
             "done": false,
             "errLinked": false
@@ -16303,8 +16280,8 @@
         },
         "arrival": "16:30",
         "sleep": "21:00",
-        "taskSavedAt": null,
-        "taskVer": 0,
+        "taskSavedAt": 1793543845812,
+        "taskVer": 4,
         "reviewSavedAt": null,
         "reviewVer": 1
       }
@@ -16894,7 +16871,14 @@
       "yanxi": {
         "四五快读新字": true,
         "WW1单词5个": true,
-        "语文阅读理解": true
+        "语文阅读理解": true,
+        "阅读1小时": true
+      },
+      "qiannuo": {
+        "WWK单词3个": true,
+        "600字新字5个": true,
+        "乘法口诀复习": true,
+        "英语阅读练习": true
       }
     }
   },
