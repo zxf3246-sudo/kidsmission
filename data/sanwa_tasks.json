@@ -15925,14 +15925,6 @@
         ],
         "tasks": [
           {
-            "id": "t1793409065435k8a5",
-            "name": "WWK单词3个",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t1793409065435ikyr",
             "name": "数学计算练习",
             "duration": 20,
@@ -16011,8 +16003,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793464462385,
-        "taskVer": 1,
+        "taskSavedAt": 1793498841731,
+        "taskVer": 3,
         "reviewSavedAt": null,
         "reviewVer": 1
       }
@@ -16875,7 +16867,8 @@
         "英语语法复习": true
       },
       "qiannuo": {
-        "600字新字5个": true
+        "600字新字5个": true,
+        "WWK单词3个": true
       },
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
