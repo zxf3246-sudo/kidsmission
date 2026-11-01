@@ -16001,22 +16001,29 @@
           }
         ],
         "review": {
-          "points": 7,
+          "points": 12,
           "basePoints": 7,
-          "score": null,
-          "summary": "",
+          "score": 90,
+          "summary": "李芊诺今天表现的非常好，首先给她布置的一些基本的练字任务写的比较认真，描的基本比较准确，然后今天给她的练习布置的主要是有关于数学的，昨天从学而思拿的一个数学练习册，虽然简单，但是一百多页她不到一个小时就做完了，基本也没什么错。至少她小学一年级的数学知识已经掌握的非常不错了。她是一个高精力，不懂就问，比较热爱学习的孩子，状态好的时候还会主动多学。",
           "reward": "",
           "other": "",
-          "keywords": [],
+          "keywords": [
+            "高效率",
+            "听话",
+            "有进步",
+            "认真"
+          ],
           "savings": 0,
-          "stars": 0
+          "stars": 4.5,
+          "earnPoints": 5,
+          "earnReason": "超额完成练习"
         },
         "arrival": "08:00",
         "sleep": "21:15",
         "taskSavedAt": 1793532928231,
         "taskVer": 39,
-        "reviewSavedAt": null,
-        "reviewVer": 1
+        "reviewSavedAt": 1793533656586,
+        "reviewVer": 15
       }
     },
     "2026-11-02": {
