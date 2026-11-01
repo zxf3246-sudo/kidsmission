@@ -15970,6 +15970,15 @@
             "courseTask": "quizReview"
           },
           {
+            "id": "t1793506726780rmuz",
+            "name": "思维练习题",
+            "duration": null,
+            "type": "study",
+            "done": false,
+            "errLinked": false,
+            "manualTouched": true
+          },
+          {
             "id": "t17934090654355e8v",
             "name": "自由玩耍",
             "duration": null,
@@ -15999,8 +16008,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793498841731,
-        "taskVer": 3,
+        "taskSavedAt": 1793506728237,
+        "taskVer": 5,
         "reviewSavedAt": null,
         "reviewVer": 1
       }
