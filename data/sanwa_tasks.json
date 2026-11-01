@@ -15742,27 +15742,21 @@
           },
           {
             "id": "t17934090654355ugt",
-            "name": "Missy笔记背诵和10MCQ",
+            "name": "Missy作业",
             "duration": 20,
             "type": "study",
             "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t1793409065435qoel",
-            "name": "语文错题巩固",
-            "duration": 25,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793409065435r9ak",
-            "name": "科学错题巩固",
+            "name": "科学知识点",
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "manualTouched": true
           },
           {
             "id": "t1793409065435enmz",
@@ -15819,8 +15813,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793464404288,
-        "taskVer": 1,
+        "taskSavedAt": 1793498723751,
+        "taskVer": 5,
         "reviewSavedAt": null,
         "reviewVer": 1
       },
@@ -16882,6 +16876,11 @@
       },
       "qiannuo": {
         "600字新字5个": true
+      },
+      "yilin": {
+        "Missy笔记背诵和10MCQ": true,
+        "语文错题巩固": true,
+        "科学错题巩固": true
       }
     }
   },
