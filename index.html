@@ -8529,11 +8529,53 @@ function hideSyncProgress() {
   if (el) el.style.display = 'none';
 }
 
+// ===== 云端数据编解码：紧凑 JSON + gzip =====
+function bytesToBase64(bytes) {
+  let bin = '';
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK) {
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, Math.min(i + CHUNK, bytes.length)));
+  }
+  return btoa(bin);
+}
+function base64ToBytes(b64) {
+  const bin = atob(String(b64 || '').replace(/\n/g, ''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+// 上传前编码：去掉 JSON 缩进（体积约为原来的一半）；支持 gzip 的浏览器再压缩一层（约 60KB）
+async function encodeCloudPayload(obj) {
+  const json = JSON.stringify(obj);
+  if (typeof CompressionStream === 'function' && typeof DecompressionStream === 'function') {
+    try {
+      const stream = new Blob([new TextEncoder().encode(json)]).stream()
+        .pipeThrough(new CompressionStream('gzip'));
+      const buf = new Uint8Array(await new Response(stream).arrayBuffer());
+      return bytesToBase64(buf);
+    } catch (e) {
+      console.warn('[cloud] gzip 压缩失败，改用普通 JSON:', e);
+    }
+  }
+  return btoa(unescape(encodeURIComponent(json)));
+}
+// 兼容两种云端格式：gzip（新）和普通 JSON base64（旧）
+async function decodeCloudPayload(b64) {
+  const bytes = base64ToBytes(b64);
+  if (bytes.length > 2 && bytes[0] === 0x1f && bytes[1] === 0x8b) {
+    if (typeof DecompressionStream !== 'function') throw new Error('当前浏览器不支持解压云端数据');
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return await new Response(stream).text();
+  }
+  return decodeURIComponent(escape(atob(String(b64 || '').replace(/\n/g, ''))));
+}
+
 // 上传到 GitHub 仓库文件（带自动获取 sha）
 // opts.silent = true 时不显示进度条和成功提示（用于自动后台同步）
 async function uploadToGist(opts) {
   const silent = !!(opts && opts.silent);
   const cfg = loadCloudConfig();
+  
   if (!cfg.token || !cfg.repo || !cfg.dataFile) {
     if (!silent) { showToast('⚠ 云端配置不完整'); openCloudModal(); }
     return;
@@ -8541,53 +8583,58 @@ async function uploadToGist(opts) {
   const startedAt = Date.now();
   if (!silent) showSyncProgress('正在上传到云端...');
   try {
-    // 先获取文件 sha（如果文件已存在）
-    let sha = null;
-    let cloudDateCount = 0;
-    try {
-      const headResp = await fetch(
-        `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
-        { headers: { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' } }
-      );
-      if (headResp.ok) {
-        const headData = await headResp.json();
-        sha = headData.sha;
-        // 读取云端现有数据的天数，用于"防清空"校验
-        if (headData.content) {
-          try {
-            const cs = JSON.parse(decodeURIComponent(escape(atob(headData.content.replace(/\n/g, '')))));
-            cloudDateCount = Object.keys(cs.dates || {}).length;
-          } catch (_) {}
+    const url = `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`;
+    const headers = { 'Authorization': 'token ' + cfg.token, 'Accept': 'application/vnd.github+json' };
+    const localDateCount = Object.keys(state.dates || {}).length;
+    // 已知云端 sha 且本机数据完整时，跳过"下载整份云端文件"（约 0.5MB），上传更快
+    let sha = (lastRemoteVersion && localDateCount >= 10) ? lastRemoteVersion : null;
+    let cloudDateCount = -1;
+    if (!sha) {
+      try {
+        const headResp = await fetch(url, { headers });
+        if (headResp.ok) {
+          const headData = await headResp.json();
+          sha = headData.sha;
+          // 读取云端现有数据的天数，用于"防清空"校验
+          if (headData.content) {
+            try {
+              const cs = JSON.parse(await decodeCloudPayload(headData.content));
+              cloudDateCount = Object.keys(cs.dates || {}).length;
+            } catch (_) {}
+          }
         }
-      }
-    } catch (e) {}
+      } catch (e) {}
+    }
 
     // 防清空保险：本地天数远少于云端（如本机 localStorage 为空/被误重置），拒绝上传，避免覆盖掉云端完整数据
-    const localDateCount = Object.keys(state.dates || {}).length;
     if (cloudDateCount >= 5 && localDateCount < Math.ceil(cloudDateCount * 0.6)) {
       hideSyncProgress();
       showToast('⚠ 已阻止上传：本机仅 ' + localDateCount + ' 天，云端有 ' + cloudDateCount + ' 天，疑似数据异常。请先在云同步里「↓ 拉取」恢复后再上传');
       return;
     }
 
-    const payload = {
-      message: 'sync: ' + new Date().toLocaleString('zh-CN'),
-      content: btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2))))
-    };
-    if (sha) payload.sha = sha;
-
-    const resp = await fetch(
-      `https://api.github.com/repos/${cfg.repo}/contents/${cfg.dataFile}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + cfg.token,
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      }
-    );
+    // 紧凑 JSON + gzip：原 595KB → 约 60KB，手机上传明显更快
+    const content = await encodeCloudPayload(state);
+    const doPut = () => fetch(url, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign(
+        { message: 'sync: ' + new Date().toLocaleString('zh-CN'), content },
+        sha ? { sha } : {}
+      ))
+    });
+    let resp = await doPut();
+    // 409：别的设备刚上传过（本地 sha 过期）→ 重新取最新 sha 再传一次，避免白等一次失败
+    if (resp.status === 409) {
+      try {
+        const headResp = await fetch(url, { headers });
+        if (headResp.ok) {
+          const headData = await headResp.json();
+          sha = headData.sha;
+          resp = await doPut();
+        }
+      } catch (_) {}
+    }
     if (!resp.ok) {
       const errText = await resp.text();
       throw new Error('HTTP ' + resp.status + ' ' + errText.slice(0, 120));
@@ -8636,8 +8683,8 @@ async function pullFromGist() {
       throw new Error('HTTP ' + resp.status + ' ' + errText.slice(0, 120));
     }
     const result = await resp.json();
-    // GitHub API 返回的 content 是 base64 编码
-    const content = decodeURIComponent(escape(atob(result.content.replace(/\n/g, ''))));
+    // GitHub API 返回的 content 是 base64（新格式为 gzip，旧格式为普通 JSON，自动兼容）
+    const content = await decodeCloudPayload(result.content);
     const cloudState = JSON.parse(content);
     hideSyncProgress();
     // 智能合并：按时间戳（taskSavedAt/reviewSavedAt）自动取最新，不弹冲突框
@@ -8900,7 +8947,7 @@ async function autoPullFromCloud() {
   if (lastRemoteVersion === data.sha) return;
   lastRemoteVersion = data.sha;
 
-  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  const content = await decodeCloudPayload(data.content);
   const cloudState = JSON.parse(content);
   if (!cloudState.dates) return;
 
