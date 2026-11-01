@@ -9051,10 +9051,13 @@ function mergeSmart(local, cloud) {
       // 额外保护：本地还有没上传的手动改动、且保存时间不早于云端时，一律以本地为准，
       // 避免"刚保存几次，一刷新又被云端旧版本覆盖"
       const localUnsynced = hasUnsyncedLocalEdits(local);
+      // 兼容旧数据：旧版本没存"未上传"标记，此时用保存时间判断——
+      // 本地保存时间比云端新，说明云端没有包含这次手改，必须保留本地
+      const localNewerNoFlag = !local._localTouchedAt && lTask > cTask;
       const lPristine = isDefaultTaskSet(cid, d, lc.tasks);
       const cPristine = isDefaultTaskSet(cid, d, cc.tasks);
       let takeLocal;
-      if (localUnsynced && lTask && (!cTask || lTask >= cTask)) takeLocal = true;
+      if ((localUnsynced || localNewerNoFlag) && lTask && (!cTask || lTask >= cTask)) takeLocal = true;
       else if (lVer !== cVer) takeLocal = lVer > cVer;
       else if (lPristine && !cPristine) takeLocal = false;
       else if (!lPristine && cPristine) takeLocal = true;
