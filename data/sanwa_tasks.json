@@ -15975,9 +15975,10 @@
             "name": "小测复习",
             "duration": 15,
             "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "quizReview"
+            "status": "done",
+            "done": true,
+            "courseTask": "quizReview",
+            "manualTouched": true
           },
           {
             "id": "t17934090654355e8v",
@@ -16021,8 +16022,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793532928231,
-        "taskVer": 39,
+        "taskSavedAt": 1793542373866,
+        "taskVer": 41,
         "reviewSavedAt": 1793533656586,
         "reviewVer": 15
       }
