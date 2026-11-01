@@ -15742,14 +15742,15 @@
           },
           {
             "id": "t1793506691177tsjv",
-            "name": "Missy笔记背诵和10MCQ",
+            "name": "Missy作业",
             "duration": 20,
             "type": "study",
-            "done": false
+            "done": false,
+            "manualTouched": true
           },
           {
             "id": "t1793409065435r9ak",
-            "name": "科学错题巩固",
+            "name": "科学知识点",
             "duration": 15,
             "type": "study",
             "done": false,
@@ -15811,8 +15812,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793498723751,
-        "taskVer": 5,
+        "taskSavedAt": 1793506758590,
+        "taskVer": 8,
         "reviewSavedAt": null,
         "reviewVer": 1
       },
