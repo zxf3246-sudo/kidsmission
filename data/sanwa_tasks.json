@@ -15733,28 +15733,13 @@
         ],
         "tasks": [
           {
-            "id": "t17934090654352hen",
-            "name": "学校作业",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
-          },
-          {
             "id": "t179353261590078b7",
-            "name": "Missy笔记背诵和10MCQ",
-            "duration": 20,
+            "name": "Missy作业",
+            "duration": 60,
             "type": "study",
-            "done": false
-          },
-          {
-            "id": "t1793409065435r9ak",
-            "name": "科学错题巩固",
-            "duration": 15,
-            "type": "study",
-            "done": false,
-            "errLinked": false,
-            "manualTouched": true
+            "done": true,
+            "manualTouched": true,
+            "status": "done"
           },
           {
             "id": "t1793409065435enmz",
@@ -15762,40 +15747,40 @@
             "duration": 15,
             "type": "study",
             "done": false,
-            "errLinked": false
-          },
-          {
-            "id": "t17934090654350k05",
-            "name": "听播客",
-            "duration": 30,
-            "type": "study",
-            "done": false,
-            "errLinked": false
+            "errLinked": false,
+            "status": "undone",
+            "manualTouched": true
           },
           {
             "id": "t1793409065435o93u",
             "name": "学而思作业",
-            "duration": null,
+            "duration": 20,
             "type": "study",
-            "status": "",
-            "done": false,
-            "courseTask": "xes"
+            "status": "done",
+            "done": true,
+            "courseTask": "xes",
+            "manualTouched": true
           },
           {
             "id": "t179340906543511gb",
             "name": "自由活动",
-            "duration": null,
+            "duration": 240,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true
           },
           {
             "id": "t1793409065435124x",
             "name": "洗漱睡觉",
             "duration": null,
             "type": "rest",
-            "done": false,
-            "errLinked": false
+            "done": true,
+            "errLinked": false,
+            "status": "done",
+            "manualTouched": true,
+            "time": "21:45"
           }
         ],
         "review": {
@@ -15811,8 +15796,8 @@
         },
         "arrival": "08:00",
         "sleep": "21:15",
-        "taskSavedAt": 1793506758590,
-        "taskVer": 8,
+        "taskSavedAt": 1793532860460,
+        "taskVer": 48,
         "reviewSavedAt": null,
         "reviewVer": 1
       },
@@ -16887,7 +16872,9 @@
       "yilin": {
         "Missy笔记背诵和10MCQ": true,
         "语文错题巩固": true,
-        "科学错题巩固": true
+        "科学错题巩固": true,
+        "学校作业": true,
+        "听播客": true
       }
     }
   },
