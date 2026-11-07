@@ -2185,7 +2185,7 @@ const WEEKLY_CLASSES = {
   yilin: {
     1: [{name:'英语missy',     time:'19:00-21:00', duration:120}],
     2: [{name:'语文LA',        time:'15:30-16:30', duration:60},
-        {name:'科学',          time:'20:40-22:40', duration:120}],
+        {name:'科学',          time:'19:30-21:30', duration:120}],
     3: [{name:'补语文',        time:'15:00-18:00', duration:180}],
     4: [{name:'语文LA',        time:'15:30-16:30', duration:60},
         {name:'科学',          time:'19:30-21:30', duration:120}],
@@ -3529,6 +3529,31 @@ function syncYilinTueThuLa(obj) {
   }
 }
 
+// 同步李怡霖周二"科学"固定课程时间（19:30-21:30）
+// 幂等：仅处理今天及以后的周二；用户手动改动过的不动
+function syncYilinTueScience(obj) {
+  if (!obj || !obj.dates) return;
+  const today = localDateStr(new Date());
+  const TARGET = '19:30-21:30';
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (ds < today) return;
+    if (new Date(ds + 'T00:00:00').getDay() !== 2) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yilin;
+    if (!cd || !Array.isArray(cd.fixedClasses)) return;
+    cd.fixedClasses.forEach(c => {
+      if (c && c.name === '科学' && !c.manualTouched) {
+        if (c.time !== TARGET) { c.time = TARGET; changed++; }
+        if (c.duration !== 120) { c.duration = 120; changed++; }
+      }
+    });
+  });
+  if (changed > 0) {
+    console.log('[syncYilinTueScience] 🔄 李怡霖周二科学课时间已同步为 19:30-21:30，共', changed, '项');
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 同步李彦希周二固定课程：去掉 TTA AI，改为篮球 15:30-17:00
 // 幂等：用户手动改动/删除过的不动
 function syncYanxiTueClass(obj) {
@@ -4095,6 +4120,7 @@ function loadState() {
       syncYanxiWedLaTime(obj);
       syncQiannuoWedLaTime(obj);
       syncYilinTueThuLa(obj);
+      syncYilinTueScience(obj);
       syncYanxiTueClass(obj);
       syncTalToXueersi(obj);
       migratePointsSplit(obj);
@@ -8713,6 +8739,7 @@ async function pullFromGist() {
     syncYanxiWedLaTime(merged);
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
+    syncYilinTueScience(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
@@ -8848,6 +8875,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncYanxiWedLaTime(state);
   syncQiannuoWedLaTime(state);
   syncYilinTueThuLa(state);
+  syncYilinTueScience(state);
   syncYanxiTueClass(state);
   syncTalToXueersi(state);
   migratePointsSplit(state);
@@ -8979,6 +9007,7 @@ async function autoPullFromCloud() {
     syncYanxiWedLaTime(merged);
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
+    syncYilinTueScience(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
