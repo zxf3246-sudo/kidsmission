@@ -1601,7 +1601,7 @@
         <button class="reorder-btn" title="下移" onclick="event.stopPropagation();event.preventDefault();moveTask('yanxi',5,+1)" data-dir="dn">▼</button>
       </span>
       <button class="status-btn s-empty" title="未设置（点击标记完成）" onclick="cycleTaskStatus('yanxi',5)">○</button>
-      <span class="name" onblur="editTaskName('yanxi',5,this.textContent)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">Koobits</span>
+      <span class="name" onblur="editTaskName('yanxi',5,this.textContent)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}">4 Koobits</span>
       
       
       
@@ -2305,7 +2305,7 @@ function defaultTasksFor(childId, dateStr) {
     const kuaiduName = dow === 6 ? '四五快读复习' : dow === 0 ? '阅读作文学习' : '四五快读新字';
     const wwName = dow === 6 ? 'WW单词复习' : dow === 0 ? '英语语法复习' : 'WW1单词5个';
     return [
-      t('Koobits', 20),
+      t('4 Koobits', 20),
       t('1 Mission', 15),
       t(kuaiduName, 15),
       t(wwName, 15),
@@ -3555,6 +3555,32 @@ function syncYilinTueScience(obj) {
   }
 }
 
+// 李彦希每日固定任务改名：'Koobits' → '4 Koobits'（今天及以后，幂等）
+function migrateYanxiKoobits(obj) {
+  if (!obj || !obj.dates) return;
+  const today = localDateStr(new Date());
+  let changed = 0;
+  Object.keys(obj.dates).forEach(ds => {
+    if (ds < today) return;
+    const cd = obj.dates[ds] && obj.dates[ds].yanxi;
+    if (!cd || !Array.isArray(cd.tasks)) return;
+    let dayChanged = false;
+    cd.tasks.forEach(t => {
+      if (t && t.name === 'Koobits') { t.name = '4 Koobits'; dayChanged = true; changed++; }
+    });
+    if (dayChanged) {
+      // 算一次手动改动：避免云端旧任务名在刷新合并时被改回去
+      cd.taskSavedAt = Date.now();
+      cd.taskVer = (+cd.taskVer || 0) + 1;
+    }
+  });
+  if (changed > 0) {
+    console.log('[migrateYanxiKoobits] ✏️ 李彦希任务已改名：Koobits → 4 Koobits，共', changed, '项');
+    obj._localTouchedAt = Date.now();
+    try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
+  }
+}
+
 // 同步李彦希周二固定课程：去掉 TTA AI，改为篮球 15:30-17:00
 // 幂等：用户手动改动/删除过的不动
 function syncYanxiTueClass(obj) {
@@ -3772,11 +3798,11 @@ function upgradeLegacyTasks(obj, dateStr, childId) {
   const yanxiAlt = (dow === 0 || dow % 2 === 1) ? '语文阅读理解' : '英语语法';
   const qiannuoAlt = (dow === 0 || dow % 2 === 1) ? '英语阅读练习' : '语文练习';
   const NEW = {
-    yanxi: ['Koobits','1 Mission','四五快读新字','WW1单词5个',yanxiAlt,'语文学校词复习'],
+    yanxi: ['4 Koobits','1 Mission','四五快读新字','WW1单词5个',yanxiAlt,'语文学校词复习'],
     qiannuo: ['WWK单词3个','600字新字5个','数学计算练习','华文练字','控笔练习','字母拼音',qiannuoAlt]
   };
   const DUR = {
-    'Koobits':20,'1 Mission':15,'四五快读新字':15,'WW1单词5个':15,'语文阅读理解':15,'英语语法':15,'语文学校词复习':15,
+    '4 Koobits':20,'Koobits':20,'1 Mission':15,'四五快读新字':15,'WW1单词5个':15,'语文阅读理解':15,'英语语法':15,'语文学校词复习':15,
     'WWK3个新单词':15,'600字1课生字':15,'数学计算练习':20,'书法汉字练习':15,'字母拼音练习':10,'控笔练习':10,'英语阅读练习':15,'语文练习':15,
     'WWK单词3个':15,'600字新字5个':15,'华文练字':15,'字母拼音':10,'乘法口诀复习':10
   };
@@ -4122,6 +4148,7 @@ function loadState() {
       syncQiannuoWedLaTime(obj);
       syncYilinTueThuLa(obj);
       syncYilinTueScience(obj);
+      migrateYanxiKoobits(obj);
       syncYanxiTueClass(obj);
       syncTalToXueersi(obj);
       migratePointsSplit(obj);
@@ -8742,6 +8769,7 @@ async function pullFromGist() {
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
     syncYilinTueScience(merged);
+    migrateYanxiKoobits(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
@@ -8878,6 +8906,7 @@ function finalizeMerge(cloudState, mergedDates, conflictDates, choices) {
   syncQiannuoWedLaTime(state);
   syncYilinTueThuLa(state);
   syncYilinTueScience(state);
+  migrateYanxiKoobits(state);
   syncYanxiTueClass(state);
   syncTalToXueersi(state);
   migratePointsSplit(state);
@@ -9010,6 +9039,7 @@ async function autoPullFromCloud() {
     syncQiannuoWedLaTime(merged);
     syncYilinTueThuLa(merged);
     syncYilinTueScience(merged);
+    migrateYanxiKoobits(merged);
     syncYanxiTueClass(merged);
     syncTalToXueersi(merged);
     migratePointsSplit(merged);
