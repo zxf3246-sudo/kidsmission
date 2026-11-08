@@ -2192,8 +2192,7 @@ const WEEKLY_CLASSES = {
     5: [],
     6: [{name:'学而思',         time:'15:00-17:00', duration:120},
         {name:'英语missy',     time:'19:45-21:45', duration:120}],
-    0: [{name:'全科补习',      time:'09:00-13:30', duration:270},
-        {name:'画画课',        time:'15:00-18:00', duration:180}]
+    0: [{name:'全科补习',      time:'09:00-13:30', duration:270}]
   },
   yanxi: {
     1: [{name:'语文LA',        time:'15:30-16:30', duration:60}],
@@ -3425,8 +3424,8 @@ function renameYilinWeeklyTasks(obj) {
   }
 }
 
-// 同步李怡霖周日固定课程到最新模板（用户要求：周日去掉科学课、增加画画课 15:00-18:00）
-// 幂等：仅处理周日(dow=0)，移除"科学 19:30-21:30"，并确保存在"画画课 15:00-18:00"
+// 同步李怡霖周日固定课程到最新模板（用户要求：周日去掉科学课、取消画画课）
+// 幂等：仅处理周日(dow=0)，移除"科学 19:30-21:30"和"画画课"
 function syncYilinSundayClasses(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3436,18 +3435,17 @@ function syncYilinSundayClasses(obj) {
     const cd = obj.dates[ds] && obj.dates[ds].yilin;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     const before = cd.fixedClasses.length;
-    // 1) 移除周日科学课（19:30-21:30）；用户手动改过/加回的保留
-    cd.fixedClasses = cd.fixedClasses.filter(c =>
-      !(c.name && c.name === '科学' && c.time === '19:30-21:30' && !c.manualTouched));
-    // 2) 确保周日有画画课 15:00-18:00（用户手动删除过的则不补回）
-    if (!cd.fixedClasses.some(c => c.name && c.name === '画画课' && c.time === '15:00-18:00') &&
-        !isClassManuallyRemoved(obj, ds, 'yilin', '画画课')) {
-      cd.fixedClasses.push({ name: '画画课', time: '15:00-18:00', duration: 180 });
-    }
+    cd.fixedClasses = cd.fixedClasses.filter(c => {
+      // 1) 移除周日科学课（19:30-21:30）；用户手动改过/加回的保留
+      if (c.name === '科学' && c.time === '19:30-21:30' && !c.manualTouched) return false;
+      // 2) 取消周日的画画课（用户要求，含手动改过时间的）
+      if (c.name === '画画课') return false;
+      return true;
+    });
     if (cd.fixedClasses.length !== before) changed++;
   });
   if (changed > 0) {
-    console.log('[syncYilinSundayClasses] 🔄 李怡霖周日固定课程已同步：科学课移除、画画课添加，共', changed, '天');
+    console.log('[syncYilinSundayClasses] 🔄 李怡霖周日固定课程已同步：科学课、画画课移除，共', changed, '天');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
