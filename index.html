@@ -2391,6 +2391,9 @@ function syncCourseHomework(childId, dateStr) {
   const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
   let changed = false;
   COURSE_HOMEWORK.forEach(ch => {
+    // 用户手动添加了同名任务（如手动加了几条"学而思作业"）：
+    // 完全尊重手动结果，不再自动插入/移动/删除，避免刷新后被自动逻辑清掉
+    if (tasks.some(t => t && t.manualAdded && !t.courseTask && ch.matchTask(t.name || ''))) return;
     // 本周（周一~所选日）内是否有该课程
     let weekHasCourse = false;
     for (let d = new Date(monday + 'T00:00:00'); d.getTime() <= today.getTime(); d.setDate(d.getDate() + 1)) {
@@ -2406,8 +2409,8 @@ function syncCourseHomework(childId, dateStr) {
       if (t && (t.status === 'done' || t.done)) { doneBefore = true; break; }
     }
     const shouldShow = weekHasCourse && !doneBefore;
-    const idx = tasks.findIndex(t => t.courseTask === ch.key);
-    const legacyIdx = tasks.findIndex(t => !t.courseTask && ch.matchTask(t.name || ''));
+    const idx = tasks.findIndex(t => t.courseTask === ch.key && !t.manualAdded);
+    const legacyIdx = tasks.findIndex(t => !t.courseTask && !t.manualAdded && ch.matchTask(t.name || ''));
     if (shouldShow) {
       if (idx === -1) {
         // 用户手动删过该作业：尊重手动结果，不再自动补回
@@ -6393,7 +6396,8 @@ function saveTask() {
     type: document.getElementById('taskType').value,
     done: false,
     errLinked: document.getElementById('taskErrLinked').value === '1',
-    manualTouched: true
+    manualTouched: true,
+    manualAdded: true
   };
   const arr = state.dates[dateStr][modalCtx.childId].tasks;
   arr.splice(defaultInsertIndex(arr, task.type), 0, task);
@@ -9037,6 +9041,8 @@ async function autoPullFromCloud() {
 // 动态插入的课程作业（学而思作业/语文LA作业/小测复习）会被剔除后再比较
 function isDefaultTaskSet(childId, dateStr, tasks) {
   if (!Array.isArray(tasks)) return false;
+  // 用户手动添加过任务 → 绝不算默认模板（合并时不能被云端旧数据顶掉）
+  if (tasks.some(t => t && t.manualAdded)) return false;
   const def = defaultTasksFor(childId, dateStr).filter(t => t.type !== 'rest').map(t => t.name);
   const dyn = new Set(['学而思作业','语文LA作业','小测复习']);
   const names = tasks.filter(t => t && t.type !== 'rest').map(t => t.name).filter(n => !dyn.has(n));
