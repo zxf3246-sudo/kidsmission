@@ -2303,7 +2303,7 @@ function defaultTasksFor(childId, dateStr) {
     // 周日(dow=0)：四五快读新字→阅读作文学习，WW1单词5个→英语语法复习
     // 其余天沿用原名
     const kuaiduName = dow === 6 ? '四五快读复习' : dow === 0 ? '阅读作文学习' : '四五快读新字';
-    const wwName = dow === 6 ? 'WW单词复习' : dow === 0 ? '英语语法复习' : 'WW1单词5个';
+    const wwName = dow === 6 ? 'WW单词复习' : dow === 0 ? '英语语法复习' : 'WW单词练习';
     return [
       t('4 Koobits', 20),
       t('1 Mission', 15),
@@ -3627,21 +3627,31 @@ function syncTalToXueersi(obj) {
 
 function renameYanxiWW1(obj) {
   if (!obj || !obj.dates) return;
+  const today = localDateStr(new Date());
   let changed = 0;
   Object.keys(obj.dates).forEach(ds => {
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.tasks)) return;
     let hit = false;
     cd.tasks.forEach(t => {
-      if (t.name === 'WW1单词10个') {
-        t.name = 'WW1单词5个';
-        hit = true;
+      if (!t || !t.name) return;
+      if (/^WW1单词/.test(t.name)) {
+        // 今天及以后统一改为"WW单词练习"；历史日期仅做旧名归一
+        if (ds >= today) { t.name = 'WW单词练习'; hit = true; }
+        else if (t.name === 'WW1单词10个') { t.name = 'WW1单词5个'; hit = true; }
       }
     });
-    if (hit) changed++;
+    if (hit) {
+      changed++;
+      // 记一次手动改动，避免刷新/合并时被云端旧名字覆盖
+      if (ds >= today) {
+        cd.taskSavedAt = Date.now();
+        cd.taskVer = (+cd.taskVer || 0) + 1;
+      }
+    }
   });
   if (changed > 0) {
-    console.log('[renameYanxiWW1] ✏️ 已将李彦希"WW1单词10个"改为"WW1单词5个"：', changed, '天');
+    console.log('[renameYanxiWW1] ✏️ 已将李彦希"WW1单词5个"改为"WW单词练习"：', changed, '天');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
@@ -3656,8 +3666,8 @@ function renameYanxiWeeklyTasks(obj) {
   Object.keys(obj.dates).forEach(ds => {
     const dow = new Date(ds + 'T00:00:00').getDay();
     const map = {};
-    if (dow === 6) { map['四五快读新字'] = '四五快读复习'; map['WW1单词5个'] = 'WW单词复习'; }
-    else if (dow === 0) { map['四五快读新字'] = '阅读作文学习'; map['WW1单词5个'] = '英语语法复习'; }
+    if (dow === 6) { map['四五快读新字'] = '四五快读复习'; map['WW单词练习'] = 'WW单词复习'; map['WW1单词5个'] = 'WW单词复习'; }
+    else if (dow === 0) { map['四五快读新字'] = '阅读作文学习'; map['WW单词练习'] = '英语语法复习'; map['WW1单词5个'] = '英语语法复习'; }
     else return;
     const cd = obj.dates[ds] && obj.dates[ds].yanxi;
     if (!cd || !Array.isArray(cd.tasks)) return;
