@@ -1039,6 +1039,28 @@
   }
   .save-indicator.show { opacity: 1; transform: translateY(0); }
 
+  /* ====== 导出图片时的进度遮罩 ====== */
+  .export-busy {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(15, 23, 42, .42);
+    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: opacity .18s;
+  }
+  .export-busy.show { opacity: 1; visibility: visible; }
+  .export-busy-card {
+    background: #fff; border-radius: 16px; padding: 22px 26px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    box-shadow: 0 16px 48px rgba(15, 23, 42, .28);
+  }
+  .export-spinner {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 3px solid #e2e8f0; border-top-color: #6366f1;
+    animation: exportSpin .8s linear infinite;
+  }
+  @keyframes exportSpin { to { transform: rotate(360deg); } }
+  .export-busy-text { font-size: 13px; font-weight: 600; color: #475569; }
+
   /* ====== 模态框 ====== */
   .modal-overlay {
     position: fixed; inset: 0; background: rgba(15, 23, 42, .55);
@@ -6818,9 +6840,50 @@ function drawStar(ctx, cx, cy, outerR, innerR, fill) {
 }
 
 // DPR 高清适配 + 微信/iOS 兼容下载
+// 导出图最高按 2 倍绘制：3 倍会让像素数翻倍，手机上生成/编码明显变慢，观感几乎没有差别
 function getDPR() {
-  try { return Math.max(1, Math.min(3, window.devicePixelRatio || 1)); }
+  try { return Math.max(1, Math.min(2, window.devicePixelRatio || 1)); }
   catch(e) { return 2; }
+}
+
+// 导出进度遮罩（防止重复点击，并让用户知道正在生成）
+let __exportBusy = false;
+function beginExportBusy(text) {
+  if (__exportBusy) return false;
+  __exportBusy = true;
+  let el = document.getElementById('exportBusy');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'exportBusy';
+    el.className = 'export-busy';
+    el.innerHTML = '<div class="export-busy-card"><div class="export-spinner"></div><div class="export-busy-text"></div></div>';
+    document.body.appendChild(el);
+  }
+  el.querySelector('.export-busy-text').textContent = text || '正在生成图片…';
+  el.classList.add('show');
+  return true;
+}
+function endExportBusy() {
+  __exportBusy = false;
+  const el = document.getElementById('exportBusy');
+  if (el) el.classList.remove('show');
+}
+// 让浏览器先把遮罩画出来，再执行耗时的同步绘制
+function nextPaint() {
+  return new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+}
+
+// 导出前拉云端：60 秒内已拉过就跳过；网络慢时最多等 1.2 秒，超时直接用本地数据导出
+let __lastExportPullAt = 0;
+async function pullFreshBeforeExport() {
+  if (Date.now() - __lastExportPullAt < 60000) return;
+  __lastExportPullAt = Date.now();
+  try {
+    await Promise.race([
+      autoPullFromCloud(),
+      new Promise(r => setTimeout(r, 1200))
+    ]);
+  } catch(e) {}
 }
 
 function newTmpCanvas() {
@@ -6844,23 +6907,27 @@ function cropCanvas(tmp, h) {
 
 function downloadCanvas(canvas, filename) {
   // 优先 toBlob（桌面体验好），不行退回 toDataURL（iOS/微信）
-  try {
-    if (canvas.toBlob) {
-      canvas.toBlob(blob => {
-        if (blob) {
-          triggerDownload(URL.createObjectURL(blob), filename, 'blob');
-        } else {
-          triggerDownload(canvas.toDataURL('image/png'), filename, 'data');
-        }
-      }, 'image/png');
-      return;
+  return new Promise(resolve => {
+    try {
+      if (canvas.toBlob) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            triggerDownload(URL.createObjectURL(blob), filename, 'blob');
+          } else {
+            triggerDownload(canvas.toDataURL('image/png'), filename, 'data');
+          }
+          resolve();
+        }, 'image/png');
+        return;
+      }
+    } catch(e) { /* fallthrough */ }
+    try {
+      triggerDownload(canvas.toDataURL('image/png'), filename, 'data');
+    } catch(e) {
+      showToast('❌ 导出失败：' + e.message);
     }
-  } catch(e) { /* fallthrough */ }
-  try {
-    triggerDownload(canvas.toDataURL('image/png'), filename, 'data');
-  } catch(e) {
-    showToast('❌ 导出失败：' + e.message);
-  }
+    resolve();
+  });
 }
 
 function triggerDownload(url, filename, kind) {
@@ -6893,14 +6960,17 @@ function calcTotalPoints(childId) {
 
 // 导出任务（给小孩看）：彩色 PNG 长图，可直接发微信查看
 async function exportTasks() {
-  // 先拉云端最新
-  try { await autoPullFromCloud(); } catch(e) {}
-  const dateStr = document.getElementById('datePicker').value;
-  const data = state.dates[dateStr];
-  if (!data) return;
-  const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
+  if (!beginExportBusy('正在生成任务图…')) return;
+  try {
+    // 拉云端最新（网络慢时最多等 1.2 秒，不阻塞导出）
+    await pullFreshBeforeExport();
+    await nextPaint();
+    const dateStr = document.getElementById('datePicker').value;
+    const data = state.dates[dateStr];
+    if (!data) return;
+    const dow = WEEKDAYS[new Date(dateStr+'T00:00:00').getDay()];
 
-  const { canvas: tmp, ctx } = newTmpCanvas();
+    const { canvas: tmp, ctx } = newTmpCanvas();
   const W = IMG.W, CW = IMG.CW, x0 = IMG.PAD;
   let y = IMG.PAD;
   ctx.textBaseline = 'top';
@@ -7067,17 +7137,31 @@ async function exportTasks() {
   y += 56;
 
   const out = cropCanvas(tmp, y);
-  downloadCanvas(out, `三娃任务_${dateStr}.png`);
+  await downloadCanvas(out, `三娃任务_${dateStr}.png`);
+  } catch(e) {
+    showToast('❌ 导出失败：' + (e && e.message ? e.message : e));
+  } finally {
+    endExportBusy();
+  }
 }
 
 // 各孩子专属背景图（未配置的孩子沿用默认白色卡片）
 const CHILD_BG_SRC = { yilin: 'share-bg-yilin.jpg', yanxi: 'share-bg-yanxi.jpg', qiannuo: 'share-bg-qiannuo.jpg' };
 
 // 加载头像图片（SVG data URL）为可绘制 Image，供复盘图头部使用
+// 背景图/头像按 src 缓存解码结果，重复导出不再重复下载解码
+const __imgCache = new Map();
 function loadAvatarImage(src) {
+  if (!src) return Promise.resolve(null);
+  // 只缓存本地图片文件（data: 的复盘照片每天不同，缓存会占内存）
+  const cacheable = !/^data:/i.test(src);
+  if (cacheable && __imgCache.has(src)) return Promise.resolve(__imgCache.get(src));
   return new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(img);
+    img.onload = () => {
+      if (cacheable) __imgCache.set(src, img);
+      resolve(img);
+    };
     img.onerror = () => resolve(null);
     img.src = src;
   });
@@ -7085,8 +7169,11 @@ function loadAvatarImage(src) {
 
 // 导出复盘（家长用）：彩色 PNG 长图，含评分环 / 时长统计 / 积分徽章
 async function exportReview() {
-  // 先拉云端最新
-  try { await autoPullFromCloud(); } catch(e) {}
+  if (!beginExportBusy('正在生成复盘图…')) return;
+  try {
+  // 拉云端最新（网络慢时最多等 1.2 秒，不阻塞导出）
+  await pullFreshBeforeExport();
+  await nextPaint();
   const dateStr = document.getElementById('datePicker').value;
   const data = state.dates[dateStr];
   if (!data) return;
@@ -7411,7 +7498,12 @@ async function exportReview() {
   y += 56;
 
   const out = cropCanvas(tmp, y);
-  showImagePreview(out, `三娃复盘_${dateStr}.png`);
+  await showImagePreview(out, `三娃复盘_${dateStr}.png`);
+  } catch(e) {
+    showToast('❌ 导出失败：' + (e && e.message ? e.message : e));
+  } finally {
+    endExportBusy();
+  }
 }
 
 // 导出月报（家长用）：浅色长图，含三个孩子的月度统计 / 本月总评 / 分板块总结
@@ -7738,7 +7830,11 @@ async function exportWeekReport() {
 
 // 导出最终任务完成图：深色风格，展示课程和任务完成情况（和复盘图设计一致）
 async function exportTasksFinal() {
-  try { await autoPullFromCloud(); } catch(e) {}
+  if (!beginExportBusy('正在生成任务完成图…')) return;
+  try {
+  // 拉云端最新（网络慢时最多等 1.2 秒，不阻塞导出）
+  await pullFreshBeforeExport();
+  await nextPaint();
   const dateStr = document.getElementById('datePicker').value;
   const data = state.dates[dateStr];
   if (!data) return;
@@ -7963,51 +8059,73 @@ async function exportTasksFinal() {
   y += 56;
 
   const out = cropCanvas(tmp, y);
-  showImagePreview(out, `三娃任务完成_${dateStr}.png`);
+  await showImagePreview(out, `三娃任务完成_${dateStr}.png`);
+  } catch(e) {
+    showToast('❌ 导出失败：' + (e && e.message ? e.message : e));
+  } finally {
+    endExportBusy();
+  }
 }
+// 图片预览：用 toBlob 异步编码（大画布用 toDataURL 会同步阻塞，明显卡顿）
 function showImagePreview(canvas, filename) {
-  const dataUrl = canvas.toDataURL('image/png');
-  // 移除旧的
-  const old = document.getElementById('imgPreviewModal');
-  if (old) old.remove();
+  return new Promise(resolve => {
+    const build = (src, blob) => {
+      const revoke = () => { if (blob) { try { URL.revokeObjectURL(src); } catch(e) {} } };
+      // 移除旧的
+      const old = document.getElementById('imgPreviewModal');
+      if (old) old.remove();
 
-  const modal = document.createElement('div');
-  modal.id = 'imgPreviewModal';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:20px;';
-  modal.innerHTML = `
+      const modal = document.createElement('div');
+      modal.id = 'imgPreviewModal';
+      modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:20px;overflow:auto;';
+      modal.innerHTML = `
     <div style="color:#fff;font-size:15px;margin-bottom:10px;text-align:center;line-height:1.5;">
       💡 长按下方图片 → 「保存图片」到相册<br>
       然后去微信群里从相册发送，就是图片形式啦！
     </div>
-    <img src="${dataUrl}" style="max-width:92vw;max-height:70vh;border-radius:12px;box-shadow:0 4px 30px rgba(0,0,0,.5);" alt="复盘图">
+    <img src="${src}" style="max-width:92vw;max-height:70vh;border-radius:12px;box-shadow:0 4px 30px rgba(0,0,0,.5);" alt="复盘图">
     <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center;">
       <button id="shareImgBtn" style="background:#07c160;color:#fff;border:none;padding:12px 24px;border-radius:24px;font-size:16px;font-weight:600;">📤 直接分享到微信</button>
       <button id="downloadImgBtn" style="background:#3b82f6;color:#fff;border:none;padding:12px 24px;border-radius:24px;font-size:16px;font-weight:600;">⬇️ 下载图片</button>
       <button id="closePreviewBtn" style="background:#64748b;color:#fff;border:none;padding:12px 24px;border-radius:24px;font-size:16px;font-weight:600;">✕ 关闭</button>
     </div>
   `;
-  document.body.appendChild(modal);
+      document.body.appendChild(modal);
 
-  document.getElementById('closePreviewBtn').onclick = () => modal.remove();
-  document.getElementById('downloadImgBtn').onclick = () => {
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = filename;
-    a.click();
-  };
-  document.getElementById('shareImgBtn').onclick = async () => {
+      document.getElementById('closePreviewBtn').onclick = () => { modal.remove(); revoke(); };
+      document.getElementById('downloadImgBtn').onclick = () => {
+        const a = document.createElement('a');
+        a.href = src;
+        a.download = filename;
+        a.click();
+      };
+      document.getElementById('shareImgBtn').onclick = async () => {
+        try {
+          const b = blob || await (await fetch(src)).blob();
+          const file = new File([b], filename, {type:'image/png'});
+          if (navigator.canShare && navigator.canShare({files:[file]})) {
+            await navigator.share({files:[file], title:'三娃复盘', text:'今日三娃复盘'});
+          } else {
+            showToast('请长按图片保存到相册，再去微信发送');
+          }
+        } catch(e) {
+          showToast('请长按图片保存到相册，再去微信发送');
+        }
+      };
+      resolve();
+    };
+
     try {
-      const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], filename, {type:'image/png'});
-      if (navigator.canShare && navigator.canShare({files:[file]})) {
-        await navigator.share({files:[file], title:'三娃复盘', text:'今日三娃复盘'});
-      } else {
-        showToast('请长按图片保存到相册，再去微信发送');
+      if (canvas.toBlob) {
+        canvas.toBlob(blob => {
+          if (blob) build(URL.createObjectURL(blob), blob);
+          else build(canvas.toDataURL('image/png'), null);
+        }, 'image/png');
+        return;
       }
-    } catch(e) {
-      showToast('请长按图片保存到相册，再去微信发送');
-    }
-  };
+    } catch(e) { /* fallthrough */ }
+    build(canvas.toDataURL('image/png'), null);
+  });
 }
 
 function downloadText(text, filename) {
