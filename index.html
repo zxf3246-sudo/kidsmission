@@ -8602,7 +8602,8 @@ function acceptRec(idx) {
   state.dates[dateStr][smartCtx.childId].tasks.push({
     id: uid(), name: r.name, duration: r.duration,
     type: r.type, done: false, errLinked: false,
-    autoEnriched: true, enrichCategory: r.category
+    // 用户手动"采纳"的推荐视为手动任务：加 manualTouched，避免被自动清理逻辑删掉
+    autoEnriched: true, enrichCategory: r.category, manualTouched: true
   });
   save(); renderChildren(dateStr);
   closeSmartModal();
