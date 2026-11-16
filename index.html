@@ -2228,7 +2228,7 @@ const WEEKLY_CLASSES = {
   qiannuo: {
     1: [],
     2: [{name:'学而思',        time:'17:00-18:30', duration:90}],
-    3: [{name:'语文LA',        time:'17:00-18:00', duration:60}],
+    3: [{name:'语文LA',        time:'17:00-17:25', duration:25}],
     4: [],
     5: [],
     6: [{name:'豌豆思维',      time:'10:00-10:40', duration:40},
@@ -3473,8 +3473,8 @@ function syncYilinSundayClasses(obj) {
   }
 }
 
-// 同步李芊诺周三"语文LA"固定课程时间到最新模板（17:00-18:00）
-// 幂等：仅处理周三(dow=3)，已为 17:00-18:00 则跳过
+// 同步李芊诺周三"语文LA"固定课程时间到最新模板（17:00-17:25）
+// 幂等：仅处理周三(dow=3)，已为 17:00-17:25 则跳过
 function syncQiannuoWedLaTime(obj) {
   if (!obj || !obj.dates) return;
   let changed = 0;
@@ -3484,13 +3484,13 @@ function syncQiannuoWedLaTime(obj) {
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     cd.fixedClasses.forEach(c => {
       if (c && c.name === '语文LA' && !c.manualTouched && !isClassManuallyRemoved(obj, ds, 'qiannuo', '语文LA')) {
-        if (c.time !== '17:00-18:00') { c.time = '17:00-18:00'; changed++; }
-        if (c.duration !== 60) { c.duration = 60; changed++; }
+        if (c.time !== '17:00-17:25') { c.time = '17:00-17:25'; changed++; }
+        if (c.duration !== 25) { c.duration = 25; changed++; }
       }
     });
   });
   if (changed > 0) {
-    console.log('[syncQiannuoWedLaTime] 🔄 李芊诺周三语文LA时间已同步为 17:00-18:00，共', changed, '项');
+    console.log('[syncQiannuoWedLaTime] 🔄 李芊诺周三语文LA时间已同步为 17:00-17:25，共', changed, '项');
     try { localStorage.setItem('sanwa_tasks', JSON.stringify(obj)); } catch(_) {}
   }
 }
@@ -4414,15 +4414,15 @@ function render() {
       }
     });
   })();
-  // 强制李芊诺周三"语文LA"时间：17:00-18:00（用户要求）
+  // 强制李芊诺周三"语文LA"时间：17:00-17:25（用户要求）
   (() => {
     const cd = state.dates[dateStr] && state.dates[dateStr].qiannuo;
     if (!cd || !Array.isArray(cd.fixedClasses)) return;
     if (new Date(dateStr+'T00:00:00').getDay() !== 3) return;
     cd.fixedClasses.forEach(c => {
       if (c && c.name === '语文LA' && !c.manualTouched) {
-        if (c.time !== '17:00-18:00') c.time = '17:00-18:00';
-        if (c.duration !== 60) c.duration = 60;
+        if (c.time !== '17:00-17:25') c.time = '17:00-17:25';
+        if (c.duration !== 25) c.duration = 25;
       }
     });
   })();
