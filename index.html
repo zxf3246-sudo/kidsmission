@@ -3778,13 +3778,21 @@ function addQiannuoThursBilingual(obj) {
 // 幂等：仅移除带 autoEnriched 标记的任务，不影响用户手动添加/修改的内容
 function removeAutoEnrichedTasks(obj) {
   if (!obj || !obj.dates) return 0;
+  // 智能推荐库里的活动名称集合：旧版本可能把这类活动自动塞进任务却没打标记，
+  // 这里按名称兜底清理（用户手动添加/改过的任务带 manualTouched，会被保留）
+  const recNames = new Set();
+  try {
+    Object.values(ACTIVITY_LIBRARY || {}).forEach(cat => {
+      (cat.activities || []).forEach(a => { if (a && a.name) recNames.add(a.name); });
+    });
+  } catch(_) {}
   let changed = 0;
   Object.values(obj.dates).forEach(kids => {
     Object.values(kids || {}).forEach(cd => {
       if (!cd || !Array.isArray(cd.tasks)) return;
       const before = cd.tasks.length;
-      // 用户手动改过（manualTouched）的任务即使带 autoEnriched 标记也保留
-      cd.tasks = cd.tasks.filter(t => !t.autoEnriched || t.manualTouched);
+      // 用户手动改过（manualTouched）的任务一律保留；否则移除带自动推荐标记、或名称属于推荐库的残留任务
+      cd.tasks = cd.tasks.filter(t => t && (t.manualTouched || (!t.autoEnriched && !recNames.has(t.name))));
       if (cd.tasks.length !== before) changed++;
     });
   });
